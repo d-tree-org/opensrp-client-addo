@@ -17,8 +17,7 @@
         <!-- Top Section -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="180dp"
             android:id="@+id/top_section">
 
             <LinearLayout
@@ -55,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Afyatek :: ADDO"
+                android:text="ADDO"
                 android:layout_below="@id/program_stakeholders"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -63,7 +62,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:textColor="@color/black_tranparent_50"
                 android:id="@+id/login_message"
-                android:textSize="24sp"/> <!-- Use dimensions and reference color -->
+                android:textSize="26sp"/> <!-- Use dimensions and reference color -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,6 +72,16 @@
                 android:id="@+id/login_build_text_view"
                 android:textSize="12sp"
                 android:textColor="#b2b2b2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Afya-Tek"
+                android:layout_below="@id/login_build_text_view"
+                android:id="@+id/at_name"
+                android:fontFamily="@font/google_sans_bold"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 
