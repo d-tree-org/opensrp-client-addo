@@ -67,6 +67,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
+        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
 
         FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
