@@ -1,4 +1,4 @@
-package org.smartregister.addo.custom_view;
+package org.smartregister.addo.custom_views;
 
 
 import android.content.Context;

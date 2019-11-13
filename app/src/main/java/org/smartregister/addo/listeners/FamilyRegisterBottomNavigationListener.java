@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
+import org.smartregister.addo.R;
 import org.smartregister.addo.activity.AddoHomeActivity;
 import org.smartregister.listener.BottomNavigationListener;
 
@@ -23,8 +24,8 @@ public class FamilyRegisterBottomNavigationListener extends BottomNavigationList
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         AddoHomeActivity activity = (AddoHomeActivity) context;
 
-        if (item.getItemId() == org.smartregister.family.R.id.action_register) {
-            activity.startFamilyRegisterForm();
+        if (item.getItemId() == R.id.action_fingerprint) {
+            activity.startSimprintsId();
         }
 
         return false;

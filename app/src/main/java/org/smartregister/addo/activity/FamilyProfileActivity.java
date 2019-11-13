@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyProfileExtendedContract;
-import org.smartregister.addo.custom_view.FamilyFloatingMenu;
+import org.smartregister.addo.custom_views.FamilyFloatingMenu;
 import org.smartregister.addo.event.PermissionEvent;
 import org.smartregister.addo.fragment.FamilyProfileActivityFragment;
 import org.smartregister.addo.fragment.FamilyProfileMemberFragment;
@@ -119,7 +119,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
 
         adapter.addFragment(profileMemberFragment, this.getString(org.smartregister.family.R.string.member).toUpperCase());
         //adapter.addFragment(profileDueFragment, this.getString(org.smartregister.family.R.string.due).toUpperCase());
-        adapter.addFragment(profileActivityFragment, this.getString(org.smartregister.family.R.string.activity).toUpperCase());
+        adapter.addFragment(profileActivityFragment, this.getString(R.string.med_history).toUpperCase());
 
         viewPager.setAdapter(adapter);
 
@@ -139,7 +139,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
             addMember.setVisible(false);
         }
 
-        //getMenuInflater().inflate(R.menu.profile_menu, menu);
+        getMenuInflater().inflate(R.menu.profile_menu, menu);
 
         return true;
     }

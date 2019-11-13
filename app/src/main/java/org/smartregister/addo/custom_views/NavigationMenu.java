@@ -1,4 +1,4 @@
-package org.smartregister.addo.custom_view;
+package org.smartregister.addo.custom_views;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -147,6 +147,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         drawer = activity.findViewById(R.id.drawer_layout);
         recyclerView = rootView.findViewById(R.id.rvOptions);
         tvLogout = rootView.findViewById(R.id.tvLogout);
+        recyclerView = rootView.findViewById(R.id.rvOptions);
         ivSync = rootView.findViewById(R.id.ivSyncIcon);
 
         pbSync = rootView.findViewById(R.id.pbSync);

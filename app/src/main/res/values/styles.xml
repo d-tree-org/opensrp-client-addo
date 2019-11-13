@@ -24,7 +24,7 @@
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 
-    <style name="AddoTheme.NoActionBar" parent="AppTheme">
+    <style name="AddoTheme.NoActionBar" parent="AddoTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

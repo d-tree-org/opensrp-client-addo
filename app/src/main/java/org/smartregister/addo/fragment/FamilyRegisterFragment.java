@@ -9,13 +9,15 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.RegisterFragmentContract;
-import org.smartregister.addo.custom_view.NavigationMenu;
+import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoRegisterProvider;
 import org.smartregister.addo.model.FamilyRegisterFragmentModel;
 import org.smartregister.addo.presenter.FamilyRegisterFragmentPresenter;
@@ -43,6 +45,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     private View view;
     private View dueOnlyLayout;
+    private TextView tvScanFPMessage;
+    private ImageView ivFScan;
 
     private boolean dueFilterActive = false;
     private static final String DUE_FILTER_TAG = "PRESSED";
@@ -52,7 +56,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         return R.layout.activity_addo_home;
     }
 
-    @Override
+   @Override
     public void setupViews(View view) {
         super.setupViews(view);
         this.view = view;
@@ -77,7 +81,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
                 searchBarLayout.getPaddingLeft(),
                 searchBarLayout.getPaddingTop(),
                 searchBarLayout.getPaddingRight(),
-                (int) Utils.convertDpToPixel(10, getActivity())
+                (int) Utils.convertDpToPixel(10.0F, this.getActivity())
         );
 
         CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
@@ -99,13 +103,17 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         filterSortLayout.setVisibility(View.GONE);
 
         dueOnlyLayout = view.findViewById(R.id.due_only_layout);
-        dueOnlyLayout.setVisibility(View.VISIBLE);
+        dueOnlyLayout.setVisibility(View.INVISIBLE);
         dueOnlyLayout.setOnClickListener(registerActionHandler);
+        clientsView.setVisibility(View.GONE);
+
+        ivFScan = view.findViewById(R.id.ivFScan);
+        tvScanFPMessage = view.findViewById(R.id.tvScanFPMessage);
 
         if (getSearchView() != null) {
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
             getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_icon_search,0,0,0);
-            getSearchView().setTextColor(getResources().getColor(R.color.black));
+            getSearchView().setTextColor(this.getResources().getColor(R.color.text_black));
         }
 
     }
@@ -125,6 +133,23 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
     @Override
     public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
 
+    }
+
+    public void fingerprintScannedSuccessfully(String guid){
+        /**
+         * Search from the clients list to fing the client with the Identifier(simprintsID)
+         * get the client's uniqueID
+         * pass the unique id to filter so as to filter the list
+         */
+
+
+
+        if (StringUtils.isNotBlank(guid)){
+            filter(guid, "", getMainCondition(), false);
+            ivFScan.setVisibility(View.GONE);
+            tvScanFPMessage.setVisibility(View.GONE);
+            clientsView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -194,7 +219,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         intent.putExtra("village_town",
                 org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
         intent.putExtra("family_name",
-                org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_name", false));
+                org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
         intent.putExtra("go_to_due_page", goToDuePage);
         this.startActivity(intent);
 
@@ -249,6 +274,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         filter(searchText(), "", presenter().getMainCondition(), false);
         dueOnlyLayout.setTag(null);
         switchViews(dueOnlyLayout, false);
+        clientsView.setVisibility(View.VISIBLE);
     }
 
     private String searchText() {
@@ -397,39 +423,3 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         }
     }
 }
-
-/**public class FamilyRegisterFragment extends CoreFamilyRegisterFragment {
-
-    @Override
-    public void initializeAdapter(Set<View> visibleColumns) {
-        CoreRegisterProvider chwRegisterProvider = new FamilyRegisterProvider(getActivity(), commonRepository(), visibleColumns, registerActionHandler, paginationViewHandler);
-        clientAdapter = new RecyclerViewPaginatedAdapter(null, chwRegisterProvider, context().commonrepository(this.tablename));
-        clientAdapter.setCurrentlimit(20);
-        clientsView.setAdapter(clientAdapter);
-    }
-
-    @Override
-    public void onViewClicked(android.view.View view) {
-        super.onViewClicked(view);
-        if (view.getId() == R.id.due_only_layout) {
-            toggleFilterSelection(view);
-        }
-    }
-
-    @Override
-    protected String dueFilterAndSortQuery() {
-
-        String query = "";
-        try {
-            SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
-            sqb.addCondition(filters);
-            sqb.addCondition(Utils.getFamilyDueFilter());
-            query = sqb.orderbyCondition(Sortqueries);
-            query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-
-        return query;
-    }
-}**/

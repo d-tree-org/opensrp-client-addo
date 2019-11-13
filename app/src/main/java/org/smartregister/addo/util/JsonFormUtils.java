@@ -1370,4 +1370,30 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         }
     }
 
+    public static String lookForClientsUniqueId(String guid){
+
+        //baseEntityId
+        String UniqueId = "";
+        Client mClient = null;
+
+        String query_client = "select json from client where json LIKE '%"+guid+"%' ";
+        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
+
+        try {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                mClient = jsonStringToJava(cursor.getString(0), Client.class);
+                UniqueId = mClient.getIdentifier("opensrp_id");
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        } finally {
+            cursor.close();
+        }
+
+        return UniqueId;
+    }
+
 }

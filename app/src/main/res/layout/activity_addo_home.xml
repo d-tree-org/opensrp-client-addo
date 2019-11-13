@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/client_list_header_dark_grey"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_base_register" />
+    <include
+        layout="@layout/toolbar_base_register"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
 
     <include
         layout="@layout/base_register_search_bar"
@@ -46,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/empty_view"
@@ -56,7 +60,28 @@
             android:padding="32dp"
             android:text="No Record"
             android:visibility="gone" />
+        <ImageView
+            android:id="@+id/ivFScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_fingerprint" />
+
+        <TextView
+            android:id="@+id/tvScanFPMessage"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@id/ivFScan"
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/google_sans_bold"
+            android:gravity="center"
+            android:text="@string/scan_fp_message"
+            android:textColor="@color/addo_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </FrameLayout>
+
+
 
 </LinearLayout>

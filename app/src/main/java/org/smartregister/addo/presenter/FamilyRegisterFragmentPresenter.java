@@ -34,9 +34,4 @@ public class FamilyRegisterFragmentPresenter
     public String getDueFilterCondition() {
         return getMainCondition() + " AND " + ChildDBConstants.childDueFilter();
     }
-
-    @Override
-    public String getMainCondition() {
-        return String.format(" %s is null ", "date_removed");
-    }
 }

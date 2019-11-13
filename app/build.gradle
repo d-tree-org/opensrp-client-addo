@@ -80,6 +80,10 @@ android {
             buildConfigField "int", "IMAGE_UPLOAD_MINUTES", '180'
             buildConfigField "int", "PULL_UNIQUE_IDS_MINUTES", '180'
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '180'
+            buildConfigField "boolean", "SUPPORT_REPORT", "false"
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
+            buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
+            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
         }
 
         debug {
@@ -91,7 +95,11 @@ android {
             buildConfigField "int", "IMAGE_UPLOAD_MINUTES", '15'
             buildConfigField "int", "PULL_UNIQUE_IDS_MINUTES", '15'
             buildConfigField "boolean", 'SUPPORT_QR', 'true'
+            buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
+            buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
+            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
             testCoverageEnabled true
         }
     }
@@ -136,7 +144,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    implementation('org.smartregister:opensrp-client-core:1.7.33-SNAPSHOT@aar') {
+//    implementation('org.smartregister:opensrp-client-core:1.7.33-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:1.7.33-DEMO-2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
@@ -154,7 +163,8 @@ dependencies {
 
     }
 
-    implementation('org.smartregister:opensrp-client-family:1.2.21-SNAPSHOT@aar') {
+//    implementation('org.smartregister:opensrp-client-family:1.2.21-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-family:1.2.20-DEMO-2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
@@ -170,7 +180,17 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-materialedittext'
     }
 
-//
+    implementation('org.smartregister:opensrp-client-native-form:1.6.49-DEMO-7-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'com.android.support', module: 'support-media-compat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'io.ona.rdt-capture', module: 'lib'
+    }
+
+
 //    implementation('org.smartregister:opensrp-client-chw-core:1.0.23-SNAPSHOT@aar') {
 //        transitive = true
 //    }

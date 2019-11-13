@@ -1,26 +1,24 @@
 package org.smartregister.addo.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 
-import org.smartregister.addo.R;
-import org.smartregister.addo.custom_view.NavigationMenu;
 import org.smartregister.addo.model.FamilyProfileActivityModel;
 import org.smartregister.addo.presenter.FamilyProfileActivityPresenter;
+import org.smartregister.addo.provider.FamilyActivityRegisterProvider;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.family.adapter.FamilyRecyclerViewCustomAdapter;
 import org.smartregister.family.fragment.BaseFamilyProfileActivityFragment;
-import org.smartregister.family.provider.FamilyActivityRegisterProvider;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
-import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.util.HashMap;
 import java.util.Set;
 
 import timber.log.Timber;
 
+/**
+ * This class should be implemented for medication history for the clients
+ */
 public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFragment {
     private static final String TAG = FamilyProfileActivityFragment.class.getCanonicalName();
 
@@ -29,11 +27,10 @@ public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFrag
 
     @Override
     public void setupViews(android.view.View view) {
-        super.setupViews(view);
 
         super.setupViews(view);
         this.view = view;
-
+/**
         Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
         toolbar.setContentInsetsRelative(0, 0);
@@ -76,7 +73,7 @@ public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFrag
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
             getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_action_search, 0, 0, 0);
             getSearchView().setTextColor(getResources().getColor(R.color.text_black));
-        }
+        } **/
 
     }
 

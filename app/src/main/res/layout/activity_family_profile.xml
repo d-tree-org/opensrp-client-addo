@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <android.support.design.widget.AppBarLayout
         android:id="@+id/toolbar_appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/addo_primary">
 
-        <androidx.appcompat.widget.Toolbar
+        <android.support.v7.widget.Toolbar
             android:id="@+id/family_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,9 +38,9 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/register_member_title_size" />
 
-        </androidx.appcompat.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
 
-        <androidx.appcompat.widget.Toolbar
+        <android.support.v7.widget.Toolbar
             android:id="@+id/family_two_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -144,9 +144,9 @@
                         android:visibility="invisible" />
                 </LinearLayout>
             </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
 
-        <TableLayout
+        <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -158,8 +158,8 @@
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator.sub.white" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_base_profile" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</android.support.design.widget.CoordinatorLayout>
