@@ -124,7 +124,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         viewPager.setAdapter(adapter);
 
         if (getIntent().getBooleanExtra(org.smartregister.addo.util.Constants.INTENT_KEY.SERVICE_DUE, true) || getIntent().getBooleanExtra(Constants.INTENT_KEY.GO_TO_DUE_PAGE, false)) {
-            viewPager.setCurrentItem(1);
+            viewPager.setCurrentItem(0);
         }
 
         return viewPager;

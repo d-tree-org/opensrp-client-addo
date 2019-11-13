@@ -68,6 +68,30 @@
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar" />
 
+        <activity
+            android:name=".activity.FamilyOtherMemberProfileActivity"
+            android:label="@string/title_family_detail"
+            android:parentActivityName=".activity.FamilyRegisterActivity"
+            android:theme="@style/AddoTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.smartregister.addo.activity.FamilyProfileActivity" />
+        </activity>
+
+        <activity android:name=".activity.ChildProfileActivity"
+            android:label="@string/child_details"
+            android:theme="@style/AddoTheme.NoActionBar"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/captured_images_path" />
+        </provider>
+
         <activity android:name=".activity.MainActivity" />
 
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />

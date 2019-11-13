@@ -1,11 +1,16 @@
 package org.smartregister.addo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import org.smartregister.addo.R;
+import org.smartregister.addo.activity.AboveFiveChildProfileActivity;
+import org.smartregister.addo.activity.ChildProfileActivity;
+import org.smartregister.addo.activity.FamilyOtherMemberProfileActivity;
 import org.smartregister.addo.model.FamilyProfileMemberModel;
 import org.smartregister.addo.provider.AddoMemberRegisterProvider;
 import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.ChildUtils;
 import org.smartregister.addo.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
@@ -13,11 +18,14 @@ import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.family.fragment.BaseFamilyProfileMemberFragment;
 import org.smartregister.family.presenter.BaseFamilyProfileMemberPresenter;
 import org.smartregister.family.util.Constants;
+import org.smartregister.family.util.DBConstants;
 
 import java.util.HashMap;
 import java.util.Set;
 
 import timber.log.Timber;
+
+import static org.smartregister.addo.util.Constants.INTENT_KEY.IS_COMES_FROM_FAMILY;
 
 public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment {
 
@@ -72,13 +80,13 @@ public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment
             CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
             String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
             if (org.smartregister.addo.util.Constants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
-                //goToOtherMemberProfileActivity(commonPersonObjectClient);
+                goToOtherMemberProfileActivity(commonPersonObjectClient);
             } else {
-                //goToChildProfileActivity(commonPersonObjectClient);
+                goToChildProfileActivity(commonPersonObjectClient);
             }
         }
     }
-/**
+
     public void goToOtherMemberProfileActivity(CommonPersonObjectClient patient) {
         Intent intent = new Intent(getActivity(), FamilyOtherMemberProfileActivity.class);
         intent.putExtras(getArguments());
@@ -103,7 +111,7 @@ public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment
         intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
         startActivity(intent);
     }
-**/
+
     @Override
     public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
         Timber.v("setAdvancedSearchFormData");

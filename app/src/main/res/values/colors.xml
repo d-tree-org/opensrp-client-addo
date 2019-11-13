@@ -78,5 +78,6 @@
     <color name="second_grey">#ff999999</color>
     <color name="card_white">#ffffff</color>
     <color name="card_shadow">#8c666666</color>
+    <color name="bottom_nav_bar_selected_background">#8A1A51</color>
 
 </resources>

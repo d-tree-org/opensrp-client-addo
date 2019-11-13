@@ -377,7 +377,10 @@
     <string name="opv_1">OPV 1</string>
     <string name="opv_2">OPV 2</string>
     <string name="yellow_fever">Yellow Fever</string>
-    <string name="scan_fp_message">Scan Fingerprint to get clients</string>
+    <string name="scan_fp_message">Scan Fingerprint to get a client</string>
     <string name="med_history">Medication History</string>
+    <string name="family_no_medication_history">Family has no medication history</string>
+    <string name="addo_app_home">ADDO Home</string>
+    <string name="return_to_addo_home">Return to home</string>
 
 </resources>

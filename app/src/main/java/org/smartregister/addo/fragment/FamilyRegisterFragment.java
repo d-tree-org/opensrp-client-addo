@@ -86,6 +86,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
         CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
         if (titleView != null) {
+            titleView.setText(R.string.addo_app_home);
             titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(),
                     titleView.getPaddingBottom());
         }
@@ -149,6 +150,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             ivFScan.setVisibility(View.GONE);
             tvScanFPMessage.setVisibility(View.GONE);
             clientsView.setVisibility(View.VISIBLE);
+        } else {
+            tvScanFPMessage.setText("Client not registered with fingerprint");
         }
     }
 

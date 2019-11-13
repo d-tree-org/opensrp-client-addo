@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
                 android:paddingStart="0dp"
-                android:text="@string/return_to_all_families"
+                android:text="@string/return_to_addo_home"
                 android:textColor="@color/white"
                 android:textSize="@dimen/register_member_title_size" />
 

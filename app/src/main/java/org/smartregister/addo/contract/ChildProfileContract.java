@@ -77,7 +77,7 @@ public interface ChildProfileContract {
 
         void openVisitMonthView();
 
-        void showUndoVisitNotDoneView();
+    //    void showUndoVisitNotDoneView();
 
         void updateAfterBackgroundProcessed();
     }
@@ -94,11 +94,11 @@ public interface ChildProfileContract {
 
         void updateVisitNotDone(long value);
 
-        void undoVisitNotDone();
+  //      void undoVisitNotDone();
 
-        void fetchVisitStatus(String baseEntityId);
+//        void fetchVisitStatus(String baseEntityId);
 
-        void fetchUpcomingServiceAndFamilyDue(String baseEntityId);
+//        void fetchUpcomingServiceAndFamilyDue(String baseEntityId);
 
         void processBackGroundEvent();
 
@@ -146,7 +146,7 @@ public interface ChildProfileContract {
 
         void updateVisitNotDone();
 
-        void undoVisitNotDone();
+        //void undoVisitNotDone();
 
         void updateAfterBackGroundProcessed();
     }

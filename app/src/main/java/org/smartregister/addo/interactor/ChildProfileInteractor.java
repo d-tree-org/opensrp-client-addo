@@ -163,7 +163,7 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
                     @Override
                     public void onNext(Object o) {
                         if (value == 0) {
-                            callback.undoVisitNotDone();
+                           // callback.undoVisitNotDone();
                         } else {
                             callback.updateVisitNotDone();
                         }
