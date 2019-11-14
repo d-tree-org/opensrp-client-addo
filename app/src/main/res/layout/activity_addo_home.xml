@@ -92,17 +92,31 @@
             android:gravity="center"
             android:text="@string/scan_fp_message"
             android:textColor="@color/text_light"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvScanFPMessageInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/google_sans_bold"
+            android:gravity="center"
+            android:text="@string/scan_fp_message_instruction"
+            android:textColor="@color/text_light"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/fingerPrintPointer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_point_to_fp"
             android:background="@color/colorWhite"
-            android:tint="@color/addo_primary_dark"
-            android:paddingTop="80dp"
-            android:paddingRight="50dp"
+            android:tint="@color/addo_primary"
+            android:paddingTop="100dp"
+            android:paddingRight="47dp"
             android:layout_gravity="right" />
 
     </LinearLayout>

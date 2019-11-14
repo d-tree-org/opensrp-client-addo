@@ -45,8 +45,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     private View view;
     private View dueOnlyLayout;
-    private TextView tvScanFPMessage;
-    private ImageView ivFScan;
+    private TextView tvScanFPMessage, tvScanFPMessageInstruction;
+    private ImageView ivFScan, fingerPrintPointer;
 
     private boolean dueFilterActive = false;
     private static final String DUE_FILTER_TAG = "PRESSED";
@@ -56,7 +56,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         return R.layout.activity_addo_home;
     }
 
-   @Override
+    @Override
     public void setupViews(View view) {
         super.setupViews(view);
         this.view = view;
@@ -110,10 +110,12 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
         ivFScan = view.findViewById(R.id.ivFScan);
         tvScanFPMessage = view.findViewById(R.id.tvScanFPMessage);
+        tvScanFPMessageInstruction = view.findViewById(R.id.tvScanFPMessageInstruction);
+        fingerPrintPointer = view.findViewById(R.id.fingerPrintPointer);
 
         if (getSearchView() != null) {
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
-            getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_icon_search,0,0,0);
+            getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_icon_search, 0, 0, 0);
             getSearchView().setTextColor(this.getResources().getColor(R.color.text_black));
         }
 
@@ -136,7 +138,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     }
 
-    public void fingerprintScannedSuccessfully(String guid){
+    public void fingerprintScannedSuccessfully(String guid) {
         /**
          * Search from the clients list to fing the client with the Identifier(simprintsID)
          * get the client's uniqueID
@@ -144,14 +146,15 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
          */
 
 
-
-        if (StringUtils.isNotBlank(guid)){
+        if (StringUtils.isNotBlank(guid)) {
             filter(guid, "", getMainCondition(), false);
             ivFScan.setVisibility(View.GONE);
             tvScanFPMessage.setVisibility(View.GONE);
+            tvScanFPMessageInstruction.setVisibility(View.GONE);
+            fingerPrintPointer.setVisibility(View.GONE);
             clientsView.setVisibility(View.VISIBLE);
         } else {
-            tvScanFPMessage.setText("Client not registered with fingerprint");
+            tvScanFPMessage.setText("Fingerprint not found");
         }
     }
 
@@ -178,7 +181,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         AddoRegisterProvider addoRegisterProvider = new AddoRegisterProvider(getActivity(),
                 commonRepository(), visibleColumns, registerActionHandler, paginationViewHandler);
         clientAdapter = new RecyclerViewPaginatedAdapter(null, addoRegisterProvider,
-            context().commonrepository(this.tablename));
+                context().commonrepository(this.tablename));
         clientAdapter.setCurrentlimit(20);
         clientsView.setAdapter(clientAdapter);
     }
@@ -256,10 +259,10 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     public void toggleFilterSelection(View dueOnlyLayout) {
         if (dueOnlyLayout != null) {
-            if (dueOnlyLayout.getTag() == null ) {
+            if (dueOnlyLayout.getTag() == null) {
                 dueFilterActive = true;
                 dueFilter(dueOnlyLayout);
-            } else  if (dueOnlyLayout.getTag().toString().equals(DUE_FILTER_TAG)) {
+            } else if (dueOnlyLayout.getTag().toString().equals(DUE_FILTER_TAG)) {
                 dueFilterActive = false;
                 normalFilter(dueOnlyLayout);
             }
@@ -277,7 +280,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         filter(searchText(), "", presenter().getMainCondition(), false);
         dueOnlyLayout.setTag(null);
         switchViews(dueOnlyLayout, false);
-        clientsView.setVisibility(View.VISIBLE);
+        Toast.makeText(this.getActivity(), R.string.confirm_remove_text, Toast.LENGTH_SHORT).show();
+        //clientsView.setVisibility(View.VISIBLE);
     }
 
     private String searchText() {
@@ -287,9 +291,9 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
     private void switchViews(View dueOnlyLayout, boolean isPress) {
         TextView dueOnlyTextView = dueOnlyLayout.findViewById(R.id.due_only_text_view);
         if (isPress) {
-             dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.ic_due_filter_on, 0);
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_on, 0);
         } else {
-            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.ic_due_filter_off, 0);
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_off, 0);
         }
     }
 
@@ -395,7 +399,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
                 @Override
                 public Cursor loadInBackground() {
                     final String COUNT = "count_execute";
-                    if (args != null && args.getBoolean(COUNT) ) {
+                    if (args != null && args.getBoolean(COUNT)) {
                         countExecute();
                     }
                     String query = (dueFilterActive ? dueFilterAndSortQuery() : defaultFilterAndSortQuery());
@@ -411,7 +415,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         super.onResume();
         Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
-        toolbar.setContentInsetsRelative(0,0);
+        toolbar.setContentInsetsRelative(0, 0);
         toolbar.setContentInsetStartWithNavigation(0);
         NavigationMenu.getInstance(getActivity(), null, toolbar);
     }
