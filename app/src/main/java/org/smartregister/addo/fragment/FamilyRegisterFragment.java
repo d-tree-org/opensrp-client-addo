@@ -175,7 +175,6 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             fingerPrintPointer.setVisibility(View.GONE);
             clientsView.setVisibility(View.VISIBLE);
         } else {
-            clientsView.setVisibility(View.GONE);
             tvScanFPMessage.setText("Fingerprint not found");
         }
     }
