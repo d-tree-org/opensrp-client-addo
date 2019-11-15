@@ -8,6 +8,8 @@
     <string name="password">Password</string>
 
     <string name="menu_all_families">All Families</string>
+    <string name="menu_addo_home">ADDO Home</string>
+    <string name="menu_addo_report">Reports</string>
     <string name="menu_anc_clients">ANC Clients</string>
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
@@ -375,5 +377,11 @@
     <string name="opv_1">OPV 1</string>
     <string name="opv_2">OPV 2</string>
     <string name="yellow_fever">Yellow Fever</string>
+    <string name="scan_fp_message">Scan Fingerprint</string>
+    <string name="scan_fp_message_instruction">To get your clients details, scan their fingerprint!</string>
+    <string name="med_history">Medication History</string>
+    <string name="family_no_medication_history">Family has no medication history</string>
+    <string name="addo_app_home">ADDO Home</string>
+    <string name="return_to_addo_home">Return to home</string>
 
 </resources>
