@@ -105,7 +105,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
                 identifications = (ArrayList<SimPrintsIdentification>) data.getSerializableExtra("intent_data");
             }
 
-            String guid = "";
+            String guid = null;
             SimPrintsIdentification simPrintsIdentification;
             if (identifications.size() > 0){
                 simPrintsIdentification = identifications.get(0);
@@ -120,11 +120,12 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     private void onFingerprintSuccesfullyScanned(String guid){
 
-        String id = org.smartregister.addo.util.JsonFormUtils.lookForClientsUniqueId(guid);
-
-        if (TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(guid)){
             Toast.makeText(this, "User not Found!", Toast.LENGTH_LONG).show();
         }else {
+
+            String id = org.smartregister.addo.util.JsonFormUtils.lookForClientsUniqueId(guid);
+
             FamilyRegisterFragment fragment = (FamilyRegisterFragment) mBaseFragment;
             fragment.fingerprintScannedSuccessfully(id);
             //fragment.setSearchTerm(id);
