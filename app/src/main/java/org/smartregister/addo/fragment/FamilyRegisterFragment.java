@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +51,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
     private View dueOnlyLayout;
     private TextView tvScanFPMessage, tvScanFPMessageInstruction;
     private ImageView ivFScan, fingerPrintPointer;
+    private ImageButton buttonSearchCancel;
 
     private boolean dueFilterActive = false;
     private static final String DUE_FILTER_TAG = "PRESSED";
@@ -114,6 +119,21 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         tvScanFPMessageInstruction = view.findViewById(R.id.tvScanFPMessageInstruction);
         fingerPrintPointer = view.findViewById(R.id.fingerPrintPointer);
 
+        buttonSearchCancel = view.findViewById(R.id.btn_search_cancel);
+        buttonSearchCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                buttonSearchCancel.setVisibility(View.GONE);
+
+                ivFScan.setVisibility(View.VISIBLE);
+                tvScanFPMessage.setVisibility(View.VISIBLE);
+                tvScanFPMessageInstruction.setVisibility(View.VISIBLE);
+                fingerPrintPointer.setVisibility(View.VISIBLE);
+                clientsView.setVisibility(View.GONE);
+            }
+        });
+
         if (getSearchView() != null) {
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
             getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_icon_search, 0, 0, 0);
@@ -147,7 +167,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
          */
 
 
-        if (StringUtils.isNotBlank(guid)) {
+        if (StringUtils.isNotEmpty(guid)) {
             filter(guid, "", getMainCondition(), false);
             ivFScan.setVisibility(View.GONE);
             tvScanFPMessage.setVisibility(View.GONE);
@@ -155,6 +175,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             fingerPrintPointer.setVisibility(View.GONE);
             clientsView.setVisibility(View.VISIBLE);
         } else {
+            clientsView.setVisibility(View.GONE);
             tvScanFPMessage.setText("Fingerprint not found");
         }
     }
@@ -283,6 +304,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         switchViews(dueOnlyLayout, false);
         Toast.makeText(this.getActivity(), R.string.confirm_remove_text, Toast.LENGTH_SHORT).show();
         //clientsView.setVisibility(View.VISIBLE);
+
     }
 
     private String searchText() {
