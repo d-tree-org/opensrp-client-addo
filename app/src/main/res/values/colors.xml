@@ -6,9 +6,9 @@
     <color name="colorAccent">#8A1A51</color>
 
     <!--<color name="chw_primary">#218CC5</color>-->
-    <color name="chw_primary">#8A1A51</color>
-    <color name="chw_primary_dark">#660d39</color>
-    <color name="chw_accent">#8A1A51</color>
+    <color name="addo_primary">#8A1A51</color>
+    <color name="addo_primary_dark">#660d39</color>
+    <color name="addo_accent">#8A1A51</color>
     <color name="primaryAccent">#3797ca</color>
     <color name="primaryBackground">#a6d1e7</color>
     <color name="purple">#512DA8</color>
@@ -78,5 +78,6 @@
     <color name="second_grey">#ff999999</color>
     <color name="card_white">#ffffff</color>
     <color name="card_shadow">#8c666666</color>
+    <color name="bottom_nav_bar_selected_background">#8A1A51</color>
 
 </resources>

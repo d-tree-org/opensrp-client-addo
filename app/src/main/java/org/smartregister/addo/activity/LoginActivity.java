@@ -34,20 +34,23 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     public void goToHome(boolean b) {
         //Take user to a home page
         if (b){
-            goToMainActivity();
+
         }
+        goToMainActivity(b);
+        finish();
+
     }
 
-    private void goToMainActivity(){
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+    private void goToMainActivity(boolean b){
+        Intent intent = new Intent(this, AddoHomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mLoginPresenter.processViewCustomizations();
-        if (mLoginPresenter.isUserLoggedOut()){
+        if (!mLoginPresenter.isUserLoggedOut()){
             goToHome(false);
         }
     }

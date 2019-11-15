@@ -1,5 +1,7 @@
 package org.smartregister.addo.service;
 
+import android.support.annotation.NonNull;
+
 import org.jetbrains.annotations.Nullable;
 import org.smartregister.AllConstants;
 import org.smartregister.CoreLibrary;
@@ -16,7 +18,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
 
 /**
  * Author : Isaya Mollel on 2019-10-18.

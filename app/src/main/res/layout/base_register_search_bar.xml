@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_bar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_weight="2"
+    android:background="#8A1A51"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1.5">
+
+        <EditText
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="0dp"
+            android:background="@color/white"
+            android:ellipsize="end"
+            android:fontFamily="@font/google_sans_medium"
+            android:hint="Find Name or ID"
+            android:maxLines="1"
+            android:minWidth="100dp"
+            android:padding="10dp"
+            android:textColor="@color/dark_grey_text"
+            android:textColorHint="@color/dark_grey_text"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/btn_search_cancel"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_cross"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/filter_sort_layout"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/filter_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:drawableStart="@drawable/ic_icon_filter"
+            android:drawableLeft="@drawable/ic_icon_filter"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:scrollHorizontally="true"
+            android:text="Filter"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/due_only_layout"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="1dp"
+        android:visibility="gone"
+        android:layout_weight="0.75">
+
+        <TextView
+            android:id="@+id/due_only_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:drawableEnd="@drawable/ic_due_filter_off"
+            android:drawableRight="@drawable/ic_due_filter_off"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="@string/due_only"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
