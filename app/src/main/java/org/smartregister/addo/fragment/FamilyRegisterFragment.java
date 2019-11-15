@@ -159,7 +159,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     }
 
-    public void fingerprintScannedSuccessfully(String guid) {
+    public void fingerprintScannedSuccessfully(String uniqueId) {
         /**
          * Search from the clients list to fing the client with the Identifier(simprintsID)
          * get the client's uniqueID
@@ -167,8 +167,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
          */
 
 
-        if (StringUtils.isNotEmpty(guid)) {
-            filter(guid, "", getMainCondition(), false);
+        if (StringUtils.isNotEmpty(uniqueId)) {
+            filter(uniqueId, "", getMainCondition(), false);
             ivFScan.setVisibility(View.GONE);
             tvScanFPMessage.setVisibility(View.GONE);
             tvScanFPMessageInstruction.setVisibility(View.GONE);
