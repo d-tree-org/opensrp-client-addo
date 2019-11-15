@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/client_list_header_dark_grey"
+    android:background="@color/colorWhite"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -71,13 +71,14 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:background="@color/colorWhite"
-        android:layout_below="@+id/empty_view">
+        android:layout_below="@+id/empty_view"
+        android:layout_weight="1">
 
 
         <ImageView
             android:id="@+id/ivFScan"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:src="@drawable/ic_fingerprint"
@@ -86,41 +87,37 @@
         <TextView
             android:id="@+id/tvScanFPMessage"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorWhite"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/google_sans_bold"
             android:gravity="center"
             android:text="@string/scan_fp_message"
             android:textColor="@color/text_light"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvScanFPMessageInstruction"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/colorWhite"
-            android:fontFamily="@font/google_sans_bold"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:fontFamily="@font/google_sans_regular"
             android:gravity="center"
             android:text="@string/scan_fp_message_instruction"
             android:textColor="@color/text_light"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/fingerPrintPointer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_point_to_fp"
-            android:background="@color/colorWhite"
-            android:tint="@color/addo_primary"
-            android:paddingTop="100dp"
-            android:paddingRight="47dp"
-            android:layout_gravity="right" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-
+    <ImageView
+        android:id="@+id/fingerPrintPointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_point_to_fp"
+        android:background="@color/colorWhite"
+        android:tint="@color/addo_primary"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="right|bottom" />
 
 </LinearLayout>
