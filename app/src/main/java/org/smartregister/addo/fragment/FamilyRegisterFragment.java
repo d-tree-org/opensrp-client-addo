@@ -95,7 +95,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         topLeftLayout.setVisibility(View.GONE);
 
         View topRightLayout = view.findViewById(R.id.top_right_layout);
-        topRightLayout.setVisibility(View.VISIBLE);
+        topRightLayout.setVisibility(View.GONE);
 
         View sortFilterBarLayout = view.findViewById(R.id.register_sort_filter_bar_layout);
         sortFilterBarLayout.setVisibility(View.GONE);
@@ -104,7 +104,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         filterSortLayout.setVisibility(View.GONE);
 
         dueOnlyLayout = view.findViewById(R.id.due_only_layout);
-        dueOnlyLayout.setVisibility(View.INVISIBLE);
+        dueOnlyLayout.setVisibility(View.GONE);
+
         dueOnlyLayout.setOnClickListener(registerActionHandler);
         clientsView.setVisibility(View.GONE);
 
