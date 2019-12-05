@@ -99,7 +99,7 @@ android {
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
             buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
-            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
+            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "d_tree_test" ')
             testCoverageEnabled true
         }
     }

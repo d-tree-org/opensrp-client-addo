@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,12 +17,15 @@ import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.R;
+import org.smartregister.addo.activity.SimPrintIdentificationRegisterActivity;
 import org.smartregister.addo.contract.RegisterFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoRegisterProvider;
 import org.smartregister.addo.model.FamilyRegisterFragmentModel;
+import org.smartregister.addo.model.FingerPrintScanResultModel;
 import org.smartregister.addo.presenter.FamilyRegisterFragmentPresenter;
 import org.smartregister.addo.util.Constants;
+import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.addo.util.QueryBuilder;
 import org.smartregister.addo.util.Utils;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -36,9 +36,11 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.fragment.BaseFamilyRegisterFragment;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.simprint.SimPrintsIdentification;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -166,7 +168,6 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
          * pass the unique id to filter so as to filter the list
          */
 
-
         if (StringUtils.isNotEmpty(uniqueId)) {
             filter(uniqueId, "", getMainCondition(), false);
             ivFScan.setVisibility(View.GONE);
@@ -177,6 +178,32 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         } else {
             tvScanFPMessage.setText("Fingerprint not found");
         }
+    }
+
+    public void onIdentificationFromSimPrints(ArrayList<SimPrintsIdentification> simPrintsIdentifications,
+                                              String sessionId) {
+
+
+
+        if (simPrintsIdentifications.isEmpty()) {
+
+            // Need to implement a notification or something when there is no FP from SIMPRINT
+            Toast.makeText(this.getActivity(), "No FP was returned from SIMPrint", Toast.LENGTH_SHORT).show();
+        } else {
+            ArrayList<FingerPrintScanResultModel> clientsFromScan = new ArrayList<>();
+            for (SimPrintsIdentification simPrintsIdentification : simPrintsIdentifications) {
+                clientsFromScan.add(JsonFormUtils.lookForWithGuid(simPrintsIdentification.getGuid()));
+            }
+            /**Intent intent = new Intent(this.getActivity(), org.smartregister.addo.activity.FingerprintScanResultActivity.class);
+            intent.putParcelableArrayListExtra("clients", clientsFromScan);
+            startActivity(intent);**/
+            Intent intent = new Intent(this.getActivity(), SimPrintIdentificationRegisterActivity.class);
+            intent.putParcelableArrayListExtra("clients", clientsFromScan);
+            intent.putExtra("baseEntityId", clientsFromScan.get(0).getVillage());
+            startActivity(intent);
+
+        }
+
     }
 
     @Override

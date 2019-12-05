@@ -1,18 +1,47 @@
 package org.smartregister.addo.contract;
 
-import org.smartregister.view.contract.BaseRegisterContract;
+import org.smartregister.configurableviews.model.RegisterConfiguration;
+import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
-public interface SimPrintResultFragmantContract {
+import java.util.Set;
 
-    interface View extends BaseRegisterContract {
+public interface SimPrintResultFragmentContract {
+
+    interface View extends BaseRegisterFragmentContract.View {
+
+        void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns, String familyHead, String primaryCaregiver);
+
+
+        SimPrintResultFragmentContract.Presenter presenter();
+
+        void setFamilyHead(String familyHead);
+
+        void setPrimaryCaregiver(String primaryCaregiver);
 
     }
 
-    interface Presenter {
+    interface Presenter extends BaseRegisterFragmentContract.Presenter {
+
+        String getMainCondition();
+
+        String getDefaultSortQuery();
+
+        void setFamilyHead(String familyHead);
+
+        void setPrimaryCaregiver(String primaryCaregiver);
 
     }
 
     interface Model {
+        RegisterConfiguration defaultRegisterConfiguration();
 
+        ViewConfiguration getViewConfiguration(String viewConfigurationIdentifier);
+
+        Set<org.smartregister.configurableviews.model.View> getRegisterActiveColumns(String viewConfigurationIdentifier);
+
+        String countSelect(String tableName, String mainCondition);
+
+        String mainSelect(String tableName, String mainCondition);
     }
 }

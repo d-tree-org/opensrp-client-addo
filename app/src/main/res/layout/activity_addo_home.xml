@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:gravity="center"
+    android:id="@+id/addo_home_fragment"
     android:orientation="vertical">
 
     <include
