@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.domain.FamilyMember;
+import org.smartregister.addo.model.FingerPrintScanResultModel;
 import org.smartregister.addo.repository.AddoRepository;
 import org.smartregister.clientandeventmodel.Address;
 import org.smartregister.clientandeventmodel.Client;
@@ -28,6 +29,7 @@ import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.domain.Photo;
 import org.smartregister.domain.ProfileImage;
 import org.smartregister.domain.tag.FormTag;
@@ -1394,6 +1396,59 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         }
 
         return UniqueId;
+    }
+
+    public static FingerPrintScanResultModel lookForWithGuid(String guid){
+
+        //baseEntityId
+        FingerPrintScanResultModel client = null;
+        Client mClient = null;
+
+        String query_client = "select json from client where json LIKE '%"+guid+"%' ";
+        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
+
+        try {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                mClient = jsonStringToJava(cursor.getString(0), Client.class);
+                //UniqueId = mClient.getIdentifier("opensrp_id");
+                CommonPersonObject personObject = getCommonRepository(org.smartregister.family.util.Utils.metadata()
+                        .familyMemberRegister.tableName).findByBaseEntityId(mClient.getBaseEntityId());
+                final CommonPersonObjectClient client2 = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
+                client2.setColumnmaps(personObject.getColumnmaps());
+
+
+                String firstName = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "first_name", true);
+                String middleName = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "middle_name", true);
+                String lastName = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "last_name", true);
+                String gender = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "gender", true);
+                String dob = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "dob", false);
+                String familyBaseEntity = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "relational_id", false);
+                //String village = personObject.getCaseId();
+                String dobString = org.smartregister.family.util.Utils.getDuration(dob);
+                dobString = dobString.contains("y") ? dobString.substring(0, dobString.indexOf("y")) : dobString;
+                String patientName = org.smartregister.family.util.Utils.getName(firstName, middleName, lastName);
+                patientName = patientName + ", " + dobString;
+
+                client = new FingerPrintScanResultModel(patientName, gender, familyBaseEntity);
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        } finally {
+            cursor.close();
+        }
+
+        return client;
+    }
+
+    public static CommonRepository getCommonRepository(String tableName) {
+        return org.smartregister.family.util.Utils.context().commonrepository(tableName);
+    }
+
+    public static String getValueOfClientsFields(Map<String, String> map, String field){
+        return org.smartregister.family.util.Utils.getValue(map, field, false);
     }
 
 }
