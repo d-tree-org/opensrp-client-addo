@@ -5,9 +5,11 @@ import org.smartregister.addo.contract.SimPrintResultFragmentContract;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -19,9 +21,8 @@ public class SimPrintIdentificationFragmentPresenter implements SimPrintResultFr
 
     protected RegisterConfiguration config;
 
-    protected String familyBaseEntityId;
-    protected String familyHead;
-    protected String primaryCaregiver;
+    protected ArrayList<String> ids;
+
 
 
     protected Set<View> visibleColumns = new TreeSet<>();
@@ -29,21 +30,34 @@ public class SimPrintIdentificationFragmentPresenter implements SimPrintResultFr
     private String viewConfigurationIdentifier;
 
     public SimPrintIdentificationFragmentPresenter(SimPrintResultFragmentContract.View view, SimPrintResultFragmentContract.Model model,
-                                                   String viewConfigurationIdentifier, String familyBaseEntityId, String familyHead, String primaryCaregiver){
+                                                   String viewConfigurationIdentifier, ArrayList<String> ids){
 
         this.viewReference = new WeakReference<>(view);
         this.model = model;
         this.viewConfigurationIdentifier = viewConfigurationIdentifier;
         this.config = model.defaultRegisterConfiguration();
-        this.familyBaseEntityId = familyBaseEntityId;
-        this.familyHead = familyHead;
-        this.primaryCaregiver = primaryCaregiver;
+        this.ids = ids;
+
 
     }
 
     @Override
     public String getMainCondition() {
-        return  String.format(" %s is null ", "date_removed");
+        //return  String.format(" %s is null ", "date_removed");
+        String mainCondition = "";
+        StringBuilder stringBuilder= new StringBuilder();
+        for (int i=0; i < ids.size(); i++) {
+
+            stringBuilder.append("'"+ids.get(i)+"'").append(",");
+        }
+
+        String stringIds = stringBuilder.toString();
+
+        if (stringIds.length() > 0) {
+            mainCondition = String.format(" %s IN (" + stringIds.substring(0, stringIds.length()-1)+ ") AND %s is null ", DBConstants.KEY.OBJECT_ID, DBConstants.KEY.DATE_REMOVED);
+        }
+
+        return mainCondition;
 
     }
 
