@@ -65,12 +65,6 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
     @Override
     public void getView(Cursor cursor, SmartRegisterClient client, RegisterViewHolder viewHolder) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
-        //CommonPersonObject obj = this.commonRepository.findByBaseEntityId(cursor.getString(2));
-
-        /**if (!cursor.isAfterLast()) {
-         populatePatientColumn(pc, client, viewHolder);
-         populateIdentifierColumn(pc, viewHolder);
-         }**/
 
         if (visibleColumns.isEmpty()) {
             populatePatientColumn(pc, client, viewHolder);
