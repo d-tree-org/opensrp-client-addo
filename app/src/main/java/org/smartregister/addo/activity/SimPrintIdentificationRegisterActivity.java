@@ -42,6 +42,7 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
 
     }
 
+
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
         return new SimPrintIdentificationRegisterFragment();

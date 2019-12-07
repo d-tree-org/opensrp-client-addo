@@ -55,7 +55,7 @@ public class SimPrintIdentificationFragmentModel implements SimPrintResultFragme
                 tableName + "." + DBConstants.KEY.DOB,
         };**/
         String[] columns = new String[]{
-                tableName + ".relationalid",
+                tableName + ".relational_id as relationalid",
                 tableName + "." + DBConstants.KEY.LAST_INTERACTED_WITH,
                 tableName + "." + DBConstants.KEY.BASE_ENTITY_ID,
                 tableName + "." + DBConstants.KEY.FIRST_NAME,
