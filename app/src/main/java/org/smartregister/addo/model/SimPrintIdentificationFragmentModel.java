@@ -1,4 +1,4 @@
-package org.smartregister.addo.presenter;
+package org.smartregister.addo.model;
 
 import org.smartregister.addo.contract.SimPrintResultFragmentContract;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
@@ -44,16 +44,12 @@ public class SimPrintIdentificationFrgamentModel implements SimPrintResultFragme
 
     protected String[] mainColumns(String tableName) {
         String[] columns = new String[]{
-                tableName + ".relational_id",
+                tableName + ".relationalid",
                 tableName + "." + DBConstants.KEY.LAST_INTERACTED_WITH,
                 tableName + "." + DBConstants.KEY.BASE_ENTITY_ID,
                 tableName + "." + DBConstants.KEY.FIRST_NAME,
-                tableName + "." + DBConstants.KEY.MIDDLE_NAME,
                 tableName + "." + DBConstants.KEY.LAST_NAME,
                 tableName + "." + DBConstants.KEY.UNIQUE_ID,
-                tableName + "." + DBConstants.KEY.GENDER,
-                tableName + "." + DBConstants.KEY.DOB,
-                tableName + "." + DBConstants.KEY.DOD,
         };
         return columns;
     }

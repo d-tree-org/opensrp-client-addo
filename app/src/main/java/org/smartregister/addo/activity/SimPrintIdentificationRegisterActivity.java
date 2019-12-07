@@ -88,6 +88,7 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
             bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
             bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_search);
             bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_library);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
 
             bottomNavigationView.inflateMenu(org.smartregister.family.R.menu.bottom_nav_family_menu);
 

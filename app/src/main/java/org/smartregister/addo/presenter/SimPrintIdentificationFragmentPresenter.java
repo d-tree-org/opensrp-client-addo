@@ -5,6 +5,7 @@ import org.smartregister.addo.contract.SimPrintResultFragmentContract;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.family.util.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFr
 
     @Override
     public String getMainCondition() {
-        return null;
+        return  String.format(" %s is null ", "date_removed");
     }
 
     @Override
@@ -93,8 +94,14 @@ public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFr
 
 
     @Override
-    public void initializeQueries(String s) {
-
+    public void initializeQueries(String mainCondition) {
+        String tableName = Utils.metadata().familyRegister.tableName;
+        String countSelect = this.model.countSelect(tableName, mainCondition);
+        String mainSelect = this.model.mainSelect(tableName, mainCondition);
+        this.getView().initializeQueryParams(tableName, countSelect, mainSelect);
+        this.getView().initializeAdapter(this.visibleColumns);
+        this.getView().countExecute();
+        this.getView().filterandSortInInitializeQueries();
     }
 
     @Override
