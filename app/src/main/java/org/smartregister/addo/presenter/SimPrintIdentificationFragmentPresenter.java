@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFragmentContract.Presenter {
+public class SimPrintIdentificationFragmentPresenter implements SimPrintResultFragmentContract.Presenter {
 
     protected WeakReference<SimPrintResultFragmentContract.View> viewReference;
 
@@ -28,7 +28,7 @@ public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFr
 
     private String viewConfigurationIdentifier;
 
-    public SimPrintIdentificationFrgamentPresenter(SimPrintResultFragmentContract.View view, SimPrintResultFragmentContract.Model model,
+    public SimPrintIdentificationFragmentPresenter(SimPrintResultFragmentContract.View view, SimPrintResultFragmentContract.Model model,
                                                    String viewConfigurationIdentifier, String familyBaseEntityId, String familyHead, String primaryCaregiver){
 
         this.viewReference = new WeakReference<>(view);
@@ -44,6 +44,7 @@ public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFr
     @Override
     public String getMainCondition() {
         return  String.format(" %s is null ", "date_removed");
+
     }
 
     @Override
@@ -95,7 +96,7 @@ public class SimPrintIdentificationFrgamentPresenter implements SimPrintResultFr
 
     @Override
     public void initializeQueries(String mainCondition) {
-        String tableName = Utils.metadata().familyRegister.tableName;
+        String tableName = Utils.metadata().familyMemberRegister.tableName;
         String countSelect = this.model.countSelect(tableName, mainCondition);
         String mainSelect = this.model.mainSelect(tableName, mainCondition);
         this.getView().initializeQueryParams(tableName, countSelect, mainSelect);
