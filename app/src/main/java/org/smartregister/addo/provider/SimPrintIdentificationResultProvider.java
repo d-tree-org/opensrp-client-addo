@@ -46,12 +46,10 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
     private CommonRepository commonRepository;
     private ImageRenderHelper imageRenderHelper;
 
-    private String familyHead;
-    private String primaryCaregiver;
 
-    public SimPrintIdentificationResultProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
+    public SimPrintIdentificationResultProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener) {
 
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.visibleColumns = visibleColumns;
 
         this.onClickListener = onClickListener;
@@ -61,19 +59,24 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
         this.commonRepository = commonRepository;
         this.imageRenderHelper = new ImageRenderHelper(context);
 
-        this.familyHead = familyHead;
-        this.primaryCaregiver = primaryCaregiver;
+
     }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient client, RegisterViewHolder viewHolder) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
+        //CommonPersonObject obj = this.commonRepository.findByBaseEntityId(cursor.getString(2));
+
+        /**if (!cursor.isAfterLast()) {
+         populatePatientColumn(pc, client, viewHolder);
+         populateIdentifierColumn(pc, viewHolder);
+         }**/
+
         if (visibleColumns.isEmpty()) {
             populatePatientColumn(pc, client, viewHolder);
             populateIdentifierColumn(pc, viewHolder);
-
-            return;
         }
+
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, SmartRegisterClient client, final SimPrintIdentificationResultProvider.RegisterViewHolder viewHolder) {
@@ -153,26 +156,11 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
     }
 
 
-
     private void populateIdentifierColumn(CommonPersonObjectClient pc, SimPrintIdentificationResultProvider.RegisterViewHolder viewHolder) {
         String uniqueId = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.UNIQUE_ID, false);
         //fillValue(viewHolder.ancId, String.format(context.getString(R.string.unique_id_text), uniqueId));
 
         String baseEntityId = pc.getCaseId();
-        if (StringUtils.isNotBlank(baseEntityId)) {
-            if (baseEntityId.equals(familyHead)) {
-                viewHolder.familyHead.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.familyHead.setVisibility(View.GONE);
-            }
-
-
-            if (baseEntityId.equals(primaryCaregiver)) {
-                viewHolder.primaryCaregiver.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.primaryCaregiver.setVisibility(View.GONE);
-            }
-        }
     }
 
     private void attachPatientOnclickListener(View view, SmartRegisterClient client) {
@@ -186,7 +174,6 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
         view.setTag(client);
         view.setTag(org.smartregister.family.R.id.VIEW_ID, BaseFamilyProfileMemberFragment.CLICK_VIEW_NEXT_ARROW);
     }
-
 
 
     @Override
@@ -211,22 +198,24 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
 
     @Override
     public LayoutInflater inflater() {
-        return null;
+        return this.inflater;
     }
 
     @Override
-    public RegisterViewHolder createViewHolder(ViewGroup viewGroup) {
-        return null;
+    public RegisterViewHolder createViewHolder(ViewGroup parent) {
+        View view = inflater.inflate(org.smartregister.family.R.layout.family_member_register_list_row, parent, false);
+        return new RegisterViewHolder(view);
     }
 
     @Override
-    public RecyclerView.ViewHolder createFooterHolder(ViewGroup viewGroup) {
-        return null;
+    public RecyclerView.ViewHolder createFooterHolder(ViewGroup parent) {
+        View view = inflater.inflate(org.smartregister.family.R.layout.smart_register_pagination, parent, false);
+        return new FooterViewHolder(view);
     }
 
     @Override
     public boolean isFooterViewHolder(RecyclerView.ViewHolder viewHolder) {
-        return false;
+        return FooterViewHolder.class.isInstance(viewHolder);
     }
 
     public static void fillValue(TextView v, String value) {
