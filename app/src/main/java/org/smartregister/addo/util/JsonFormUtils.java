@@ -1424,8 +1424,9 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
                 String lastName = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "last_name", true);
                 String gender = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "gender", true);
                 String dob = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "dob", false);
-                String familyBaseEntity = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "relational_id", false);
+                //String familyBaseEntity = org.smartregister.family.util.Utils.getValue(client2.getColumnmaps(), "relational_id", false);
                 //String village = personObject.getCaseId();
+                String familyBaseEntity = "Village";
                 String dobString = org.smartregister.family.util.Utils.getDuration(dob);
                 dobString = dobString.contains("y") ? dobString.substring(0, dobString.indexOf("y")) : dobString;
                 String patientName = org.smartregister.family.util.Utils.getName(firstName, middleName, lastName);

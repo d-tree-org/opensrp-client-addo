@@ -12,7 +12,7 @@ import org.smartregister.family.util.Utils;
 
 import java.util.Set;
 
-public class SimPrintIdentificationFrgamentModel implements SimPrintResultFragmentContract.Model {
+public class SimPrintIdentificationFragmentModel implements SimPrintResultFragmentContract.Model {
     @Override
     public RegisterConfiguration defaultRegisterConfiguration() {
         return ConfigHelper.defaultRegisterConfiguration(Utils.context().applicationContext());
@@ -43,12 +43,25 @@ public class SimPrintIdentificationFrgamentModel implements SimPrintResultFragme
     }
 
     protected String[] mainColumns(String tableName) {
+        /**String[] columns = new String[]{
+                tableName + "." + DBConstants.KEY.LAST_INTERACTED_WITH,
+                tableName + "." + DBConstants.KEY.BASE_ENTITY_ID,
+                tableName + "." + DBConstants.KEY.FIRST_NAME,
+                tableName + "." + DBConstants.KEY.LAST_NAME,
+                tableName + "." + DBConstants.KEY.MIDDLE_NAME,
+                tableName + "." + DBConstants.KEY.GENDER,
+                tableName + "." + DBConstants.KEY.ENTITY_TYPE,
+                tableName + "." + DBConstants.KEY.UNIQUE_ID,
+                tableName + "." + DBConstants.KEY.DOB,
+        };**/
         String[] columns = new String[]{
                 tableName + ".relationalid",
                 tableName + "." + DBConstants.KEY.LAST_INTERACTED_WITH,
                 tableName + "." + DBConstants.KEY.BASE_ENTITY_ID,
                 tableName + "." + DBConstants.KEY.FIRST_NAME,
+                tableName + "." + DBConstants.KEY.MIDDLE_NAME,
                 tableName + "." + DBConstants.KEY.LAST_NAME,
+                tableName + "." + DBConstants.KEY.GENDER,
                 tableName + "." + DBConstants.KEY.UNIQUE_ID,
         };
         return columns;
