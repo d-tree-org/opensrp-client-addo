@@ -22,7 +22,6 @@ import org.smartregister.addo.contract.RegisterFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoRegisterProvider;
 import org.smartregister.addo.model.FamilyRegisterFragmentModel;
-import org.smartregister.addo.model.FingerPrintScanResultModel;
 import org.smartregister.addo.presenter.FamilyRegisterFragmentPresenter;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.addo.util.JsonFormUtils;
@@ -190,16 +189,16 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             // Need to implement a notification or something when there is no FP from SIMPRINT
             Toast.makeText(this.getActivity(), "No FP was returned from SIMPrint", Toast.LENGTH_SHORT).show();
         } else {
-            ArrayList<FingerPrintScanResultModel> clientsFromScan = new ArrayList<>();
+            ArrayList<String> clientsFromScan = new ArrayList<>();
             for (SimPrintsIdentification simPrintsIdentification : simPrintsIdentifications) {
-                clientsFromScan.add(JsonFormUtils.lookForWithGuid(simPrintsIdentification.getGuid()));
+                clientsFromScan.add(JsonFormUtils.lookForClientsBaseEntityId(simPrintsIdentification.getGuid()));
             }
             /**Intent intent = new Intent(this.getActivity(), org.smartregister.addo.activity.FingerprintScanResultActivity.class);
             intent.putParcelableArrayListExtra("clients", clientsFromScan);
             startActivity(intent);**/
             Intent intent = new Intent(this.getActivity(), SimPrintIdentificationRegisterActivity.class);
-            intent.putParcelableArrayListExtra("clients", clientsFromScan);
-            intent.putExtra("baseEntityId", clientsFromScan.get(0).getVillage());
+            intent.putExtra("clients", clientsFromScan);
+            intent.putExtra("baseEntityId", clientsFromScan);
             startActivity(intent);
 
         }
