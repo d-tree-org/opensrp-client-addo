@@ -2,6 +2,7 @@ package org.smartregister.addo.fragment;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.family.util.Utils;
+import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -92,9 +94,15 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
     @Override
     protected void initializePresenter() {
-        ArrayList<String> ids = this.getActivity().getIntent().getStringArrayListExtra("clients");
+        //ArrayList<String> ids = this.getActivity().getIntent().getStringArrayListExtra("clients");
+        ArrayList<String> ids = getBaseEntityIds();
         this.presenter = new SimPrintIdentificationFragmentPresenter(this, new SimPrintIdentificationFragmentModel(),
                 null, ids);
+    }
+
+    private ArrayList<String> getBaseEntityIds() {
+        HashMap<String, String> baseidsGuids = (HashMap<String, String>) this.getActivity().getIntent().getSerializableExtra("baseids_guids");
+        return new ArrayList<String>(baseidsGuids.keySet());
     }
 
     @Override
@@ -126,6 +134,14 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
     protected void onViewClicked(android.view.View view) {
         if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == "click_view_normal") {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) view.getTag();
+
+            //SimPrint Confirmation of the selected client
+            String baseEntityId = pc.entityId();
+            String simPrintsGuid = getSimPrintGuid(baseEntityId);
+            String sessionid = this.getActivity().getIntent().getStringExtra("session_id");
+            Utils.startAsyncTask(new ConfirmIdentificationTask(sessionid, simPrintsGuid), null);
+
+            // Get values to start the family profile
             String relational_id = org.smartregister.family.util.Utils.getValue(pc.getColumnmaps(), "relationalid", false);
             CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
                     .findByCaseID(relational_id);
@@ -145,9 +161,41 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
     }
 
+    private void confirmSelectedGuid(String sessionid, String simPrintsGuid) {
+
+        SimPrintsIdentifyActivity.ConfirmIdentification(this.getActivity(), sessionid, simPrintsGuid);
+
+    }
+
+    private String getSimPrintGuid(String baseEntityId) {
+        HashMap<String, String> baseidsGuids = (HashMap<String, String>) this.getActivity().getIntent().getSerializableExtra("baseids_guids");
+        return baseidsGuids.get(baseEntityId);
+    }
+
     @Override
     public RecyclerViewPaginatedAdapter getClientsCursorAdapter() {
         return super.getClientsCursorAdapter();
+    }
+
+    ////////////////////////////////////////////////////////////////////
+    //      Inner Class | SimPrints Identification Confirmation
+    ///////////////////////////////////////////////////////////////////
+
+    private class ConfirmIdentificationTask extends AsyncTask<Void, Void, Void> {
+
+        private String sessiodId;
+        private String selectedGuid;
+
+        public ConfirmIdentificationTask(String sessiodId, String selectedGuid) {
+            this.sessiodId = sessiodId;
+            this.selectedGuid = selectedGuid;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            confirmSelectedGuid(sessiodId, selectedGuid);
+            return null;
+        }
     }
 
 

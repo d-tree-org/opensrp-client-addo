@@ -189,18 +189,26 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             // Need to implement a notification or something when there is no FP from SIMPRINT
             Toast.makeText(this.getActivity(), "No FP was returned from SIMPrint", Toast.LENGTH_SHORT).show();
         } else {
+            // This will just find the basentity ids and pass them to the SimPrint Identification Activity but we also need guids for confirmation
+            /**
             ArrayList<String> clientsFromScan = new ArrayList<>();
             for (SimPrintsIdentification simPrintsIdentification : simPrintsIdentifications) {
                 clientsFromScan.add(JsonFormUtils.lookForClientsBaseEntityId(simPrintsIdentification.getGuid()));
             }
-            /**Intent intent = new Intent(this.getActivity(), org.smartregister.addo.activity.FingerprintScanResultActivity.class);
-            intent.putParcelableArrayListExtra("clients", clientsFromScan);
-            startActivity(intent);**/
             Intent intent = new Intent(this.getActivity(), SimPrintIdentificationRegisterActivity.class);
             intent.putExtra("clients", clientsFromScan);
             intent.putExtra("baseEntityId", clientsFromScan);
             startActivity(intent);
+            **/
 
+            HashMap<String, String> baseEntityGuid = new HashMap<String, String>();
+            for (SimPrintsIdentification simPrintsIdentification : simPrintsIdentifications) {
+                baseEntityGuid.put(JsonFormUtils.lookForClientsBaseEntityId(simPrintsIdentification.getGuid()), simPrintsIdentification.getGuid());
+            }
+            Intent intent = new Intent(this.getActivity(), SimPrintIdentificationRegisterActivity.class);
+            intent.putExtra("baseids_guids", baseEntityGuid);
+            intent.putExtra("session_id", sessionId);
+            startActivity(intent);
         }
 
     }
