@@ -3,11 +3,8 @@ package org.smartregister.addo.fragment;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.SimPrintResultFragmentContract;
@@ -32,16 +29,27 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_addo_home;
+        return R.layout.activity_simprint_identification;
     }
 
-    @Nullable
+ /**   @Nullable
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         android.view.View view = inflater.inflate(R.layout.fingerprint_identification_profile, container, false);
         rootView = view;//handle to the root
 
 
+
+
+        setupViews(view);
+        return view;
+    } **/
+
+    @Override
+    public void setupViews(android.view.View view) {
+        super.setupViews(view);
+
+        rootView = view;
 
         Toolbar toolbar = view.findViewById(R.id.register_toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
@@ -50,15 +58,28 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
         toolbar.setContentInsetStartWithNavigation(0);
         toolbar.setVisibility(android.view.View.VISIBLE);
 
+       // NavigationMenu.getInstance(this.getActivity(), null, toolbar);
 
+        android.view.View navBarContainer = view.findViewById(R.id.register_nav_bar_container);
+        navBarContainer.setFocusable(false);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        android.view.View searchBarLayout = view.findViewById(R.id.search_bar_layout);
+        searchBarLayout.setLayoutParams(params);
+        searchBarLayout.setBackgroundResource(R.color.addo_primary);
+        searchBarLayout.setPadding(
+                searchBarLayout.getPaddingLeft(),
+                searchBarLayout.getPaddingTop(),
+                searchBarLayout.getPaddingRight(),
+                (int) org.smartregister.addo.util.Utils.convertDpToPixel(10.0F, this.getActivity())
+        );
 
         CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
         if (titleView != null) {
-            titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(), titleView.getPaddingBottom());
+            titleView.setText(R.string.fingerprint_identification_title);
+            titleView.setPadding(0, titleView.getTop(), 0, titleView.getPaddingBottom());
         }
-
-        setupViews(view);
-        return view;
     }
 
     @Override
@@ -132,7 +153,25 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
     @Override
     protected void onViewClicked(android.view.View view) {
-        if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == "click_view_normal") {
+        switch (view.getId()) {
+            case R.id.patient_column:
+                if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == "click_view_normal") {
+                    goToFamilyProfileActivity(view);
+                }
+                break;
+            case R.id.next_arrow:
+                if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == "click_next_arrow") {
+                    goToFamilyProfileActivity(view);
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void goToFamilyProfileActivity(android.view.View view) {
+        if (view.getTag() instanceof CommonPersonObjectClient) {
             CommonPersonObjectClient pc = (CommonPersonObjectClient) view.getTag();
 
             //SimPrint Confirmation of the selected client
@@ -157,8 +196,8 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
                     org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
             intent.putExtra("go_to_due_page", false);
             this.startActivity(intent);
+            this.getActivity().finish();
         }
-
     }
 
     private void confirmSelectedGuid(String sessionid, String simPrintsGuid) {
