@@ -384,5 +384,6 @@
     <string name="addo_app_home">ADDO Home</string>
     <string name="return_to_addo_home">Return to home</string>
     <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
+    <string name="fingerprint_identification_title">Find Clients</string>
 
 </resources>
