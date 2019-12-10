@@ -5,12 +5,12 @@ import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.v4.app.Fragment;
 
 import org.json.JSONObject;
+import org.smartregister.addo.R;
 import org.smartregister.addo.contract.SimPrintIdentificationRegisterContract;
 import org.smartregister.addo.fragment.SimPrintIdentificationRegisterFragment;
 import org.smartregister.addo.model.SimPrintIdentificationRegisterModel;
 import org.smartregister.addo.presenter.SimPrintIdentificationRegisterPresenter;
 import org.smartregister.family.listener.FamilyBottomNavigationListener;
-import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -80,18 +80,14 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
 
     @Override
     protected void registerBottomNavigation() {
-        bottomNavigationHelper = new BottomNavigationHelper();
-        bottomNavigationView = findViewById(org.smartregister.R.id.bottom_navigation);
 
         if (bottomNavigationView != null) {
             bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_clients);
-            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
-            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_search);
-            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_library);
-            bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
-
-            bottomNavigationView.inflateMenu(org.smartregister.family.R.menu.bottom_nav_family_menu);
+            bottomNavigationView.getMenu().removeItem(R.id.action_clients);
+            bottomNavigationView.getMenu().removeItem(R.id.action_register);
+            bottomNavigationView.getMenu().removeItem(R.id.action_search);
+            bottomNavigationView.getMenu().removeItem(R.id.action_library);
+            bottomNavigationView.getMenu().removeItem(R.id.action_scan_qr);
 
             bottomNavigationHelper.disableShiftMode(bottomNavigationView);
 

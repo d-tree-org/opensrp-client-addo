@@ -52,6 +52,7 @@ public class SimPrintIdentificationFragmentModel implements SimPrintResultFragme
                 tableName + "." + DBConstants.KEY.MIDDLE_NAME,
                 tableName + "." + DBConstants.KEY.LAST_NAME,
                 tableName + "." + DBConstants.KEY.GENDER,
+                tableName + "." + DBConstants.KEY.DOB,
                 tableName + "." + DBConstants.KEY.UNIQUE_ID,
         };
         return columns;

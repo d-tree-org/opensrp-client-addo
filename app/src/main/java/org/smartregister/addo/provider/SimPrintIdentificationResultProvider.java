@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.addo.R;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewProvider;
@@ -203,7 +203,7 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
 
     @Override
     public RecyclerView.ViewHolder createFooterHolder(ViewGroup parent) {
-        View view = inflater.inflate(org.smartregister.family.R.layout.smart_register_pagination, parent, false);
+        View view = inflater.inflate(R.layout.simprint_result_pagination, parent, false);
         return new FooterViewHolder(view);
     }
 
@@ -255,14 +255,14 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
         public TextView pageInfoView;
-        public Button nextPageView;
-        public Button previousPageView;
+        public ImageView nextPageView;
+        public ImageView previousPageView;
 
         public FooterViewHolder(View view) {
             super(view);
 
-            nextPageView = view.findViewById(org.smartregister.R.id.btn_next_page);
-            previousPageView = view.findViewById(org.smartregister.R.id.btn_previous_page);
+            nextPageView = view.findViewById(R.id.iv_next_page);
+            previousPageView = view.findViewById(R.id.iv_previous_page);
             pageInfoView = view.findViewById(org.smartregister.R.id.txt_page_info);
         }
     }
