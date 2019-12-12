@@ -43,7 +43,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     public void startSimprintsId(){
 
         // This is where the session starts, need to find a way to define this session for the confirmation
-        SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(AddoHomeActivity.this,
+        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(AddoHomeActivity.this,
                 BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
     }
 
