@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
+import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.SimPrintResultFragmentContract;
 import org.smartregister.addo.model.SimPrintIdentificationFragmentModel;
@@ -16,6 +17,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.family.util.Utils;
+import org.smartregister.simprint.SimPrintsHelper;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -201,9 +203,8 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
     }
 
     private void confirmSelectedGuid(String sessionid, String simPrintsGuid) {
-
-        SimPrintsIdentifyActivity.ConfirmIdentification(this.getActivity(), sessionid, simPrintsGuid);
-
+        SimPrintsHelper simPrintsHelper = new SimPrintsHelper(BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_USER_ID);
+        simPrintsHelper.confirmIdentity(this.getActivity(), sessionid, simPrintsGuid);
     }
 
     private String getSimPrintGuid(String baseEntityId) {
