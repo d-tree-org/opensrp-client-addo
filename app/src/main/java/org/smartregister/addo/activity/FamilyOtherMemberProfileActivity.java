@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -57,7 +58,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private String PhoneNumber;
     private CommonPersonObjectClient commonPersonObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
-    private TextView textViewFamilyHas;
+    private TextView textViewFamilyHas, textViewDangersignScreening;
     private RelativeLayout layoutFamilyHasRow;
 
     private OnClickFloatingMenu onClickFloatingMenu;
@@ -107,6 +108,8 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     protected void setupViews() {
         super.setupViews();
 
+        textViewDangersignScreening = findViewById(R.id.textview_ds_screening);
+
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
 
@@ -127,6 +130,8 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         familyFloatingMenu.setClickListener(onClickFloatingMenu);
         textViewFamilyHas = findViewById(R.id.textview_family_has);
         layoutFamilyHasRow = findViewById(R.id.family_has_row);
+
+        textViewDangersignScreening.setOnClickListener(this);
 
         layoutFamilyHasRow.setOnClickListener(this);
 
@@ -330,6 +335,10 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
                 //TODO: Uncomment to implement viewing family due screen
                 //openFamilyDueTab();
                 break;
+
+            case R.id.textview_ds_screening:
+                //startFormForEdit(R.string.edit_anc_registration_form_title);
+                Toast.makeText(this, "You have clicked the ds thingy", Toast.LENGTH_SHORT).show();
             default:
                 super.onClick(view);
                 break;

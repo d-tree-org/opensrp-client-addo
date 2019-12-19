@@ -77,6 +77,7 @@
     <string name="not_visiting_this_month">Not visiting this month</string>
     <string name="undo">UNDO</string>
     <string name="record_visit">Record visit</string>
+    <string name="ds_screening">Screen for Danger Sign</string>
     <string name="edit">EDIT</string>
     <string name="return_to_family_name">Return to %1$s Family</string>
     <string name="return_to_family_members">Return to family members</string>
