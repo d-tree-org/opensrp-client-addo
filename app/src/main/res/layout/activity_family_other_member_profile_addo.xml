@@ -213,6 +213,8 @@
                 app:tabSelectedTextColor="@color/text_black"
                 app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator.sub.white" />
 
+            <include android:id="@+id/ds_screening" layout="@layout/view_dangersign_screening" />
+
         </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
