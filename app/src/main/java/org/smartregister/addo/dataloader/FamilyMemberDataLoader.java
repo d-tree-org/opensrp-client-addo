@@ -39,7 +39,7 @@ public class FamilyMemberDataLoader extends NativeFormsDataLoader {
     }
 
     @Override
-    public String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, String>> dbData) throws JSONException {
+    public String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, Object>> dbData) throws JSONException {
         String key = jsonObject.getString(JsonFormConstants.KEY);
         Client client = getClient(baseEntityID);
         switch (key) {
@@ -82,9 +82,9 @@ public class FamilyMemberDataLoader extends NativeFormsDataLoader {
         super.bindNativeFormsMetaData(jsonObjectForm, context, baseEntityID);
 
         jsonObjectForm.put(org.smartregister.family.util.JsonFormUtils.ENCOUNTER_TYPE, eventType);
-        Map<String, Map<String, String>> dbVals = getDbData(context, baseEntityID, eventType);
+        Map<String, Map<String, Object>> dbVals = getDbData(context, baseEntityID, eventType);
         if (dbVals != null) {
-            for (Map.Entry<String, Map<String, String>> entry : dbVals.entrySet()) {
+            for (Map.Entry<String, Map<String, Object>> entry : dbVals.entrySet()) {
                 String val = (String) entry.getValue().get(DBConstants.KEY.UNIQUE_ID);
                 if (StringUtils.isNotBlank(val))
                     jsonObjectForm.put(org.smartregister.family.util.JsonFormUtils.CURRENT_OPENSRP_ID, val);
@@ -96,7 +96,7 @@ public class FamilyMemberDataLoader extends NativeFormsDataLoader {
             stepOne.put("title", title);
     }
 
-    private void computeDOBUnknown(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, String>> dbData) throws JSONException {
+    private void computeDOBUnknown(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, Object>> dbData) throws JSONException {
         String val = super.getValue(context, baseEntityID, jsonObject, dbData);
         jsonObject.put(org.smartregister.family.util.JsonFormUtils.READ_ONLY, false);
         JSONObject optionsObject = jsonObject.getJSONArray(org.smartregister.family.util.Constants.JSON_FORM_KEY.OPTIONS).getJSONObject(0);

@@ -11,6 +11,7 @@
         android:id="@+id/record_visit_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="10dp"
         android:visibility="visible">
 
@@ -20,8 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/record_btn_selector"
+            android:background="@drawable/record_btn_selector_overdue"
             android:gravity="center_horizontal"
             android:paddingLeft="30dp"
             android:paddingTop="10dp"

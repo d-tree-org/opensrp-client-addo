@@ -83,10 +83,9 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
 
         if (bottomNavigationView != null) {
             bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-            bottomNavigationView.getMenu().removeItem(R.id.action_clients);
-            bottomNavigationView.getMenu().removeItem(R.id.action_register);
-            bottomNavigationView.getMenu().removeItem(R.id.action_search);
-            bottomNavigationView.getMenu().removeItem(R.id.action_library);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_register);
+
             bottomNavigationView.getMenu().removeItem(R.id.action_scan_qr);
 
             bottomNavigationHelper.disableShiftMode(bottomNavigationView);

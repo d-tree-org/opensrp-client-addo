@@ -50,7 +50,7 @@ public class NativeFormsDataLoader implements DataLoader {
     private List<String> tableCache;
     private Map<String, Table> tableMap;
     protected JSONArray jsonArray;
-    private Map<String, Map<String, String>> dbData = new HashMap<>();
+    private Map<String, Map<String, Object>> dbData = new HashMap<>();
 
     private Event latestEvent;
     private Map<String, List<Obs>> obsMap;
@@ -71,12 +71,12 @@ public class NativeFormsDataLoader implements DataLoader {
         return clientClassification;
     }
 
-    public Map<String, Map<String, String>> getDbData(Context context, String baseEntityID, String eventName) {
+    public Map<String, Map<String, Object>> getDbData(Context context, String baseEntityID, String eventName) {
         if(dbData == null){
             dbData = new HashMap<>();
             List<String> tables = getFormTables(context, eventName);
             for (String table : tables) {
-                Map<String, String> results = getValues(context, table, baseEntityID);
+                Map<String, Object> results = getValues(context, table, baseEntityID);
                 if (results != null)
                     dbData.put(table, results);
             }
@@ -108,9 +108,9 @@ public class NativeFormsDataLoader implements DataLoader {
     }
 
     @Override
-    public Map<String, String> getValues(Context context, String tableName, String baseEntityID) {
+    public Map<String, Object> getValues(Context context, String tableName, String baseEntityID) {
         String sql = "select * from " + tableName + " where base_entity_id = '" + baseEntityID + "'";
-        List<Map<String, String>> value = AbstractDao.readData(sql, new String[]{});
+        List<Map<String, Object>> value = AbstractDao.readData(sql, new String[]{});
 
         if (value != null && value.size() > 0)
             return value.get(0);
@@ -180,7 +180,7 @@ public class NativeFormsDataLoader implements DataLoader {
     }
 
     @Override
-    public String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, String>> dbData) throws JSONException {
+    public String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, Object>> dbData) throws JSONException {
         String type = jsonObject.getString(JsonFormConstants.TYPE);
         String key = jsonObject.getString(JsonFormConstants.KEY);
         String entity = jsonObject.getString(JsonFormConstants.OPENMRS_ENTITY);
@@ -193,7 +193,7 @@ public class NativeFormsDataLoader implements DataLoader {
         return StringUtils.isBlank(val) ? getObsValue(baseEntityID, key, type) : val;
     }
 
-    protected String getExtractedValue(Context context, JSONObject jsonObject, String baseEntityID, Map<String, Map<String, String>> dbData) throws JSONException {
+    protected String getExtractedValue(Context context, JSONObject jsonObject, String baseEntityID, Map<String, Map<String, Object>> dbData) throws JSONException {
         String entity = jsonObject.getString(JsonFormConstants.OPENMRS_ENTITY);
         String entity_id = jsonObject.getString(JsonFormConstants.OPENMRS_ENTITY_ID);
 
@@ -297,14 +297,14 @@ public class NativeFormsDataLoader implements DataLoader {
         return JsonFormUtils.dd_MM_yyyy.format(date.toDate());
     }
 
-    private String getValueFromConcept(String entityID, Map<String, Map<String, String>> dbData) {
+    private String getValueFromConcept(String entityID, Map<String, Map<String, Object>> dbData) {
         for (Map.Entry<String, Table> entry : tableMap.entrySet()) {
             for (Column column : entry.getValue().columns) {
                 if ("Event".equalsIgnoreCase(column.type) &&
                         "obs.fieldCode".equalsIgnoreCase(column.json_mapping.field) &&
                         column.json_mapping.concept.equalsIgnoreCase(entityID)
                 ) {
-                    Map<String, String> map = dbData.get(entry.getKey());
+                    Map<String, Object> map = dbData.get(entry.getKey());
                     return map != null ? (String) map.get(column.column_name) : "";
                 }
             }

@@ -16,7 +16,7 @@ public interface DataLoader {
     List<String> getFormTables(Context context, String eventName);
 
     @Nullable
-    Map<String, String> getValues(Context context, String tableName, String baseEntityID);
+    Map<String, Object> getValues(Context context, String tableName, String baseEntityID);
 
     CommonPersonObjectClient getClient(Context context, String baseEntityID);
 
@@ -31,6 +31,6 @@ public interface DataLoader {
 
     void bindNativeFormsMetaData(@NotNull JSONObject jsonObjectForm, Context context, String baseEntityID) throws JSONException;
 
-    String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, String>> dbData) throws JSONException;
+    String getValue(Context context, String baseEntityID, JSONObject jsonObject, Map<String, Map<String, Object>> dbData) throws JSONException;
 
 }
