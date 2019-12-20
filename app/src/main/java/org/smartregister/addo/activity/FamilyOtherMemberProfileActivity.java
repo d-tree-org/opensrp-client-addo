@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -26,12 +25,17 @@ import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
+import org.smartregister.addo.dataloader.AncMemberDataLoader;
+import org.smartregister.addo.dataloader.FamilyMemberDataLoader;
+import org.smartregister.addo.form_data.NativeFormsDataBinder;
 import org.smartregister.addo.fragment.FamilyOtherMemberProfileFragment;
 import org.smartregister.addo.interactor.ChildProfileInteractor;
 import org.smartregister.addo.listeners.FloatingMenuListener;
 import org.smartregister.addo.listeners.OnClickFloatingMenu;
 import org.smartregister.addo.presenter.FamilyOtherMemberActivityPresenter;
 import org.smartregister.addo.util.ChildUtils;
+import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
@@ -60,6 +64,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private FamilyMemberFloatingMenu familyFloatingMenu;
     private TextView textViewFamilyHas, textViewDangersignScreening;
     private RelativeLayout layoutFamilyHasRow;
+    protected MemberObject memberObject;
 
     private OnClickFloatingMenu onClickFloatingMenu;
     //private FamilyOtherMemberProfileActivityFlv flavor = new FamilyOtherMemberProfileActivityFlv();
@@ -97,6 +102,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         villageTown = getIntent().getStringExtra(Constants.INTENT_KEY.VILLAGE_TOWN);
         familyName = getIntent().getStringExtra(Constants.INTENT_KEY.FAMILY_NAME);
         PhoneNumber = commonPersonObject.getColumnmaps().get(org.smartregister.addo.util.Constants.JsonAssets.FAMILY_MEMBER.PHONE_NUMBER);
+        memberObject = new MemberObject(commonPersonObject);
         presenter = new FamilyOtherMemberActivityPresenter(this, new BaseFamilyOtherMemberProfileActivityModel(), null, familyBaseEntityId, baseEntityId, familyHead, primaryCaregiver, villageTown, familyName);
 
         //TODO: Include flavor to implement
@@ -337,13 +343,46 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
                 break;
 
             case R.id.textview_ds_screening:
-                //startFormForEdit(R.string.edit_anc_registration_form_title);
-                Toast.makeText(this, "You have clicked the ds thingy", Toast.LENGTH_SHORT).show();
+                //AncHomeVisitActivity.startMe(this, memberObject.getBaseEntityId(), true);
+                startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns());
             default:
                 super.onClick(view);
                 break;
         }
     }
+
+    public void startAncFormActivity(Integer title_resource, String formName) {
+        try {
+            JSONObject form = null;
+            boolean isPrimaryCareGiver = memberObject.getPrimaryCareGiver().equals(memberObject.getBaseEntityId());
+            String titleString = title_resource != null ? getResources().getString(title_resource) : null;
+
+            if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
+
+                NativeFormsDataBinder binder = new NativeFormsDataBinder(this, memberObject.getBaseEntityId());
+                binder.setDataLoader(new AncMemberDataLoader(titleString));
+                form = binder.getPrePopulatedForm(formName);
+
+            } else if (formName.equals(CoreConstants.JSON_FORM.getFamilyMemberRegister())) {
+
+                String eventName = org.smartregister.addo.util.Utils.metadata().familyMemberRegister.updateEventType;
+
+                NativeFormsDataBinder binder = new NativeFormsDataBinder(this, memberObject.getBaseEntityId());
+                binder.setDataLoader(new FamilyMemberDataLoader(memberObject.getFamilyName(), isPrimaryCareGiver, titleString, eventName));
+
+                form = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            } else if (formName.equals(CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns())) {
+              // Technically here we can implement the logic to check whether they are ANC or PNC and handle the danger signs for them
+                NativeFormsDataBinder binder = new NativeFormsDataBinder(this, memberObject.getBaseEntityId());
+                binder.setDataLoader(new AncMemberDataLoader(titleString));
+                form = binder.getPrePopulatedForm(formName);
+            }
+            startActivityForResult(org.smartregister.addo.util.JsonFormUtils.getAncPncStartFormIntent(form, this), JsonFormUtils.REQUEST_CODE_GET_JSON);
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
+
 
     private void openFamilyDueTab() {
         Intent intent = new Intent(this, FamilyProfileActivity.class);

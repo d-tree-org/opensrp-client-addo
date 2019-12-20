@@ -37,6 +37,10 @@
             android:theme="@style/AddoTheme.NoActionBar">
         </activity>
 
+        <activity
+            android:name=".activity.AncHomeVisitActivity"
+            android:theme="@style/AddoTheme.NoActionBar" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
