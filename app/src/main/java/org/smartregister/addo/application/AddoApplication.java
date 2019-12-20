@@ -22,6 +22,8 @@ import org.smartregister.addo.service.AddoAuthorizationService;
 import org.smartregister.addo.sync.AddoClientProcessor;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.Constants;
+import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
@@ -92,6 +94,7 @@ public class AddoApplication extends DrishtiApplication {
 
         FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
         SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID);
+        AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 
@@ -101,6 +104,8 @@ public class AddoApplication extends DrishtiApplication {
         //scheduleJobs();
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.ALLOWED_LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
         SyncStatusBroadcastReceiver.init(this);
+
+        CoreConstants.JSON_FORM.setLocaleAndAssetManager(getCurrentLocale(), getAssets());
 
         setServerURL();
 
