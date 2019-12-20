@@ -1,12 +1,14 @@
 package org.smartregister.addo.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Pair;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -1476,6 +1478,18 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
 
     public static String getValueOfClientsFields(Map<String, String> map, String field){
         return org.smartregister.family.util.Utils.getValue(map, field, false);
+    }
+
+
+    public static Intent getAncPncStartFormIntent(JSONObject jsonForm, Context context) {
+        Intent intent = new Intent(context, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+
+        Form form = new Form();
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setWizard(false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        return intent;
     }
 
 }
