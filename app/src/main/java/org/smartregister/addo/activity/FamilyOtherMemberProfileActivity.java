@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
+import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dataloader.AncMemberDataLoader;
 import org.smartregister.addo.dataloader.FamilyMemberDataLoader;
 import org.smartregister.addo.form_data.NativeFormsDataBinder;
@@ -343,8 +344,14 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
                 break;
 
             case R.id.textview_ds_screening:
-                //AncHomeVisitActivity.startMe(this, memberObject.getBaseEntityId(), true);
-                startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns());
+                // Technically here we can implement the logic to check whether they are ANC or PNC and handle the danger signs for them
+                // This line checks whether the woman is already registered as ANC
+                if (AncDao.isANCMember(baseEntityId)) {
+                    startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns());
+                } else {
+                    startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.PNC_HOME_VISIT.getDangerSignsMother());
+                }
+
             default:
                 super.onClick(view);
                 break;
@@ -372,7 +379,12 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
 
                 form = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getFamilyMemberRegister());
             } else if (formName.equals(CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns())) {
-              // Technically here we can implement the logic to check whether they are ANC or PNC and handle the danger signs for them
+                NativeFormsDataBinder binder = new NativeFormsDataBinder(this, memberObject.getBaseEntityId());
+                binder.setDataLoader(new AncMemberDataLoader(titleString));
+                form = binder.getPrePopulatedForm(formName);
+            }
+
+            else if (formName.equals(CoreConstants.JSON_FORM.PNC_HOME_VISIT.getDangerSignsMother())) {
                 NativeFormsDataBinder binder = new NativeFormsDataBinder(this, memberObject.getBaseEntityId());
                 binder.setDataLoader(new AncMemberDataLoader(titleString));
                 form = binder.getPrePopulatedForm(formName);
