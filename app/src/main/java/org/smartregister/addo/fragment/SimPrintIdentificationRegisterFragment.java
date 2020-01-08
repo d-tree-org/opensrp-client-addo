@@ -18,7 +18,6 @@ import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.family.util.Utils;
 import org.smartregister.simprint.SimPrintsHelper;
-import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -166,6 +165,11 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
                     goToFamilyProfileActivity(view);
                 }
                 break;
+            case R.id.textview_none_of_above:
+                if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == "click_none_of_above") {
+                    handleNoneSelected(view);
+                }
+                break;
             default:
                 break;
         }
@@ -200,6 +204,14 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
             this.startActivity(intent);
             this.getActivity().finish();
         }
+    }
+
+    public void handleNoneSelected(android.view.View view) {
+        String sessionid = this.getActivity().getIntent().getStringExtra("session_id");
+        // A call back to SimPrint to notify that none of the item on the list was selected
+        Utils.startAsyncTask(new ConfirmIdentificationTask(sessionid, "none_selected"), null);
+
+        this.getActivity().finish();
     }
 
     private void confirmSelectedGuid(String sessionid, String simPrintsGuid) {
