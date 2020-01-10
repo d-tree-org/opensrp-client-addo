@@ -3,6 +3,7 @@ package org.smartregister.addo.activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
+import org.smartregister.addo.fragment.AdvancedSearchFragment;
 import org.smartregister.addo.fragment.FamilyRegisterFragment;
 import org.smartregister.addo.listeners.FamilyRegisterBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
@@ -25,13 +27,15 @@ import org.smartregister.simprint.SimPrintsIdentification;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class AddoHomeActivity extends BaseFamilyRegisterActivity {
+public class AddoHomeActivity extends BaseFamilyRegisterActivity implements AdvancedSearchFragment.OnFragmentInteractionListener {
 
     private String action = null;
     private static final int IDENTIFY_RESULT_CODE = 4061;
     private String sessionId = null;
+    private WeakReference<AdvancedSearchFragment> advancedSearchFragmentWR;
 
 
     public void startFamilyRegisterForm(){
@@ -70,9 +74,27 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         return new FamilyRegisterFragment();
     }
 
-    @Override
+    /*@Override
     protected Fragment[] getOtherFragments() {
         return new Fragment[0];
+    }*/
+
+    @Override
+    protected Fragment[] getOtherFragments() {
+
+        Fragment[] fragments = new Fragment[1];
+        fragments[0] = new AdvancedSearchFragment();
+
+        return fragments;
+    }
+
+    protected AdvancedSearchFragment getAdvancedSearchFragment() {
+
+        if (advancedSearchFragmentWR == null || advancedSearchFragmentWR.get() == null) {
+            advancedSearchFragmentWR = new WeakReference<>(new AdvancedSearchFragment());
+        }
+
+        return advancedSearchFragmentWR.get();
     }
 
     @Override
@@ -205,5 +227,10 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             simPrintsHelper.confirmIdentity(AddoHomeActivity.this, sessionId, guid);
 
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 }
