@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
@@ -182,27 +183,37 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
     public void getFooterView(RecyclerView.ViewHolder viewHolder, int currentPageCount, int totalPageCount, boolean hasNext, boolean hasPrevious) {
 
         FooterViewHolder footerViewHolder = (FooterViewHolder) viewHolder;
-        footerViewHolder.pageInfoView.setText(
-                MessageFormat.format(context.getString(org.smartregister.R.string.str_page_info), currentPageCount, totalPageCount)
-        );
+        // If there are pages, show the footer, otherwise do something else?
+        if (totalPageCount > 0) {
+            footerViewHolder.pageInfoView.setText(
+                    MessageFormat.format(context.getString(org.smartregister.R.string.str_page_info), currentPageCount, totalPageCount)
+            );
 
-        footerViewHolder.nextPageView.setVisibility(hasNext ? View.VISIBLE : View.INVISIBLE);
-        footerViewHolder.previousPageView.setVisibility(hasPrevious ? View.VISIBLE : View.INVISIBLE);
+            footerViewHolder.nextPageView.setVisibility(hasNext ? View.VISIBLE : View.INVISIBLE);
+            footerViewHolder.previousPageView.setVisibility(hasPrevious ? View.VISIBLE : View.INVISIBLE);
 
-        // Check if it is the last page and include the option for none of the items above or in the previous page meaning that the patient was not found using fingerprint scan
-        footerViewHolder.textViewNoneOfAbove.setVisibility(!hasNext ? View.VISIBLE : View.GONE);
-        footerViewHolder.textViewNoneOfAbove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                footerViewHolder.textViewNoneOfAbove.performLongClick();
-            }
-        });
+            // Check if it is the last page and include the option for none of the items above or in the previous page meaning that the patient was not found using fingerprint scan
+            footerViewHolder.textViewNoneOfAbove.setVisibility(!hasNext ? View.VISIBLE : View.GONE);
+            footerViewHolder.textViewNoneOfAbove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    footerViewHolder.textViewNoneOfAbove.performLongClick();
+                }
+            });
 
-        View noneOfAboveView = footerViewHolder.textViewNoneOfAbove;
-        setNoneOfAboveOnclickListener(noneOfAboveView);
+            View noneOfAboveView = footerViewHolder.textViewNoneOfAbove;
+            setNoneOfAboveOnclickListener(noneOfAboveView);
 
-        footerViewHolder.nextPageView.setOnClickListener(paginationClickListener);
-        footerViewHolder.previousPageView.setOnClickListener(paginationClickListener);
+            footerViewHolder.nextPageView.setOnClickListener(paginationClickListener);
+            footerViewHolder.previousPageView.setOnClickListener(paginationClickListener);
+        } else {
+            footerViewHolder.textViewNoneOfAbove.setVisibility(View.GONE);
+            footerViewHolder.pageInfoView.setVisibility(View.GONE);
+            footerViewHolder.previousPageView.setVisibility(View.GONE);
+            footerViewHolder.nextPageView.setVisibility(View.GONE);
+
+            footerViewHolder.noResultEmptyState.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -289,6 +300,7 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
         public ImageView nextPageView;
         public ImageView previousPageView;
         public TextView textViewNoneOfAbove;
+        public LinearLayout noResultEmptyState;
 
         public FooterViewHolder(View view) {
             super(view);
@@ -297,6 +309,7 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
             previousPageView = view.findViewById(R.id.iv_previous_page);
             pageInfoView = view.findViewById(org.smartregister.R.id.txt_page_info);
             textViewNoneOfAbove = view.findViewById(R.id.textview_none_of_above);
+            noResultEmptyState = view.findViewById(R.id.client_not_found_empty_state);
         }
     }
 }
