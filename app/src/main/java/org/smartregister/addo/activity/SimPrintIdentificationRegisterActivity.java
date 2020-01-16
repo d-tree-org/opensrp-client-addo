@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.SimPrintIdentificationRegisterContract;
+import org.smartregister.addo.fragment.EmptyResultFragment;
 import org.smartregister.addo.fragment.SimPrintIdentificationRegisterFragment;
 import org.smartregister.addo.listeners.SimPrintIdentificationBottomNavigationListener;
 import org.smartregister.addo.model.SimPrintIdentificationRegisterModel;
@@ -17,6 +18,7 @@ import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity implements SimPrintIdentificationRegisterContract.View {
@@ -55,7 +57,17 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new SimPrintIdentificationRegisterFragment();
+        HashMap<String, String> baseIdGuids = (HashMap<String, String>) this.getIntent().getSerializableExtra("baseids_guids");
+        BaseRegisterFragment fragment = null;
+
+        // This scenario will probably never happen but in case the simprints returned a guid but there is no baseEntityId in opensrp
+        if (baseIdGuids.keySet().size() == 1 && baseIdGuids.keySet().toString().equals("[]")) {
+            fragment = new EmptyResultFragment();
+        } else {
+            fragment = new SimPrintIdentificationRegisterFragment();
+        }
+        return fragment;
+        //return new SimPrintIdentificationRegisterFragment();
     }
 
     @Override
