@@ -4,6 +4,7 @@
     <color name="colorPrimary">#8A1A51</color>
     <color name="colorPrimaryDark">#660d39</color>
     <color name="colorAccent">#8A1A51</color>
+    <color name="colorWhite">#FFFFFF</color>
 
     <!--<color name="chw_primary">#218CC5</color>-->
     <color name="addo_primary">#8A1A51</color>

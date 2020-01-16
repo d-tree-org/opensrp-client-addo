@@ -386,6 +386,7 @@
     <string name="return_to_addo_home">Return to home</string>
     <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
     <string name="fingerprint_identification_title">Find Clients</string>
-    <string name="none_of_above">None of above</string>
+    <string name="none_of_above">None of the above</string>
+    <string name="no_client_found">No client identification from SimPrints Identification, scan again or cancel and use normal search.</string>
 
 </resources>
