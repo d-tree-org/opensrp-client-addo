@@ -2,6 +2,9 @@ package org.smartregister.addo.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
 import org.smartregister.addo.activity.SimPrintIdentificationRegisterActivity;
 import org.smartregister.addo.contract.RegisterFragmentContract;
@@ -35,7 +39,9 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.fragment.BaseFamilyRegisterFragment;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.simprint.OnDialogButtonClick;
 import org.smartregister.simprint.SimPrintsIdentification;
+import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
@@ -56,6 +62,8 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
     private boolean dueFilterActive = false;
     private static final String DUE_FILTER_TAG = "PRESSED";
+
+    private static final int IDENTIFY_RESULT_CODE = 4061;
 
     @Override
     protected int getLayout() {
@@ -187,7 +195,19 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         if (simPrintsIdentifications.isEmpty()) {
 
             // Need to implement a notification or something when there is no FP from SIMPRINT
-            Toast.makeText(this.getActivity(), "No FP was returned from SIMPrint", Toast.LENGTH_SHORT).show();
+            showFingerPrintFail(this.getActivity(), new OnDialogButtonClick() {
+                @Override
+                public void onOkButtonClick() {
+                    SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(getActivity(),
+                            BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
+                }
+
+                @Override
+                public void onCancelButtonClick() {
+                    Intent returnIntent = new Intent();
+
+                }
+            });
         } else {
             // This will just find the basentity ids and pass them to the SimPrint Identification Activity but we also need guids for confirmation
 
@@ -201,6 +221,26 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             startActivity(intent);
         }
 
+    }
+
+    private void showFingerPrintFail(Context context, final OnDialogButtonClick onDialogButtonClick){
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setMessage(getString(R.string.no_client_found));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(org.smartregister.simprint.R.string.scan_again), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onDialogButtonClick.onOkButtonClick();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(org.smartregister.simprint.R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onDialogButtonClick.onCancelButtonClick();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
