@@ -6,18 +6,26 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.vijay.jsonwizard.customviews.RadioButton;
 
+import org.apache.commons.lang3.StringUtils;
+import org.opensrp.api.domain.BaseEntity;
 import org.smartregister.addo.R;
+import org.smartregister.addo.adapter.FamilyMemberAdapter;
+import org.smartregister.addo.contract.AdvancedSearchContract;
+import org.smartregister.addo.domain.FamilyMember;
 import org.smartregister.addo.model.AdvancedSearchFragmentModel;
 import org.smartregister.addo.presenter.AdvancedSearchFragmentPresenter;
 import org.smartregister.addo.util.Constants;
@@ -25,10 +33,12 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class AdvancedSearchFragment extends BaseRegisterFragment {
+public class AdvancedSearchFragment extends BaseRegisterFragment implements AdvancedSearchContract.View {
 
     protected AdvancedSearchTextWatcher advancedSearchTextwatcher = new AdvancedSearchTextWatcher();
     protected HashMap<String, String> searchFormData = new HashMap<>();
@@ -44,6 +54,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment {
     private TextView matchingResults;
     private MaterialEditText firstName;
     private MaterialEditText lastName;
+    private boolean isLocal = false;
+    private boolean listMode = false;
 
     public AdvancedSearchFragment() {
         // Required empty public constructor
@@ -273,14 +285,16 @@ public class AdvancedSearchFragment extends BaseRegisterFragment {
     }
 
     @Override
-    protected void onViewClicked(View view) {
-        /*if (view.getId() == R.id.search) {
+    public void onViewClicked(View view) {
+        if (view.getId() == R.id.search) {
             search();
+            //Toast.makeText(getContext(), "Search", Toast.LENGTH_LONG).show();
         } else if (view.getId() == R.id.advanced_form_search_btn) {
             search();
+            //Toast.makeText(getContext(), "Search", Toast.LENGTH_LONG).show();
         } else if (view.getId() == R.id.back_button) {
             switchViews(false);
-        } else if ((view.getId() == R.id.patient_column || view.getId() == R.id.child_profile_info_layout) && view.getTag() != null) {
+        } /*else if ((view.getId() == R.id.patient_column || view.getId() == R.id.child_profile_info_layout) && view.getTag() != null) {
 
             RegisterClickables registerClickables = new RegisterClickables();
             if (view.getTag(org.smartregister.child.R.id.record_action) != null) {
@@ -299,8 +313,103 @@ public class AdvancedSearchFragment extends BaseRegisterFragment {
         }*/
     }
 
+    private void search() {
+        showProgressView();
+        if (myCatchment.isChecked()) {
+            isLocal = true;
+        } else if (outsideInside.isChecked()) {
+            isLocal = false;
+        }
+
+        Map<String, String> editMap = getSearchMap(!isLocal);
+
+        ((AdvancedSearchContract.Presenter) presenter).search(editMap, isLocal);
+    }
+
+    protected Map<String, String> getSearchMap(boolean outOfArea) {
+
+        Map<String, String> searchParams = new HashMap<>();
+
+
+        String fn = firstName.getText().toString();
+        String ln = lastName.getText().toString();
+
+        if (!TextUtils.isEmpty(fn)) {
+            searchParams.put(Constants.DB.FIRST_NAME, fn);
+        }
+
+        if (!TextUtils.isEmpty(ln)) {
+            searchParams.put(Constants.DB.LAST_NAME, ln);
+        }
+
+        return searchParams;
+    }
+
     @Override
     public void showNotFoundPopup(String opensrpID) {
         //Todo implement this
+    }
+
+    public void showResults(List<BaseEntity> members) {
+        FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members);
+        ListView listView = rootView.findViewById(R.id.family_member_list);
+        listView.setAdapter(adapter);
+        updateMatchingResults(members.size());
+        switchViews(true);
+    }
+
+    public void switchViews(boolean showList) {
+        if (showList) {
+            Utils.hideKeyboard(getActivity());
+
+            advancedSearchForm.setVisibility(View.GONE);
+            listViewLayout.setVisibility(View.VISIBLE);
+            clientsView.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.VISIBLE);
+            searchButton.setVisibility(View.GONE);
+            advancedSearchToolbarSearchButton.setVisibility(View.GONE);
+
+            if (titleLabelView != null) {
+                titleLabelView.setText(getString(R.string.search_results));
+            }
+
+            // hide result count , should be dynamic
+            if (matchingResults != null) {
+                //matchingResults.setVisibility(View.GONE);
+            }
+
+            hideProgressView();
+            listMode = true;
+        } else {
+            clearSearchCriteria();
+            advancedSearchForm.setVisibility(View.VISIBLE);
+            listViewLayout.setVisibility(View.GONE);
+            clientsView.setVisibility(View.INVISIBLE);
+            backButton.setVisibility(View.GONE);
+            searchButton.setVisibility(View.VISIBLE);
+            advancedSearchToolbarSearchButton.setVisibility(View.VISIBLE);
+
+            if (titleLabelView != null) {
+                titleLabelView.setText(getString(R.string.advanced_search));
+            }
+
+
+            listMode = false;
+        }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        goBack();
+        return true;
+    }
+
+    @Override
+    protected void goBack() {
+        if (listMode) {
+            switchViews(false);
+        } else {
+            ((BaseRegisterActivity) getActivity()).switchToBaseFragment();
+        }
     }
 }

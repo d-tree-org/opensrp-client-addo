@@ -1,10 +1,18 @@
 package org.smartregister.addo.presenter;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import org.apache.commons.lang3.StringUtils;
+import org.opensrp.api.domain.BaseEntity;
+import org.smartregister.addo.contract.AdvancedSearchContract;
+import org.smartregister.addo.interactor.AdvancedSearchInteractor;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.domain.Response;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract.Presenter;
 import org.smartregister.family.util.DBConstants;
@@ -12,23 +20,36 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AdvancedSearchFragmentPresenter implements Presenter {
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
+public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearchContract.Presenter, AdvancedSearchContract.InteractorCallBack {
 
     protected WeakReference<FamilyRegisterFragmentContract.View> viewReference;
     protected FamilyRegisterFragmentContract.Model model;
     protected RegisterConfiguration config;
     protected Set<View> visibleColumns = new TreeSet();
     protected String viewConfigurationIdentifier;
+    protected AdvancedSearchContract.Interactor interactor;
+    //protected AdvancedMatrixCursor matrixCursor;
 
     public AdvancedSearchFragmentPresenter(BaseRegisterFragmentContract.View view, FamilyRegisterFragmentContract.Model model, String viewConfigurationIdentifier) {
         this.viewReference = new WeakReference(view);
         this.model = model;
         this.viewConfigurationIdentifier = viewConfigurationIdentifier;
         this.config = model.defaultRegisterConfiguration();
+        interactor = new AdvancedSearchInteractor();
     }
 
     public void processViewConfigurations() {
@@ -70,8 +91,8 @@ public class AdvancedSearchFragmentPresenter implements Presenter {
     public void searchGlobally(String uniqueId) {
     }
 
-    protected BaseRegisterFragmentContract.View getView() {
-        return this.viewReference != null ? (BaseRegisterFragmentContract.View)this.viewReference.get() : null;
+    protected AdvancedSearchContract.View getView() {
+        return this.viewReference != null ? (AdvancedSearchContract.View)this.viewReference.get() : null;
     }
 
     private void setVisibleColumns(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
@@ -89,5 +110,30 @@ public class AdvancedSearchFragmentPresenter implements Presenter {
     @Override
     public String getDefaultSortQuery() {
         return DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
+    }
+
+    public void search(Map<String, String> searchMap, boolean isLocal) {
+        Log.d("Search", "searching in presenter: "  + searchMap.toString());
+        interactor.search(searchMap, this);
+    }
+
+    public void onResultsFound(Response<String> response) {
+        Log.d("Results", response.payload());
+
+        //To do: convert payload to Family member
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                return new Date(json.getAsJsonPrimitive().getAsLong());
+            }
+        });
+        Gson gson = builder.create();
+
+        List<BaseEntity> members = gson.fromJson(response.payload(), new TypeToken<List<BaseEntity>>() {
+        }.getType());
+
+        System.out.println("Member size: " + members.size());
+
+        getView().showResults(members);
     }
 }

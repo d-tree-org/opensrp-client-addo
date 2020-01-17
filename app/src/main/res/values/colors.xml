@@ -85,4 +85,6 @@
 
     <color name="contact_complete_grey_border">#CDCDCD</color>
 
+    <color name="colorWhite">#FFFFFF</color>
+
 </resources>

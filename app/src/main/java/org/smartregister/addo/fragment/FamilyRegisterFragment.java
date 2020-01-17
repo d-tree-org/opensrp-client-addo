@@ -145,7 +145,6 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         skipToSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Toasting..", Toast.LENGTH_LONG).show();
                 ((BaseRegisterActivity) getContext()).switchToFragment(2);
                 //((AddoHomeActivity) getContext()).startAdvancedForm();
             }

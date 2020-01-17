@@ -30,7 +30,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class AddoHomeActivity extends BaseFamilyRegisterActivity implements AdvancedSearchFragment.OnFragmentInteractionListener {
+public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     private String action = null;
     private static final int IDENTIFY_RESULT_CODE = 4061;
@@ -227,10 +227,5 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity implements Adva
             simPrintsHelper.confirmIdentity(AddoHomeActivity.this, sessionId, guid);
 
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri){
-        //you can leave it empty
     }
 }

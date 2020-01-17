@@ -402,4 +402,7 @@
 
     <string name="matching_results">%1$s matching results found.</string>
 
+    <string name="search_results">Search Results</string>
+    <string name="full_name">%s %s %s</string>
+
 </resources>

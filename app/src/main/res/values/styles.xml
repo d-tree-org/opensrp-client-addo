@@ -55,4 +55,10 @@
         <item name="rbd_strokeColor">@drawable/advanced_search_rdb_stoke_color_list</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>
