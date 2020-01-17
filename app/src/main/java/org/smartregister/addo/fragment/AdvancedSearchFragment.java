@@ -1,12 +1,10 @@
 package org.smartregister.addo.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +13,14 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.vijay.jsonwizard.customviews.RadioButton;
 
-import org.apache.commons.lang3.StringUtils;
-import org.opensrp.api.domain.BaseEntity;
 import org.smartregister.addo.R;
 import org.smartregister.addo.adapter.FamilyMemberAdapter;
 import org.smartregister.addo.contract.AdvancedSearchContract;
-import org.smartregister.addo.domain.FamilyMember;
+import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.model.AdvancedSearchFragmentModel;
 import org.smartregister.addo.presenter.AdvancedSearchFragmentPresenter;
 import org.smartregister.addo.util.Constants;
@@ -33,7 +28,6 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -350,7 +344,7 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //Todo implement this
     }
 
-    public void showResults(List<BaseEntity> members) {
+    public void showResults(List<Entity> members) {
         FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members);
         ListView listView = rootView.findViewById(R.id.family_member_list);
         listView.setAdapter(adapter);

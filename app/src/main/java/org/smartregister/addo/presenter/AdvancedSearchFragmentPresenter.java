@@ -5,8 +5,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
-import org.opensrp.api.domain.BaseEntity;
 import org.smartregister.addo.contract.AdvancedSearchContract;
+import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.interactor.AdvancedSearchInteractor;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
@@ -42,7 +42,6 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
     protected Set<View> visibleColumns = new TreeSet();
     protected String viewConfigurationIdentifier;
     protected AdvancedSearchContract.Interactor interactor;
-    //protected AdvancedMatrixCursor matrixCursor;
 
     public AdvancedSearchFragmentPresenter(BaseRegisterFragmentContract.View view, FamilyRegisterFragmentContract.Model model, String viewConfigurationIdentifier) {
         this.viewReference = new WeakReference(view);
@@ -129,10 +128,11 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
         });
         Gson gson = builder.create();
 
-        List<BaseEntity> members = gson.fromJson(response.payload(), new TypeToken<List<BaseEntity>>() {
+        List<Entity> members = gson.fromJson(response.payload(), new TypeToken<List<Entity>>() {
         }.getType());
 
         System.out.println("Member size: " + members.size());
+        System.out.println(members.get(0));
 
         getView().showResults(members);
     }
