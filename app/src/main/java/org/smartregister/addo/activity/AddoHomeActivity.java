@@ -1,14 +1,11 @@
 package org.smartregister.addo.activity;
 
-import android.app.IntentService;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.BuildConfig;
@@ -22,7 +19,6 @@ import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
 import org.smartregister.family.presenter.BaseFamilyRegisterPresenter;
 import org.smartregister.family.util.JsonFormUtils;
-import org.smartregister.simprint.SimPrintsHelper;
 import org.smartregister.simprint.SimPrintsIdentification;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -113,7 +109,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
-
         FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
@@ -132,13 +127,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
                 identifications = (ArrayList<SimPrintsIdentification>) data.getSerializableExtra("intent_data");
             }
 
-            /**String guid = null;
-            SimPrintsIdentification simPrintsIdentification;
-            if (identifications.size() > 0){
-                simPrintsIdentification = identifications.get(0);
-                guid = simPrintsIdentification.getGuid();
-            } **/
-
             ArrayList<String> guid = new ArrayList<>();
             SimPrintsIdentification simPrintsIdentification;
             if (identifications.size() > 0){
@@ -149,54 +137,11 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
                 }
 
             }
-            //onFingerprintSuccesfullyScanned(guid);
-//            Toast.makeText(this, "Welcome back from Simprints ID "+guid, Toast.LENGTH_LONG).show();
             FamilyRegisterFragment fragment = (FamilyRegisterFragment) mBaseFragment;
             fragment.onIdentificationFromSimPrints(identifications, sessionId);
         }
     }
 
-
-
-    private void onFingerprintSuccesfullyScanned(ArrayList<String> guid){
-
-        if (guid.isEmpty()){
-            Toast.makeText(this, "User not Found!", Toast.LENGTH_LONG).show();
-        } else {
-
-            /**String id = org.smartregister.addo.util.JsonFormUtils.lookForClientsUniqueId(guid);
-
-            Intent intent = new Intent(AddoHomeActivity.this, org.smartregister.addo.activity.FingerprintScanResultActivity.class);
-            ArrayList<FingerPrintScanResultModel> clients = new ArrayList<FingerPrintScanResultModel>();
-            clients.add(new FingerPrintScanResultModel("Kassim Sheghembe", "Sheghembe Family"));
-            clients.add(new FingerPrintScanResultModel("Isaya Molel", "Mollel Family"));
-            clients.add(new FingerPrintScanResultModel("Stella Mareale", "Marealle Family"));
-            clients.add(new FingerPrintScanResultModel("Gloria Kahamba", "Kahamba Family"));
-            intent.putParcelableArrayListExtra("clients", clients);
-            startActivity(intent); **/
-
-
-            /**if (StringUtils.isNotEmpty(id)) {
-
-                //Here we should use the FingerprintResult Scan Fragment instead of Family register
-                FamilyRegisterFragment fragment = (FamilyRegisterFragment) mBaseFragment;
-                fragment.fingerprintScannedSuccessfully(id);
-                Intent intent = new Intent(AddoHomeActivity.this, SimPrintConfirmationService.class);
-                intent.putExtra("guid", guid);
-                intent.putExtra("sessionId", sessionId);
-                startActivity(intent);
-
-            } else {
-                Toast.makeText(this, "No client with GUI "+guid+" was found!", Toast.LENGTH_SHORT).show();
-                SimPrintsHelper simPrintsHelper = new SimPrintsHelper(BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_USER_ID);
-                simPrintsHelper.confirmIdentity(AddoHomeActivity.this, sessionId, guid);
-            }
-
-**/
-            //fragment.setSearchTerm(id);
-        }
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -205,27 +150,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             if (navigationMenu != null) {
                 //navigationMenu.startP2PActivity(this);
             }
-        }
-    }
-
-    /**
-     * Background service to han
-     */
-
-    public class SimPrintConfirmationService extends IntentService {
-
-        public SimPrintConfirmationService() {
-            super("SimPrintConfirmationService");
-        }
-
-        @Override
-        protected void onHandleIntent(@Nullable Intent intent) {
-            String guid = intent.getStringExtra("guid");
-            String sessionId = intent.getStringExtra("sessionId");
-
-            SimPrintsHelper simPrintsHelper = new SimPrintsHelper(BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_USER_ID);
-            simPrintsHelper.confirmIdentity(AddoHomeActivity.this, sessionId, guid);
-
         }
     }
 }

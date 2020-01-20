@@ -12,10 +12,11 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_clients"
+        android:id="@+id/action_search"
         android:enabled="true"
-        android:icon="@drawable/ic_icon_nav_clients"
-        android:title="@string/clients_menu"
+        android:icon="@drawable/ic_icon_search"
+        android:title="@string/search_menu"
+        android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
 
 </menu>
