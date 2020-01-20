@@ -149,6 +149,15 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             getSearchView().setTextColor(this.getResources().getColor(R.color.text_black));
         }
 
+        TextView skipToSearch = view.findViewById(R.id.skip_to_search);
+        skipToSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseRegisterActivity) getContext()).switchToFragment(2);
+                //((AddoHomeActivity) getContext()).startAdvancedForm();
+            }
+        });
+
     }
 
     @Override

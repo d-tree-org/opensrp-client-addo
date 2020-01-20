@@ -46,4 +46,19 @@
         <item name="android:background">@android:color/white</item>
     </style>
 
+    <style name="Material.Drawable.RadioButton.AdvancedSearch" parent="Material.Drawable.RadioButton">
+        <item name="rbd_width">40dp</item>
+        <item name="rbd_height">40dp</item>
+        <item name="rbd_strokeSize">2dp</item>
+        <item name="rbd_radius">15dp</item>
+        <item name="rbd_innerRadius">10dp</item>
+        <item name="rbd_strokeColor">@drawable/advanced_search_rdb_stoke_color_list</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

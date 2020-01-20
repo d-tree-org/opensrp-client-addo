@@ -389,4 +389,22 @@
     <string name="none_of_above">None of the above</string>
     <string name="no_client_found">No client identification from SimPrints Identification, scan again or cancel and use normal search.</string>
 
+    <string name="search_limits">Search Limits</string>
+    <string name="out_and_inside">Outside and Inside\nMy Catchment Area</string>
+    <string name="requires_internet_connection">(Requires Internet Connection)</string>
+    <string name="my_catchment_area">My Catchment Area Only</string>
+
+    <string name="first_name_hint">First Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_hint">Last Name</string>
+
+    <string name="search">Search</string>
+    <string name="advanced_search">Advanced Search</string>
+
+    <string name="matching_results">%1$s matching results found.</string>
+
+    <string name="search_results">Search Results</string>
+    <string name="full_name">%s %s %s</string>
+
 </resources>

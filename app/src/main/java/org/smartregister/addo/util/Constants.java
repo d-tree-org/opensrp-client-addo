@@ -363,4 +363,8 @@ public class Constants {
         public static final int STORAGE_PERMISIONS = 1;
     }
 
+    public static final class DB {
+        public static final String FIRST_NAME = "firstName";
+        public static final String LAST_NAME = "lastName";
+    }
 }
