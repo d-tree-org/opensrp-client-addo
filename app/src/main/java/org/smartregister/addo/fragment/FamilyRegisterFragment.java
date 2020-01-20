@@ -154,7 +154,6 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             @Override
             public void onClick(View v) {
                 ((BaseRegisterActivity) getContext()).switchToFragment(2);
-                //((AddoHomeActivity) getContext()).startAdvancedForm();
             }
         });
 

@@ -288,23 +288,7 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             //Toast.makeText(getContext(), "Search", Toast.LENGTH_LONG).show();
         } else if (view.getId() == R.id.back_button) {
             switchViews(false);
-        } /*else if ((view.getId() == R.id.patient_column || view.getId() == R.id.child_profile_info_layout) && view.getTag() != null) {
-
-            RegisterClickables registerClickables = new RegisterClickables();
-            if (view.getTag(org.smartregister.child.R.id.record_action) != null) {
-
-                registerClickables.setRecordWeight(Constants.RECORD_ACTION.GROWTH.equals(view.getTag(org.smartregister.child.R.id.record_action)));
-                registerClickables.setRecordAll(Constants.RECORD_ACTION.VACCINATION.equals(view.getTag(org.smartregister.child.R.id.record_action)));
-                registerClickables.setNextAppointmentDate(view.getTag(R.id.next_appointment_date) != null ? String.valueOf(view.getTag(R.id.next_appointment_date)) : "");
-
-            }
-            BaseChildImmunizationActivity.launchActivity(getActivity(), (CommonPersonObjectClient) view.getTag(), registerClickables);
-
-        } else if (view.getId() == R.id.move_to_catchment && view.getTag(R.id.move_to_catchment_ids) != null && view.getTag(R.id.move_to_catchment_ids) instanceof List) {
-
-            @SuppressWarnings("unchecked") List<String> ids = (List<String>) view.getTag(R.id.move_to_catchment_ids);
-            moveToMyCatchmentArea(ids);
-        }*/
+        }
     }
 
     private void search() {

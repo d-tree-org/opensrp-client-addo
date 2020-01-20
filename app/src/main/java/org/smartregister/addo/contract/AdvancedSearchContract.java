@@ -16,19 +16,6 @@ public interface AdvancedSearchContract  {
         void showResults(List<Entity> members);
     }
 
-    /*interface Model {
-
-        Map<String, String> createEditMap(Map<String, String> searchMap);
-
-        String createSearchString(Map<String, String> searchMap);
-
-        String getMainConditionString(Map<String, String> editMap);
-
-        AdvancedMatrixCursor createMatrixCursor(Response<String> response);
-
-    }*/
-
-
     interface Interactor {
         void search(Map<String, String> editMap, InteractorCallBack callBack);
     }
