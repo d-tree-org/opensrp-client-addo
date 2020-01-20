@@ -2,7 +2,6 @@ package org.smartregister.addo.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -43,7 +42,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     public void startSimprintsId(){
 
         // This is where the session starts, need to find a way to define this session for the confirmation
-        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(AddoHomeActivity.this,
+        SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(AddoHomeActivity.this,
                 BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
     }
 

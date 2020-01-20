@@ -140,6 +140,25 @@ tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
 }
 
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+repositories {
+    maven {
+        name = "GitHubPackages"
+        /*  Configure path to the library hosted on GitHub Packages Registry
+         *  Replace UserID with package owner userID and REPOSITORY with the repository name
+         *  e.g. "https://maven.pkg.github.com/enefce/AndroidLibraryForGitHubPackagesDemo"*/
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-simprints")
+        credentials {
+            /** Create github.properties in root project folder file with
+             ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+             ** Or set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
@@ -164,7 +183,7 @@ dependencies {
     }
 
 //    implementation('org.smartregister:opensrp-client-family:1.2.26-DEMO-2-SNAPSHOT@aar
-    implementation('org.smartregister:opensrp-client-family:1.2.20-DEMO-2-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-family:1.2.26-DEMO-2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
@@ -194,6 +213,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-simprints'
     }
 
+
     implementation('org.smartregister:opensrp-client-chw-anc:0.1.42-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -202,10 +222,11 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
     }
-
-    api('org.smartregister:opensrp-client-simprints:1.0.3-SNAPSHOT@aar') {
+// New package from github 1.1.14-SNAPSHOT
+    implementation('org.smartregister:opensrp-client-simprints:1.0.2-DEMO-8-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'org.smartregister', module: 'opensrp-client-family'
     }
 
 //    implementation('org.smartregister:opensrp-client-chw-core:1.0.23-SNAPSHOT@aar') {

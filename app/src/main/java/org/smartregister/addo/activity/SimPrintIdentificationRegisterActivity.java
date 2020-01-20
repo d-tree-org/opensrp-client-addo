@@ -44,7 +44,7 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
     public void startSimprintsId(){
 
         // This is where the session starts, need to find a way to define this session for the confirmation
-        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(SimPrintIdentificationRegisterActivity.this,
+        SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(SimPrintIdentificationRegisterActivity.this,
                 BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
     }
 
