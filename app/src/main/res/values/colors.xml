@@ -81,4 +81,9 @@
     <color name="card_shadow">#8c666666</color>
     <color name="bottom_nav_bar_selected_background">#8A1A51</color>
 
+    <color name="record_weight_grey_bg_end">#ebebeb</color>
+    <color name="record_weight_grey_bg_st">#f4f4f4</color>
+
+    <color name="contact_complete_grey_border">#CDCDCD</color>
+
 </resources>
