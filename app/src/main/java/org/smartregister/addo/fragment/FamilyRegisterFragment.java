@@ -207,7 +207,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             showFingerPrintFail(this.getActivity(), new OnDialogButtonClick() {
                 @Override
                 public void onOkButtonClick() {
-                    SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(getActivity(),
+                    SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(getActivity(),
                             BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
                 }
 
