@@ -1,6 +1,7 @@
 package org.smartregister.addo.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
@@ -184,7 +185,7 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
             String baseEntityId = pc.entityId();
             String simPrintsGuid = getSimPrintGuid(baseEntityId);
             String sessionid = this.getActivity().getIntent().getStringExtra("session_id");
-            Utils.startAsyncTask(new ConfirmIdentificationTask(sessionid, simPrintsGuid), null);
+            Utils.startAsyncTask(new ConfirmIdentificationTask(this.getContext(), sessionid, simPrintsGuid), null);
 
             // Get values to start the family profile
             String relational_id = org.smartregister.family.util.Utils.getValue(pc.getColumnmaps(), "relationalid", false);
@@ -209,14 +210,14 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
     public void handleNoneSelected(android.view.View view) {
         String sessionid = this.getActivity().getIntent().getStringExtra("session_id");
         // A call back to SimPrint to notify that none of the item on the list was selected
-        Utils.startAsyncTask(new ConfirmIdentificationTask(sessionid, "none_selected"), null);
+        Utils.startAsyncTask(new ConfirmIdentificationTask(this.getContext(), sessionid, "none_selected"), null);
 
         this.getActivity().finish();
     }
 
-    private void confirmSelectedGuid(String sessionid, String simPrintsGuid) {
+    private void confirmSelectedGuid(Context context, String sessionid, String simPrintsGuid) {
         SimPrintsHelper simPrintsHelper = new SimPrintsHelper(BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_USER_ID);
-        simPrintsHelper.confirmIdentity(this.getActivity(), sessionid, simPrintsGuid);
+        simPrintsHelper.confirmIdentity(context, sessionid, simPrintsGuid);
     }
 
     private String getSimPrintGuid(String baseEntityId) {
@@ -237,15 +238,17 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
         private String sessiodId;
         private String selectedGuid;
+        private Context context;
 
-        public ConfirmIdentificationTask(String sessiodId, String selectedGuid) {
+        public ConfirmIdentificationTask(Context context, String sessiodId, String selectedGuid) {
             this.sessiodId = sessiodId;
             this.selectedGuid = selectedGuid;
+            this.context = context;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            confirmSelectedGuid(sessiodId, selectedGuid);
+            confirmSelectedGuid(context, sessiodId, selectedGuid);
             return null;
         }
     }
