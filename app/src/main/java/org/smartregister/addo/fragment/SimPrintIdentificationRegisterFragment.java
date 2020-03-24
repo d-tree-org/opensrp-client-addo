@@ -4,8 +4,9 @@ package org.smartregister.addo.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
@@ -13,6 +14,7 @@ import org.smartregister.addo.contract.SimPrintResultFragmentContract;
 import org.smartregister.addo.model.SimPrintIdentificationFragmentModel;
 import org.smartregister.addo.presenter.SimPrintIdentificationFragmentPresenter;
 import org.smartregister.addo.provider.SimPrintIdentificationResultProvider;
+import org.smartregister.addo.util.Constants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
@@ -185,7 +187,7 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
             String baseEntityId = pc.entityId();
             String simPrintsGuid = getSimPrintGuid(baseEntityId);
             String sessionid = this.getActivity().getIntent().getStringExtra("session_id");
-            Utils.startAsyncTask(new ConfirmIdentificationTask(this.getContext(), sessionid, simPrintsGuid), null);
+            //Utils.startAsyncTask(new ConfirmIdentificationTask(this.getContext(), sessionid, simPrintsGuid), null);
 
             // Get values to start the family profile
             String relational_id = org.smartregister.family.util.Utils.getValue(pc.getColumnmaps(), "relationalid", false);
@@ -202,6 +204,8 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
             intent.putExtra("family_name",
                     org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
             intent.putExtra("go_to_due_page", false);
+            intent.putExtra("session_id", sessionid);
+            intent.putExtra("selected_guid", simPrintsGuid);
             this.startActivity(intent);
             this.getActivity().finish();
         }
@@ -217,7 +221,8 @@ public class SimPrintIdentificationRegisterFragment extends BaseRegisterFragment
 
     private void confirmSelectedGuid(Context context, String sessionid, String simPrintsGuid) {
         SimPrintsHelper simPrintsHelper = new SimPrintsHelper(BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_USER_ID);
-        simPrintsHelper.confirmIdentity(context, sessionid, simPrintsGuid);
+        Intent intent = simPrintsHelper.confirmIdentity(context, sessionid, simPrintsGuid);
+        this.startActivityForResult(intent, Constants.SIMPRINTS_IDENTIFICATION.IDENTIFY_RESULT_CODE);
     }
 
     private String getSimPrintGuid(String baseEntityId) {

@@ -6,10 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -17,6 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
@@ -299,6 +300,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     break;
+                case org.smartregister.addo.util.Constants.SIMPRINTS_IDENTIFICATION.IDENTIFY_RESULT_CODE:
+                    Boolean check = data.getBooleanExtra("biometricsComplete" , false);
             }
         }
     }

@@ -4,13 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.R;
@@ -280,7 +281,7 @@ public class SimPrintIdentificationResultProvider implements RecyclerViewProvide
 
             status = itemView.findViewById(org.smartregister.family.R.id.status);
             profile = itemView.findViewById(org.smartregister.family.R.id.profile);
-            fingerprintStatus = itemView.findViewById(org.smartregister.family.R.id.finger_print_status);
+//            fingerprintStatus = itemView.findViewById(org.smartregister.family.R.id.finger_print_status);
 
             patientNameAge = itemView.findViewById(org.smartregister.family.R.id.patient_name_age);
             gender = itemView.findViewById(org.smartregister.family.R.id.gender);

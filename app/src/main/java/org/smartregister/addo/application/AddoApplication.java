@@ -93,7 +93,7 @@ public class AddoApplication extends DrishtiApplication {
         FamilyLibrary.init(context, getRepository(), getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
-        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID);
+        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);

@@ -2,8 +2,9 @@ package org.smartregister.addo.interactor;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.VisibleForTesting;
 import android.util.Pair;
+
+import androidx.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -42,10 +43,6 @@ import java.util.Map;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static org.smartregister.util.JsonFormUtils.getFieldJSONObject;
@@ -151,34 +148,6 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
     @Override
     public void updateVisitNotDone(final long value, final ChildProfileContract.InteractorCallBack callback) {
 
-        updateHomeVisitAsEvent(value)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Object>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Object o) {
-                        if (value == 0) {
-                           // callback.undoVisitNotDone();
-                        } else {
-                            callback.updateVisitNotDone();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        callback.hideProgressBar();
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
     }
 /**
     @Override

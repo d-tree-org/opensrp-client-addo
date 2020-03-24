@@ -3,18 +3,20 @@ package org.smartregister.addo.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.bottomnavigation.LabelVisibilityMode;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
+import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.fragment.FamilyRegisterFragment;
 import org.smartregister.addo.listeners.AddoBottomNavigationListener;
 import org.smartregister.addo.listeners.FamilyBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
-import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
 import org.smartregister.family.presenter.BaseFamilyRegisterPresenter;

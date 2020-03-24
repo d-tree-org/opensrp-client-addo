@@ -1,9 +1,11 @@
 package org.smartregister.addo.listeners;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.activity.AddoHomeActivity;

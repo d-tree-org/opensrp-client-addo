@@ -2,11 +2,11 @@ package org.smartregister.addo.listeners;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import org.smartregister.addo.activity.FamilyRegisterActivity;
+import androidx.annotation.NonNull;
 
+import org.smartregister.addo.activity.FamilyRegisterActivity;
 import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.view.activity.BaseRegisterActivity;
 

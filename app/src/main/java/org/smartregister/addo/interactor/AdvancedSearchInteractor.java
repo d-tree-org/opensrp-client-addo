@@ -1,7 +1,8 @@
 package org.smartregister.addo.interactor;
 
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.CoreLibrary;

@@ -1,7 +1,8 @@
 package org.smartregister.addo.form_data;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;

@@ -8,15 +8,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.BuildConfig;
@@ -206,7 +207,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
             showFingerPrintFail(this.getActivity(), new OnDialogButtonClick() {
                 @Override
                 public void onOkButtonClick() {
-                    SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(getActivity(),
+                    SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(getActivity(),
                             BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
                 }
 

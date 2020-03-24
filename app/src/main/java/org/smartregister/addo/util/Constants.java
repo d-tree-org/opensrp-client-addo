@@ -367,4 +367,8 @@ public class Constants {
         public static final String FIRST_NAME = "firstName";
         public static final String LAST_NAME = "lastName";
     }
+
+    public static final class SIMPRINTS_IDENTIFICATION {
+        public static final int IDENTIFY_RESULT_CODE = 4061;
+    }
 }

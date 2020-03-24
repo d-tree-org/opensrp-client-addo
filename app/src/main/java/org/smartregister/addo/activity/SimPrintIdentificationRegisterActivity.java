@@ -1,8 +1,10 @@
 package org.smartregister.addo.activity;
 
 import android.content.Intent;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 import org.smartregister.addo.BuildConfig;
@@ -13,6 +15,7 @@ import org.smartregister.addo.fragment.SimPrintIdentificationRegisterFragment;
 import org.smartregister.addo.listeners.SimPrintIdentificationBottomNavigationListener;
 import org.smartregister.addo.model.SimPrintIdentificationRegisterModel;
 import org.smartregister.addo.presenter.SimPrintIdentificationRegisterPresenter;
+import org.smartregister.addo.util.Constants;
 import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.activity.BaseRegisterActivity;
@@ -22,9 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity implements SimPrintIdentificationRegisterContract.View {
-
-
-    private static final int IDENTIFY_RESULT_CODE = 4061;
 
     @Override
     public void setNumberClientsFound() {
@@ -44,8 +44,8 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
     public void startSimprintsId(){
 
         // This is where the session starts, need to find a way to define this session for the confirmation
-        SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(SimPrintIdentificationRegisterActivity.this,
-                BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
+        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(SimPrintIdentificationRegisterActivity.this,
+                BuildConfig.SIMPRINT_MODULE_ID, Constants.SIMPRINTS_IDENTIFICATION.IDENTIFY_RESULT_CODE);
     }
 
     @Override
@@ -113,6 +113,13 @@ public class SimPrintIdentificationRegisterActivity extends BaseRegisterActivity
             this.bottomNavigationHelper.disableShiftMode(this.bottomNavigationView);
             SimPrintIdentificationBottomNavigationListener simPrintIdentificationBottomNavigationListener = new SimPrintIdentificationBottomNavigationListener(this, this.bottomNavigationView);
             this.bottomNavigationView.setOnNavigationItemSelectedListener(simPrintIdentificationBottomNavigationListener);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == -1) {
+            Boolean check = data.getBooleanExtra("biometricsComplete", false);
         }
     }
 }

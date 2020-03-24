@@ -2,8 +2,9 @@ package org.smartregister.addo.activity;
 
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
