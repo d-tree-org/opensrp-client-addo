@@ -342,7 +342,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
                 addRelationship(context, ss, baseClient);
                 SQLiteDatabase db = AddoApplication.getInstance().getRepository().getReadableDatabase();
                 AddoRepository pathRepository = new AddoRepository(context, AddoApplication.getInstance().getContext());
-                EventClientRepository eventClientRepository = new EventClientRepository(pathRepository);
+                EventClientRepository eventClientRepository = new EventClientRepository();
                 JSONObject clientjson = eventClientRepository.getClient(db, lookUpBaseEntityId);
                 baseClient.setAddresses(getAddressFromClientJson(clientjson));
             }

@@ -183,7 +183,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 //    implementation('org.smartregister:opensrp-client-core:1.7.33-SNAPSHOT@aar') {
-    implementation('org.smartregister:opensrp-client-core:1.8.10-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:1.8.25-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
