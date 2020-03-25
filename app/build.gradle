@@ -159,6 +159,23 @@ repositories {
             password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
         }
     }
+
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-family")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-native-form")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
 }
 
 dependencies {
@@ -173,7 +190,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
-        exclude group: 'org.smartregister', module: 'opensrp-client-materialedittext'
+        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 
     implementation('org.smartregister:opensrp-client-configurable-views:1.1.2-SNAPSHOT@aar') {
@@ -184,7 +201,7 @@ dependencies {
 
     }
 
-    implementation('org.smartregister:opensrp-client-family:1.2.26-DEMO-2-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-family:1.2.35-DTREE-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
@@ -202,7 +219,7 @@ dependencies {
 
     //1.7.0-SNAPSHOT@aar
 
-    implementation('org.smartregister:opensrp-client-native-form:1.6.49-DEMO-9-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-native-form:1.7.25-DTREE-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -228,6 +245,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'org.smartregister', module: 'opensrp-client-family'
     }
+    implementation 'org.smartregister:opensrp-client-materialedittext:2.1.6-SNAPSHOT'
 
     implementation 'androidx.appcompat:appcompat:1.0.2' //Do not upgrade to 1.1.0 due to compatibility issues
     implementation 'com.google.android.material:material:1.0.0'

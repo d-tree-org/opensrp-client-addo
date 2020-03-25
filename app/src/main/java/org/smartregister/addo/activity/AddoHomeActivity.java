@@ -91,7 +91,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected void onResumption() {
-        super.onResumption();
+ //       super.onResumption();
         NavigationMenu.getInstance(this,null, null).getNavigationAdapter()
                 .setSelectedView(Constants.DrawerMenu.ALL_FAMILIES);
     }
@@ -108,36 +108,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
-
-/*        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON && resultCode != RESULT_OK && StringUtils.isNotBlank(action)) {
-            finish();
-        }else if (requestCode == IDENTIFY_RESULT_CODE && resultCode == RESULT_OK){
-
-            sessionId = data.getStringExtra("sessionId");
-            ArrayList<SimPrintsIdentification> identifications = new ArrayList<>();
-            if (data != null){
-                identifications = (ArrayList<SimPrintsIdentification>) data.getSerializableExtra("intent_data");
-            }
-
-            ArrayList<String> guid = new ArrayList<>();
-            SimPrintsIdentification simPrintsIdentification;
-            if (identifications.size() > 0){
-                //simPrintsIdentification = identifications.get(0);
-
-                for (int i=0; i < identifications.size(); i++) {
-                    guid.add(identifications.get(i).getGuid());
-                }
-
-            }
-            FamilyRegisterFragment fragment = (FamilyRegisterFragment) mBaseFragment;
-            fragment.onIdentificationFromSimPrints(identifications, sessionId);
-        }*/
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

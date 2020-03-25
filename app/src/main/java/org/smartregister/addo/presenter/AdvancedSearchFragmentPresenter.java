@@ -3,6 +3,12 @@ package org.smartregister.addo.presenter;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.contract.AdvancedSearchContract;
@@ -26,13 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 
 public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearchContract.Presenter, AdvancedSearchContract.InteractorCallBack {
 
@@ -109,6 +108,11 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
     @Override
     public String getDefaultSortQuery() {
         return DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
+    }
+
+    @Override
+    public String getQueryTable() {
+        return null;
     }
 
     public void search(Map<String, String> searchMap, boolean isLocal) {

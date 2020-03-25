@@ -130,14 +130,8 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
     }
 
     @Override
-    public void onRegistrationSaved(boolean isEditMode) {
-        if (isEditMode) {
-            getView().hideProgressDialog();
+    public void onRegistrationSaved(boolean b, boolean b1, FamilyEventClient familyEventClient) {
 
-            refreshProfileView();
-
-            getView().refreshList();
-        }
     }
 
     @Override
