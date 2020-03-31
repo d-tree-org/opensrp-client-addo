@@ -40,7 +40,7 @@ android {
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "IS_SYNC_SETTINGS", "false"
 
-        buildConfigField "String[]", "ALLOWED_LOCATION_LEVELS", '{"Country", "Region", "District", "Ward", "Facility", "Village"}'
+        buildConfigField "String[]", "ALLOWED_LOCATION_LEVELS", '{"Village"}'
         buildConfigField "String", 'DEFAULT_LOCATION', '"Village"'
         buildConfigField "boolean", 'SUPPORT_QR', 'true'
         buildConfigField "int", "DATABASE_VERSION", '1'
@@ -147,6 +147,14 @@ githubProperties.load(new FileInputStream(rootProject.file("github.properties"))
 repositories {
     maven {
         name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/issyzac/opensrp-client-core")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+    maven {
+        name = "GitHubPackages"
         /*  Configure path to the library hosted on GitHub Packages Registry
          *  Replace UserID with package owner userID and REPOSITORY with the repository name
          *  e.g. "https://maven.pkg.github.com/enefce/AndroidLibraryForGitHubPackagesDemo"*/
@@ -183,7 +191,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 //    implementation('org.smartregister:opensrp-client-core:1.7.33-SNAPSHOT@aar') {
-    implementation('org.smartregister:opensrp-client-core:1.8.25-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:1.8.26-SNAPSHOT') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'

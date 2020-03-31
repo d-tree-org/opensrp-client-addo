@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment;
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
+import org.smartregister.addo.fragment.AddoHomeFragment;
 import org.smartregister.addo.fragment.AdvancedSearchFragment;
-import org.smartregister.addo.fragment.FamilyRegisterFragment;
 import org.smartregister.addo.listeners.FamilyRegisterBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
@@ -63,7 +63,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new FamilyRegisterFragment();
+        return new AddoHomeFragment();
     }
 
     /*@Override

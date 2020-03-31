@@ -382,7 +382,7 @@
     <string name="scan_fp_message_instruction">To get your clients details, scan their fingerprint!</string>
     <string name="med_history">Medication History</string>
     <string name="family_no_medication_history">Family has no medication history</string>
-    <string name="addo_app_home">ADDO Home</string>
+    <string name="addo_app_home">ADDO</string>
     <string name="return_to_addo_home">Return to home</string>
     <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
     <string name="fingerprint_identification_title">Find Clients</string>
@@ -406,5 +406,4 @@
 
     <string name="search_results">Search Results</string>
     <string name="full_name">%s %s %s</string>
-
 </resources>

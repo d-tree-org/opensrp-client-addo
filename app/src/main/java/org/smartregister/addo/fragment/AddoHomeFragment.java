@@ -1,0 +1,148 @@
+package org.smartregister.addo.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.smartregister.addo.R;
+import org.smartregister.addo.adapter.AddoLocationRecyclerViewProviderAdapter;
+import org.smartregister.addo.contract.AddoHomeFragmentContract;
+import org.smartregister.addo.custom_views.NavigationMenu;
+import org.smartregister.addo.model.AddoHomeFragmentModel;
+import org.smartregister.addo.presenter.AddoHomeFragmentPresenter;
+import org.smartregister.view.activity.BaseRegisterActivity;
+import org.smartregister.view.customcontrols.CustomFontTextView;
+import org.smartregister.view.fragment.BaseRegisterFragment;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
+public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFragmentContract.View {
+
+    private RecyclerView addoLocationView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<String> villageLocations;
+
+    @Override
+    public void setupViews(View view) {
+        this.rootView = view;
+
+        Toolbar toolbar = view.findViewById(R.id.register_toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0);
+        toolbar.setContentInsetsRelative(0, 0);
+
+        toolbar.setContentInsetStartWithNavigation(0);
+
+        NavigationMenu.getInstance(this.getActivity(), null, toolbar);
+
+        View navBarContainer = view.findViewById(R.id.register_nav_bar_container);
+        navBarContainer.setFocusable(false);
+
+        CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
+        if (titleView != null) {
+            titleView.setText(R.string.addo_app_home);
+            titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(),
+                    titleView.getPaddingBottom());
+        }
+
+        addoLocationView = (RecyclerView) view.findViewById(R.id.addo_villages_recycler_view);
+        addoLocationView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        addoLocationView.setLayoutManager(layoutManager);
+        registerAdapter(addoLocationView);
+
+    }
+
+    public void registerAdapter(RecyclerView view) {
+
+        if (view != null) {
+
+            //this.villageLocations = LocationHelper.getInstance()
+            //      .locationsFromHierarchy(false, null);
+            this.villageLocations = presenter().getLocations();
+        }
+
+        mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
+                , this.getActivity());
+        view.setAdapter(mAdapter);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_addo_home, container, false);
+        this.rootView = view;
+        this.setupViews(view);
+
+        return view;
+
+    }
+
+    @Override
+    public void initializeAdapter
+            (Set<org.smartregister.configurableviews.model.View> visibleColumns) {
+    }
+
+    @Override
+    public AddoHomeFragmentContract.Presenter presenter() {
+        return (AddoHomeFragmentContract.Presenter) presenter;
+    }
+
+    @Override
+    protected void initializePresenter() {
+        if (getActivity() == null) {
+            return;
+        }
+
+        String viewConfigurationIdentifier = ((BaseRegisterActivity) getActivity()).getViewIdentifiers().get(0);
+        presenter = new AddoHomeFragmentPresenter(this, AddoHomeFragmentModel.getInstance(), viewConfigurationIdentifier);
+    }
+
+    @Override
+    public void setUniqueID(String s) {
+
+    }
+
+    @Override
+    public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
+
+    }
+
+    @Override
+    protected String getMainCondition() {
+        return null;
+    }
+
+    @Override
+    protected String getDefaultSortQuery() {
+        return null;
+    }
+
+    @Override
+    protected void startRegistration() {
+
+    }
+
+    @Override
+    protected void onViewClicked(View view) {
+
+    }
+
+    @Override
+    public void showNotFoundPopup(String s) {
+
+    }
+
+}

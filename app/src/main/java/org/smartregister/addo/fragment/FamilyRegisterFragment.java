@@ -2,9 +2,6 @@ package org.smartregister.addo.fragment;
 
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,17 +16,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
-import org.apache.commons.lang3.StringUtils;
-import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
-import org.smartregister.addo.activity.SimPrintIdentificationRegisterActivity;
 import org.smartregister.addo.contract.RegisterFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoRegisterProvider;
 import org.smartregister.addo.model.FamilyRegisterFragmentModel;
 import org.smartregister.addo.presenter.FamilyRegisterFragmentPresenter;
 import org.smartregister.addo.util.Constants;
-import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.addo.util.QueryBuilder;
 import org.smartregister.addo.util.Utils;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -40,13 +33,9 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.fragment.BaseFamilyRegisterFragment;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.simprint.OnDialogButtonClick;
-import org.smartregister.simprint.SimPrintsIdentification;
-import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -175,81 +164,6 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
     @Override
     public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
 
-    }
-
-    public void fingerprintScannedSuccessfully(String uniqueId) {
-        /**
-         * Search from the clients list to fing the client with the Identifier(simprintsID)
-         * get the client's uniqueID
-         * pass the unique id to filter so as to filter the list
-         */
-
-        if (StringUtils.isNotEmpty(uniqueId)) {
-            filter(uniqueId, "", getMainCondition(), false);
-            ivFScan.setVisibility(View.GONE);
-            tvScanFPMessage.setVisibility(View.GONE);
-            tvScanFPMessageInstruction.setVisibility(View.GONE);
-            fingerPrintPointer.setVisibility(View.GONE);
-            clientsView.setVisibility(View.VISIBLE);
-        } else {
-            tvScanFPMessage.setText("Fingerprint not found");
-        }
-    }
-
-    public void onIdentificationFromSimPrints(ArrayList<SimPrintsIdentification> simPrintsIdentifications,
-                                              String sessionId) {
-
-
-
-        if (simPrintsIdentifications.isEmpty()) {
-
-            // Need to implement a notification or something when there is no FP from SIMPRINT
-            showFingerPrintFail(this.getActivity(), new OnDialogButtonClick() {
-                @Override
-                public void onOkButtonClick() {
-                    SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(getActivity(),
-                            BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
-                }
-
-                @Override
-                public void onCancelButtonClick() {
-                    Intent returnIntent = new Intent();
-
-                }
-            });
-        } else {
-            // This will just find the basentity ids and pass them to the SimPrint Identification Activity but we also need guids for confirmation
-
-            HashMap<String, String> baseEntityGuid = new HashMap<String, String>();
-            for (SimPrintsIdentification simPrintsIdentification : simPrintsIdentifications) {
-                baseEntityGuid.put(JsonFormUtils.lookForClientsBaseEntityId(simPrintsIdentification.getGuid()), simPrintsIdentification.getGuid());
-            }
-            Intent intent = new Intent(this.getActivity(), SimPrintIdentificationRegisterActivity.class);
-            intent.putExtra("baseids_guids", baseEntityGuid);
-            intent.putExtra("session_id", sessionId);
-            startActivity(intent);
-        }
-
-    }
-
-    private void showFingerPrintFail(Context context, final OnDialogButtonClick onDialogButtonClick){
-        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setMessage(getString(R.string.no_client_found));
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(org.smartregister.simprint.R.string.scan_again), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onDialogButtonClick.onOkButtonClick();
-                alertDialog.dismiss();
-            }
-        });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(org.smartregister.simprint.R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onDialogButtonClick.onCancelButtonClick();
-                alertDialog.dismiss();
-            }
-        });
-        alertDialog.show();
     }
 
     @Override
