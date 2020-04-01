@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.addo.R;
-import org.smartregister.addo.activity.AddoHomeActivity;
 import org.smartregister.view.LocationPickerView;
+import org.smartregister.view.activity.BaseRegisterActivity;
 
 import java.util.List;
 
@@ -92,7 +92,8 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
         public void onClick(View v) {
             // Here is where we start the activity with fingerprint search functionality
             // Also pass the location selected
-            startRegisterActivity(AddoHomeActivity.class);
+            ((BaseRegisterActivity) activity).switchToFragment(3);
+            //startRegisterActivity(AddoHomeActivity.class);
         }
 
         private void startRegisterActivity(Class registerClass) {
