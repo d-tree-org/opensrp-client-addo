@@ -2,10 +2,10 @@ package org.smartregister.addo.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,10 +22,12 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
     private View.OnClickListener onClickListener;
     private Context context;
 
-    public AddoLocationRecyclerViewProviderAdapter(List<String> addoLocation,  Activity context) {
+    protected OnItemClickListener onItemClickListener;
+
+    public AddoLocationRecyclerViewProviderAdapter(List<String> addoLocation,  Activity activity) {
         this.addoLocation = addoLocation;
-        this.context = context;
-        this.onClickListener = new AddoLocationAdapterListener(context);
+        this.context = activity;
+        this.onClickListener = new AddoLocationAdapterListener(activity);
     }
 
     @NonNull
@@ -33,16 +35,20 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.addo_villages_list_row, parent, false);
-
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        String item = null;
         if (!addoLocation.isEmpty()) {
-            String item = this.addoLocation.get(position);
-            holder.tvVillageName.setText(item);
+            if (position != (getItemCount() - 1)) {
+                item = this.addoLocation.get(position);
+                holder.tvVillageName.setText(item);
+            } else {
+                holder.tvVillageName.setText("None of the above");
+                holder.ivLocationIcon.setVisibility(View.INVISIBLE);
+            }
             View location = holder.myView;
             if (onClickListener != null) {
                 attachLocationOnclickListener(location, item);
@@ -51,13 +57,27 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
     }
 
     private void attachLocationOnclickListener(View view, String locationItem) {
-        view.setOnClickListener(onClickListener);
+        //view.setOnClickListener(onClickListener);
         view.setTag(locationItem);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onClick(locationItem);
+            }
+        });
+    }
+
+    public void setOnItemClickListener(AddoLocationRecyclerViewProviderAdapter.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(String village);
     }
 
     @Override
     public int getItemCount() {
-        return this.addoLocation.size();
+        return this.addoLocation.size() + 1;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,11 +86,13 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private LocationPickerView tvVillageName;
+        private ImageView ivLocationIcon;
         private View myView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvVillageName = itemView.findViewById(R.id.village_name);
+            ivLocationIcon = itemView.findViewById(R.id.locationImageView);
 
             myView = itemView;
         }
@@ -96,12 +118,5 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
             //startRegisterActivity(AddoHomeActivity.class);
         }
 
-        private void startRegisterActivity(Class registerClass) {
-            Intent intent = new Intent(activity, registerClass);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            activity.startActivity(intent);
-            activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-            activity.finish();
-        }
     }
 }

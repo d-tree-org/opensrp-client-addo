@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.application.AddoApplication;
@@ -118,6 +121,22 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             if (navigationMenu != null) {
                 //navigationMenu.startP2PActivity(this);
             }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Inner Class //////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static class AddoHomeSharedViewModel extends ViewModel {
+        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
+
+        public AddoHomeSharedViewModel() {}
+
+        public void setSelectedVillage(String village) {
+            selectedVillage.setValue(village);
+        }
+
+        public LiveData<String> getSelectedVillage() {
+            return selectedVillage;
         }
     }
 }

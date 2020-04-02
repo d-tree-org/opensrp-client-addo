@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.addo.R;
+import org.smartregister.addo.activity.AddoHomeActivity;
 import org.smartregister.addo.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.addo.contract.AddoHomeFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
@@ -22,6 +27,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFragmentContract.View {
@@ -30,6 +36,7 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<String> villageLocations;
+    private AddoHomeActivity.AddoHomeSharedViewModel model;
 
     @Override
     public void setupViews(View view) {
@@ -65,15 +72,17 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
     public void registerAdapter(RecyclerView view) {
 
         if (view != null) {
-
-            //this.villageLocations = LocationHelper.getInstance()
-            //      .locationsFromHierarchy(false, null);
             this.villageLocations = presenter().getLocations();
         }
 
-        mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
+        AddoLocationRecyclerViewProviderAdapter mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
                 , this.getActivity());
         view.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(village -> {
+            Toast.makeText(getActivity(), village, Toast.LENGTH_SHORT).show();
+            model.setSelectedVillage(village);
+            ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(3);
+        });
 
     }
 
@@ -83,6 +92,13 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
             container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_addo_home, container, false);
+        model = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new AddoHomeActivity.AddoHomeSharedViewModel();
+            }
+        }).get(AddoHomeActivity.AddoHomeSharedViewModel.class);
         this.rootView = view;
         this.setupViews(view);
 
