@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +21,12 @@ import org.smartregister.addo.contract.AddoHomeFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoHomeFragmentModel;
 import org.smartregister.addo.presenter.AddoHomeFragmentPresenter;
+import org.smartregister.addo.view.EmptystateView;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -35,8 +37,10 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
     private RecyclerView addoLocationView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<String> villageLocations;
+    private List<String> villageLocations = new ArrayList<>();
     private AddoHomeActivity.AddoHomeSharedViewModel model;
+    private TextView tvNoVillage;
+    private EmptystateView emptystateView;
 
     @Override
     public void setupViews(View view) {
@@ -60,6 +64,9 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
                     titleView.getPaddingBottom());
         }
 
+        tvNoVillage = view.findViewById(R.id.empty_view);
+        emptystateView = view.findViewById(R.id.ev_no_villages);
+
         addoLocationView = (RecyclerView) view.findViewById(R.id.addo_villages_recycler_view);
         addoLocationView.setHasFixedSize(true);
 
@@ -69,19 +76,29 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
 
     }
 
-    public void registerAdapter(RecyclerView view) {
-
+    private void registerAdapter(RecyclerView view) {
         if (view != null) {
-            this.villageLocations = presenter().getLocations();
+            if ( presenter().getLocations() != null ) {
+                this.villageLocations = presenter().getLocations();
+            }
+        }
+
+        if (this.villageLocations.size() == 0) {
+            emptystateView.setVisibility(View.VISIBLE);
         }
 
         AddoLocationRecyclerViewProviderAdapter mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
                 , this.getActivity());
         view.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(village -> {
-            Toast.makeText(getActivity(), village, Toast.LENGTH_SHORT).show();
-            model.setSelectedVillage(village);
-            ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(3);
+            // if the selected item is other village then take the user to Advanced search otherwise fp scan
+            if (!village.equalsIgnoreCase(String.valueOf(R.string.addo_other_village))) {
+                model.setSelectedVillage(village);
+                ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(2);
+            } else {
+                ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(1);
+            }
+
         });
 
     }

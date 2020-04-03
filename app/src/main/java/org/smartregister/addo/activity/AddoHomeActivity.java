@@ -1,6 +1,5 @@
 package org.smartregister.addo.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -11,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.smartregister.addo.BuildConfig;
+import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.fragment.AddoHomeFragment;
@@ -33,12 +33,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     private String sessionId = null;
     private WeakReference<AdvancedSearchFragment> advancedSearchFragmentWR;
 
-
-    public void startFamilyRegisterForm(){
-        Intent intent = new Intent(this, AddoHomeActivity.class);
-        intent.putExtra(Constants.ACTIVITY_PAYLOAD.ACTION, Constants.ACTION.START_REGISTRATION);
-        startActivity(intent);
-    }
 
     public void startSimprintsId(){
 
@@ -110,6 +104,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
+        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
         FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }

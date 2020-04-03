@@ -62,6 +62,9 @@ public class AddoHomeFragmentModel implements AddoHomeFragmentContract.Model {
 
         LinkedHashMap<String, TreeNode<String, Location>> locatioHierarchy = getTreeNodeWithUserAssignedLocationId();
 
+        // For testing purpose, in case the list is null
+        //LinkedHashMap<String, TreeNode<String, Location>> locatioHierarchy = new LinkedHashMap<>();
+
         if (!Utils.isEmptyMap(locatioHierarchy)) {
             for (Map.Entry<String, TreeNode<String, Location>> entry : locatioHierarchy.entrySet()) {
                 List<String> loca = getListOfTaggedLocationFromTheNode(entry.getValue());

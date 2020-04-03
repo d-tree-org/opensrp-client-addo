@@ -22,7 +22,7 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
     private View.OnClickListener onClickListener;
     private Context context;
 
-    protected OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public AddoLocationRecyclerViewProviderAdapter(List<String> addoLocation,  Activity activity) {
         this.addoLocation = addoLocation;
@@ -46,7 +46,8 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
                 item = this.addoLocation.get(position);
                 holder.tvVillageName.setText(item);
             } else {
-                holder.tvVillageName.setText("None of the above");
+                item = String.valueOf(R.string.addo_other_village);
+                holder.tvVillageName.setText(R.string.addo_other_village);
                 holder.ivLocationIcon.setVisibility(View.INVISIBLE);
             }
             View location = holder.myView;
@@ -77,7 +78,10 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
 
     @Override
     public int getItemCount() {
-        return this.addoLocation.size() + 1;
+        if (this.addoLocation.size() > 0) {
+            return this.addoLocation.size() + 1;
+        }
+        return this.addoLocation.size();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

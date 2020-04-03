@@ -48,8 +48,17 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="10dp"
-            android:text="No Record"
+            android:text="@string/addo_user_no_villages"
             android:visibility="gone" />
+        <org.smartregister.addo.view.EmptystateView
+            android:id="@+id/ev_no_villages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:emptystate_image="@mipmap/no_loc_listed_big"
+            app:emptystate_title="No Location"
+            app:emptystate_text="@string/addo_user_no_villages"
+            android:visibility="gone"/>
 
     </FrameLayout>
 

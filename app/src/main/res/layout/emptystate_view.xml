@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="234dp"
+    android:layout_height="254dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="14dp">
+    
+    <ImageView
+        android:id="@+id/emptystate_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="8dp"
+        tools:src="@color/colorPrimary" />
+    <TextView
+        android:id="@+id/emptystate_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tittle call to act"
+        android:textAlignment="center"
+        android:textColor="#666"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/emptystate_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No village is set for this user"
+        android:textAlignment="center"
+        android:textColor="#666"
+        android:textSize="14sp" />
+
+</LinearLayout>
