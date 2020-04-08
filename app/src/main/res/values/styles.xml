@@ -62,6 +62,20 @@
         <item name="android:lineSpacingMultiplier">1.21</item>
     </style>
 
+    <style name="selectClientVillag">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="askTheClientIfTh">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingMultiplier">1.18</item>
+    </style>
+
     <style name="scanFingerprint">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">#FF840952</item>

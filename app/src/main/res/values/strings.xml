@@ -408,4 +408,6 @@
     <string name="full_name">%s %s %s</string>
     <string name="addo_user_no_villages">This user has not been assigned any village</string>
     <string name="addo_other_village">Other Village</string>
+    <string name="ask_client_village">Ask the client if they are from Kibaha, if they are, please select the location from the list below. If they are not in Kibaha, then do not use the system for this service.</string>
+    <string name="add_select_village">Select client village</string>
 </resources>
