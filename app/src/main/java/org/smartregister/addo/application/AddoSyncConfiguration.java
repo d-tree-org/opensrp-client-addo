@@ -31,9 +31,11 @@ public class AddoSyncConfiguration extends SyncConfiguration {
 
         List<String> locationIds = LocationHelper.getInstance().locationsFromHierarchy(true, null);
         if (!org.smartregister.util.Utils.isEmptyCollection(locationIds)) {
-            int index = locationIds.indexOf(userLocationId);
-            List<String> subLocationIds = locationIds.subList(index, locationIds.size());
-            return StringUtils.join(subLocationIds, ",");
+/*            int index = locationIds.indexOf(userLocationId);
+            List<String> subLocationIds = locationIds.subList(index, locationIds.size());*/
+            locationIds.add("05c5bb5e-0417-442f-b3be-f702e22ffb3f"); // This location id is for Tumbi where most test users
+            // have been registered on, the currently proposed is to use the villages below a ward. More discussion with the team is needed.
+            return StringUtils.join(locationIds, ",");
         }
         return "";
     }
@@ -66,6 +68,11 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         */
         //return SyncFilter.LOCATION;
         return SyncFilter.LOCATION;
+    }
+
+    @Override
+    public boolean isSyncUsingPost() {
+        return true;
     }
 
     @Override
