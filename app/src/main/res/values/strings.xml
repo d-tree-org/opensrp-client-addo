@@ -415,4 +415,6 @@
     <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
     <string name="give_commodities_client_focus_profile">Give Commodities</string>
     <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
+    <string name="item_2_placeholder">Item 2 Placeholder</string>
+    <string name="item_1_placeholder">Item 1 Placeholder</string>
 </resources>

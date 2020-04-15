@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_family_details"
+        android:enabled="true"
+        android:title="@string/family_details"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_item1_placeholder"
+        android:enabled="true"
+        android:title="@string/item_1_placeholder"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_item2_placeholder"
+        android:enabled="true"
+        android:title="@string/item_2_placeholder"
+        app:showAsAction="never" />
+
+</menu>

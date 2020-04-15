@@ -146,7 +146,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
             addMember.setVisible(false);
         }
 
-        getMenuInflater().inflate(R.menu.profile_menu, menu);
+        //Menu items for the family members profile
+        getMenuInflater().inflate(R.menu.addo_family_profile_menu, menu);
 
         return true;
     }
@@ -158,34 +159,14 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         switch (item.getItemId()) {
             case R.id.action_family_details:
 
-                startFormForEdit();
+                Toast.makeText(this, "Maybe show the family detils, medical history", Toast.LENGTH_SHORT).show();
 
                 break;
-            case R.id.action_remove_member:
-                /**
-                Intent frm_intent = new Intent(this, FamilyRemoveMemberActivity.class);
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, getFamilyBaseEntityId());
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.FAMILY_HEAD, familyHead);
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.PRIMARY_CAREGIVER, primaryCaregiver);
-                startActivityForResult(frm_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-                 **/
+            case R.id.action_item1_placeholder:
+                Toast.makeText(this, "Item 1 Menu Placeholder", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.action_change_head:
-/**
-                Intent fh_intent = new Intent(this, FamilyProfileMenuActivity.class);
-                fh_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.BASE_ENTITY_ID, getFamilyBaseEntityId());
-                fh_intent.putExtra(FamilyProfileMenuActivity.MENU, org.smartregister.chw.util.Constants.MenuType.ChangeHead);
-                startActivityForResult(fh_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-**/
-                break;
-            case R.id.action_change_care_giver:
-/**
-
-                Intent pc_intent = new Intent(this, FamilyProfileMenuActivity.class);
-                pc_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.BASE_ENTITY_ID, getFamilyBaseEntityId());
-                pc_intent.putExtra(FamilyProfileMenuActivity.MENU, org.smartregister.chw.util.Constants.MenuType.ChangePrimaryCare);
-                startActivityForResult(pc_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-**/
+            case R.id.action_item2_placeholder:
+                Toast.makeText(this, "Item 2 Menu Placeholder", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 super.onOptionsItemSelected(item);

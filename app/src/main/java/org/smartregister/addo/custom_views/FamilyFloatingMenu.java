@@ -80,6 +80,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
 
         addNewMember = findViewById(R.id.add_new_member_layout);
         addNewMember.setOnClickListener(this);
+        addNewMember.setVisibility(GONE);
 
         callLayout.setClickable(false);
         addNewMember.setClickable(false);
