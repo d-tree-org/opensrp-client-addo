@@ -145,6 +145,7 @@ public class CoreConstants {
         public static final String FAMILY_DETAILS_REMOVE_CHILD = "family_details_remove_child";
         public static final String FAMILY_DETAILS_REMOVE_FAMILY = "family_details_remove_family";
         public static final String HOME_VISIT_COUNSELLING = "routine_home_visit";
+        public static final String ADDO_RECORD_SERVICE_OTHER = "addo_record_service_provided_other";
 
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
@@ -170,6 +171,8 @@ public class CoreConstants {
             JSON_FORM.assetManager = assetManager;
             JSON_FORM.locale = locale;
         }
+
+        public static String getAddoRecordServiceOther() { return ADDO_RECORD_SERVICE_OTHER; }
 
         public static String getChildReferralForm() {
             return CHILD_REFERRAL_FORM;

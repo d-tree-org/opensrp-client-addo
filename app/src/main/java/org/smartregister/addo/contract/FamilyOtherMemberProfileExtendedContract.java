@@ -11,7 +11,6 @@ public interface FamilyOtherMemberProfileExtendedContract {
 
         void updateFamilyMember(String jsonString);
 
-        void updateFamilyMemberServiceDue(String serviceDueStatus);
     }
 
     interface View extends FamilyOtherMemberContract.View {
@@ -19,12 +18,6 @@ public interface FamilyOtherMemberProfileExtendedContract {
         void showProgressDialog(int saveMessageStringIdentifier);
 
         void hideProgressDialog();
-
-        void refreshList();
-
-        void updateHasPhone(boolean hasPhone);
-
-        void setFamilyServiceStatus(String status);
 
         Context getContext();
     }

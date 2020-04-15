@@ -3,6 +3,8 @@ package org.smartregister.addo.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Gravity;
@@ -19,24 +21,20 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.vijay.jsonwizard.constants.JsonFormConstants;
-import com.vijay.jsonwizard.domain.Form;
 
 import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
-import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dataloader.AncMemberDataLoader;
 import org.smartregister.addo.dataloader.FamilyMemberDataLoader;
 import org.smartregister.addo.form_data.NativeFormsDataBinder;
 import org.smartregister.addo.fragment.FamilyOtherMemberProfileFragment;
-import org.smartregister.addo.interactor.ChildProfileInteractor;
 import org.smartregister.addo.listeners.FloatingMenuListener;
 import org.smartregister.addo.listeners.OnClickFloatingMenu;
 import org.smartregister.addo.presenter.FamilyOtherMemberActivityPresenter;
-import org.smartregister.addo.util.ChildUtils;
 import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.addo.util.CoreJsonFormUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -49,6 +47,7 @@ import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
+import org.smartregister.util.FormUtils;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import timber.log.Timber;
@@ -67,6 +66,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private TextView textViewFamilyHas, textViewDangersignScreening;
     private RelativeLayout layoutFamilyHasRow;
     protected MemberObject memberObject;
+    private FormUtils formUtils;
 
     private OnClickFloatingMenu onClickFloatingMenu;
     //private FamilyOtherMemberProfileActivityFlv flavor = new FamilyOtherMemberProfileActivityFlv();
@@ -76,18 +76,21 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     protected void onCreation() {
         setContentView(R.layout.activity_family_other_member_profile_addo);
 
-        Toolbar toolbar = findViewById(org.smartregister.family.R.id.family_toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.addo_other_family_member_toolbar);
+        this.setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            final Drawable backArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
+            backArrow.setColorFilter(getResources().getColor(R.color.addo_primary), PorterDuff.Mode.SRC_ATOP);
+            actionBar.setHomeAsUpIndicator(backArrow);
             actionBar.setTitle("");
         }
 
-        appBarLayout = findViewById(org.smartregister.family.R.id.toolbar_appbarlayout);
+        this.appBarLayout = findViewById(R.id.toolbar_appbarlayout_addo_non_focused);
 
-        imageRenderHelper = new ImageRenderHelper(this);
+        this.imageRenderHelper = new ImageRenderHelper(this);
 
         initializePresenter();
 
@@ -136,32 +139,13 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         addContentView(familyFloatingMenu, linearLayoutParams);
 
         familyFloatingMenu.setClickListener(onClickFloatingMenu);
-        textViewFamilyHas = findViewById(R.id.textview_family_has);
-        layoutFamilyHasRow = findViewById(R.id.family_has_row);
+        //textViewFamilyHas = findViewById(R.id.textview_family_has);
+        //layoutFamilyHasRow = findViewById(R.id.family_has_row);
 
         textViewDangersignScreening.setOnClickListener(this);
 
-        layoutFamilyHasRow.setOnClickListener(this);
+        //layoutFamilyHasRow.setOnClickListener(this);
 
-    }
-
-    @Override
-    public void updateHasPhone(boolean hasPhone) {
-        if (familyFloatingMenu != null) {
-            familyFloatingMenu.reDraw(hasPhone);
-        }
-    }
-
-    @Override
-    public void setFamilyServiceStatus(String status) {
-        layoutFamilyHasRow.setVisibility(View.VISIBLE);
-        if (status.equalsIgnoreCase(ChildProfileInteractor.FamilyServiceType.DUE.name())) {
-            textViewFamilyHas.setText(getString(R.string.family_has_services_due));
-        } else if (status.equalsIgnoreCase(ChildProfileInteractor.FamilyServiceType.OVERDUE.name())) {
-            textViewFamilyHas.setText(ChildUtils.fromHtml(getString(R.string.family_has_service_overdue)));
-        } else {
-            textViewFamilyHas.setText(getString(R.string.family_has_nothing_due));
-        }
     }
 
     @Override
@@ -260,17 +244,8 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     }
 
     public void startFormActivity(JSONObject jsonForm) {
-
-        Intent intent = new Intent(this, Utils.metadata().familyMemberFormActivity);
-        intent.putExtra(Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
-
-
-        Form form = new Form();
-        form.setActionBarBackground(R.color.family_actionbar);
-        form.setWizard(false);
-        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
-
-        startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
+        startActivityForResult(CoreJsonFormUtils.getJsonIntent(this, jsonForm, Utils.metadata().familyMemberFormActivity),
+                JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
     @Override
@@ -347,16 +322,21 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
             case R.id.textview_ds_screening:
                 // Technically here we can implement the logic to check whether they are ANC or PNC and handle the danger signs for them
                 // This line checks whether the woman is already registered as ANC
-                if (AncDao.isANCMember(baseEntityId)) {
+/*                if (AncDao.isANCMember(baseEntityId)) {
                     startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.ANC_HOME_VISIT.getDangerSigns());
                 } else {
                     startAncFormActivity(R.string.anc_home_visit_danger_signs, CoreConstants.JSON_FORM.PNC_HOME_VISIT.getDangerSignsMother());
-                }
+                }*/
+                startRecordServiceProvided();
 
             default:
                 super.onClick(view);
                 break;
         }
+    }
+
+    private void startRecordServiceProvided() {
+        startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoRecordServiceOther()));
     }
 
     public void startAncFormActivity(Integer title_resource, String formName) {
@@ -407,6 +387,17 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
 
         intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.SERVICE_DUE, true);
         startActivity(intent);
+    }
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(Utils.context().applicationContext());
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+        return formUtils;
     }
 
     /**

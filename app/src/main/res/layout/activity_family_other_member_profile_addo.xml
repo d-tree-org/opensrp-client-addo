@@ -14,21 +14,21 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolbar_appbarlayout"
+            android:id="@+id/toolbar_appbarlayout_addo_non_focused"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/addo_primary">
+            android:background="@color/anc_member_profile_bg">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/family_toolbar"
+                android:id="@+id/addo_other_family_member_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/addo_primary"
+                android:background="@color/anc_member_profile_bg"
                 android:contentInsetStart="0dp"
                 android:contentInsetLeft="0dp"
                 android:contentInsetEnd="0dp"
                 android:contentInsetRight="0dp"
-                android:theme="@style/FamilyTheme.DarkAppBarOverlay"
+                android:theme="@style/AddoTheme"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
@@ -43,7 +43,7 @@
                     android:paddingStart="0dp"
                     android:paddingLeft="0dp"
                     android:text="@string/return_to_family_profile"
-                    android:textColor="@color/white"
+                    android:textColor="@color/addo_primary"
                     android:textSize="@dimen/register_member_title_size" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:background="@color/addo_primary"
+                    android:background="@color/anc_member_profile_bg"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:layout_marginBottom="32dp"
@@ -93,7 +93,7 @@
                         android:layout_marginTop="16dp"
                         android:paddingLeft="0dp"
                         android:text="Charity Otala"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/activity_title_size" />
 
                     <LinearLayout
@@ -115,7 +115,7 @@
                             android:paddingLeft="0dp"
                             android:text="Male"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                             android:text="\u00b7"
                             android:textSize="18sp"
                             android:fontFamily="@font/google_sans_bold"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/addo_primary" />
 
                         <TextView
                             android:id="@+id/textview_detail_two"
@@ -138,7 +138,7 @@
                             android:paddingLeft="0dp"
                             android:text="Mwananyamala #445"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
                             android:text="\u00b7"
                             android:textSize="18sp"
                             android:fontFamily="@font/google_sans_bold"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/addo_primary" />
 
                         <TextView
                             android:id="@+id/textview_detail_three"
@@ -160,7 +160,7 @@
                             android:paddingLeft="0dp"
                             android:text="ID: 25398735"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/black" />
                     </LinearLayout>
 
                     <View
@@ -181,7 +181,7 @@
                         android:paddingTop="@dimen/register_list_top_bottom_min_padding"
                         android:text="@string/family_head"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/primary_caregiver"
@@ -192,7 +192,7 @@
                         android:paddingTop="@dimen/register_list_top_bottom_min_padding"
                         android:text="@string/primary_care_giver"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                 </LinearLayout>
@@ -213,60 +213,9 @@
                 app:tabSelectedTextColor="@color/text_black"
                 app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator.sub.white" />
 
-            <include android:id="@+id/ds_screening" layout="@layout/view_dangersign_screening" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
-            android:id="@+id/family_has_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list_item_background_selctor"
-            android:padding="20dp"
-            android:layout_margin="16dp"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/family_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/childrow_family" />
-
-            <ImageView
-                android:id="@+id/family_arrow_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/row_goto" />
-
-            <TextView
-                android:id="@+id/textview_family_has"
-                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-                android:fontFamily="@font/google_sans_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/family_image"
-                android:gravity="center_horizontal"
-                android:text="@string/family_no_medication_history"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/text_view_family_profile"
-                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-                android:fontFamily="@font/google_sans_regular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview_family_has"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/family_image"
-                android:text="@string/go_to_family_s_profile"
-                android:textColor="@android:color/darker_gray" />
-
-        </RelativeLayout>
+        <include android:id="@+id/ds_screening" layout="@layout/view_btn_client_profile_action" />
 
         <include layout="@layout/content_base_profile" />
     </androidx.appcompat.widget.LinearLayoutCompat>
