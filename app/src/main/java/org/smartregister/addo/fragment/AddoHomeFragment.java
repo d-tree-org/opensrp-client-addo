@@ -62,6 +62,7 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
             titleView.setText(R.string.addo_app_home);
             titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(),
                     titleView.getPaddingBottom());
+            titleView.setVisibility(View.GONE);
         }
 
         tvNoVillage = view.findViewById(R.id.empty_view);

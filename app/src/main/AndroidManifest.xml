@@ -75,6 +75,15 @@
                 android:value="org.smartregister.addo.activity.FamilyProfileActivity" />
         </activity>
         <activity
+            android:name=".activity.FamilyFocusedMemberProfileActivity"
+            android:label="@string/title_family_detail"
+            android:parentActivityName=".activity.FamilyRegisterActivity"
+            android:theme="@style/AddoTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.smartregister.addo.activity.FamilyProfileActivity" />
+        </activity>
+        <activity
             android:name=".activity.ChildProfileActivity"
             android:label="@string/child_details"
             android:theme="@style/AddoTheme.NoActionBar" />

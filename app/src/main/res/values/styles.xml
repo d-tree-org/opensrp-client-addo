@@ -97,6 +97,13 @@
         <item name="android:lineSpacingMultiplier">1.18</item>
     </style>
 
+    <style name="selectThePersonTo">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

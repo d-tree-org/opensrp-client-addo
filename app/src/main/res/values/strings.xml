@@ -78,6 +78,7 @@
     <string name="undo">UNDO</string>
     <string name="record_visit">Record visit</string>
     <string name="ds_screening">Screen for Danger Sign</string>
+    <string name="addo_non_focus_profile_action_text">Select service provided</string>
     <string name="edit">EDIT</string>
     <string name="return_to_family_name">Return to %1$s Family</string>
     <string name="return_to_family_members">Return to family members</string>
@@ -381,8 +382,9 @@
     <string name="scan_fp_message">Scan Fingerprint</string>
     <string name="scan_fp_message_instruction">To get your clients details, scan their fingerprint!</string>
     <string name="med_history">Medication History</string>
+    <string name="family_members">Family Members</string>
     <string name="family_no_medication_history">Family has no medication history</string>
-    <string name="addo_app_home">ADDO</string>
+    <string name="addo_app_home">ADDO HOME</string>
     <string name="return_to_addo_home">Return to home</string>
     <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
     <string name="fingerprint_identification_title">Find Clients</string>
@@ -410,4 +412,7 @@
     <string name="addo_other_village">Other Village</string>
     <string name="ask_client_village">Ask the client if they are from Kibaha, if they are, please select the location from the list below. If they are not in Kibaha, then do not use the system for this service.</string>
     <string name="add_select_village">Select client village</string>
+    <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
+    <string name="give_commodities_client_focus_profile">Give Commodities</string>
+    <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
 </resources>
