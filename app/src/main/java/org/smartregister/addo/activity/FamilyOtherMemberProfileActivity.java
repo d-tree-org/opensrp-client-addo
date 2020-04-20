@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -63,13 +62,11 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private String PhoneNumber;
     private CommonPersonObjectClient commonPersonObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
-    private TextView textViewFamilyHas, textViewDangersignScreening;
-    private RelativeLayout layoutFamilyHasRow;
+    private TextView textViewDangersignScreening;
     protected MemberObject memberObject;
     private FormUtils formUtils;
 
     private OnClickFloatingMenu onClickFloatingMenu;
-    //private FamilyOtherMemberProfileActivityFlv flavor = new FamilyOtherMemberProfileActivityFlv();
 
 
     @Override
@@ -139,12 +136,8 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         addContentView(familyFloatingMenu, linearLayoutParams);
 
         familyFloatingMenu.setClickListener(onClickFloatingMenu);
-        //textViewFamilyHas = findViewById(R.id.textview_family_has);
-        //layoutFamilyHasRow = findViewById(R.id.family_has_row);
 
         textViewDangersignScreening.setOnClickListener(this);
-
-        //layoutFamilyHasRow.setOnClickListener(this);
 
     }
 
@@ -175,20 +168,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         }
 
         getMenuInflater().inflate(R.menu.other_member_menu, menu);
-
-        //TODO : Flavour
-        /*if (flavor.showMalariaConfirmationMenu()) {
-            menu.findItem(R.id.action_malaria_registration).setVisible(false);
-        } else {
-            menu.findItem(R.id.action_malaria_registration).setVisible(false);
-        }
-
-        if (flavor.isWra(commonPersonObject)) {
-            menu.findItem(R.id.action_anc_registration).setVisible(true);
-        } else {
-            menu.findItem(R.id.action_anc_registration).setVisible(false);
-        }
-        */
 
         return true;
     }

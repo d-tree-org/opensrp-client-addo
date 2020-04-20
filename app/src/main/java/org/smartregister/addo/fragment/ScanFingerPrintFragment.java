@@ -73,7 +73,7 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
             @Override
             public void onChanged(String s) {
                 tvVillageSelected.setText(s);
-                SIMPRINTS_MODULE_ID = s;
+                SIMPRINTS_MODULE_ID = s.toLowerCase(); // Module id/ village name in lower case
             }
         });
 

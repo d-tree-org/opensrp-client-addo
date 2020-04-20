@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +22,7 @@ import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.view.activity.BaseProfileActivity;
+import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,6 +33,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private TextView detailTwoView;
     private TextView detailThreeView;
     private CircleImageView imageView;
+    private CustomFontTextView ctvScreeningMed, ctvCommodities, ctvDispense;
 
     private View familyHeadView;
     private View primaryCaregiverView;
@@ -88,6 +91,13 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         imageView = findViewById(R.id.imageview_profile);
         imageView.setBorderWidth(2);
+
+        ctvScreeningMed = findViewById(R.id.tv_focused_client_screening);
+        ctvScreeningMed.setOnClickListener(this);
+        ctvCommodities = findViewById(R.id.tv_focused_client_commodities);
+        ctvCommodities.setOnClickListener(this);
+        ctvDispense = findViewById(R.id.tv_focused_client_dispense);
+        ctvDispense.setOnClickListener(this);
     }
 
     @Override
@@ -167,5 +177,30 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void onResumption() {
         super.onResumption();
         presenter().refreshProfileView();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+
+            case R.id.tv_focused_client_screening:
+                Toast.makeText(this, "You clicked client screening", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_focused_client_commodities:
+                Toast.makeText(this, "Give your client the commodities they want", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_focused_client_dispense:
+                Toast.makeText(this, "Please dispense the medication now.", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                super.onClick(view);
+                break;
+
+        }
+
     }
 }
