@@ -328,7 +328,7 @@ description: Displaying the danger signs selected in the toaster message
 priority: 1
 condition: "true"
 actions:
-  - "calculation = ['danger_signs_captured': step2_danger_signs_captured, 'addo_actions': step2_addo_actions, 'addo_medication_to_give': step2_addo_medication_to_give, 'child_conditions':step2_child_conditions]"
+  - "calculation = ['danger_signs_captured': step2_danger_signs_captured, 'addo_actions': step2_addo_actions, 'addo_medication_to_give': step2_addo_medication_to_give, 'child_conditions':step2_child_conditions]" #Remove child condition this is just for testing
 
 ---
 name: step1_danger_signs_require_paracetamol_toaster
