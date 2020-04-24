@@ -1,0 +1,264 @@
+---
+name: step1_danger_signs_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_fever')) {
+            if (selected.isEmpty()) {
+                selected += 'Severe fever and shivering';
+            } else {
+                selected += ', Severe fever and shivering \n';
+            }
+
+        }
+        if (selectedItem.contains('chk_bleeding_vaginally')) {
+            if (selected.isEmpty()) {
+                selected += 'Vaginal bleeding';
+            } else {
+                selected += ', Vaginal bleeding';
+            }
+        }
+        if (selectedItem.contains('chk_server_headache')) {
+            if (selected.isEmpty()) {
+                selected += 'Severe headache';
+            } else {
+                selected += ', Severe headache';
+            }
+        }
+        if (selectedItem.contains('chk_blurred_vision')) {
+            if (selected.isEmpty()) {
+                selected += 'Blurred vision';
+            } else {
+                selected += ', Blurred vision';
+            }
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            if (selected.isEmpty()) {
+                selected += 'Convulsions/Seizures';
+            } else {
+                selected += ', Convulsions/Seizures';
+            }
+        }
+        if (selectedItem.contains('chk_difficulty_breathing')) {
+            if (selected.isEmpty()) {
+                selected += 'Difficulty breathing';
+            } else {
+                selected += ', Difficulty breathing';
+            }
+        }
+        if (selectedItem.contains('chk_severe_abdominal_pain')) {
+            if (selected.isEmpty()) {
+                selected += 'Severe abdominal pain';
+            } else {
+                selected += ', Severe abdominal pain';
+            }
+        }
+        if (selectedItem.contains('chk_loss_consciousness')) {
+            if (selected.isEmpty()) {
+                selected += 'Loss of consciousness';
+            } else {
+                selected += ', Loss of consciousness';
+            }
+        }
+        if (selectedItem.contains('chk_swelling')) {
+            if (selected.isEmpty()) {
+                selected += 'Swelling of the hands, face, and/or legs';
+            } else {
+                selected += ', Swelling of the hands, face, and/or legs';
+            }
+        }
+        if (selectedItem.contains('chk_early_labour')) {
+            if (selected.isEmpty()) {
+                selected += 'Early labour pains before 9 months';
+            } else {
+                selected += ', Early labour pains before 9 months';
+            }
+        }
+        if (selectedItem.contains('chk_vaginal_discharge')) {
+            if (selected.isEmpty()) {
+                selected += 'Foul smelling vaginal discharge';
+            } else {
+                selected += ', Foul smelling vaginal discharge';
+            }
+        }
+        if (selectedItem.contains('chk_unusual_movement')) {
+            if (selected.isEmpty()) {
+                selected += 'Less/no fetal movement';
+            } else {
+                selected += ', Less/no fetal movement';
+            }
+        }
+        if (selectedItem.contains('chk_water_broke')) {
+            if (selected.isEmpty()) {
+                selected += 'Water broke before 9 months';
+            } else {
+                selected += ', Water broke before 9 months';
+            }
+        }
+        if (selectedItem.contains('chk_vomiting')) {
+            if (selected.isEmpty()) {
+                selected += 'Vomiting';
+            } else {
+                selected += ', Vomiting';
+            }
+        }
+        if (selectedItem.contains('chk_anemia')) {
+            if (selected.isEmpty()) {
+                selected += 'Anemia demonstrated by paleness on the palms';
+            } else {
+                selected += ', Anemia demonstrated by paleness on the palms';
+            }
+        }
+        if (selectedItem.contains('chk_other')) {
+            if (selected.isEmpty()) {
+                selected += otherIllnesses;
+            } else {
+                selected += ', '+otherIllnesses;
+            }
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step1_danger_signs_present, step1_danger_sign_description) "
+---
+name: step1_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step1_danger_signs_captured]"
+---
+name: step1_danger_signs_captured_sw
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_fever')) {
+            if (selected.isEmpty()) {
+                selected += 'Homa';
+            } else {
+                selected += ', Homa \n';
+            }
+
+        }
+        if (selectedItem.contains('chk_bleeding_vaginally')) {
+            if (selected.isEmpty()) {
+                selected += 'Damu kutoka ukeni';
+            } else {
+                selected += ', Damu kutoka ukeni';
+            }
+        }
+        if (selectedItem.contains('chk_server_headache')) {
+            if (selected.isEmpty()) {
+                selected += 'Maumivu ya kichwa';
+            } else {
+                selected += ', Maumivu ya kichwa';
+            }
+        }
+        if (selectedItem.contains('chk_blurred_vision')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutoona vizuri';
+            } else {
+                selected += ', Kutoona vizuri';
+            }
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            if (selected.isEmpty()) {
+                selected += 'Degedege / Mtukutiko wa mwili';
+            } else {
+                selected += ', Degedege / Mtukutiko wa mwili';
+            }
+        }
+        if (selectedItem.contains('chk_difficulty_breathing')) {
+            if (selected.isEmpty()) {
+                selected += 'Kushindwa kupumua';
+            } else {
+                selected += ', Kushindwa kupumua';
+            }
+        }
+        if (selectedItem.contains('chk_severe_abdominal_pain')) {
+            if (selected.isEmpty()) {
+                selected += 'Maumivu makali ya tumbo';
+            } else {
+                selected += ', Maumivu makali ya tumbo';
+            }
+        }
+        if (selectedItem.contains('chk_loss_consciousness')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupoteza fahamu';
+            } else {
+                selected += ', Kupoteza fahamu';
+            }
+        }
+        if (selectedItem.contains('chk_swelling')) {
+            if (selected.isEmpty()) {
+                selected += 'Kuvimba uso na / au mikono';
+            } else {
+                selected += ', Kuvimba uso na / au mikono';
+            }
+        }
+        if (selectedItem.contains('chk_early_labour')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupata uchungu mapema kabla ya miezi tisa';
+            } else {
+                selected += ', Kupata uchungu mapema kabla ya miezi tisa';
+            }
+        }
+        if (selectedItem.contains('chk_vaginal_discharge')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
+            } else {
+                selected += ', Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
+            }
+        }
+        if (selectedItem.contains('chk_unusual_movement')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutocheza / kucheza kusiko kwa kawaida kwa mtoto aliye tumboni';
+            } else {
+                selected += ', Kutocheza / kucheza kusiko kwa kawaida kwa mtoto aliye tumboni';
+            }
+        }
+        if (selectedItem.contains('chk_water_broke')) {
+            if (selected.isEmpty()) {
+                selected += 'Maji kumwagika kabla ya miezi tisa';
+            } else {
+                selected += ', Maji kumwagika kabla ya miezi tisa';
+            }
+        }
+        if (selectedItem.contains('chk_vomiting')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutapika';
+            } else {
+                selected += ', Kutapika';
+            }
+        }
+        if (selectedItem.contains('chk_anemia')) {
+            if (selected.isEmpty()) {
+                selected += 'Anemia demonstrated by paleness on the palms';
+            } else {
+                selected += ', Anemia demonstrated by paleness on the palms';
+            }
+        }
+        if (selectedItem.contains('chk_other')) {
+            if (selected.isEmpty()) {
+                selected += otherIllnesses;
+            } else {
+                selected += ', '+otherIllnesses;
+            }
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step1_danger_signs_present, step1_danger_sign_description) "
+---
+name: step1_danger_signs_present_toaster_sw
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured_sw': step1_danger_signs_captured_sw]"

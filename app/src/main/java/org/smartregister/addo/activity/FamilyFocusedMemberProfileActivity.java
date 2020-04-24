@@ -1,5 +1,6 @@
 package org.smartregister.addo.activity;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -10,21 +11,34 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
+import org.smartregister.addo.dao.AncDao;
+import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.presenter.FamilyFocusedMemberProfileActivityPresenter;
+import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
+import org.smartregister.chw.anc.model.BaseAncHomeVisitAction;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.model.BaseFamilyProfileMemberModel;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
+import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
 
 public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity implements FamilyFocusedMemberProfileContract.View {
 
@@ -49,6 +63,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private CommonPersonObjectClient commonPersonObject;
     protected MemberObject memberObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
+
+    private FormUtils formUtils;
 
     @Override
     protected void onCreation() {
@@ -185,7 +201,15 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         switch (view.getId()){
 
             case R.id.tv_focused_client_screening:
-                Toast.makeText(this, "You clicked client screening", Toast.LENGTH_SHORT).show();
+                if (isChildClient()) {
+                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getChildAddoDangerSigns()));
+                } else if (isAncClient()) {
+                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAncAddoDangerSigns()));
+                } else if (isPncClient()) {
+                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getPncAddoDangerSigns()));
+                } else {
+                    Toast.makeText(this, "You clicked a client that is not in the focused group screening", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.tv_focused_client_commodities:
@@ -202,5 +226,69 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         }
 
+    }
+
+    private boolean isChildClient() {
+        String entityType = Utils.getValue(commonPersonObject.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
+        return entityType.equals(org.smartregister.addo.util.Constants.TABLE_NAME.CHILD);
+    }
+
+    private boolean isAncClient() {
+        return AncDao.isANCMember(baseEntityId);
+    }
+
+    private boolean isPncClient() {
+        return PNCDao.isPNCMember(baseEntityId);
+    }
+
+    public void startFormActivity(JSONObject jsonForm) {
+        Form form = new Form();
+        form.setActionBarBackground(org.smartregister.family.R.color.family_actionbar);
+        form.setWizard(false);
+
+        Intent intent = new Intent(this, ReferralWizardFormActivity.class);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+        intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
+    }
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(Utils.context().applicationContext());
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+        return formUtils;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON) {
+            try {
+
+                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+                JSONObject form = new JSONObject(jsonString);
+
+                // Here get the form and find out the values in the child_condition field or whatever defined use the information to open up a prescription
+                // form which will have a message with the conditions diagnosed and the corresponding medication required
+
+                BaseAncHomeVisitAction visitAction = new BaseAncHomeVisitAction.Builder(this, "Danger Signs")
+                        .withBaseEntityID(baseEntityId)
+                        .withDetails(null)
+                        .withFormName(org.smartregister.addo.util.Utils.getLocalForm("child_addo_danger_signs", CoreConstants.JSON_FORM.locale, CoreConstants.JSON_FORM.assetManager))
+                        .build();
+                // Here save the form for referral danger signs results
+
+                visitAction.setJsonPayload(jsonString);
+
+            } catch (JSONException | BaseAncHomeVisitAction.ValidationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
