@@ -1,0 +1,23 @@
+---
+name: step1_danger_signs_require_paracetamol_toaster
+description: Child has danger signs requires paracetamol before referral
+priority: 1
+condition: "step1_danger_signs_present_child.contains('chk_oversleeping') || step1_danger_signs_present_child.contains('chk_redness_around_umbilical') || step1_danger_signs_present_child.contains('chk_body_rashes') || step1_danger_signs_present_child.contains('chk_eye_discharge')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_danger_signs_present_toaster
+description: Child has danger signs, requires immediate referral
+priority: 1
+condition: "step1_danger_signs_present_child.contains('chk_difficult_drinking') || step1_danger_signs_present_child.contains('chk_difficult_breathing') || step1_danger_signs_present_child.contains('chk_chest_indrawing') || step1_danger_signs_present_child.contains('chk_convulsions') || step1_danger_signs_present_child.contains('chk_extreme_cold_or_hot') || step1_danger_signs_present_child.contains('chk_grunting_voice') || step1_danger_signs_present_child.contains('chk_not_getting_better') || step1_danger_signs_present_child.contains('chk_severe_vomit') || step1_danger_signs_present_child.contains('chk_weak')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_save_n_refer
+description: Child has danger signs, requires immediate referral
+priority: 1
+condition: "step1_child_conditions.contains('oversleeping_umbilica_rashes_puseyes') || step1_child_conditions.contains('general_conditions_for_referral') || step1_child_conditions.contains('malaria') || step1_child_conditions.contains('severe_malaria') || step1_child_conditions.contains('pneumonia') || step1_child_conditions.contains('severe_pneumonia') || step1_child_conditions.contains('diarrhea_without_blood') || step1_child_conditions.contains('bloody_diarrhea') || step1_child_conditions.contains('chronic_diarrhea')"
+actions:
+  - "isRelevant = true"
