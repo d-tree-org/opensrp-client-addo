@@ -243,8 +243,13 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     public void startFormActivity(JSONObject jsonForm) {
         Form form = new Form();
-        form.setActionBarBackground(org.smartregister.family.R.color.family_actionbar);
-        form.setWizard(false);
+        form.setName("Danger Sign Screening"); // Make it so that it is for Child, ANC or PNC
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setNavigationBackground(R.color.family_navigation);
+        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
+        form.setSaveLabel("FINISH");
+        form.setHideSaveLabel(true);
+        form.setWizard(true);
 
         Intent intent = new Intent(this, ReferralWizardFormActivity.class);
         intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());

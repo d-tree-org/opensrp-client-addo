@@ -7,7 +7,7 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_danger_signs_present_toaster
+name: step3_danger_signs_present_toaster
 description: Child has danger signs, requires immediate referral
 priority: 1
 condition: "step2_danger_signs_present_child.contains('chk_difficult_drinking') || step2_danger_signs_present_child.contains('chk_difficult_breathing') || step2_danger_signs_present_child.contains('chk_chest_indrawing') || step2_danger_signs_present_child.contains('chk_convulsions') || step2_danger_signs_present_child.contains('chk_extreme_cold_or_hot') || step2_danger_signs_present_child.contains('chk_grunting_voice') || step2_danger_signs_present_child.contains('chk_not_getting_better') || step2_danger_signs_present_child.contains('chk_severe_vomit') || step2_danger_signs_present_child.contains('chk_weak')"
@@ -15,7 +15,7 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_save_n_refer
+name: step3_save_n_refer
 description: Child has danger signs, requires immediate referral
 priority: 1
 condition: "step2_child_conditions.contains('oversleeping_umbilica_rashes_puseyes') || step2_child_conditions.contains('general_conditions_for_referral') || step2_child_conditions.contains('malaria') || step2_child_conditions.contains('severe_malaria') || step2_child_conditions.contains('pneumonia') || step2_child_conditions.contains('severe_pneumonia') || step2_child_conditions.contains('diarrhea_without_blood') || step2_child_conditions.contains('bloody_diarrhea') || step2_child_conditions.contains('chronic_diarrhea')"

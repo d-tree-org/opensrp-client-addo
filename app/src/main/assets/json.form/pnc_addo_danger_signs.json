@@ -1,7 +1,8 @@
 {
   "validate_on_submit": true,
   "show_errors_on_submit": true,
-  "count": "1",
+  "skip_blank_steps": true,
+  "count": "3",
   "encounter_type": "Danger signs - Mother",
   "entity_id": "",
   "metadata": {
@@ -49,7 +50,50 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Mother danger signs and minor illnesses",
+    "title": "Woman Present",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "ds_start_message",
+        "type": "label",
+        "text": "Screen and Dispense Medication",
+        "label_text_size": "18sp",
+        "label_text_style": "bold"
+      },
+      {
+        "key": "mother_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "check_box",
+        "exclusive": [
+          "chk_mother_present_yes"
+        ],
+        "label": "Is the postpartum woman present?",
+        "options": [
+          {
+            "key": "chk_mother_present_yes",
+            "text": "Yes",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "chk_mother_present_no",
+            "text": "No",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "Please indicate if the mother is present or not"
+        }
+      }
+    ]
+  },
+  "step2": {
+    "title": "Mother Danger Signs",
+    "next": "step3",
     "fields": [
       {
         "key": "danger_signs_present_mama",
@@ -150,17 +194,10 @@
           },
           {
             "key": "chk_urination",
-            "text": "Urinate a little or no urine",
+            "text": "Little/no urination",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "118982AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "chk_other",
-            "text": "Other",
-            "value": false,
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_none",
@@ -173,64 +210,13 @@
         "v_required": {
           "value": "true",
           "err": "Please pick at least one"
-        }
-      },
-      {
-        "key": "danger_signs_other",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "Describe the signs and symptoms of the illness",
-        "v_required": {
-          "value": "true",
-          "err": "Describe the signs and symptoms of the illness"
         },
         "relevance": {
-          "step1:danger_signs_present_mama": {
+          "step1:mother_present": {
             "ex-checkbox": [
               {
                 "or": [
-                  "chk_other"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "date_of_illness",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "1730AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "date_picker",
-        "hint": "Date mother started to be ill",
-        "label_info_text": "Date mother started to be ill",
-        "expanded": false,
-        "min_date": "today-1y",
-        "max_date": "today",
-        "v_required": {
-          "value": "true",
-          "err": "Please enter the date of illness"
-        },
-        "relevance": {
-          "step1:danger_signs_present_mama": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_fever",
-                  "chk_bleeding_vaginally",
-                  "chk_server_headache",
-                  "chk_convulsions",
-                  "chk_difficulty_breathing",
-                  "chk_severe_leg_pain",
-                  "chk_unusual_behaviour",
-                  "chk_swelling_of_breast",
-                  "chk_severe_abdominal_pain",
-                  "chk_vaginal_discharge",
-                  "chk_blurred_vision",
-                  "chk_loss_conscioueness",
-                  "chk_urination"
+                  "chk_mother_present_yes"
                 ]
               }
             ]
@@ -246,93 +232,8 @@
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "pnc_hv_danger_sign_calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "danger_signs_present_toaster",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "toaster_notes",
-        "text": "Danger sign! \nI have identified an urgent danger sign: {danger_signs_captured}. You need to go to the closest health facility immediately. It is important that you complete the referral. I will follow-up with you within 24 hours to check if you have completed your referral.",
-        "text_color": "#CF0800",
-        "toaster_type": "problem",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
               "rules-file": "pnc_addo_danger_signs_calculation.yml"
             }
-          }
-        },
-        "relevance": {
-          "step1:danger_signs_present_mama": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_fever",
-                  "chk_bleeding_vaginally",
-                  "chk_server_headache",
-                  "chk_convulsions",
-                  "chk_difficulty_breathing",
-                  "chk_severe_leg_pain",
-                  "chk_unusual_behaviour",
-                  "chk_swelling of breast",
-                  "chk_severe_abdominal_pain",
-                  "chk_vaginal_discharge",
-                  "chk_blurred_vision",
-                  "chk_loss_conscioueness",
-                  "chk_urination",
-                  "chk_other"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "spacer",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "spacer",
-        "type": "spacer",
-        "spacer_height": "20dp"
-      },
-      {
-        "key": "save_n_refer",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "button",
-        "hint": "Save and Refer to Health Facility",
-        "btn_bg_color": "#CF0800",
-        "action": {
-          "behaviour": "refer"
-        },
-        "relevance": {
-          "step1:danger_signs_present_mama": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_fever",
-                  "chk_bleeding_vaginally",
-                  "chk_server_headache",
-                  "chk_convulsions",
-                  "chk_difficulty_breathing",
-                  "chk_severe_leg_pain",
-                  "chk_unusual_behaviour",
-                  "chk_swelling of breast",
-                  "chk_severe_abdominal_pain",
-                  "chk_vaginal_discharge",
-                  "chk_blurred_vision",
-                  "chk_loss_conscioueness",
-                  "chk_urination",
-                  "chk_other"
-                ]
-              }
-            ]
           }
         }
       },
@@ -432,7 +333,7 @@
           "err": "Describe the other needs"
         },
         "relevance": {
-          "step1:minor_illness_present_mama": {
+          "step2:minor_illness_present_mama": {
             "ex-checkbox": [
               {
                 "or": [
@@ -459,7 +360,7 @@
           "err": "Please enter the date of illness"
         },
         "relevance": {
-          "step1:minor_illness_present_mama": {
+          "step2:minor_illness_present_mama": {
             "ex-checkbox": [
               {
                 "or": [
@@ -525,6 +426,96 @@
                   "chk_mild_fever",
                   "chk_refill_commodities",
                   "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "Mother Condition",
+    "fields": [
+      {
+        "key": "danger_signs_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Danger sign! \nI have identified an urgent danger sign: <br /> {danger_signs_captured} <br /> Refer to Health Facility and dispense over the counter medicine if needed based on the symptoms.",
+        "text_color": "#CF0800",
+        "toaster_type": "problem",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_calculation.yml"
+            }
+          }
+        },
+        "relevance": {
+          "step2:danger_signs_present_mama": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_fever",
+                  "chk_bleeding_vaginally",
+                  "chk_server_headache",
+                  "chk_convulsions",
+                  "chk_difficulty_breathing",
+                  "chk_severe_leg_pain",
+                  "chk_unusual_behaviour",
+                  "chk_swelling of breast",
+                  "chk_severe_abdominal_pain",
+                  "chk_vaginal_discharge",
+                  "chk_blurred_vision",
+                  "chk_loss_conscioueness",
+                  "chk_urination",
+                  "chk_other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save_n_refer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "Save and Refer to Health Facility",
+        "btn_bg_color": "#FF840952",
+        "action": {
+          "behaviour": "refer"
+        },
+        "relevance": {
+          "step2:danger_signs_present_mama": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_fever",
+                  "chk_bleeding_vaginally",
+                  "chk_server_headache",
+                  "chk_convulsions",
+                  "chk_difficulty_breathing",
+                  "chk_severe_leg_pain",
+                  "chk_unusual_behaviour",
+                  "chk_swelling of breast",
+                  "chk_severe_abdominal_pain",
+                  "chk_vaginal_discharge",
+                  "chk_blurred_vision",
+                  "chk_loss_conscioueness",
+                  "chk_urination",
+                  "chk_other"
                 ]
               }
             ]
