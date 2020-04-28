@@ -59,6 +59,47 @@ priority: 1
 condition: "true"
 actions:
   - "calculation = ['danger_signs_captured': step2_danger_signs_captured]"
+
+######################################### Minor Illnesses #########################################
+---
+name: step2_minor_illness_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_mild_pain')) {
+            selected += '\u2022 Mild pain anywhere in the body <br />';
+        }
+        if (selectedItem.contains('chk_mild_fever')) {
+
+            selected += '\u2022 Mild fever <br />';
+
+        }
+        if (selectedItem.contains('chk_cough')) {
+            selected += '\u2022 Cough <br />';
+        }
+        if (selectedItem.contains('chk_runny_nose')) {
+            selected += '\u2022 Runny nose/cold <br /> ';
+
+        }
+        if (selectedItem.contains('chk_sore_throat')) {
+            selected += '\u2022 Sore throat <br />';
+        }
+
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_minor_illness_present_mama) "
+
+---
+name: step3_minor_illness_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['minor_illness_captured': step2_minor_illness_captured]"
 ---
 name: step1_danger_signs_captured_sw
 description: Get the danger signs that were selected
