@@ -158,15 +158,11 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_family_details:
-
-                Toast.makeText(this, "Maybe show the family detils, medical history", Toast.LENGTH_SHORT).show();
-
-                break;
             case R.id.action_item1_placeholder:
-                Toast.makeText(this, "Item 1 Menu Placeholder", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.action_item2_placeholder:
-                Toast.makeText(this, "Item 2 Menu Placeholder", Toast.LENGTH_SHORT).show();
+
+                // TODO Add Menu Item here
+
                 break;
             default:
                 super.onOptionsItemSelected(item);
