@@ -305,62 +305,6 @@
             "openmrs_entity_id": ""
           },
           {
-            "key": "chk_cold_flu",
-            "text": "Runny nose/ Cold/ flu",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_sore_throat",
-            "text": "Sore throat",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_sneezing",
-            "text": "Sneezing",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_headache",
-            "text": "Headache",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_mild_diarrhea_without_blood",
-            "text": "Mild diarrhea without blood (less than 3 times in 24 hrs)",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_minor_skin_infections",
-            "text": "Minor skin infections",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_minor_wound_cuts",
-            "text": "Minor wounds or cuts",
-            "value": false,
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "chk_other",
-            "text": "Other",
-            "value": false,
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": ""
-          },
-          {
             "key": "chk_none",
             "text": "None",
             "value": false,
@@ -378,29 +322,6 @@
               {
                 "or": [
                   "chk_child_present_yes"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "other_illness_description",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "Describe the other needs",
-        "v_required": {
-          "value": "true",
-          "err": "Describe the other needs"
-        },
-        "relevance": {
-          "step2:danger_signs_present_child": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_other"
                 ]
               }
             ]
@@ -480,6 +401,164 @@
             ]
           }
         }
+      },
+      {
+        "key": "minor_illness_present_child",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Does the child have any of the following minor illnesses or needs?",
+        "label_text_style": "normal",
+        "text_color": "#C0C0C0",
+        "exclusive": [
+          "chk_none"
+        ],
+        "options": [
+          {
+            "key": "chk_cold_flu",
+            "text": "Running nose/ Cold/ flu",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_sore_throat",
+            "text": "Sore throat",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_sneezing",
+            "text": "Sneezing",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_headache",
+            "text": "Headache",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_mild_diarrhea_without_blood",
+            "text": "Mild diarrhea without blood (less than 3 times in 24 hrs)",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_minor_skin_infections",
+            "text": "Minor skin infections",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_minor_wound_cuts",
+            "text": "Minor wounds or cuts",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_other_needs",
+            "text": "Other",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_none",
+            "text": "None",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please pick at least one"
+        },
+        "relevance": {
+          "step2:danger_signs_present_child": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minorillness_description",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Describe the other needs",
+        "v_required": {
+          "value": "true",
+          "err": "Describe the other needs"
+        },
+        "relevance": {
+          "step2:minor_illness_present_child": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minor_illness_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "addo_actions_minor_condition",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "addo_meds_minor_condition",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
       }
     ]
   },
@@ -487,13 +566,48 @@
     "title": "Child Condition",
     "fields": [
       {
+        "key": "minor_illness_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The following minor illness(es) have been identified: <br /> {minor_illness_captured} {addo_actions_minor_condition} <br />Dispense:<br />{addo_meds_minor_condition}",
+        "text_color": "#CF0800",
+        "toaster_type": "problem",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        },
+        "relevance": {
+          "step2:minor_illness_present_child": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_cold_flu",
+                  "chk_sore_throat",
+                  "chk_sneezing",
+                  "chk_headache",
+                  "chk_mild_diarrhea_without_blood",
+                  "chk_minor_skin_infections",
+                  "chk_minor_wound_cuts",
+                  "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "danger_signs_present_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "<b>The following urgent danger sign(s) have been identified:</b> <br />{danger_signs_captured} {addo_actions} <br /> <b>Dispense:</b><br />{addo_medication_to_give} <br /> {child_conditions}",
-        "text_color": "#000000",
+        "text": "The following <b> urgent danger sign(s)</b> have been identified: <br />{danger_signs_captured} {addo_actions} <br />Dispense:<br />{addo_medication_to_give} <br /> {child_conditions}",
+        "text_color": "#CF0800",
         "toaster_type": "problem",
         "calculation": {
           "rules-engine": {
