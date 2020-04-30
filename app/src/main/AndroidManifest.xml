@@ -104,6 +104,7 @@
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ValidateIntentService" />
+        <service android:name="org.smartregister.sync.intent.SyncTaskIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
 
         <uses-library
