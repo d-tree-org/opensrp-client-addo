@@ -262,7 +262,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Does the mother have any of the following minor illnesses or needs?",
+        "label": "Assess the postpartum woman for the following minor illnesses:",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [

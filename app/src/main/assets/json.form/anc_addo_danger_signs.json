@@ -1,7 +1,8 @@
 {
   "validate_on_submit": true,
   "show_errors_on_submit": true,
-  "count": "2",
+  "skip_blank_steps": true,
+  "count": "3",
   "encounter_type": "ADDO Visit - Danger signs",
   "entity_id": "",
   "metadata": {
@@ -91,7 +92,8 @@
     ]
   },
   "step2": {
-    "title": "ANC Danger Signs Form",
+    "title": "Pregnant Woman Danger Signs",
+    "next": "step3",
     "fields": [
       {
         "key": "danger_signs_present",
@@ -250,13 +252,31 @@
         }
       },
       {
+        "key": "minor_illnesses_title",
+        "type": "label",
+        "text": "Minor Illnesses",
+        "label_text_size": "18sp",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "relevance": {
+          "step2:danger_signs_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "minor_illnesses",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Minor Illnesses",
-        "label_text_style": "bold",
+        "label": "Assess the pregnant woman for the following minor illnesses:",
         "text_color": "#000000",
         "exclusive": [
           "chk_none"
@@ -279,20 +299,28 @@
             "openmrs_entity_id": "136443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "chk_refill_medicine",
-            "text": "Refill of medicines such as Ferrous Sulphate, folic acid, and SP for IPTp",
+            "key": "chk_cough",
+            "text": "Cough",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "155052AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": ""
           },
           {
-            "key": "chk_refill_commodities",
-            "text": "Refill of other commodities such as antiseptics/soaps, delivery kit",
+            "key": "chk_runny_nose",
+            "text": "Runny nose/Cold",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "996AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_sore_throat",
+            "text": "Sore throat",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
           },
           {
             "key": "chk_other_needs",
@@ -349,13 +377,32 @@
         }
       },
       {
+        "key": "minor_illness_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "Pregnant Woman Condition",
+    "fields": [
+      {
         "key": "danger_signs_present_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
         "text": "Danger sign! <br /> The following urgent <b>danger sign(s)</b> have been identified: <br /> {danger_signs_captured} <br /> Refer the pregnant woman to the closest health facility. <br /> <b>Dispense</b> over the counter medicine if needed based on symptoms.",
-        "text_color": "#CF0800",
+        "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
           "rules-engine": {
@@ -384,31 +431,6 @@
                   "chk_water_broke",
                   "chk_vomiting",
                   "chk_anemia"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "minor_illness_present_toaster",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "toaster_notes",
-        "text": "Recommend that the client visits a nearby ADDO. Tell them that you'll follow up with them in 3 days.",
-        "text_color": "#FFC100",
-        "toaster_type": "warning",
-        "relevance": {
-          "step2:minor_illnesses": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_mild_pain",
-                  "chk_mild_fever",
-                  "chk_refill_medicine",
-                  "chk_refill_commodities",
-                  "chk_other_needs"
                 ]
               }
             ]
@@ -461,26 +483,53 @@
         }
       },
       {
-        "key": "save_n_link",
+        "key": "minor_illness_present_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "button",
-        "hint": "Save and Link to ADDO",
-        "btn_bg_color": "#CF0800",
-        "action": {
-          "behaviour": "link"
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The pregnant woman has the following illness(es): <br /> {minor_illness_captured} <br /> Manage as needed by dispensing over the counter medicine or commodity",
+        "text_color": "#101010",
+        "toaster_type": "warning",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:minor_illnesses": {
+          "step2:minor_illnesses": {
             "ex-checkbox": [
               {
                 "or": [
                   "chk_mild_pain",
                   "chk_mild_fever",
-                  "chk_refill_medicine",
-                  "chk_refill_commodities",
+                  "chk_cough",
+                  "chk_runny_nose",
+                  "chk_sore_throat",
                   "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "no_illness_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The pregnant woman does not have any illness please proceed as needed by dispensing over the counter medicine or commodity",
+        "text_color": "#101010",
+        "toaster_type": "positive",
+        "relevance": {
+          "step2:minor_illnesses": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
                 ]
               }
             ]
@@ -494,7 +543,7 @@
         "openmrs_entity_id": "",
         "type": "toaster_notes",
         "text": "The pregnant woman must be present in order to proceed with screening.",
-        "text_color": "#CF0800",
+        "text_color": "#000000",
         "toaster_type": "problem",
         "relevance": {
           "step1:pregnant_woman_present": {
