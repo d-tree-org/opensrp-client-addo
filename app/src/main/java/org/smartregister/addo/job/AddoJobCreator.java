@@ -6,13 +6,11 @@ import androidx.annotation.Nullable;
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 
-import org.smartregister.addo.sync.AddoSyncTaskIntentService;
 import org.smartregister.job.ExtendedSyncServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.P2pServiceJob;
 import org.smartregister.job.PullUniqueIdsServiceJob;
 import org.smartregister.job.SyncServiceJob;
-import org.smartregister.job.SyncTaskServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
 import org.smartregister.sync.intent.SyncIntentService;
 
@@ -29,8 +27,6 @@ public class AddoJobCreator implements JobCreator {
         switch (tag) {
             case SyncServiceJob.TAG:
                 return new SyncServiceJob(SyncIntentService.class);
-            case SyncTaskServiceJob.TAG:
-                return new SyncTaskServiceJob(AddoSyncTaskIntentService.class);
             case ExtendedSyncServiceJob.TAG:
                 return new ExtendedSyncServiceJob();
             case PullUniqueIdsServiceJob.TAG:
@@ -41,6 +37,8 @@ public class AddoJobCreator implements JobCreator {
                 return new ImageUploadServiceJob();
             case P2pServiceJob.TAG:
                 return new P2pServiceJob();
+            case AddoTaskServiceJob.TAG:
+                return new AddoTaskServiceJob();
             default:
                 Timber.d( "Looks like you tried to create a job " + tag + " that is not declared in the Chw Job Creator");
                 return null;
