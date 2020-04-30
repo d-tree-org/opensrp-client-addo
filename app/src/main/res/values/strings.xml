@@ -398,11 +398,10 @@
 
     <string name="first_name_hint">First Name</string>
     <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="last_name_hint">Last Name</string>
+    <string name="search_name">Enter first name or last name</string>
+    <string name="search_name_hint">Enter first name or last name</string>
 
     <string name="search">Search</string>
-    <string name="advanced_search">Advanced Search</string>
 
     <string name="matching_results">%1$s matching results found.</string>
 
