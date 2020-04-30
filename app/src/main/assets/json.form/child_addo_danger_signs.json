@@ -464,20 +464,16 @@
         }
       },
       {
-        "key": "minor_illnesses_title",
-        "type": "label",
-        "text": "Child Minor Illnesses",
-        "label_text_size": "18sp",
-        "label_text_style": "bold",
-        "relevance": {
-          "step2:danger_signs_present_child": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "chk_none"
-                ]
-              }
-            ]
+        "key": "condition_urgency",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
           }
         }
       }
@@ -492,7 +488,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "<b>The following urgent danger sign(s) have been identified:</b> <br />{danger_signs_captured} {addo_actions} <br /> <b>Dispense:</b><br />{addo_medication_to_give} <br /> {child_conditions}",
+        "text": "<b>The child has the following {condition_urgency}:</b> <br />{danger_signs_captured} {addo_actions} <br /> <b>Dispense</b> {addo_medication_to_give} <br /> {child_conditions}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
@@ -544,6 +540,9 @@
                   "chk_excessive_crying_discomfort",
                   "chk_no_movement",
                   "chk_jaundiced",
+                  "chk_mild_diarrhea_without_blood",
+                  "chk_minor_skin_infections",
+                  "chk_minor_wound_cuts",
                   "chk_other"
                 ]
               }
