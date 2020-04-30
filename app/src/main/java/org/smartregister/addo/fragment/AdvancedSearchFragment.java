@@ -275,11 +275,15 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             hideProgressView();
             listMode = true;
         } else {
+            if(clientsView.getVisibility() == View.INVISIBLE) {
+                ((BaseRegisterActivity) getActivity()).switchToFragment(0);
+                return;
+            }
+
             clearSearchCriteria();
             advancedSearchForm.setVisibility(View.VISIBLE);
             listViewLayout.setVisibility(View.GONE);
             clientsView.setVisibility(View.INVISIBLE);
-            backButton.setVisibility(View.GONE);
             searchButton.setVisibility(View.VISIBLE);
             advancedSearchToolbarSearchButton.setVisibility(View.VISIBLE);
 
@@ -303,7 +307,7 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         if (listMode) {
             switchViews(false);
         } else {
-            ((BaseRegisterActivity) getActivity()).switchToBaseFragment();
+            ((BaseRegisterActivity) getActivity()).switchToFragment(0);
         }
     }
 }
