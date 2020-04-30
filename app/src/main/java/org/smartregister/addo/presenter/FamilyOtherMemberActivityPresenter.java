@@ -48,34 +48,6 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
         verifyHasPhone();
         //initializeServiceStatus();
     }
-/**
-    private void initializeServiceStatus() {
-        FamilyInteractor.updateFamilyDueStatus(viewReference.get().getContext(), "", familyBaseEntityId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Timber.v(TAG, "initializeServiceStatus onSubscribe");
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        updateFamilyMemberServiceDue(s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e("initializeServiceStatus " + e.toString());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Timber.v("initializeServiceStatus onComplete");
-                    }
-                });
-    }
-**/
 
     public String getFamilyBaseEntityId() {
         return familyBaseEntityId;
@@ -139,27 +111,17 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
         ((FamilyProfileInteractor) profileInteractor).verifyHasPhone(familyBaseEntityId, this);
     }
 
+    @Override
+    public void notifyHasPhone(boolean hasPhone) {
+
+    }
+
     public FamilyOtherMemberProfileExtendedContract.View getView() {
         if (viewReference != null) {
             return viewReference.get();
         } else {
             return null;
         }
-    }
-
-    @Override
-    public void notifyHasPhone(boolean hasPhone) {
-        if (viewReference.get() != null) {
-            viewReference.get().updateHasPhone(hasPhone);
-        }
-    }
-
-    @Override
-    public void updateFamilyMemberServiceDue(String serviceDueStatus) {
-        if (getView() != null) {
-            getView().setFamilyServiceStatus(serviceDueStatus);
-        }
-
     }
 
 }

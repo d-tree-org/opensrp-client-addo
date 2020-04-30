@@ -55,6 +55,55 @@
         <item name="rbd_strokeColor">@drawable/advanced_search_rdb_stoke_color_list</item>
     </style>
 
+    <style name="returnToSelectVil">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="selectClientVillag">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="askTheClientIfTh">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingMultiplier">1.18</item>
+    </style>
+
+    <style name="scanFingerprint">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="arafaMwendapole">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="scanFingerprintBtn">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingMultiplier">1.18</item>
+    </style>
+
+    <style name="selectThePersonTo">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

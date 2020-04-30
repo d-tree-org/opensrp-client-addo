@@ -4,6 +4,7 @@ package org.smartregister.addo.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,16 +27,20 @@ import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyProfileExtendedContract;
 import org.smartregister.addo.custom_views.FamilyFloatingMenu;
+import org.smartregister.addo.dao.AncDao;
+import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.event.PermissionEvent;
 import org.smartregister.addo.fragment.FamilyProfileActivityFragment;
 import org.smartregister.addo.fragment.FamilyProfileMemberFragment;
 import org.smartregister.addo.listeners.FloatingMenuListener;
 import org.smartregister.addo.model.FamilyProfileModel;
 import org.smartregister.addo.presenter.FamilyProfilePresenter;
+import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.activity.BaseFamilyProfileActivity;
 import org.smartregister.family.adapter.ViewPagerAdapter;
-import org.smartregister.family.fragment.BaseFamilyProfileActivityFragment;
 import org.smartregister.family.fragment.BaseFamilyProfileMemberFragment;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.JsonFormUtils;
@@ -116,11 +122,11 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
 
         BaseFamilyProfileMemberFragment profileMemberFragment = FamilyProfileMemberFragment.newInstance(this.getIntent().getExtras());
         //BaseFamilyProfileDueFragment profileDueFragment = FamilyProfileDueFragment.newInstance(this.getIntent().getExtras());
-        BaseFamilyProfileActivityFragment profileActivityFragment = FamilyProfileActivityFragment.newInstance(this.getIntent().getExtras());
+        //BaseFamilyProfileActivityFragment profileActivityFragment = FamilyProfileActivityFragment.newInstance(this.getIntent().getExtras());
 
-        adapter.addFragment(profileMemberFragment, this.getString(org.smartregister.family.R.string.member).toUpperCase());
+        adapter.addFragment(profileMemberFragment, this.getString(R.string.family_members).toUpperCase());
         //adapter.addFragment(profileDueFragment, this.getString(org.smartregister.family.R.string.due).toUpperCase());
-        adapter.addFragment(profileActivityFragment, this.getString(R.string.med_history).toUpperCase());
+        //adapter.addFragment(profileActivityFragment, this.getString(R.string.med_history).toUpperCase());
 
         viewPager.setAdapter(adapter);
 
@@ -140,7 +146,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
             addMember.setVisible(false);
         }
 
-        getMenuInflater().inflate(R.menu.profile_menu, menu);
+        //Menu items for the family members profile
+        getMenuInflater().inflate(R.menu.addo_family_profile_menu, menu);
 
         return true;
     }
@@ -151,35 +158,11 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_family_details:
+            case R.id.action_item1_placeholder:
+            case R.id.action_item2_placeholder:
 
-                startFormForEdit();
+                // TODO Add Menu Item here
 
-                break;
-            case R.id.action_remove_member:
-                /**
-                Intent frm_intent = new Intent(this, FamilyRemoveMemberActivity.class);
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, getFamilyBaseEntityId());
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.FAMILY_HEAD, familyHead);
-                frm_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.PRIMARY_CAREGIVER, primaryCaregiver);
-                startActivityForResult(frm_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-                 **/
-                break;
-            case R.id.action_change_head:
-/**
-                Intent fh_intent = new Intent(this, FamilyProfileMenuActivity.class);
-                fh_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.BASE_ENTITY_ID, getFamilyBaseEntityId());
-                fh_intent.putExtra(FamilyProfileMenuActivity.MENU, org.smartregister.chw.util.Constants.MenuType.ChangeHead);
-                startActivityForResult(fh_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-**/
-                break;
-            case R.id.action_change_care_giver:
-/**
-
-                Intent pc_intent = new Intent(this, FamilyProfileMenuActivity.class);
-                pc_intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.BASE_ENTITY_ID, getFamilyBaseEntityId());
-                pc_intent.putExtra(FamilyProfileMenuActivity.MENU, org.smartregister.chw.util.Constants.MenuType.ChangePrimaryCare);
-                startActivityForResult(pc_intent, org.smartregister.chw.util.Constants.ProfileActivityResults.CHANGE_COMPLETED);
-**/
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -381,6 +364,14 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         }
     }
 
+    public String getPrimaryCaregiver() {
+        return primaryCaregiver;
+    }
+
+    public String getFamilyHead(){
+        return this.familyHead;
+    }
+
     public void setFamilyHead(String head) {
         if (StringUtils.isNotBlank(head)) {
             this.familyHead = head;
@@ -391,5 +382,53 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
     @Override
     public FamilyProfileExtendedContract.Presenter presenter() {
         return (FamilyProfilePresenter) presenter;
+    }
+
+    public void goToProfileActivity(View view, Bundle fragmentArguments) {
+        if (view.getTag() instanceof CommonPersonObjectClient) {
+            CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
+            String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
+            if (CoreConstants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
+                if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()))) {
+                    goToOtherMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+                } else {
+                    goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+                }
+            } else {
+                goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+            }
+        }
+    }
+
+    private void goToFocusMemberProfileActivity(CommonPersonObjectClient patient, Bundle fragmentArguments) {
+        Intent intent = new Intent(this, FamilyFocusedMemberProfileActivity.class);
+        if (fragmentArguments != null) {
+            intent.putExtras(fragmentArguments);
+        }
+        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
+        intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
+        intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
+        intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        startActivity(intent);
+    }
+
+    public void goToOtherMemberProfileActivity(CommonPersonObjectClient patient, Bundle fragmentArguments) {
+        Intent intent = new Intent(this, FamilyOtherMemberProfileActivity.class);
+        if (fragmentArguments != null) {
+            intent.putExtras(fragmentArguments);
+        }
+        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
+        intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
+        intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
+        intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        startActivity(intent);
+    }
+
+    private boolean isPncMember(String entityId) {
+        return PNCDao.isPNCMember(entityId);
+    }
+
+    private boolean isAncMember(String entityId) {
+        return AncDao.isANCMember(entityId);
     }
 }

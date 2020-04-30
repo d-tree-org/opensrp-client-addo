@@ -7,6 +7,7 @@ import org.smartregister.addo.R;
 import org.smartregister.addo.activity.AboveFiveChildProfileActivity;
 import org.smartregister.addo.activity.ChildProfileActivity;
 import org.smartregister.addo.activity.FamilyOtherMemberProfileActivity;
+import org.smartregister.addo.activity.FamilyProfileActivity;
 import org.smartregister.addo.model.FamilyProfileMemberModel;
 import org.smartregister.addo.provider.AddoMemberRegisterProvider;
 import org.smartregister.addo.util.ChildDBConstants;
@@ -21,6 +22,7 @@ import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.DBConstants;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -63,12 +65,12 @@ public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment
         switch (view.getId()) {
             case R.id.patient_column:
                 if (view.getTag() != null && view.getTag(org.smartregister.family.R.id.VIEW_ID) == CLICK_VIEW_NORMAL) {
-                    goToProfileActivity(view);
+                    ((FamilyProfileActivity) Objects.requireNonNull(getActivity())).goToProfileActivity(view, getArguments());
                 }
                 break;
             case R.id.next_arrow:
                 if (view.getTag() != null && view.getTag(org.smartregister.family.R.id.VIEW_ID) == CLICK_VIEW_NEXT_ARROW) {
-                    goToProfileActivity(view);
+                    ((FamilyProfileActivity) Objects.requireNonNull(getActivity())).goToProfileActivity(view, getArguments());
                 }
             default:
                 break;

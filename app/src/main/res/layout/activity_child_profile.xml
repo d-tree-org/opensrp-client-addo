@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/collapsing_toolbar"
                 android:background="@color/addo_primary"
                 android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:contentInsetLeft="0dp"
                 android:contentInsetEnd="0dp"
                 android:contentInsetRight="0dp"
-                android:theme="@style/FamilyTheme.AppBarOverlay.Light"
+                android:theme="@style/FamilyTheme.AppBarOverlay"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
@@ -45,7 +45,7 @@
                     android:textColor="@color/white"
                     android:textSize="17sp" />
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
                 android:id="@+id/profile_name_layout"

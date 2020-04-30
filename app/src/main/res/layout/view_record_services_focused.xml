@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/record_visit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/tv_focused_client_screening"
+        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/addo_btn_selector_client_profile"
+        android:gravity="center"
+        android:text="@string/addo_profile_other_screening"
+        android:textAllCaps="false"
+        android:textColor="@color/addo_primary" />
+
+    <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/tv_focused_client_commodities"
+        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/addo_btn_selector_client_profile"
+        android:gravity="center"
+        android:text="@string/give_commodities_client_focus_profile"
+        android:textColor="@color/addo_primary" />
+
+    <org.smartregister.view.customcontrols.CustomFontTextView
+        android:id="@+id/tv_focused_client_dispense"
+        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/addo_btn_selector_client_profile"
+        android:gravity="center"
+        android:layout_marginEnd="17dp"
+        android:text="@string/focused_client_profile_dispense"
+        android:textColor="@color/addo_primary" />
+
+    <View
+        android:id="@+id/view_record"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:background="@color/light_grey" />
+
+
+</LinearLayout>

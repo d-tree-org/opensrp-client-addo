@@ -1,17 +1,21 @@
 package org.smartregister.addo.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import org.smartregister.addo.BuildConfig;
+import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
+import org.smartregister.addo.fragment.AddoHomeFragment;
 import org.smartregister.addo.fragment.AdvancedSearchFragment;
-import org.smartregister.addo.fragment.FamilyRegisterFragment;
+import org.smartregister.addo.fragment.ScanFingerPrintFragment;
 import org.smartregister.addo.listeners.FamilyRegisterBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
@@ -29,12 +33,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     private String sessionId = null;
     private WeakReference<AdvancedSearchFragment> advancedSearchFragmentWR;
 
-
-    public void startFamilyRegisterForm(){
-        Intent intent = new Intent(this, AddoHomeActivity.class);
-        intent.putExtra(Constants.ACTIVITY_PAYLOAD.ACTION, Constants.ACTION.START_REGISTRATION);
-        startActivity(intent);
-    }
 
     public void startSimprintsId(){
 
@@ -63,7 +61,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new FamilyRegisterFragment();
+        return new AddoHomeFragment();
     }
 
     /*@Override
@@ -74,8 +72,9 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     @Override
     protected Fragment[] getOtherFragments() {
 
-        Fragment[] fragments = new Fragment[1];
+        Fragment[] fragments = new Fragment[2];
         fragments[0] = new AdvancedSearchFragment();
+        fragments[1] = new ScanFingerPrintFragment();
 
         return fragments;
     }
@@ -105,6 +104,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
+        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
         FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
@@ -116,6 +116,22 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             if (navigationMenu != null) {
                 //navigationMenu.startP2PActivity(this);
             }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Inner Class //////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static class AddoHomeSharedViewModel extends ViewModel {
+        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
+
+        public AddoHomeSharedViewModel() {}
+
+        public void setSelectedVillage(String village) {
+            selectedVillage.setValue(village);
+        }
+
+        public LiveData<String> getSelectedVillage() {
+            return selectedVillage;
         }
     }
 }
