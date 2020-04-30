@@ -12,14 +12,14 @@ actions:
         }
         if (selectedItem.contains('chk_bleeding_vaginally')) {
 
-            selected += '\u2022 Severe vaginal bleeding <br />';
+            selected += '\u2022 Severe vaginal bleeding, non-stop bleeding (using one pad every 5 minutes) <br />';
 
         }
         if (selectedItem.contains('chk_server_headache')) {
             selected += '\u2022 Headache/Dizziness <br />';
         }
         if (selectedItem.contains('chk_convulsions')) {
-            selected += '\u2022 Unconscious/Seizure <br /> ';
+            selected += '\u2022 Seizures/Convulsions <br /> ';
 
         }
         if (selectedItem.contains('chk_difficulty_breathing')) {
@@ -32,7 +32,7 @@ actions:
            selected += '\u2022 Abnormal behaviour (stress, confusion) <br />';
         }
         if (selectedItem.contains('chk_swelling_of_breast')) {
-           selected += '\u2022 Breast engorgement <br />';
+           selected += '\u2022 Pain due to breast engorgement <br />';
         }
         if (selectedItem.contains('chk_severe_abdominal_pain')) {
            selected += '\u2022 Severe abdominal pain <br />';
@@ -47,7 +47,7 @@ actions:
            selected += '\u2022 Loss of consciousness <br />';
         }
         if (selectedItem.contains('chk_urination')) {
-           selected += '\u2022 Urinate a little or no urine <br />';
+           selected += '\u2022 Little/no urination <br />';
         }
         return selected;
   }"
@@ -67,11 +67,11 @@ description: Get the danger signs that were selected
 priority: 1
 condition: "true"
 actions:
-  - "def getSelectedDS(selectedItem) {
+  - "def getSelectedDS(selectedItem, otherIllness) {
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('chk_mild_pain')) {
-            selected += '\u2022 Mild pain anywhere in the body <br />';
+            selected += '\u2022 Mild pain in the body <br />';
         }
         if (selectedItem.contains('chk_mild_fever')) {
 
@@ -89,9 +89,13 @@ actions:
             selected += '\u2022 Sore throat <br />';
         }
 
+        if (selectedItem.contains('chk_other_needs')) {
+            selected += '\u2022' + otherIllness + '<br />';
+        }
+
         return selected;
   }"
-  - "calculation = getSelectedDS(step2_minor_illness_present_mama) "
+  - "calculation = getSelectedDS(step2_minor_illness_present_mama, step2_minorillness_description) "
 
 ---
 name: step3_minor_illness_present_toaster
