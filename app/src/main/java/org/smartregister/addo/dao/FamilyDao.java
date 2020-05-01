@@ -1,13 +1,19 @@
 package org.smartregister.addo.dao;
 
+import android.database.Cursor;
 import android.util.Pair;
 
+import org.smartregister.addo.application.AddoApplication;
+import org.smartregister.addo.domain.Entity;
 import org.smartregister.dao.AbstractDao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import timber.log.Timber;
 
 public class FamilyDao extends AbstractDao {
 
@@ -91,5 +97,39 @@ public class FamilyDao extends AbstractDao {
             return false;
 
         return res.get(0) > 0;
+    }
+
+    public static List<Entity> search(String searchText) {
+        Cursor cursor = null;
+        List<Entity> entitySet = new ArrayList<>();
+        try {
+            String query = String.format("SELECT * FROM ec_family_member WHERE first_name LIKE '%%%s%%' " +
+                    "OR middle_name LIKE '%%%s%%' OR last_name LIKE '%%%s%%'", searchText, searchText, searchText);
+            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query,
+                    new String[]{});
+            while (cursor.moveToNext()) {
+                Entity entity = readCursor(cursor);
+                entitySet.add(entity);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return entitySet;
+    }
+
+    private static Entity readCursor(Cursor cursor) {
+        Entity entity = new Entity();
+
+        entity.setBaseEntityId(cursor.getString(cursor.getColumnIndex("base_entity_id")));
+        entity.setFirstName(cursor.getString(cursor.getColumnIndex("first_name")));
+        entity.setMiddleName(cursor.getString(cursor.getColumnIndex("middle_name")));
+        entity.setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
+        entity.setGender(cursor.getString(cursor.getColumnIndex("gender")));
+        entity.setFamilyId(cursor.getString(cursor.getColumnIndex("relational_id")));
+
+        return entity;
     }
 }

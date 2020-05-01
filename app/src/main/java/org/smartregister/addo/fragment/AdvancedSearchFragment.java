@@ -42,12 +42,9 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private ImageButton backButton;
     private Button searchButton;
     private Button advancedSearchToolbarSearchButton;
-    private RadioButton outsideInside;
-    private RadioButton myCatchment;
     private TextView searchCriteria;
     private TextView matchingResults;
-    private MaterialEditText firstName;
-    private MaterialEditText lastName;
+    private MaterialEditText searchName;
     private boolean isLocal = false;
     private boolean listMode = false;
 
@@ -112,11 +109,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         matchingResults = view.findViewById(R.id.matching_results);
         advancedSearchToolbarSearchButton = view.findViewById(R.id.search);
         searchButton = view.findViewById(R.id.advanced_form_search_btn);
-        outsideInside = view.findViewById(R.id.out_and_inside);
-        myCatchment = view.findViewById(R.id.my_catchment);
 
-
-        populateFormViews(view);
+        setUpSearchButtons();
 
         populateSearchableFields(view);
 
@@ -124,29 +118,12 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
 
     }
 
-    protected void populateFormViews(View view) {
-
-        setUpSearchButtons();
-
-        setUpMyCatchmentControls(view, outsideInside, myCatchment, R.id.out_and_inside_layout);
-
-        setUpMyCatchmentControls(view, myCatchment, outsideInside, R.id.my_catchment_layout);
-
-        setUpMyCatchmentControls(view, myCatchment, outsideInside, R.id.my_catchment_layout);
-    }
-
-
     public void populateSearchableFields(View view) {
 
-        firstName = view.findViewById(R.id.first_name);
-        firstName.addTextChangedListener(advancedSearchTextwatcher);
+        searchName = view.findViewById(R.id.search_name);
+        searchName.addTextChangedListener(advancedSearchTextwatcher);
 
-        lastName = view.findViewById(R.id.last_name);
-        lastName.addTextChangedListener(advancedSearchTextwatcher);
-
-
-        advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, firstName);
-        advancedFormSearchableFields.put(Constants.DB.LAST_NAME, lastName);
+        advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, searchName);
     }
 
     private void resetForm() {
@@ -176,13 +153,6 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         }
     }
 
-    public void updateSearchCriteria(String searchCriteriaString) {
-        if (searchCriteria != null) {
-            searchCriteria.setText(Html.fromHtml(searchCriteriaString));
-            searchCriteria.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void setUpSearchButtons() {
         advancedSearchToolbarSearchButton.setEnabled(false);
         advancedSearchToolbarSearchButton.setTextColor(getResources().getColor(R.color.contact_complete_grey_border));
@@ -194,29 +164,6 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         searchButton.setOnClickListener(registerActionHandler);
     }
 
-    private void setUpMyCatchmentControls(View view, final RadioButton myCatchment,
-                                          final RadioButton outsideInside, int p) {
-        myCatchment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!Utils.isConnectedToNetwork(getActivity())) {
-                    myCatchment.setChecked(true);
-                    outsideInside.setChecked(false);
-                } else {
-                    outsideInside.setChecked(!isChecked);
-                }
-            }
-        });
-
-        View myCatchmentLayout = view.findViewById(p);
-        myCatchmentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myCatchment.toggle();
-            }
-        });
-    }
-
     private boolean anySearchableFieldHasValue() {
 
         for (Map.Entry<String, View> entry : advancedFormSearchableFields.entrySet()) {
@@ -224,8 +171,6 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             if (entry.getValue() instanceof TextView && !TextUtils.isEmpty(((TextView) entry.getValue()).getText())) {
                 return true;
             }
-
-
         }
         return false;
 
@@ -235,7 +180,6 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         if (anySearchableFieldHasValue()) {
             advancedSearchToolbarSearchButton.setEnabled(true);
             advancedSearchToolbarSearchButton.setTextColor(getResources().getColor(R.color.white));
-
 
             searchButton.setEnabled(true);
             searchButton.setTextColor(getResources().getColor(R.color.white));
@@ -282,10 +226,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     public void onViewClicked(View view) {
         if (view.getId() == R.id.search) {
             search();
-            //Toast.makeText(getContext(), "Search", Toast.LENGTH_LONG).show();
         } else if (view.getId() == R.id.advanced_form_search_btn) {
             search();
-            //Toast.makeText(getContext(), "Search", Toast.LENGTH_LONG).show();
         } else if (view.getId() == R.id.back_button) {
             switchViews(false);
         }
@@ -293,34 +235,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
 
     private void search() {
         showProgressView();
-        if (myCatchment.isChecked()) {
-            isLocal = true;
-        } else if (outsideInside.isChecked()) {
-            isLocal = false;
-        }
 
-        Map<String, String> editMap = getSearchMap(!isLocal);
-
-        ((AdvancedSearchContract.Presenter) presenter).search(editMap, isLocal);
-    }
-
-    protected Map<String, String> getSearchMap(boolean outOfArea) {
-
-        Map<String, String> searchParams = new HashMap<>();
-
-
-        String fn = firstName.getText().toString();
-        String ln = lastName.getText().toString();
-
-        if (!TextUtils.isEmpty(fn)) {
-            searchParams.put(Constants.DB.FIRST_NAME, fn);
-        }
-
-        if (!TextUtils.isEmpty(ln)) {
-            searchParams.put(Constants.DB.LAST_NAME, ln);
-        }
-
-        return searchParams;
+        ((AdvancedSearchContract.Presenter) presenter).search(searchName.getText().toString());
     }
 
     @Override
@@ -359,16 +275,20 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             hideProgressView();
             listMode = true;
         } else {
+            if(clientsView.getVisibility() == View.INVISIBLE) {
+                ((BaseRegisterActivity) getActivity()).switchToFragment(0);
+                return;
+            }
+
             clearSearchCriteria();
             advancedSearchForm.setVisibility(View.VISIBLE);
             listViewLayout.setVisibility(View.GONE);
             clientsView.setVisibility(View.INVISIBLE);
-            backButton.setVisibility(View.GONE);
             searchButton.setVisibility(View.VISIBLE);
             advancedSearchToolbarSearchButton.setVisibility(View.VISIBLE);
 
             if (titleLabelView != null) {
-                titleLabelView.setText(getString(R.string.advanced_search));
+                titleLabelView.setText(getString(R.string.search));
             }
 
 
@@ -387,7 +307,7 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         if (listMode) {
             switchViews(false);
         } else {
-            ((BaseRegisterActivity) getActivity()).switchToBaseFragment();
+            ((BaseRegisterActivity) getActivity()).switchToFragment(0);
         }
     }
 }

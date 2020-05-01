@@ -2,14 +2,6 @@ package org.smartregister.addo.presenter;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.contract.AdvancedSearchContract;
 import org.smartregister.addo.domain.Entity;
@@ -18,7 +10,6 @@ import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
-import org.smartregister.domain.Response;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract.Presenter;
 import org.smartregister.family.util.DBConstants;
@@ -26,10 +17,7 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Type;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -115,28 +103,13 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
         return null;
     }
 
-    public void search(Map<String, String> searchMap, boolean isLocal) {
-        Log.d("Search", "searching in presenter: "  + searchMap.toString());
-        interactor.search(searchMap, this);
+    public void search(String searchText) {
+        Log.d("Search", "searching in presenter: "  + searchText);
+        interactor.search(searchText, this);
     }
 
-    public void onResultsFound(Response<String> response) {
-        Log.d("Results", response.payload());
-
-        //To do: convert payload to Family member
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                return new Date(json.getAsJsonPrimitive().getAsLong());
-            }
-        });
-        Gson gson = builder.create();
-
-        List<Entity> members = gson.fromJson(response.payload(), new TypeToken<List<Entity>>() {
-        }.getType());
-
+    public void onResultsFound(List<Entity> members) {
         System.out.println("Member size: " + members.size());
-        System.out.println(members.get(0));
 
         getView().showResults(members);
     }
