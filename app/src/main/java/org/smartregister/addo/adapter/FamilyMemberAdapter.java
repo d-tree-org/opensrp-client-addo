@@ -17,7 +17,6 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 
 import java.util.List;
-import java.util.Map;
 
 public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
 
@@ -50,27 +49,22 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> res  = member.getRelationships();
-                List<String> families = (List<String>) res.get("family");
-                if (families.size()>0) {
-                    String familyId = families.get(0);
-                    Log.d("Family", familyId);
-                    CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
-                            .findByCaseID(familyId);
-                    Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
-                    intent.putExtra("family_base_entity_id", patient.getCaseId());
-                    intent.putExtra("family_head",
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
-                    intent.putExtra("primary_caregiver",
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
-                    intent.putExtra("village_town",
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
-                    intent.putExtra("family_name",
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
-                    intent.putExtra("go_to_due_page", false);
-                    getContext().startActivity(intent);
-                }
-
+                String familyId = member.getFamilyId();
+                Log.d("Family", familyId);
+                CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
+                        .findByCaseID(familyId);
+                Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
+                intent.putExtra("family_base_entity_id", patient.getCaseId());
+                intent.putExtra("family_head",
+                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
+                intent.putExtra("primary_caregiver",
+                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
+                intent.putExtra("village_town",
+                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
+                intent.putExtra("family_name",
+                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
+                intent.putExtra("go_to_due_page", false);
+                getContext().startActivity(intent);
             }
         });
 

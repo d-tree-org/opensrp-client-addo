@@ -9,122 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="50dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:scrollbars="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical">
-
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                style="@style/CustomFontTextViewStyle.ClientList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingStart="0dp"
-                android:paddingLeft="0dp"
-                android:text="@string/search_limits"
-                android:textColor="@color/client_list_grey"
-                android:textSize="@dimen/advanced_search_label_size" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <RelativeLayout
-                    android:id="@+id/out_and_inside_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="1.5dp"
-                    android:layout_marginRight="1.5dp"
-                    android:layout_weight="1">
-
-                    <com.vijay.jsonwizard.customviews.RadioButton
-                        android:id="@+id/out_and_inside"
-                        style="@style/Material.Drawable.RadioButton.AdvancedSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/out_and_inside"
-                        android:layout_toRightOf="@id/out_and_inside"
-                        android:orientation="vertical">
-
-                        <org.smartregister.view.customcontrols.CustomFontTextView
-                            style="@style/CustomFontTextViewStyle.ClientList.Light"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="@string/out_and_inside"
-                            android:textColor="@color/client_list_grey"
-                            android:textSize="@dimen/advanced_search_label_size" />
-
-                        <org.smartregister.view.customcontrols.CustomFontTextView
-                            style="@style/CustomFontTextViewStyle.ClientList.Light"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/requires_internet_connection"
-                            android:textColor="@color/client_list_grey"
-                            android:textSize="@dimen/advanced_search_label_small_size" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/my_catchment_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1.5dp"
-                    android:layout_marginLeft="1.5dp"
-                    android:layout_weight="1">
-
-                    <com.vijay.jsonwizard.customviews.RadioButton
-                        android:id="@+id/my_catchment"
-                        style="@style/Material.Drawable.RadioButton.AdvancedSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/my_catchment"
-                        android:layout_toRightOf="@id/my_catchment"
-                        android:maxLines="2"
-                        android:text="@string/my_catchment_area"
-                        android:textColor="@color/client_list_grey"
-                        android:textSize="@dimen/advanced_search_label_size" />
-                </RelativeLayout>
-            </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/first_name"
+                    android:id="@+id/search_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/first_name_hint"
+                    android:hint="@string/search_name_hint"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingStart="@dimen/advanced_search_label_padding"
@@ -133,38 +32,12 @@
                     android:textColorHint="@color/light_grey"
                     android:textSize="@dimen/advanced_search_text_size"
                     app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="@string/first_name"
+                    app:met_floatingLabelText="@string/search_name"
                     app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
                     app:met_primaryColor="@color/addo_primary"
                     app:met_singleLineEllipsis="true" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/last_name"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/last_name_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/advanced_search_label_padding"
-                    android:paddingLeft="@dimen/advanced_search_label_padding"
-                    android:textColor="@color/client_list_grey"
-                    android:textColorHint="@color/light_grey"
-                    android:textSize="@dimen/advanced_search_text_size"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="@string/last_name"
-                    app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
-                    app:met_primaryColor="@color/addo_primary"
-                    app:met_singleLineEllipsis="true" />
-            </LinearLayout>
-
-
-        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 
