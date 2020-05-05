@@ -1,19 +1,19 @@
 package org.smartregister.addo.presenter;
 
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
+import org.smartregister.addo.interactor.FamilyFocusedMemberProfileInteractor;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.family.contract.FamilyOtherMemberContract;
 import org.smartregister.family.contract.FamilyProfileMemberContract;
-import org.smartregister.family.interactor.FamilyOtherMemberProfileInteractor;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
+import java.util.Map;
 
 import static org.smartregister.util.Utils.getName;
 
-public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocusedMemberProfileContract.Presenter, FamilyOtherMemberContract.InteractorCallBack {
+public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocusedMemberProfileContract.Presenter, FamilyFocusedMemberProfileContract.InteractorCallBack {
 
     private WeakReference<FamilyFocusedMemberProfileContract.View> viewReference;
     private String baseEntityId;
@@ -22,7 +22,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
     protected String familyHead;
     private String familyName;
     protected String villageTown;
-    private FamilyOtherMemberProfileInteractor interactor;
+    private FamilyFocusedMemberProfileInteractor interactor;
 
     public FamilyFocusedMemberProfileActivityPresenter(FamilyFocusedMemberProfileContract.View view, FamilyProfileMemberContract.Model model,
                                                        String viewConfigurationIdentifier, String baseEntityId, String familyBaseEntityId,
@@ -34,7 +34,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
         this.familyName = familyName;
         this.primaryCaregiver = primaryCaregiver;
         this.villageTown = villageTown;
-        this.interactor = new FamilyOtherMemberProfileInteractor();
+        this.interactor = new FamilyFocusedMemberProfileInteractor();
 
     }
 
@@ -110,5 +110,18 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
 
         getView().setProfileImage(client.getCaseId(), entityType);
 
+    }
+
+    @Override
+    public void onSubmitted(boolean successful) {
+
+    }
+
+    @Override
+    public void submitVisit(Map<String, String> formForSubmission) {
+        if (viewReference.get() != null) {
+            //viewReference.get().displayProgressBar(true);
+            interactor.submitVisit(false, baseEntityId, formForSubmission, this);
+        }
     }
 }
