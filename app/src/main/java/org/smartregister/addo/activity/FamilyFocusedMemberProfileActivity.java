@@ -26,7 +26,6 @@ import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
-import org.smartregister.chw.anc.model.BaseAncHomeVisitAction;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.model.BaseFamilyProfileMemberModel;
@@ -36,6 +35,9 @@ import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
@@ -278,22 +280,20 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
                 JSONObject form = new JSONObject(jsonString);
+                Map<String, String> formForSubmission = new HashMap<>();
 
-                // Here get the form and find out the values in the child_condition field or whatever defined use the information to open up a prescription
-                // form which will have a message with the conditions diagnosed and the corresponding medication required
+                formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
 
-                BaseAncHomeVisitAction visitAction = new BaseAncHomeVisitAction.Builder(this, "Danger Signs")
-                        .withBaseEntityID(baseEntityId)
-                        .withDetails(null)
-                        .withFormName(org.smartregister.addo.util.Utils.getLocalForm("child_addo_danger_signs", CoreConstants.JSON_FORM.locale, CoreConstants.JSON_FORM.assetManager))
-                        .build();
-                // Here save the form for referral danger signs results
+                submitForm(formForSubmission);
 
-                visitAction.setJsonPayload(jsonString);
 
-            } catch (JSONException | BaseAncHomeVisitAction.ValidationException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void submitForm(Map<String, String> formForSubmission) {
+        presenter().submitVisit(formForSubmission);
     }
 }
