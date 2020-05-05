@@ -488,7 +488,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "<b>The child has the following {condition_urgency}:</b> <br />{danger_signs_captured} {addo_actions} <br /> <b>Dispense</b> {addo_medication_to_give} <br /> {child_conditions}",
+        "text": "<b>The child has the following {condition_urgency}:</b> <br />{danger_signs_captured} {addo_actions} <br /> <b>Dispense</b> {addo_medication_to_give}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
