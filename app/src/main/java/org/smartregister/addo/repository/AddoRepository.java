@@ -12,6 +12,7 @@ import org.smartregister.configurableviews.repository.ConfigurableViewsRepositor
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
+import org.smartregister.repository.TaskRepository;
 import org.smartregister.repository.UniqueIdRepository;
 
 import timber.log.Timber;
@@ -40,6 +41,8 @@ public class AddoRepository extends Repository {
 
         UniqueIdRepository.createTable(database);
         SettingsRepository.onUpgrade(database);
+
+        TaskRepository.createTable(database);
 
         VisitRepository.createTable(database);
         onUpgrade(database, 1, 2);
