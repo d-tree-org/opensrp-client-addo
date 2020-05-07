@@ -1,0 +1,562 @@
+{
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "skip_blank_steps": true,
+  "count": "3",
+  "encounter_type": "ADDO Visit - Danger signs",
+  "entity_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": ""
+  },
+  "step1": {
+    "title": "Pregnant Woman Present",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "ds_start_message",
+        "type": "label",
+        "text": "Screen and Dispense Medication",
+        "label_text_size": "18sp",
+        "label_text_style": "bold"
+      },
+      {
+        "key": "pregnant_woman_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "check_box",
+        "exclusive": [
+          "chk_pregnant_woman_present_yes"
+        ],
+        "label": "Is the pregnant woman present?",
+        "options": [
+          {
+            "key": "chk_pregnant_woman_present_yes",
+            "text": "Yes",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "chk_pregnant_woman_present_no",
+            "text": "No",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "Please indicate if the pregnant woman is present or not"
+        }
+      }
+    ]
+  },
+  "step2": {
+    "title": "Pregnant Woman Danger Signs",
+    "next": "step3",
+    "fields": [
+      {
+        "key": "danger_signs_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Assess the pregnant woman for the following danger signs:",
+        "label_text_style": "normal",
+        "text_color": "#C0C0C0",
+        "exclusive": [
+          "chk_none"
+        ],
+        "options": [
+          {
+            "key": "chk_fever",
+            "text": "Severe fever and shivering",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_bleeding_vaginally",
+            "text": "Vaginal bleeding",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "150802AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_server_headache",
+            "text": "Severe headache",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "139081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_blurred_vision",
+            "text": "Blurred vision",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "147104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_convulsions",
+            "text": "Convulsions/Seizures",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "164483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_difficulty_breathing",
+            "text": "Difficulty breathing",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_severe_abdominal_pain",
+            "text": "Severe abdominal pain",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_loss_consciousness",
+            "text": "Loss of consciousness",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "135592AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_swelling",
+            "text": "Swelling of the hands, face, and/or legs",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_early_labour",
+            "text": "Early labour pains before 9 months",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "151687AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_vaginal_discharge",
+            "text": "Foul smelling vaginal discharge",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_unusual_movement",
+            "text": "Less/no fetal movement",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "113377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_water_broke",
+            "text": "Water broke before 9 months",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_vomiting",
+            "text": "Vomiting",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_anemia",
+            "text": "Anemia demonstrated by paleness on the palms or tongue, weakness or tiredness",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_none",
+            "text": "None",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please pick at least one"
+        },
+        "relevance": {
+          "step1:pregnant_woman_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_pregnant_woman_present_yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "danger_signs_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "minor_illnesses_title",
+        "type": "label",
+        "text": "Minor Illnesses",
+        "label_text_size": "18sp",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "relevance": {
+          "step2:danger_signs_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minor_illnesses",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Assess the pregnant woman for the following minor illnesses:",
+        "text_color": "#000000",
+        "exclusive": [
+          "chk_none"
+        ],
+        "options": [
+          {
+            "key": "chk_mild_pain",
+            "text": "Mild pain anywhere in the body",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_mild_fever",
+            "text": "Mild fever",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "136443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_cough",
+            "text": "Cough",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_runny_nose",
+            "text": "Runny nose/Cold",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_sore_throat",
+            "text": "Sore throat",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_other_needs",
+            "text": "Other",
+            "value": false,
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_none",
+            "text": "None",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Minor illness is required"
+        },
+        "relevance": {
+          "step2:danger_signs_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minorillness_description",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Describe the other needs",
+        "v_required": {
+          "value": "true",
+          "err": "Describe the other needs"
+        },
+        "relevance": {
+          "step2:minor_illnesses": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minor_illness_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "Pregnant Woman Condition",
+    "fields": [
+      {
+        "key": "danger_signs_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Danger sign! <br /> The following urgent <b>danger sign(s)</b> have been identified: <br /> {danger_signs_captured} <br /> Refer the pregnant woman to the closest health facility. <br /> <b>Dispense</b> over the counter medicine if needed based on symptoms.",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
+        },
+        "relevance": {
+          "step2:danger_signs_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_fever",
+                  "chk_bleeding_vaginally",
+                  "chk_server_headache",
+                  "chk_blurred_vision",
+                  "chk_convulsions",
+                  "chk_difficulty_breathing",
+                  "chk_severe_abdominal_pain",
+                  "chk_loss_consciousness",
+                  "chk_swelling",
+                  "chk_early_labour",
+                  "chk_vaginal_discharge",
+                  "chk_unusual_movement",
+                  "chk_water_broke",
+                  "chk_vomiting",
+                  "chk_anemia"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save_n_refer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "Save and Refer to Health Facility",
+        "btn_bg_color": "#FF840952",
+        "action": {
+          "behaviour": "refer"
+        },
+        "relevance": {
+          "step2:danger_signs_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_fever",
+                  "chk_bleeding_vaginally",
+                  "chk_server_headache",
+                  "chk_blurred_vision",
+                  "chk_convulsions",
+                  "chk_difficulty_breathing",
+                  "chk_severe_abdominal_pain",
+                  "chk_loss_consciousness",
+                  "chk_swelling",
+                  "chk_early_labour",
+                  "chk_vaginal_discharge",
+                  "chk_unusual_movement",
+                  "chk_water_broke",
+                  "chk_vomiting",
+                  "chk_anemia"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "minor_illness_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The pregnant woman has the following illness(es): <br /> {minor_illness_captured} <br /> Manage as needed by dispensing over the counter medicine or commodity",
+        "text_color": "#101010",
+        "toaster_type": "warning",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "anc_addo_danger_signs_calculation.yml"
+            }
+          }
+        },
+        "relevance": {
+          "step2:minor_illnesses": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_mild_pain",
+                  "chk_mild_fever",
+                  "chk_cough",
+                  "chk_runny_nose",
+                  "chk_sore_throat",
+                  "chk_other_needs"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "no_illness_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The pregnant woman does not have any illness please proceed as needed by dispensing over the counter medicine or commodity",
+        "text_color": "#101010",
+        "toaster_type": "positive",
+        "relevance": {
+          "step2:minor_illnesses": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "pregnant_woman_not_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The pregnant woman must be present in order to proceed with screening.",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "step1:pregnant_woman_present": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "chk_pregnant_woman_present_yes"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

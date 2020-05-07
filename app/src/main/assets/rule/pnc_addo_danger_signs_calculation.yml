@@ -1,0 +1,224 @@
+---
+name: step2_danger_signs_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_fever')) {
+            selected += '\u2022 High Fever and general body weakness <br />';
+        }
+        if (selectedItem.contains('chk_bleeding_vaginally')) {
+
+            selected += '\u2022 Severe vaginal bleeding, non-stop bleeding (using one pad every 5 minutes) <br />';
+
+        }
+        if (selectedItem.contains('chk_server_headache')) {
+            selected += '\u2022 Headache/Dizziness <br />';
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            selected += '\u2022 Seizures/Convulsions <br /> ';
+
+        }
+        if (selectedItem.contains('chk_difficulty_breathing')) {
+            selected += '\u2022 Difficulty breathing <br />';
+        }
+        if (selectedItem.contains('chk_severe_leg_pain')) {
+            selected += '\u2022 Leg muscle cramps <br />';
+        }
+        if (selectedItem.contains('chk_unusual_behaviour')) {
+           selected += '\u2022 Abnormal behaviour (stress, confusion) <br />';
+        }
+        if (selectedItem.contains('chk_swelling_of_breast')) {
+           selected += '\u2022 Pain due to breast engorgement <br />';
+        }
+        if (selectedItem.contains('chk_severe_abdominal_pain')) {
+           selected += '\u2022 Severe abdominal pain <br />';
+        }
+        if (selectedItem.contains('chk_vaginal_discharge')) {
+           selected += '\u2022 Foul smelling vaginal discharge <br />';
+        }
+        if (selectedItem.contains('chk_blurred_vision')) {
+           selected += '\u2022 Blurred vision <br />';
+        }
+        if (selectedItem.contains('chk_loss_conscioueness')) {
+           selected += '\u2022 Loss of consciousness <br />';
+        }
+        if (selectedItem.contains('chk_urination')) {
+           selected += '\u2022 Little/no urination <br />';
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_danger_signs_present_mama) "
+---
+name: step3_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step2_danger_signs_captured]"
+
+######################################### Minor Illnesses #########################################
+---
+name: step2_minor_illness_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllness) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_mild_pain')) {
+            selected += '\u2022 Mild pain in the body <br />';
+        }
+        if (selectedItem.contains('chk_mild_fever')) {
+
+            selected += '\u2022 Mild fever <br />';
+
+        }
+        if (selectedItem.contains('chk_cough')) {
+            selected += '\u2022 Cough <br />';
+        }
+        if (selectedItem.contains('chk_runny_nose')) {
+            selected += '\u2022 Runny nose/cold <br /> ';
+
+        }
+        if (selectedItem.contains('chk_sore_throat')) {
+            selected += '\u2022 Sore throat <br />';
+        }
+
+        if (selectedItem.contains('chk_other_needs')) {
+            selected += '\u2022' + otherIllness + '<br />';
+        }
+
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_minor_illness_present_mama, step2_minorillness_description) "
+
+---
+name: step3_minor_illness_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['minor_illness_captured': step2_minor_illness_captured]"
+---
+name: step1_danger_signs_captured_sw
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_fever')) {
+            if (selected.isEmpty()) {
+                selected += 'Homa';
+            } else {
+                selected += ', Homa \n';
+            }
+
+        }
+        if (selectedItem.contains('chk_bleeding_vaginally')) {
+            if (selected.isEmpty()) {
+                selected += 'Damu kutoka ukeni';
+            } else {
+                selected += ', Damu kutoka ukeni';
+            }
+        }
+        if (selectedItem.contains('chk_server_headache')) {
+            if (selected.isEmpty()) {
+                selected += 'Maumivu ya kichwa';
+            } else {
+                selected += ', Maumivu ya kichwa';
+            }
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            if (selected.isEmpty()) {
+                selected += 'Degedege / Mtukutiko wa mwili';
+            } else {
+                selected += ', Degedege / Mtukutiko wa mwili';
+            }
+        }
+        if (selectedItem.contains('chk_difficulty_breathing')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupumua kwa shida';
+            } else {
+                selected += ', Kupumua kwa shida';
+            }
+        }
+        if (selectedItem.contains('chk_severe_leg_pain')) {
+            if (selected.isEmpty()) {
+                selected += 'Maumivu makali kwenye misuli ya miguu';
+            } else {
+                selected += ', Maumivu makali kwenye misuli ya miguu';
+            }
+        }
+        if (selectedItem.contains('chk_unusual_behaviour')) {
+            if (selected.isEmpty()) {
+                selected += 'Tabia isiyo ya kawaida (msongo wa mawazo, kuchanganyikiwa)';
+            } else {
+                selected += ', Tabia isiyo ya kawaida (msongo wa mawazo, kuchanganyikiwa)';
+            }
+        }
+        if (selectedItem.contains('chk_swelling_of_breast')) {
+            if (selected.isEmpty()) {
+                selected += 'Kuvimba kwa matiti na chuchu zilizo chanika';
+            } else {
+                selected += ', Kuvimba kwa matiti na chuchu zilizo chanika';
+            }
+        }
+        if (selectedItem.contains('chk_severe_abdominal_pain')) {
+            if (selected.isEmpty()) {
+                selected += 'Maumivu makali ya tumbo';
+            } else {
+                selected += ', Maumivu makali ya tumbo';
+            }
+        }
+        if (selectedItem.contains('chk_vaginal_discharge')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
+            } else {
+                selected += ', Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
+            }
+        }
+        if (selectedItem.contains('chk_blurred_vision')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutoona vizuri';
+            } else {
+                selected += ', Kutoona vizuri';
+            }
+        }
+        if (selectedItem.contains('chk_loss_conscioueness')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupoteza fahamu';
+            } else {
+                selected += ', Kupoteza fahamu';
+            }
+        }
+        if (selectedItem.contains('chk_urination')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupata mkojo kidogo au kuvuja mkojo mfululizo';
+            } else {
+                selected += ', Kupata mkojo kidogo au kuvuja mkojo mfululizo';
+            }
+        }
+        if (selectedItem.contains('chk_other')) {
+            if (selected.isEmpty()) {
+                selected += otherIllnesses;
+            } else {
+                selected += ', '+otherIllnesses;
+            }
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step1_danger_signs_present_mama, step1_danger_signs_other) "
+---
+name: step1_danger_signs_present_toaster_sw
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured_sw': step1_danger_signs_captured_sw]"
