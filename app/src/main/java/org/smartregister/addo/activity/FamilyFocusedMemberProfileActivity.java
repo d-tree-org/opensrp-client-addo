@@ -20,6 +20,7 @@ import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
 import org.smartregister.addo.dao.AncDao;
+import org.smartregister.addo.dao.FamilyDao;
 import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.presenter.FamilyFocusedMemberProfileActivityPresenter;
 import org.smartregister.addo.util.ChildDBConstants;
@@ -286,6 +287,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 submitForm(formForSubmission);
 
+                FamilyDao.completeTasksForEntity(baseEntityId);
 
             } catch (JSONException e) {
                 e.printStackTrace();
