@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.presenter.LoginPresenter;
+import org.smartregister.task.SaveTeamLocationsTask;
+import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
@@ -34,7 +36,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     public void goToHome(boolean b) {
         //Take user to a home page
         if (b){
-
+            Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
         goToMainActivity(b);
         finish();
