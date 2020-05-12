@@ -52,9 +52,6 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
-//import android.support.v4.app.Fragment;
-//import android.support.v4.view.ViewPager;
-
 public class FamilyProfileActivity extends BaseFamilyProfileActivity implements FamilyProfileExtendedContract.View {
 
     private static final String TAG = FamilyProfileActivity.class.getCanonicalName();
