@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.dao.AbstractDao;
 import org.smartregister.domain.Task;
 import org.smartregister.repository.BaseRepository;
@@ -24,6 +25,8 @@ import java.util.Map;
 
 import timber.log.Timber;
 import static org.smartregister.AllConstants.SYNC_STATUS;
+import static org.smartregister.addo.util.CoreConstants.BUSINESS_STATUS.LINKED;
+import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.BUSINESS_STATUS;
 import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.FOR;
 import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.STATUS;
 
@@ -149,10 +152,11 @@ public class FamilyDao extends AbstractDao {
         if (StringUtils.isBlank(entityId))
             return;
         ContentValues contentValues = new ContentValues();
-        contentValues.put(STATUS, Task.TaskStatus.COMPLETED.name());
+        contentValues.put(STATUS, Task.TaskStatus.IN_PROGRESS.name());
         contentValues.put(SYNC_STATUS, BaseRepository.TYPE_Unsynced);
         contentValues.put("last_modified", DateUtil.getMillis(new DateTime()));
+
         AddoApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
-                String.format("%s = ? AND %s =?", FOR, STATUS), new String[]{entityId, Task.TaskStatus.READY.name()});
+                String.format("%s = ? AND %s =? AND %s =?", FOR, STATUS, BUSINESS_STATUS), new String[]{entityId, Task.TaskStatus.READY.name(), LINKED});
     }
 }
