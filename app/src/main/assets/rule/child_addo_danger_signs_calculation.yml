@@ -349,29 +349,37 @@ actions:
         if (condition.contains('headache') || condition.contains('oversleeping_umbilica_rashes_puseyes') ||
             condition.contains('malaria') || condition.contains('severe_malaria')) {
             if (medication.isEmpty()) {
-                medication += ': <br /> \u2022 Paracetamol<br />';
+                medication += 'Dispense: <br /> \u2022 Paracetamol<br />';
             } else {
                 medication += '\u2022 Paracetamol<br />';
+            }
+        }
+
+        if (condition.contains('pneumonia') || condition.contains('severe_pneumonia')) {
+            if (medication.isEmpty()) {
+                medication += 'Dispense: <br /> \u2022 Amoxicillin dispersible tablets; if no dispersible tablets are available, dispense amoxicillin syrup.<br />';
+            } else {
+                medication += '\u2022 Amoxicillin dispersible tablets; if no dispersible tablets are available, dispense amoxicillin syrup.<br />';
             }
         }
 
         if (condition.contains('diarrhea_without_blood') || condition.contains('bloody_diarrhea') ||
             condition.contains('chronic_diarrhea') || condition.contains('severe_diarrhea_without_blood')) {
             if (medication.isEmpty()) {
-                medication += ': <br /> \u2022 ORS and Zinc tablets<br />';
+                medication += 'Dispense: <br /> \u2022 ORS and Zinc tablets<br />';
             } else {
                 medication += '\u2022 ORS and Zinc tablets<br />';
             }
         }
         if (condition.contains('bloody_diarrhea')) {
             if (medication.isEmpty()) {
-                medication += ': <br /> \u2022 Erythromicin <br />';
+                medication += 'Dispense: <br /> \u2022 Erythromicin <br />';
             } else {
                 medication += '\u2022 Erythromicin <br />';
             }
 
         }
-        return medication.isEmpty() ? ' as needed <br />' : medication;
+        return medication.isEmpty() ? 'Manage as needed <br />' : medication;
   }"
   - "calculation = getAddoMedicationForConditions(step2_child_conditions)"
 
