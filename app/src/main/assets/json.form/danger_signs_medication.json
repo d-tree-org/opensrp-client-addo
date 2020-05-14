@@ -1,0 +1,222 @@
+{
+  "count": "2",
+  "encounter_type": "ADDO Visit - Dispense Medicine",
+  "entity_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": ""
+  },
+  "step1": {
+    "title": "Dispensing Options",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "danger_signs_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden"
+      },
+      {
+        "key": "addo_medication_to_give",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden"
+      },
+      {
+        "key": "danger_signs_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "The screening has identified that the client has the following danger signs <br /> {danger_signs_captured} <br /> {addo_medication_to_give}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "dispense_options",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Please select one of the following",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "dispense_full",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "Needs medicine: dispense all medicines",
+            "extra_info": "NOTE: Select this option if all medicines needed are available"
+          },
+          {
+            "key": "dispense_partial",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "Needs medicine: some medicines or all medicines not available",
+            "extra_info": "NOTE: Select this option if some or all medicines needed are not available"
+          },
+          {
+            "key": "not_needed",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "No medicine needed",
+            "extra_info": "NOTE: Select this option if no medication needed"
+          }
+        ]
+      }
+    ]
+  },
+  "step2": {
+    "title": "Dispense Medicines",
+    "fields": [
+      {
+        "key": "dispense_med_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "The medicine(s) dispensed:",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
+      },
+      {
+        "key": "medicine_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "buttonText": "+ Add a medicine to dispense",
+        "sort": true,
+        "dialogTitle": "Add a medicine to dispense",
+        "searchHint": "Type Medicine Name",
+        "options": [
+          {
+            "key": "amoxicillin",
+            "text": "Amoxicillin dispersible tablets, capsules /oral suspension",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "paracetamol_tablets",
+            "text": "Paracetamol tablets",
+            "hint": "para para para",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "paracetamol_suspensions",
+            "text": "Paracetamol suspensions",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "ibuprofen_tablets",
+            "text": "Ibuprofen tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "ibuprofen_suspensions",
+            "text": "Ibuprofen suspensions",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "oral_rehydration_salts",
+            "text": "Oral Rehydration Salts",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "cough_preparations",
+            "text": "Cough preparations",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "vitamins_suspensions",
+            "text": "Vitamins suspensions/syrups",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "zinc_sulphate_tablets",
+            "text": "Zinc Sulphate tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          }
+        ],
+        "type": "multi_select_list"
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+---
+name: step1_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step1_danger_signs_captured, 'addo_medication_to_give': step1_addo_medication_to_give]"

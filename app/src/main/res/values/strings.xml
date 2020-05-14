@@ -84,6 +84,13 @@
     <string name="return_to_family_members">Return to family members</string>
     <string name="save_title">SAVE</string>
 
+    <!-- ADDO Danger Sign Screening and Medication Dispensing strings -->
+    <string name="danger_sign_title_child">Child Danger Sign Screening</string>
+    <string name="danger_sign_title_anc">ANC Danger Sign Screening</string>
+    <string name="danger_sign_title_pnc">PNC Danger Sign Screening</string>
+    <string name="dispense_medication_title">Dispense Medication</string>
+    <string name="default_dispense_message">Manage as needed</string>
+
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="copied_phone_number">PhoneNumber copied to clipboard</string>
