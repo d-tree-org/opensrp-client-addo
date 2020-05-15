@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +73,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child ADDO Visit - Danger signs";
     private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC ADDO Visit - Danger signs";
+    private static final String DISPENSE_MEDICINE_ENCOUNTER = "ADDO Visit - Dispense Medicine";
 
     @Override
     protected void onCreation() {
@@ -289,39 +291,42 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
 
-                // Get the values of danger sings selected and medication proposed from step 2 of danger signs form
+                if (!form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(DISPENSE_MEDICINE_ENCOUNTER)) {
+                    // Check if the focused group client is present or not if not skip to dispensing
+                    if (isClientPresent(form)) {
+                        String dangerSigns;
+                        String suggestedMeds;
 
-                // Check encounter type to identify if it is ANC PNC or Child
-                // Check if the danger signs field is empty or not
+                        JSONObject step2 = form.getJSONObject(JsonFormUtils.STEP2);
+                        JSONArray step2Fields = step2.getJSONArray(JsonFormUtils.FIELDS);
+                        JSONArray dangerSignsSelected;
 
-                String dangerSigns = null;
-                String suggestedMeds = null;
+                        if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                            dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
+                        } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                            dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
+                        } else {
+                            dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
+                        }
 
-                JSONObject step = form.getJSONObject(JsonFormUtils.STEP2);
-                JSONArray fields = step.getJSONArray(JsonFormUtils.FIELDS);
-                JSONArray dangerSignsSelected = null;
+                        // When there is danger signs and the none field is not selected open the dispense medication
+                        if (dangerSignsSelected.length() > 0 && !dangerSignsSelected.getString(0).equalsIgnoreCase("chk_none")) {
+                            dangerSigns = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_captured").getString(JsonFormUtils.VALUE);
+                            if (form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                                suggestedMeds = JsonFormUtils.getFieldJSONObject(step2Fields, "addo_medication_to_give").getString(JsonFormUtils.VALUE);
+                            } else {
+                                suggestedMeds = getResources().getString(R.string.default_dispense_message);
+                            }
 
-                if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
-                } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
-                } else {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
-                }
-
-                // When there is danger signs and the none field is not selected open the dispense medication
-                if (dangerSignsSelected.length() > 0 && !dangerSignsSelected.getString(0).equalsIgnoreCase("chk_none")) {
-                    dangerSigns = JsonFormUtils.getFieldJSONObject(fields, "danger_signs_captured").getString(JsonFormUtils.VALUE);
-                    if (form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                        suggestedMeds = JsonFormUtils.getFieldJSONObject(fields, "addo_medication_to_give").getString(JsonFormUtils.VALUE);
+                            dispenseMedication(dangerSigns, suggestedMeds);
+                        }
                     } else {
-                        suggestedMeds = getResources().getString(R.string.default_dispense_message);
+                        dispenseMedication(null, null);
                     }
-
-                    dispenseMedication(dangerSigns, suggestedMeds);
                 }
 
-                //submitForm(formForSubmission);
+
+                submitForm(formForSubmission);
 
                 FamilyDao.completeTasksForEntity(baseEntityId);
 
@@ -333,6 +338,32 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     public void submitForm(Map<String, String> formForSubmission) {
         presenter().submitVisit(formForSubmission);
+    }
+
+    private Boolean isClientPresent(@NotNull JSONObject form) {
+        Boolean clientPresent = false;
+        try {
+            JSONObject step1 = form.getJSONObject(JsonFormUtils.STEP1);
+            JSONArray step1Fields = step1.getJSONArray(JsonFormUtils.FIELDS);
+            if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                if(JsonFormUtils.getFieldJSONObject(step1Fields, "child_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_child_present_yes")) {
+                    clientPresent = true;
+                }
+            } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                if(JsonFormUtils.getFieldJSONObject(step1Fields, "pregnant_woman_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_pregnant_woman_present_yes")) {
+                    clientPresent = true;
+                }
+            } else {
+                if(JsonFormUtils.getFieldJSONObject(step1Fields, "mother_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_mother_present_yes")) {
+                    clientPresent = true;
+                }
+            }
+
+        } catch (JSONException e) {
+            Timber.e(e);
+        }
+
+        return clientPresent;
     }
 
     private void dispenseMedication(String dangerSigns, String suggestedMeds) {

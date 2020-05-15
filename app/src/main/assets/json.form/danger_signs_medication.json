@@ -1,5 +1,8 @@
 {
-  "count": "2",
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "skip_blank_steps": true,
+  "count": "3",
   "encounter_type": "ADDO Visit - Dispense Medicine",
   "entity_id": "",
   "metadata": {
@@ -79,7 +82,22 @@
               "rules-file": "danger_signs_medication_calculation.yml"
             }
           }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
         }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "10dp"
       },
       {
         "key": "dispense_options",
@@ -87,32 +105,30 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Please select one of the following",
+        "label": "Do want to dispense medicine to this client?",
         "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true
+        },
         "options": [
           {
-            "key": "dispense_full",
+            "key": "yes",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "Needs medicine: dispense all medicines",
-            "extra_info": "NOTE: Select this option if all medicines needed are available"
+            "text": "Yes",
+            "extra_info": "NOTE: Select this option if medication is needed"
           },
           {
-            "key": "dispense_partial",
+            "key": "no",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "Needs medicine: some medicines or all medicines not available",
-            "extra_info": "NOTE: Select this option if some or all medicines needed are not available"
-          },
-          {
-            "key": "not_needed",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "No medicine needed",
-            "extra_info": "NOTE: Select this option if no medication needed"
+            "text": "No",
+            "extra_info": "NOTE: Select this option no medication is needed"
           }
         ]
       }
@@ -120,6 +136,7 @@
   },
   "step2": {
     "title": "Dispense Medicines",
+    "next": "step3",
     "fields": [
       {
         "key": "dispense_med_label",
@@ -129,6 +146,13 @@
         "text_color": "#000000",
         "v_required": {
           "value": true
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
         }
       },
       {
@@ -140,6 +164,9 @@
         "sort": true,
         "dialogTitle": "Add a medicine to dispense",
         "searchHint": "Type Medicine Name",
+        "v_required": {
+          "value": true
+        },
         "options": [
           {
             "key": "amoxicillin",
@@ -152,7 +179,6 @@
           {
             "key": "paracetamol_tablets",
             "text": "Paracetamol tablets",
-            "hint": "para para para",
             "property": {
               "presumed-id": "er",
               "confirmed-id": "er"
@@ -215,7 +241,122 @@
             }
           }
         ],
-        "type": "multi_select_list"
+        "type": "multi_select_list",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "medications_selected",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "Dispense Confirmation",
+    "fields": [
+      {
+        "key": "no_medication_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "No medication was not given to this client.",
+        "text_color": "#101010",
+        "toaster_type": "warning",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "medication_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "You select to dispense the following medication for this client: <br /> {medications_selected}",
+        "text_color": "#101010",
+        "toaster_type": "information",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "10dp"
+      },
+      {
+        "key": "all_meds_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Did you dispense all the medicines this client want?",
+        "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true
+        },
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "Yes",
+            "extra_info": "NOTE: Select this option if ALL medications required was given"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "No",
+            "extra_info": "NOTE: Select this option if some medications required was not given"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
       }
     ]
   }
