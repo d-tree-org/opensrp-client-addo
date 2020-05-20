@@ -757,7 +757,7 @@ public class CoreConstants {
     }
 
     public static final class TASKS_FOCUS {
-        public static final String SICK_CHILD = "Sick Child";
+        public static final String SICK_CHILD = "Child Danger Signs";
         public static final String ANC_DANGER_SIGNS = "ANC Danger Signs";
         public static final String PNC_DANGER_SIGNS = "PNC Danger Signs";
     }
