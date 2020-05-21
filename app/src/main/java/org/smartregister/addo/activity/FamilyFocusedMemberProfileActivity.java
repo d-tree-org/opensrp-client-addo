@@ -71,9 +71,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private FormUtils formUtils;
 
-    private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child ADDO Visit - Danger signs";
-    private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC ADDO Visit - Danger signs";
-    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC ADDO Visit - Danger signs";
+    private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
+    private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
+    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
     private static final String DISPENSE_MEDICINE_ENCOUNTER = "ADDO Visit - Dispense Medicine";
 
     @Override

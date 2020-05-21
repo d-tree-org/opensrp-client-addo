@@ -239,6 +239,14 @@
               "presumed-id": "er",
               "confirmed-id": "er"
             }
+          },
+          {
+            "key": "other",
+            "text": "Other medications",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
           }
         ],
         "type": "multi_select_list",
@@ -247,6 +255,29 @@
             "ex-rules": {
               "rules-file": "danger_signs_medication_relevance.yml"
             }
+          }
+        }
+      },
+      {
+        "key": "medication_description",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Record other medication:",
+        "v_required": {
+          "value": "true",
+          "err": "Record other medications."
+        },
+        "relevance": {
+          "step1:minor_illness_present_child": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_other_needs"
+                ]
+              }
+            ]
           }
         }
       },
