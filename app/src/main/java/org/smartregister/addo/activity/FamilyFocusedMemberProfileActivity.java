@@ -73,6 +73,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child ADDO Visit - Danger signs";
     private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC ADDO Visit - Danger signs";
+    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC ADDO Visit - Danger signs";
     private static final String DISPENSE_MEDICINE_ENCOUNTER = "ADDO Visit - Dispense Medicine";
 
     @Override
@@ -222,7 +223,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_commodities:
-                Toast.makeText(this, "Give your client the commodities they want", Toast.LENGTH_SHORT).show();
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), "ADDO COMMODITIES DISPENSE");
                 break;
 
             case R.id.tv_focused_client_dispense:
@@ -291,8 +292,10 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
 
-                if (!form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(DISPENSE_MEDICINE_ENCOUNTER)) {
-                    // Check if the focused group client is present or not if not skip to dispensing
+                String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
+
+                if (encounterType.equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                    // Check if the focused group client is present or not; if not skip to dispensing
                     if (isClientPresent(form)) {
                         String dangerSigns;
                         String suggestedMeds;
@@ -324,7 +327,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                         dispenseMedication(null, null);
                     }
                 }
-
 
                 submitForm(formForSubmission);
 

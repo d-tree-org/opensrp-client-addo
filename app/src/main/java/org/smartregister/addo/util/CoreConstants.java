@@ -145,11 +145,14 @@ public class CoreConstants {
         public static final String FAMILY_DETAILS_REMOVE_CHILD = "family_details_remove_child";
         public static final String FAMILY_DETAILS_REMOVE_FAMILY = "family_details_remove_family";
         public static final String HOME_VISIT_COUNSELLING = "routine_home_visit";
+
+        // ADDO specific
         public static final String ADDO_RECORD_SERVICE_OTHER = "addo_record_service_provided_other";
         public static final String ANC_ADDO_DANGER_SIGNS = "anc_addo_danger_signs";
         public static final String PNC_ADDO_DANGER_SIGNS = "pnc_addo_danger_signs";
         public static final String CHILD_ADDO_DANGER_SIGNS = "child_addo_danger_signs";
         public static final String DANGER_SIGNS_MEDICATION = "danger_signs_medication";
+        public static final String ADDO_COMMODITIES = "addo_commodities";
 
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
@@ -185,6 +188,8 @@ public class CoreConstants {
         public static String getChildAddoDangerSigns() { return CHILD_ADDO_DANGER_SIGNS; }
 
         public static String getDangerSignsMedication() { return DANGER_SIGNS_MEDICATION; }
+
+        public static String getAddoCommodities() { return ADDO_COMMODITIES; }
 
         public static String getChildReferralForm() {
             return CHILD_REFERRAL_FORM;
