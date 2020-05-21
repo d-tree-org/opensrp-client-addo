@@ -14,11 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
-import org.smartregister.addo.custom_views.FamilyMemberFloatingMenu;
 import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dao.FamilyDao;
 import org.smartregister.addo.dao.PNCDao;
@@ -26,6 +26,7 @@ import org.smartregister.addo.presenter.FamilyFocusedMemberProfileActivityPresen
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.JsonFormUtils;
+import org.smartregister.addo.util.ReferralUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.adapter.ViewPagerAdapter;
@@ -65,7 +66,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private String PhoneNumber;
     private CommonPersonObjectClient commonPersonObject;
     protected MemberObject memberObject;
-    private FamilyMemberFloatingMenu familyFloatingMenu;
 
     private FormUtils formUtils;
 
@@ -278,16 +278,38 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         if (resultCode != RESULT_OK) return;
         if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON) {
             try {
-
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
                 JSONObject form = new JSONObject(jsonString);
-                Map<String, String> formForSubmission = new HashMap<>();
 
+                // complete any referrals
+                FamilyDao.completeTasksForEntity(baseEntityId);
+
+                //check if client is being referred
+                JSONArray a = form.getJSONObject("step3").getJSONArray("fields");
+                String buttonAction = "";
+
+                for (int i=0; i<a.length(); i++) {
+                    org.json.JSONObject jo = a.getJSONObject(i);
+                    if (jo.getString("key").compareToIgnoreCase("save_n_refer") == 0) {
+                        if(jo.optString("value") != null && jo.optString("value").compareToIgnoreCase("true") == 0){
+                            buttonAction = jo.getJSONObject("action").getString("behaviour");
+                        }
+                    }
+                }
+                if(!buttonAction.isEmpty()) {
+                    //refer
+                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
+
+                    if (buttonAction.equalsIgnoreCase("refer")){
+                        this.finish();
+                    }
+                }
+                //end of check referral
+
+                Map<String, String> formForSubmission = new HashMap<>();
                 formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
 
                 submitForm(formForSubmission);
-
-                FamilyDao.completeTasksForEntity(baseEntityId);
 
             } catch (JSONException e) {
                 e.printStackTrace();

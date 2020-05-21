@@ -3,7 +3,7 @@
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
   "count": "3",
-  "encounter_type": "Danger signs - Child",
+  "encounter_type": "Child Danger Signs",
   "entity_id": "",
   "metadata": {
     "start": {
