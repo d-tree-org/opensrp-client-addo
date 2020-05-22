@@ -320,11 +320,20 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                             } else {
                                 suggestedMeds = getResources().getString(R.string.default_dispense_message);
                             }
+                            // Check if client has referral or to determine if they should be linked to another ADDO or not
+                            JSONArray step3Fields = form.getJSONObject(JsonFormUtils.STEP3).getJSONArray(JsonFormUtils.FIELDS);
+                            JSONObject referralButtonObject = JsonFormUtils.getFieldJSONObject(step3Fields, "save_n_refer");
+                            String referralStatus;
+                            if (referralButtonObject.optString(JsonFormUtils.VALUE) != null && referralButtonObject.optString(JsonFormUtils.VALUE).compareToIgnoreCase("true") == 0) {
+                                referralStatus = "referred";
+                            } else {
+                                referralStatus = null;
+                            }
 
-                            dispenseMedication(dangerSigns, suggestedMeds);
+                            dispenseMedication(dangerSigns, suggestedMeds, referralStatus);
                         }
                     } else {
-                        dispenseMedication(null, null);
+                        dispenseMedication(null, null, null);
                     }
                 }
 
@@ -368,13 +377,14 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         return clientPresent;
     }
 
-    private void dispenseMedication(String dangerSigns, String suggestedMeds) {
+    private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
         try {
             JSONObject form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
             JSONObject stepOne = form.getJSONObject(JsonFormUtils.STEP1);
             JSONArray fields = stepOne.getJSONArray(JsonFormUtils.FIELDS);
             updateFormField(fields, "danger_signs_captured", dangerSigns);
             updateFormField(fields, "addo_medication_to_give", suggestedMeds);
+            updateFormField(fields, "referral_status", referralStatus);
             startFormActivity(form, getResources().getString(R.string.dispense_medication_title));
         } catch (JSONException e) {
             Timber.e(e);

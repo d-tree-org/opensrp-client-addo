@@ -20,7 +20,7 @@ public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragm
 
     @Override
     public void onSaveClick(LinearLayout mainView) {
-        validateAndWriteValues();
+        //validateAndWriteValues();
         checkAndStopCountdownAlarm();
         boolean isFormValid = isFormValid();
         if (isFormValid || Boolean.valueOf(mainView.getTag(com.vijay.jsonwizard.R.id.skip_validation).toString())) {
