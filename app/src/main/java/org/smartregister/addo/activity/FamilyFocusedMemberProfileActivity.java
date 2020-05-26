@@ -70,9 +70,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private FormUtils formUtils;
 
-    private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child ADDO Visit - Danger signs";
-    private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC ADDO Visit - Danger signs";
-    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC ADDO Visit - Danger signs";
+    private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
+    private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
+    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
     private static final String DISPENSE_MEDICINE_ENCOUNTER = "ADDO Visit - Dispense Medicine";
 
     @Override
@@ -304,7 +304,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 }
                 if(!buttonAction.isEmpty()) {
                     //refer
-                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
+                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
 
                     if (buttonAction.equalsIgnoreCase("refer")){
                         this.finish();
@@ -343,11 +343,20 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                             } else {
                                 suggestedMeds = getResources().getString(R.string.default_dispense_message);
                             }
+                            // Check if client has referral or to determine if they should be linked to another ADDO or not
+                            JSONArray step3Fields = form.getJSONObject(JsonFormUtils.STEP3).getJSONArray(JsonFormUtils.FIELDS);
+                            JSONObject referralButtonObject = JsonFormUtils.getFieldJSONObject(step3Fields, "save_n_refer");
+                            String referralStatus;
+                            if (referralButtonObject.optString(JsonFormUtils.VALUE) != null && referralButtonObject.optString(JsonFormUtils.VALUE).compareToIgnoreCase("true") == 0) {
+                                referralStatus = "referred";
+                            } else {
+                                referralStatus = null;
+                            }
 
-                            dispenseMedication(dangerSigns, suggestedMeds);
+                            dispenseMedication(dangerSigns, suggestedMeds, referralStatus);
                         }
                     } else {
-                        dispenseMedication(null, null);
+                        dispenseMedication(null, null, null);
                     }
                 }
 
@@ -389,13 +398,14 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         return clientPresent;
     }
 
-    private void dispenseMedication(String dangerSigns, String suggestedMeds) {
+    private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
         try {
             JSONObject form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
             JSONObject stepOne = form.getJSONObject(JsonFormUtils.STEP1);
             JSONArray fields = stepOne.getJSONArray(JsonFormUtils.FIELDS);
             updateFormField(fields, "danger_signs_captured", dangerSigns);
             updateFormField(fields, "addo_medication_to_give", suggestedMeds);
+            updateFormField(fields, "referral_status", referralStatus);
             startFormActivity(form, getResources().getString(R.string.dispense_medication_title));
         } catch (JSONException e) {
             Timber.e(e);

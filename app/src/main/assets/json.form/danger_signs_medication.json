@@ -61,6 +61,13 @@
         "type": "hidden"
       },
       {
+        "key": "referral_status",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden"
+      },
+      {
         "key": "addo_medication_to_give",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -251,6 +258,65 @@
         }
       },
       {
+        "key": "other_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Other medications?",
+        "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true
+        },
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "Yes",
+            "extra_info": "NOTE: Select this option for other medication other than on the list"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "No",
+            "extra_info": "NOTE: Select this option if all medications are on the list"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "medication_description",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Record other medication:",
+        "v_required": {
+          "value": "true",
+          "err": "Record other medications."
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "medications_selected",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -260,6 +326,46 @@
           "rules-engine": {
             "ex-rules": {
               "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "linkage_recommendation",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Do you recommend that the client visits another ADDO?",
+        "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true
+        },
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "Yes",
+            "extra_info": "NOTE: Select this option if ALL medications required was given"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "No",
+            "extra_info": "NOTE: Select this option if some medications required was not given"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
             }
           }
         }
@@ -316,7 +422,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "spacer",
         "type": "spacer",
-        "spacer_height": "10dp"
+        "spacer_height": "20dp"
       },
       {
         "key": "all_meds_dispensed",
@@ -324,7 +430,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Did you dispense all the medicines this client want?",
+        "label": "Were you able to dispense all the medications that the client needed?",
         "label_text_style": "bold",
         "exclusive": [
           "yes"
