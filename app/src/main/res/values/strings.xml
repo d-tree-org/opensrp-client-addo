@@ -423,5 +423,5 @@
     <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
-    <string name="referral_submitted"></string>
+    <string name="referral_submitted">Referral sent to health facility</string>
 </resources>
