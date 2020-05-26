@@ -36,6 +36,7 @@ import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.Repository;
+import org.smartregister.repository.TaskRepository;
 import org.smartregister.simprint.SimPrintsLibrary;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
@@ -248,4 +249,7 @@ public class AddoApplication extends DrishtiApplication {
         return AddoApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
     }
 
+    public TaskRepository getTaskRepository() {
+        return CoreLibrary.getInstance().context().getTaskRepository();
+    }
 }

@@ -1,10 +1,10 @@
 package org.smartregister.addo.sync.helper;
 
 import org.smartregister.CoreLibrary;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.TaskRepository;
 import org.smartregister.sync.helper.TaskServiceHelper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +26,7 @@ public class AddoTaskServiceHelper extends TaskServiceHelper {
 
     @Override
     protected List<String> getLocationIds() {
-        List<String> res = new ArrayList<>();
-        res.add("bb8e7fd4-f8d8-42d9-a71c-d659f9e2c64d");
-        return res;
+        return LocationHelper.getInstance().locationsFromHierarchy(true, null);
     }
 
     @Override
