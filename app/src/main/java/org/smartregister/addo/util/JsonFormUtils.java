@@ -75,7 +75,6 @@ import static org.smartregister.util.AssetHandler.jsonStringToJava;
 public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
     public static final String METADATA = "metadata";
     public static final String TITLE = "title";
-    public static final String ENCOUNTER_TYPE = "encounter_type";
     public static final int REQUEST_CODE_GET_JSON = 2244;
     public static final String CURRENT_OPENSRP_ID = "current_opensrp_id";
     public static final String READ_ONLY = "read_only";
