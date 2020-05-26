@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.smartregister.CoreLibrary;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.domain.Task;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 
@@ -23,15 +24,16 @@ import timber.log.Timber;
 
 public class ReferralUtils {
 
-    public static void createReferralTask(String baseEntityId, String focus, String jsonString) {
+    public static void createReferralTask(String baseEntityId, String focus, String jsonString, String villageTown) {
         Task task = new Task();
         task.setIdentifier(UUID.randomUUID().toString());
 
         String referralProblems = getReferralProblems(jsonString);
         AllSharedPreferences allSharedPreferences = CoreLibrary.getInstance().context().allSharedPreferences();
+        LocationHelper locationHelper = LocationHelper.getInstance();
 
         task.setPlanIdentifier(CoreConstants.REFERRAL_PLAN_ID);
-        task.setGroupIdentifier(allSharedPreferences.fetchUserLocalityId(allSharedPreferences.fetchRegisteredANM()));
+        task.setGroupIdentifier(locationHelper.getOpenMrsLocationId(villageTown));
         task.setStatus(Task.TaskStatus.READY);
         task.setBusinessStatus(CoreConstants.BUSINESS_STATUS.REFERRED);
         task.setPriority(1);
@@ -46,7 +48,7 @@ public class ReferralUtils {
         task.setOwner(allSharedPreferences.fetchRegisteredANM());
         task.setSyncStatus(BaseRepository.TYPE_Created);
         task.setRequester(allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM()));
-        task.setLocation(allSharedPreferences.fetchUserLocalityId(allSharedPreferences.fetchRegisteredANM()));
+        task.setLocation(locationHelper.getOpenMrsLocationId(villageTown));
         AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
     }
 
