@@ -1,33 +1,22 @@
 package org.smartregister.addo.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import org.smartregister.addo.R;
-import org.smartregister.addo.activity.AboveFiveChildProfileActivity;
-import org.smartregister.addo.activity.ChildProfileActivity;
-import org.smartregister.addo.activity.FamilyOtherMemberProfileActivity;
 import org.smartregister.addo.activity.FamilyProfileActivity;
 import org.smartregister.addo.model.FamilyProfileMemberModel;
 import org.smartregister.addo.provider.AddoMemberRegisterProvider;
-import org.smartregister.addo.util.ChildDBConstants;
-import org.smartregister.addo.util.ChildUtils;
-import org.smartregister.addo.util.Utils;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.family.fragment.BaseFamilyProfileMemberFragment;
 import org.smartregister.family.presenter.BaseFamilyProfileMemberPresenter;
 import org.smartregister.family.util.Constants;
-import org.smartregister.family.util.DBConstants;
 
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
-
-import static org.smartregister.addo.util.Constants.INTENT_KEY.IS_COMES_FROM_FAMILY;
 
 public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment {
 
@@ -75,43 +64,6 @@ public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment
             default:
                 break;
         }
-    }
-
-    public void goToProfileActivity(android.view.View view) {
-        if (view.getTag() instanceof CommonPersonObjectClient) {
-            CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
-            String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
-            if (org.smartregister.addo.util.Constants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
-                goToOtherMemberProfileActivity(commonPersonObjectClient);
-            } else {
-                goToChildProfileActivity(commonPersonObjectClient);
-            }
-        }
-    }
-
-    public void goToOtherMemberProfileActivity(CommonPersonObjectClient patient) {
-        Intent intent = new Intent(getActivity(), FamilyOtherMemberProfileActivity.class);
-        intent.putExtras(getArguments());
-        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
-        intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
-        intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, ((BaseFamilyProfileMemberPresenter) presenter).getFamilyHead());
-        intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, ((BaseFamilyProfileMemberPresenter) presenter).getPrimaryCaregiver());
-        startActivity(intent);
-    }
-
-    public void goToChildProfileActivity(CommonPersonObjectClient patient) {
-        String dobString = Utils.getDuration(Utils.getValue(patient.getColumnmaps(), DBConstants.KEY.DOB, false));
-        Integer yearOfBirth = ChildUtils.dobStringToYear(dobString);
-        Intent intent;
-        if (yearOfBirth != null && yearOfBirth >= 5) {
-            intent = new Intent(getActivity(), AboveFiveChildProfileActivity.class);
-        } else {
-            intent = new Intent(getActivity(), ChildProfileActivity.class);
-        }
-        intent.putExtras(getArguments());
-        intent.putExtra(IS_COMES_FROM_FAMILY, true);
-        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
-        startActivity(intent);
     }
 
     @Override

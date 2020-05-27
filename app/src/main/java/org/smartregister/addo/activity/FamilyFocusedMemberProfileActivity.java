@@ -3,7 +3,9 @@ package org.smartregister.addo.activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private TextView detailThreeView;
     private CircleImageView imageView;
     private CustomFontTextView ctvScreeningMed, ctvCommodities, ctvDispense;
+    private ProgressBar progressBar;
 
     private View familyHeadView;
     private View primaryCaregiverView;
@@ -70,10 +73,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private FormUtils formUtils;
 
-    private static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
-    private static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
-    private static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
-    private static final String DISPENSE_MEDICINE_ENCOUNTER = "ADDO Visit - Dispense Medicine";
+    public static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
+    public static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
+    public static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
 
     @Override
     protected void onCreation() {
@@ -93,6 +95,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         this.appBarLayout = findViewById(R.id.toolbar_appbarlayout_addo_focused);
 
         this.imageRenderHelper = new ImageRenderHelper(this);
+        progressBar = findViewById(R.id.progress_bar);
 
         initializePresenter();
 
@@ -122,6 +125,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         ctvCommodities = findViewById(R.id.tv_focused_client_commodities);
         ctvCommodities.setOnClickListener(this);
         ctvDispense = findViewById(R.id.tv_focused_client_dispense);
+        progressBar.setVisibility(View.GONE);
         ctvDispense.setOnClickListener(this);
     }
 
@@ -199,6 +203,15 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     @Override
+    public void displayProgressBar(boolean b) {
+        if (b) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onResumption() {
         super.onResumption();
         presenter().refreshProfileView();
@@ -235,6 +248,18 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean isChildClient() {
@@ -314,6 +339,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 Map<String, String> formForSubmission = new HashMap<>();
                 formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
+                submitForm(formForSubmission);
 
                 String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
 
@@ -359,8 +385,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                         dispenseMedication(null, null, null);
                     }
                 }
-
-                submitForm(formForSubmission);
 
             } catch (JSONException e) {
                 e.printStackTrace();

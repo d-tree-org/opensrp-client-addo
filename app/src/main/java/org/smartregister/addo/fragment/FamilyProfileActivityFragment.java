@@ -30,50 +30,6 @@ public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFrag
 
         super.setupViews(view);
         this.view = view;
-/**
-        Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
-        toolbar.setContentInsetsAbsolute(0, 0);
-        toolbar.setContentInsetsRelative(0, 0);
-        toolbar.setContentInsetStartWithNavigation(0);
-
-
-        NavigationMenu.getInstance(this.getActivity(), null, toolbar);
-
-        android.view.View navbarContainer = view.findViewById(R.id.register_nav_bar_container);
-        navbarContainer.setFocusable(false);
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        android.view.View searchBarLayout = view.findViewById(R.id.search_bar_layout);
-        searchBarLayout.setLayoutParams(params);
-        searchBarLayout.setBackgroundResource(R.color.addo_primary);
-        searchBarLayout.setPadding(searchBarLayout.getPaddingLeft(), searchBarLayout.getPaddingTop(), searchBarLayout.getPaddingRight(), (int) org.smartregister.addo.util.Utils.convertDpToPixel(10, getActivity()));
-
-        CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
-        if (titleView != null) {
-            titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(), titleView.getPaddingBottom());
-        }
-
-        android.view.View topLeftLayout = view.findViewById(R.id.top_left_layout);
-        topLeftLayout.setVisibility(android.view.View.GONE);
-
-        android.view.View topRightLayout = view.findViewById(R.id.top_right_layout);
-        topRightLayout.setVisibility(android.view.View.VISIBLE);
-
-        android.view.View sortFilterBarLayout = view.findViewById(R.id.register_sort_filter_bar_layout);
-        sortFilterBarLayout.setVisibility(android.view.View.GONE);
-
-        android.view.View filterSortLayout = view.findViewById(R.id.filter_sort_layout);
-        filterSortLayout.setVisibility(android.view.View.GONE);
-
-        dueOnlyLayout = view.findViewById(R.id.due_only_layout);
-        dueOnlyLayout.setVisibility(android.view.View.VISIBLE);
-        dueOnlyLayout.setOnClickListener(registerActionHandler);
-
-        if (getSearchView() != null) {
-            getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
-            getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_action_search, 0, 0, 0);
-            getSearchView().setTextColor(getResources().getColor(R.color.text_black));
-        } **/
 
     }
 

@@ -62,7 +62,6 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         Boresha Afya uses SyncFilter.LOCATION as an encryption parameter changing that to TEAM_ID
         instead causes the app to work for our server (Afyatek aws)
         */
-        //return SyncFilter.LOCATION;
         return SyncFilter.LOCATION;
     }
 

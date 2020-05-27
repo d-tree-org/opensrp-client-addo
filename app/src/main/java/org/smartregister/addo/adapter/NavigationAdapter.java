@@ -61,6 +61,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         NavigationOption model = navigationOptionList.get(position);
         holder.tvName.setText(context.getResources().getText(model.getTitleID()));
         holder.tvCount.setText(String.format(Locale.getDefault(), "%d", model.getRegisterCount()));
+        holder.tvCount.setVisibility(View.INVISIBLE);
 
         holder.ivIcon.setImageResource(model.getResourceID());
         holder.ivIcon.setColorFilter(context.getResources().getColor(R.color.pink_500));

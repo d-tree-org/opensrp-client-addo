@@ -27,6 +27,8 @@ public interface FamilyFocusedMemberProfileContract {
         void togglePrimaryCaregiver(boolean show);
 
         String getString(int id_with_value);
+
+        void displayProgressBar(boolean b);
     }
 
     interface Presenter extends BaseProfileContract.Presenter {

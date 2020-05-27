@@ -43,6 +43,4 @@ public class EmptystateView extends LinearLayout {
 
     }
 
-
-
 }
