@@ -1,6 +1,6 @@
 package org.smartregister.addo.service;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Nullable;
 import org.smartregister.AllConstants;

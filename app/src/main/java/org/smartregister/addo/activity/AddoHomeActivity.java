@@ -1,45 +1,43 @@
 package org.smartregister.addo.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import org.smartregister.addo.BuildConfig;
+import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
-import org.smartregister.addo.fragment.FamilyRegisterFragment;
-import org.smartregister.addo.listeners.FamilyRegisterBottomNavigationListener;
+import org.smartregister.addo.fragment.AddoHomeFragment;
+import org.smartregister.addo.fragment.AdvancedSearchFragment;
+import org.smartregister.addo.fragment.ScanFingerPrintFragment;
+import org.smartregister.addo.listeners.AddoBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
 import org.smartregister.family.presenter.BaseFamilyRegisterPresenter;
-import org.smartregister.family.util.JsonFormUtils;
-import org.smartregister.simprint.SimPrintsIdentification;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
-import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
 public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     private String action = null;
     private static final int IDENTIFY_RESULT_CODE = 4061;
+    private String sessionId = null;
+    private WeakReference<AdvancedSearchFragment> advancedSearchFragmentWR;
 
-
-    public void startFamilyRegisterForm(){
-        Intent intent = new Intent(this, AddoHomeActivity.class);
-        intent.putExtra(Constants.ACTIVITY_PAYLOAD.ACTION, Constants.ACTION.START_REGISTRATION);
-        startActivity(intent);
-    }
 
     public void startSimprintsId(){
 
-        SimPrintsIdentifyActivity.StartSimprintsIdentifyActivity(AddoHomeActivity.this,
+        // This is where the session starts, need to find a way to define this session for the confirmation
+        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(AddoHomeActivity.this,
                 BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
     }
 
@@ -63,19 +61,36 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new FamilyRegisterFragment();
+        return new AddoHomeFragment();
     }
 
     @Override
     protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
+
+        Fragment[] fragments = new Fragment[2];
+        fragments[0] = new AdvancedSearchFragment();
+        fragments[1] = new ScanFingerPrintFragment();
+
+        return fragments;
+    }
+
+    protected AdvancedSearchFragment getAdvancedSearchFragment() {
+
+        if (advancedSearchFragmentWR == null || advancedSearchFragmentWR.get() == null) {
+            advancedSearchFragmentWR = new WeakReference<>(new AdvancedSearchFragment());
+        }
+
+        return advancedSearchFragmentWR.get();
     }
 
     @Override
     protected void onResumption() {
-        super.onResumption();
-        NavigationMenu.getInstance(this,null, null).getNavigationAdapter()
-                .setSelectedView(Constants.DrawerMenu.ALL_FAMILIES);
+ //       super.onResumption();
+        NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
+        if (menu != null) {
+            menu.getNavigationAdapter()
+                    .setSelectedView(Constants.DrawerMenu.ALL_FAMILIES);
+        }
     }
 
 
@@ -87,50 +102,9 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
-
-        FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
+        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
+        AddoBottomNavigationListener listener = new AddoBottomNavigationListener(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON && resultCode != RESULT_OK && StringUtils.isNotBlank(action)) {
-            finish();
-        }else if (requestCode == IDENTIFY_RESULT_CODE && resultCode == RESULT_OK){
-
-            ArrayList<SimPrintsIdentification> identifications = new ArrayList<>();
-            if (data != null){
-                identifications = (ArrayList<SimPrintsIdentification>) data.getSerializableExtra("intent_data");
-            }
-
-            String guid = null;
-            SimPrintsIdentification simPrintsIdentification;
-            if (identifications.size() > 0){
-                simPrintsIdentification = identifications.get(0);
-                guid = simPrintsIdentification.getGuid();
-            }
-            onFingerprintSuccesfullyScanned(guid);
-//            Toast.makeText(this, "Welcome back from Simprints ID "+guid, Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-
-    private void onFingerprintSuccesfullyScanned(String guid){
-
-        if (TextUtils.isEmpty(guid)){
-            Toast.makeText(this, "User not Found!", Toast.LENGTH_LONG).show();
-        }else {
-
-            String id = org.smartregister.addo.util.JsonFormUtils.lookForClientsUniqueId(guid);
-
-            FamilyRegisterFragment fragment = (FamilyRegisterFragment) mBaseFragment;
-            fragment.fingerprintScannedSuccessfully(id);
-            //fragment.setSearchTerm(id);
-        }
-
     }
 
     @Override
@@ -140,6 +114,22 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             if (navigationMenu != null) {
                 //navigationMenu.startP2PActivity(this);
             }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Inner Class //////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static class AddoHomeSharedViewModel extends ViewModel {
+        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
+
+        public AddoHomeSharedViewModel() {}
+
+        public void setSelectedVillage(String village) {
+            selectedVillage.setValue(village);
+        }
+
+        public LiveData<String> getSelectedVillage() {
+            return selectedVillage;
         }
     }
 }

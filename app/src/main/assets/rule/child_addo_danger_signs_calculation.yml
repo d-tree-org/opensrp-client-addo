@@ -1,0 +1,541 @@
+---
+name: step2_danger_signs_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_difficult_drinking')) {
+            selected += '\u2022 Difficult Drinking/Sulking <br />';
+        }
+        if (selectedItem.contains('chk_difficult_breathing')) {
+            selected += '\u2022 Difficulty breathing <br />';
+        }
+        if (selectedItem.contains('chk_fast_breathing')) {
+            selected += '\u2022 Fast breathing <br />';
+        }
+        if (selectedItem.contains('chk_chest_indrawing')) {
+            selected += '\u2022 Chest in-drawing <br />';
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            selected += '\u2022 Convulsions/fits <br />';
+        }
+        if (selectedItem.contains('chk_extreme_cold_or_hot')) {
+            selected += '\u2022 Extreme cold or hot body temperature <br />';
+        }
+        if (selectedItem.contains('chk_oversleeping')) {
+            selected += '\u2022 Oversleeping/difficulty waking up <br />';
+        }
+        if (selectedItem.contains('chk_redness_around_umbilical')) {
+            selected += '\u2022 Redness around/discharge from umbilical cord <br />';
+        }
+        if (selectedItem.contains('chk_body_rashes')) {
+            selected += '\u2022 Body rashes discharging pus <br />';
+        }
+        if (selectedItem.contains('chk_eye_discharge')) {
+            selected += '\u2022 Pus discharge from eyes <br />';
+        }
+        if (selectedItem.contains('chk_grunting_voice')) {
+            selected += '\u2022 Grunting voice <br />';
+        }
+        if (selectedItem.contains('chk_malnutrition')) {
+            selected += '\u2022 Malnutrition <br />';
+        }
+        if (selectedItem.contains('chk_not_getting_better')) {
+            selected += '\u2022 Not getting better after treatment <br />';
+        }
+        if (selectedItem.contains('chk_severe_vomit')) {
+            selected += '\u2022 Severe vomiting <br />';
+        }
+        if (selectedItem.contains('chk_weak')) {
+            selected += '\u2022 Very weak/unconscious <br />';
+        }
+        if (selectedItem.contains('chk_watery_stool_3_times_a_day')) {
+            selected += '\u2022 Smooth/watery stool 3 times or more a day <br />';
+        }
+        if (selectedItem.contains('chk_watery_stool_for_14_days_more')) {
+            selected += '\u2022 Smooth/watery stool for 14 days or more <br />';
+        }
+        if (selectedItem.contains('chk_bloody_stool')) {
+            selected += '\u2022 Bloody stool <br />';
+        }
+        if (selectedItem.contains('chk_diarrhea')) {
+            selected += '\u2022 Diarrhea <br />';
+        }
+        if (selectedItem.contains('chk_sunk_eyes')) {
+            selected += '\u2022 Sunk Eyes <br />';
+        }
+        if (selectedItem.contains('chk_blue_lips')) {
+            selected += '\u2022 Blue lips <br />';
+        }
+        if (selectedItem.contains('chk_constipation')) {
+            selected += '\u2022 Constipation or difficult urinating <br />';
+        }
+        if (selectedItem.contains('chk_coughing')) {
+            selected += '\u2022 Coughing <br />';
+        }
+        if (selectedItem.contains('chk_cold_flu')) {
+            selected += '\u2022 Running nose/ Cold/ flu <br />';
+        }
+        if (selectedItem.contains('chk_sore_throat')) {
+            selected += '\u2022 Sore throat <br />';
+        }
+        if (selectedItem.contains('chk_sneezing')) {
+            selected += '\u2022 Sneezing <br />';
+        }
+        if (selectedItem.contains('chk_headache')) {
+            selected += '\u2022 Headache <br />';
+        }
+        if (selectedItem.contains('chk_fever')) {
+            selected += '\u2022 Fever <br />';
+        }
+        if (selectedItem.contains('chk_body_chills')) {
+            selected += '\u2022 Body chills/shivering <br />';
+        }
+        if (selectedItem.contains('chk_vomiting')) {
+            selected += '\u2022 Vomiting <br />';
+        }
+        if (selectedItem.contains('chk_lack_of_appetite')) {
+            selected += '\u2022 Lack of appetite <br />';
+        }
+        if (selectedItem.contains('chk_feels_thirsty')) {
+            selected += '\u2022 Feels thirsty <br />';
+        }
+        if (selectedItem.contains('chk_excessive_crying_discomfort')) {
+            selected += '\u2022 Excessive crying and discomfort <br />';
+        }
+        if (selectedItem.contains('chk_no_movement')) {
+            selected += '\u2022 No movement <br />';
+        }
+        if (selectedItem.contains('chk_jaundiced')) {
+            selected += '\u2022 Pale or jaundiced <br />';
+        }
+        if (selectedItem.contains('chk_mild_diarrhea_without_blood')) {
+            selected += '\u2022 Mild diarrhea without blood (less than 3 times in 24 hrs) <br />';
+        }
+        if (selectedItem.contains('chk_minor_skin_infections')) {
+            selected += '\u2022 Minor skin infections <br />';
+        }
+        if (selectedItem.contains('chk_minor_wound_cuts')) {
+            selected += '\u2022 Minor wounds or cuts <br />';
+        }
+        if (selectedItem.contains('chk_other')) {
+            selected += '\u2022 ' + otherIllnesses + '<br />';
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_danger_signs_present_child, step2_other_illness_description) "
+
+---
+name: step2_child_conditions
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getChildConditions(selectedItem) {
+        import java.lang.*;
+
+        String conditions = '';
+        if ((selectedItem.contains('chk_coughing') || selectedItem.contains('chk_body_chills')) ||
+            selectedItem.contains('chk_cold_flu') || selectedItem.contains('chk_sore_throat') ||
+            selectedItem.contains('chk_sneezing') || selectedItem.contains('chk_minor_skin_infections') ||
+            selectedItem.contains('chk_mild_diarrhea_without_blood') || selectedItem.contains('chk_minor_wound_cuts')) {
+            if (conditions.isEmpty()) {
+              conditions += 'other_minor_illness';
+            } else {
+              conditions += ',other_minor_illness';
+            }
+        }
+        if (selectedItem.contains('chk_other')) {
+            if (conditions.isEmpty()) {
+              conditions += 'other_conditions';
+            } else {
+              conditions += ',other_conditions';
+            }
+        }
+        if (selectedItem.contains('chk_headache')) {
+            if (conditions.isEmpty()) {
+              conditions += 'headache';
+            } else {
+              conditions += ',headache';
+            }
+        }
+        if (selectedItem.contains('chk_oversleeping') || selectedItem.contains('chk_redness_around_umbilical') ||
+            selectedItem.contains('chk_body_rashes') || selectedItem.contains('chk_eye_discharge') ||
+            selectedItem.contains('chk_extreme_cold_or_hot')) {
+            if (conditions.isEmpty()) {
+                conditions += 'oversleeping_umbilica_rashes_puseyes';
+            } else {
+                conditions += ',oversleeping_umbilica_rashes_puseyes';
+            }
+
+        }
+        if (selectedItem.contains('chk_difficult_drinking') || selectedItem.contains('chk_difficult_breathing') ||
+            selectedItem.contains('chk_fast_breathing') || selectedItem.contains('chk_chest_indrawing') ||
+            selectedItem.contains('chk_convulsions') || selectedItem.contains('chk_sunk_eyes') ||
+            selectedItem.contains('chk_grunting_voice') || selectedItem.contains('chk_not_getting_better') ||
+            selectedItem.contains('chk_severe_vomit') || selectedItem.contains('chk_weak') ||
+            selectedItem.contains('chk_bloody_stool') || selectedItem.contains('chk_excessive_crying_discomfort') ||
+            selectedItem.contains('chk_malnutrition') || selectedItem.contains('chk_lack_of_appetite') ||
+            selectedItem.contains('chk_blue_lips') || selectedItem.contains('chk_constipation') ||
+            selectedItem.contains('chk_no_movement') || selectedItem.contains('chk_jaundiced')) {
+            if (conditions.isEmpty()) {
+              conditions += 'general_conditions_for_referral';
+            } else {
+              conditions += ',general_conditions_for_referral';
+            }
+        }
+        if ((selectedItem.contains('chk_extreme_cold_or_hot') && (selectedItem.contains('chk_body_chills') ||
+            selectedItem.contains('chk_severe_vomit') || selectedItem.contains('chk_watery_stool_3_times_a_day') ||
+            selectedItem.contains('chk_lack_of_appetite'))) && !(selectedItem.contains('chk_difficult_drinking') ||
+            selectedItem.contains('chk_convulsions') || selectedItem.contains('chk_weak'))) {
+            if (conditions.isEmpty()) {
+                conditions += 'malaria';
+            } else {
+                conditions += ',malaria';
+            }
+
+        }
+        if ((selectedItem.contains('chk_extreme_cold_or_hot') && (selectedItem.contains('chk_body_chills') ||
+            selectedItem.contains('chk_severe_vomit') || selectedItem.contains('chk_watery_stool_3_times_a_day') ||
+             selectedItem.contains('chk_lack_of_appetite'))) && (selectedItem.contains('chk_difficult_drinking') ||
+            selectedItem.contains('chk_convulsions') || selectedItem.contains('chk_weak'))) {
+            if (conditions.isEmpty()) {
+                conditions += 'severe_malaria';
+            } else {
+                conditions += ',severe_malaria';
+            }
+        }
+        if ((selectedItem.contains('chk_coughing') && (selectedItem.contains('chk_fast_breathing') ||
+            selectedItem.contains('chk_difficult_breathing'))) && !(selectedItem.contains('chk_difficult_drinking') ||
+            selectedItem.contains('chk_chest_indrawing') || selectedItem.contains('chk_convulsions') ||
+            selectedItem.contains('chk_extreme_cold_or_hot') || selectedItem.contains('chk_grunting_voice') ||
+            selectedItem.contains('chk_weak'))) {
+            if (conditions.isEmpty()) {
+                conditions += 'pneumonia';
+            } else {
+                conditions += ',pneumonia';
+            }
+        }
+        if ((selectedItem.contains('chk_coughing') && (selectedItem.contains('chk_fast_breathing') ||
+            selectedItem.contains('chk_difficult_breathing'))) && (selectedItem.contains('chk_difficult_drinking') ||
+            selectedItem.contains('chk_chest_indrawing') || selectedItem.contains('chk_convulsions') ||
+            selectedItem.contains('chk_extreme_cold_or_hot') || selectedItem.contains('chk_grunting_voice') ||
+            selectedItem.contains('chk_weak'))) {
+            if (conditions.isEmpty()) {
+              conditions += 'severe_pneumonia';
+            } else {
+              conditions += ',severe_pneumonia';
+            }
+        }
+        if ((selectedItem.contains('chk_watery_stool_3_times_a_day') || (selectedItem.contains('chk_watery_stool_3_times_a_day') &&
+            (selectedItem.contains('chk_sunk_eyes') || selectedItem.contains('chk_feels_thirsty') ||
+            selectedItem.contains('chk_excessive_crying_discomfort')))) && !selectedItem.contains('chk_bloody_stool')) {
+            if (conditions.isEmpty()) {
+              conditions += 'diarrhea_without_blood';
+            } else {
+              conditions += ',diarrhea_without_blood';
+            }
+        }
+        if ((selectedItem.contains('chk_watery_stool_3_times_a_day') && (selectedItem.contains('chk_difficult_drinking') ||
+            selectedItem.contains('chk_severe_vomit') || selectedItem.contains('chk_convulsions') ||
+            selectedItem.contains('chk_weak'))) && !selectedItem.contains('chk_bloody_stool')) {
+            if (conditions.isEmpty()) {
+              conditions += 'severe_diarrhea_without_blood';
+            } else {
+              conditions += ',severe_diarrhea_without_blood';
+            }
+        }
+        if (selectedItem.contains('chk_watery_stool_3_times_a_day') && selectedItem.contains('chk_bloody_stool')) {
+            if (conditions.isEmpty()) {
+              conditions += 'bloody_diarrhea';
+            } else {
+              conditions += ',bloody_diarrhea';
+            }
+        }
+        if (selectedItem.contains('chk_watery_stool_for_14_days_more')) {
+            if (conditions.isEmpty()) {
+              conditions += 'chronic_diarrhea';
+            } else {
+              conditions += ',chronic_diarrhea';
+            }
+        }
+        return conditions;
+  }"
+  - "calculation = getChildConditions(step2_danger_signs_present_child)"
+
+---
+name: step2_addo_actions
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getAddoAdviceForConditions(stringCondition) {
+        import java.lang.*;
+        import java.util.*;
+
+        String[] arrayConditions = stringCondition.split(',');
+        List condition = Arrays.asList(arrayConditions);
+
+        String addoAdviceMessage = '';
+        if (condition.contains('other_minor_illness') && !(condition.contains('oversleeping_umbilica_rashes_puseyes') ||
+        condition.contains('general_conditions_for_referral'))) {
+            addoAdviceMessage += '<br /> Manage as needed and counsel the caretaker on home remedies <br />';
+        }
+
+        if (condition.contains('other_conditions') && !condition.contains('other_minor_illness')) {
+            addoAdviceMessage += '<br /> Manage as needed according to guidelines <br />';
+        }
+
+        if (condition.contains('headache') && !(condition.contains('other_conditions') || condition.contains('other_minor_illness'))) {
+            addoAdviceMessage += '<br /> Counsel the caretaker on home remedies <br />';
+        }
+
+        if ((condition.contains('oversleeping_umbilica_rashes_puseyes') || condition.contains('general_conditions_for_referral')) &&
+            !(condition.contains('malaria') || condition.contains('bloody_diarrhea') || condition.contains('pneumonia') ||
+            condition.contains('diarrhea_without_blood') || condition.contains('severe_pneumonia'))) {
+            addoAdviceMessage += '<br /> Advice the caretaker to take the child to the health facility immediately <br />';
+        }
+        if (condition.contains('malaria') && !condition.contains('severe_malaria')) {
+            addoAdviceMessage += '<br /> The child has symptoms of malaria and needs to be taken to the health facility immediately.' +
+                                 '<br /> Counsel the caretaker on malaria in children. <br />';
+
+        }
+        if (condition.contains('severe_malaria')) {
+            addoAdviceMessage += '<br /> The child has symptoms of severe malaria and needs to be taken to the health facility immediately.' +
+                                  '<br /> Counsel the caretaker on malaria in children. <br />';
+        }
+        if (condition.contains('pneumonia') && !condition.contains('severe_pneumonia')) {
+            addoAdviceMessage += '<br /> The child has symptoms of pneumonia and needs to be immediately referred to a health facility.' +
+                                  '<br /> Counsel the caretaker on pneumonia in children. <br />';
+        }
+        if (condition.contains('severe_pneumonia')) {
+            addoAdviceMessage += '<br /> The child has symptoms of severe pneumonia and needs to be immediately referred to a health facility.' +
+                                  '<br /> Counsel the caretaker on pneumonia in children. <br />';
+        }
+        if (condition.contains('diarrhea_without_blood') && !(condition.contains('bloody_diarrhea') || condition.contains('chronic_diarrhea') ||
+            condition.contains('severe_diarrhea_without_blood'))) {
+            addoAdviceMessage += '<br /> The child has symptoms of diarrhea. <br /> Counsel the caretaker on diarrhea in children and ' +
+                                  'dispense ORS and Zinc Tablets. <br />';
+        }
+        if (condition.contains('severe_diarrhea_without_blood') && !(condition.contains('bloody_diarrhea') || condition.contains('chronic_diarrhea'))) {
+            addoAdviceMessage += '<br /> The child has symptoms of severe diarrhea and needs to be immediately referred to a health facility.<br />' +
+                                  'Counsel the caretaker on diarrhea in and dispense ORS and Zinc Tablets. <br />';
+        }
+        if (condition.contains('bloody_diarrhea')) {
+            addoAdviceMessage += '<br /> The child has symptoms of bloody diarrhea and needs to be immediately referred to a health facility.' +
+                                 '<br > Dispense Erythromicin, Zinc tablet and ORS. Counsel the caretaker on diarrhea in children. <br />';
+        }
+        if (condition.contains('chronic_diarrhea')) {
+            addoAdviceMessage += '<br /> The child has symptoms of chronic diarrhea and needs to be immediately referred to a health facility.' +
+                                 '<br > Dispense Zinc tablet and ORS. Counsel the caretaker on diarrhea in children. <br />';
+        }
+        return addoAdviceMessage;
+  }"
+  - "calculation = getAddoAdviceForConditions(step2_child_conditions)"
+
+---
+name: step2_addo_medication_to_give
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getAddoMedicationForConditions(condition) {
+        import java.lang.*;
+
+        String medication = '';
+        if (condition.contains('headache') || condition.contains('oversleeping_umbilica_rashes_puseyes') ||
+            condition.contains('malaria') || condition.contains('severe_malaria')) {
+            if (medication.isEmpty()) {
+                medication += 'Dispense: <br /> \u2022 Paracetamol<br />';
+            } else {
+                medication += '\u2022 Paracetamol<br />';
+            }
+        }
+
+        if (condition.contains('pneumonia') || condition.contains('severe_pneumonia')) {
+            if (medication.isEmpty()) {
+                medication += 'Dispense: <br /> \u2022 Amoxicillin dispersible tablets; if no dispersible tablets are available, dispense amoxicillin syrup.<br />';
+            } else {
+                medication += '\u2022 Amoxicillin dispersible tablets; if no dispersible tablets are available, dispense amoxicillin syrup.<br />';
+            }
+        }
+
+        if (condition.contains('diarrhea_without_blood') || condition.contains('bloody_diarrhea') ||
+            condition.contains('chronic_diarrhea') || condition.contains('severe_diarrhea_without_blood')) {
+            if (medication.isEmpty()) {
+                medication += 'Dispense: <br /> \u2022 ORS and Zinc tablets<br />';
+            } else {
+                medication += '\u2022 ORS and Zinc tablets<br />';
+            }
+        }
+        if (condition.contains('bloody_diarrhea')) {
+            if (medication.isEmpty()) {
+                medication += 'Dispense: <br /> \u2022 Erythromicin <br />';
+            } else {
+                medication += '\u2022 Erythromicin <br />';
+            }
+
+        }
+        return medication.isEmpty() ? 'Manage as needed <br />' : medication;
+  }"
+  - "calculation = getAddoMedicationForConditions(step2_child_conditions)"
+
+---
+name: step2_condition_urgency
+description: The urgency of the condition
+priority: 1
+condition: "true"
+actions:
+  - "calculation = (step2_child_conditions.contains('oversleeping_umbilica_rashes_puseyes') || step2_child_conditions.contains('malaria') || step2_child_conditions.contains('severe_malaria') || step2_child_conditions.contains('pneumonia') || step2_child_conditions.contains('severe_pneumonia') || step2_child_conditions.contains('severe_diarrhea_without_blood') || step2_child_conditions.contains('bloody_diarrhea') || step2_child_conditions.contains('chronic_diarrhea') || step2_child_conditions.contains('general_conditions_for_referral')) ? 'urgent danger sign(s)' : 'condition(s)'"
+
+---
+name: step3_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step2_danger_signs_captured, 'addo_actions': step2_addo_actions, 'addo_medication_to_give': step2_addo_medication_to_give, 'child_conditions':step2_child_conditions, 'condition_urgency':step2_condition_urgency]" #Remove child condition this is just for testing
+
+################################################################### Swahili Calculations ####################################################################
+---
+name: step1_danger_signs_captured_sw
+description: Get the danger signs that were selected in SW
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_difficult_drinking')) {
+            if (selected.isEmpty()) {
+                selected += 'Kushindwa kunyonya/kunywa';
+            } else {
+                selected += ', Kushindwa kunyonya/kunywa \n';
+            }
+
+        }
+        if (selectedItem.contains('chk_difficult_breathing')) {
+            if (selected.isEmpty()) {
+                selected += 'Kupumua kwa shida';
+            } else {
+                selected += ', Kupumua kwa shida';
+            }
+        }
+        if (selectedItem.contains('chk_chest_indrawing')) {
+            if (selected.isEmpty()) {
+                selected += 'Kifua kubonyea sana';
+            } else {
+                selected += ', Kifua kubonyea sana';
+            }
+        }
+        if (selectedItem.contains('chk_convulsions')) {
+            if (selected.isEmpty()) {
+                selected += 'Degedege / Mtukutiko wa mwili';
+            } else {
+                selected += ', Degedege / Mtukutiko wa mwili';
+            }
+        }
+        if (selectedItem.contains('chk_extreme_cold_or_hot')) {
+            if (selected.isEmpty()) {
+                selected += 'Mwili kuwa baridi au joto sana';
+            } else {
+                selected += ', Mwili kuwa baridi au joto sana';
+            }
+        }
+        if (selectedItem.contains('chk_oversleeping')) {
+            if (selected.isEmpty()) {
+                selected += 'Kulala sana/kishindwa kuamka haraka';
+            } else {
+                selected += ', Kulala sana/kishindwa kuamka haraka';
+            }
+        }
+        if (selectedItem.contains('chk_redness_around_umbilical')) {
+            if (selected.isEmpty()) {
+                selected += 'Kitovu chekundu au kinachotoa usaha';
+            } else {
+                selected += ', Kitovu chekundu au kinachotoa usaha';
+            }
+        }
+        if (selectedItem.contains('chk_body_rashes')) {
+            if (selected.isEmpty()) {
+                selected += 'Vipele vyenye usaha mwilini';
+            } else {
+                selected += ', Vipele vyenye usaha mwilini';
+            }
+        }
+        if (selectedItem.contains('chk_eye_discharge')) {
+            if (selected.isEmpty()) {
+                selected += 'Macho yanayotoa usaha';
+            } else {
+                selected += ', Macho yanayotoa usaha';
+            }
+        }
+        if (selectedItem.contains('chk_grunting_voice')) {
+            if (selected.isEmpty()) {
+                selected += 'Sauti ya mtoto kuugulia';
+            } else {
+                selected += ', Sauti ya mtoto kuugulia';
+            }
+        }
+        if (selectedItem.contains('chk_malnutrition')) {
+            if (selected.isEmpty()) {
+                selected += 'Utapiamlo';
+            } else {
+                selected += ', Utapiamlo';
+            }
+        }
+        if (selectedItem.contains('chk_not_getting_better')) {
+            if (selected.isEmpty()) {
+                selected += 'Kutopata nafuu hata baada ya kupata tiba';
+            } else {
+                selected += ', Kutopata nafuu hata baada ya kupata tiba';
+            }
+        }
+        if (selectedItem.contains('chk_severe_vomit')) {
+            if (selected.isEmpty()) {
+                selected += 'Anatapika kila kitu';
+            } else {
+                selected += ', Anatapika kila kitu';
+            }
+        }
+        if (selectedItem.contains('chk_weak')) {
+            if (selected.isEmpty()) {
+                selected += 'Amelegea sana/hana fahamu';
+            } else {
+                selected += ', Amelegea sana/hana fahamu';
+            }
+        }
+        if (selectedItem.contains('chk_diarrhea')) {
+            if (selected.isEmpty()) {
+                selected += 'Kuharisha';
+            } else {
+                selected += ', Kuharisha';
+            }
+        }
+        if (selectedItem.contains('chk_sunk_eyes')) {
+            if (selected.isEmpty()) {
+                selected += 'Macho kuingia ndani';
+            } else {
+                selected += ', Macho kuingia ndani';
+            }
+        }
+        if (selectedItem.contains('chk_other')) {
+            if (selected.isEmpty()) {
+                selected += otherIllnesses;
+            } else {
+                selected += ', '+otherIllnesses;
+            }
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step1_danger_signs_present_child, step1_illness_description_1m5yr) "
+---
+name: step1_danger_signs_present_toaster_sw
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured_sw': step1_danger_signs_captured_sw]"

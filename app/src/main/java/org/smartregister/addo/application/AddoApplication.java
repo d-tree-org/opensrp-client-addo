@@ -22,6 +22,8 @@ import org.smartregister.addo.service.AddoAuthorizationService;
 import org.smartregister.addo.sync.AddoClientProcessor;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.Constants;
+import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
@@ -34,6 +36,7 @@ import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.Repository;
+import org.smartregister.repository.TaskRepository;
 import org.smartregister.simprint.SimPrintsLibrary;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
@@ -87,11 +90,12 @@ public class AddoApplication extends DrishtiApplication {
         CoreLibrary.getInstance().setEcClientFieldsFile(Constants.EC_CLIENT_FIELDS);
 
 
-        ConfigurableViewsLibrary.init(context, getRepository());
-        FamilyLibrary.init(context, getRepository(), getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+        ConfigurableViewsLibrary.init(context);
+        FamilyLibrary.init(context, getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
-        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID);
+        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
+        AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 
@@ -101,6 +105,8 @@ public class AddoApplication extends DrishtiApplication {
         //scheduleJobs();
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.ALLOWED_LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
         SyncStatusBroadcastReceiver.init(this);
+
+        CoreConstants.JSON_FORM.setLocaleAndAssetManager(getCurrentLocale(), getAssets());
 
         setServerURL();
 
@@ -243,4 +249,7 @@ public class AddoApplication extends DrishtiApplication {
         return AddoApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
     }
 
+    public TaskRepository getTaskRepository() {
+        return CoreLibrary.getInstance().context().getTaskRepository();
+    }
 }

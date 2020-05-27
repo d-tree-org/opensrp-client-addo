@@ -1,8 +1,7 @@
 package org.smartregister.addo.job;
 
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
@@ -38,6 +37,8 @@ public class AddoJobCreator implements JobCreator {
                 return new ImageUploadServiceJob();
             case P2pServiceJob.TAG:
                 return new P2pServiceJob();
+            case AddoTaskServiceJob.TAG:
+                return new AddoTaskServiceJob();
             default:
                 Timber.d( "Looks like you tried to create a job " + tag + " that is not declared in the Chw Job Creator");
                 return null;

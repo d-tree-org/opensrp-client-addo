@@ -4,6 +4,7 @@
     <color name="colorPrimary">#8A1A51</color>
     <color name="colorPrimaryDark">#660d39</color>
     <color name="colorAccent">#8A1A51</color>
+    <color name="colorWhite">#FFFFFF</color>
 
     <!--<color name="chw_primary">#218CC5</color>-->
     <color name="addo_primary">#8A1A51</color>
@@ -79,5 +80,10 @@
     <color name="card_white">#ffffff</color>
     <color name="card_shadow">#8c666666</color>
     <color name="bottom_nav_bar_selected_background">#8A1A51</color>
+
+    <color name="record_weight_grey_bg_end">#ebebeb</color>
+    <color name="record_weight_grey_bg_st">#f4f4f4</color>
+
+    <color name="contact_complete_grey_border">#CDCDCD</color>
 
 </resources>
