@@ -1,5 +1,8 @@
 package org.smartregister.addo.presenter;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.interactor.FamilyFocusedMemberProfileInteractor;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -114,13 +117,19 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
 
     @Override
     public void onSubmitted(boolean successful) {
+        if (successful) {
+            viewReference.get().displayProgressBar(false);
+            Toast.makeText((Activity) this.getView(), "Submitted ...", Toast.LENGTH_SHORT).show();
+        } else {
+            viewReference.get().displayProgressBar(true);
+        }
 
     }
 
     @Override
     public void submitVisit(Map<String, String> formForSubmission) {
         if (viewReference.get() != null) {
-            //viewReference.get().displayProgressBar(true);
+            viewReference.get().displayProgressBar(true);
             interactor.submitVisit(false, baseEntityId, formForSubmission, this);
         }
     }
