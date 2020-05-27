@@ -16,7 +16,7 @@ import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.fragment.AddoHomeFragment;
 import org.smartregister.addo.fragment.AdvancedSearchFragment;
 import org.smartregister.addo.fragment.ScanFingerPrintFragment;
-import org.smartregister.addo.listeners.FamilyRegisterBottomNavigationListener;
+import org.smartregister.addo.listeners.AddoBottomNavigationListener;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
@@ -64,11 +64,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         return new AddoHomeFragment();
     }
 
-    /*@Override
-    protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
-    }*/
-
     @Override
     protected Fragment[] getOtherFragments() {
 
@@ -91,8 +86,11 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     @Override
     protected void onResumption() {
  //       super.onResumption();
-        NavigationMenu.getInstance(this,null, null).getNavigationAdapter()
-                .setSelectedView(Constants.DrawerMenu.ALL_FAMILIES);
+        NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
+        if (menu != null) {
+            menu.getNavigationAdapter()
+                    .setSelectedView(Constants.DrawerMenu.ALL_FAMILIES);
+        }
     }
 
 
@@ -105,7 +103,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
         bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
         bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
-        FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
+        AddoBottomNavigationListener listener = new AddoBottomNavigationListener(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
 
