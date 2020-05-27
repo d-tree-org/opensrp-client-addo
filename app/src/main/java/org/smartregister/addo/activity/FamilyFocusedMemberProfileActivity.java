@@ -339,6 +339,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 Map<String, String> formForSubmission = new HashMap<>();
                 formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
+                submitForm(formForSubmission);
 
                 String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
 
@@ -384,8 +385,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                         dispenseMedication(null, null, null);
                     }
                 }
-
-                submitForm(formForSubmission);
 
             } catch (JSONException e) {
                 e.printStackTrace();
