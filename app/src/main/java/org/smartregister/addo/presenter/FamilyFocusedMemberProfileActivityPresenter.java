@@ -121,7 +121,8 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
             viewReference.get().displayProgressBar(false);
             Toast.makeText((Activity) this.getView(), "Submitted ...", Toast.LENGTH_SHORT).show();
         } else {
-            viewReference.get().displayProgressBar(true);
+            viewReference.get().displayProgressBar(false);
+            Toast.makeText((Activity) this.getView(), "Not submitted ...", Toast.LENGTH_SHORT).show();
         }
 
     }
