@@ -5,11 +5,8 @@ public class Constants {
     public static String EC_CLIENT_FIELDS = "ec_client_fields.json";
 
     public static class CONFIGURATION {
-        public static final String LOGIN = "login";
         public static final String FAMILY_REGISTER = "family_register";
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
-        public static final String ANC_REGISTER = "anc_register";
-        public static final String MALARIA_REGISTER = "anc_malaria_confirmation";
 
     }
 

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyProfileExtendedContract;
 import org.smartregister.addo.custom_views.FamilyFloatingMenu;
@@ -43,14 +41,12 @@ import org.smartregister.family.activity.BaseFamilyProfileActivity;
 import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.fragment.BaseFamilyProfileMemberFragment;
 import org.smartregister.family.util.Constants;
-import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.util.PermissionUtils;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import timber.log.Timber;
 
 public class FamilyProfileActivity extends BaseFamilyProfileActivity implements FamilyProfileExtendedContract.View {
 
@@ -118,13 +114,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         BaseFamilyProfileMemberFragment profileMemberFragment = FamilyProfileMemberFragment.newInstance(this.getIntent().getExtras());
-        //BaseFamilyProfileDueFragment profileDueFragment = FamilyProfileDueFragment.newInstance(this.getIntent().getExtras());
-        //BaseFamilyProfileActivityFragment profileActivityFragment = FamilyProfileActivityFragment.newInstance(this.getIntent().getExtras());
 
         adapter.addFragment(profileMemberFragment, this.getString(R.string.family_members).toUpperCase());
-        //adapter.addFragment(profileDueFragment, this.getString(org.smartregister.family.R.string.due).toUpperCase());
-        //adapter.addFragment(profileActivityFragment, this.getString(R.string.med_history).toUpperCase());
-
         viewPager.setAdapter(adapter);
 
         if (getIntent().getBooleanExtra(org.smartregister.addo.util.Constants.INTENT_KEY.SERVICE_DUE, true) || getIntent().getBooleanExtra(Constants.INTENT_KEY.GO_TO_DUE_PAGE, false)) {
@@ -197,17 +188,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         return familyBaseEntityId;
     }
 
-    public void startFormForEdit() {
-        if (familyBaseEntityId != null) {
-            presenter().fetchProfileData();
-        }
-    }
-
-    // Child Form
-
     @Override
     public void startChildForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
-        presenter().startChildForm(formName, entityId, metadata, currentLocationId);
     }
 
     @Override
@@ -215,10 +197,6 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         if (familyFloatingMenu != null) {
             familyFloatingMenu.reDraw(hasPhone);
         }
-    }
-
-    private void refreshPresenter() {
-        presenter = new FamilyProfilePresenter(this, new FamilyProfileModel(familyName), familyBaseEntityId, familyHead, primaryCaregiver, familyName);
     }
 
     @Override
@@ -229,73 +207,12 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
 
             switch (requestCode) {
                 case org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON:
-                    try {
-                        String jsonString = data.getStringExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON);
-                        System.err.println(jsonString);
-                        Log.d("Turnit", jsonString);
-                        //Timber.d("JSONResult", jsonString);
-
-                        JSONObject form = new JSONObject(jsonString);
-                        String encounter_type = form.getString(org.smartregister.family.util.JsonFormUtils.ENCOUNTER_TYPE);
-                        // process child registration
-                        if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyRegister.updateEventType)) {
-
-                            presenter().updateFamilyRegister(jsonString);
-                            presenter().verifyHasPhone();
-
-                        } else if (encounter_type.equals(org.smartregister.addo.util.Constants.EventType.CHILD_REGISTRATION)) {
-
-                            presenter().saveChildForm(jsonString, false);
-
-                        } else if (encounter_type.equals(Utils.metadata().familyMemberRegister.registerEventType)) {
-
-                            String careGiver = presenter().saveChwFamilyMember(jsonString);
-                            if (presenter().updatePrimaryCareGiver(getApplicationContext(), jsonString, familyBaseEntityId, careGiver)) {
-                                setPrimaryCaregiver(careGiver);
-                                refreshPresenter();
-                                refreshMemberFragment(careGiver, null);
-                            }
-
-                            presenter().verifyHasPhone();
-                        }
-                    } catch (Exception e) {
-                        Timber.e(e);
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
                     break;
                 case org.smartregister.addo.util.Constants.ProfileActivityResults.CHANGE_COMPLETED:
-                    try {
-
-                        String careGiverID = data.getStringExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER);
-                        String familyHeadID = data.getStringExtra(Constants.INTENT_KEY.FAMILY_HEAD);
-
-                        setPrimaryCaregiver(careGiverID);
-                        setFamilyHead(familyHeadID);
-
-                        refreshMemberFragment(careGiverID, familyHeadID);
-                        presenter().verifyHasPhone();
-
-                    } catch (Exception e) {
-                        Timber.e(e);
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
                     break;
                 case org.smartregister.addo.util.Constants.SIMPRINTS_IDENTIFICATION.IDENTIFY_RESULT_CODE:
                     Boolean check = data.getBooleanExtra("biometricsComplete" , false);
             }
-        }
-    }
-
-    private void refreshMemberFragment(String careGiverID, String familyHeadID) {
-        BaseFamilyProfileMemberFragment memberFragment = this.getProfileMemberFragment();
-        if (memberFragment != null) {
-            if (StringUtils.isNotBlank(careGiverID)) {
-                memberFragment.setPrimaryCaregiver(careGiverID);
-            }
-            if (StringUtils.isNotBlank(familyHeadID)) {
-                memberFragment.setFamilyHead(familyHeadID);
-            }
-            refreshMemberList(FetchStatus.fetched);
         }
     }
 
@@ -317,16 +234,6 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         }
     }
 
-    public void updateDueCount(final int dueCount) {
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            public void run() {
-                adapter.updateCount(Pair.create(1, dueCount));
-            }
-        });
-    }
-
     private void refreshList(Fragment fragment) {
         if (fragment != null && fragment instanceof BaseRegisterFragment) {
             if (fragment instanceof FamilyProfileMemberFragment) {
@@ -334,12 +241,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
                 if (familyProfileMemberFragment.presenter() != null) {
                     familyProfileMemberFragment.refreshListView();
                 }
-            } /**else if (fragment instanceof FamilyProfileDueFragment) {
-                FamilyProfileDueFragment familyProfileDueFragment = ((FamilyProfileDueFragment) fragment);
-                if (familyProfileDueFragment.presenter() != null) {
-                    familyProfileDueFragment.refreshListView();
-                }
-            } **/else if (fragment instanceof FamilyProfileActivityFragment) {
+            }else if (fragment instanceof FamilyProfileActivityFragment) {
                 FamilyProfileActivityFragment familyProfileActivityFragment = ((FamilyProfileActivityFragment) fragment);
                 if (familyProfileActivityFragment.presenter() != null) {
                     familyProfileActivityFragment.refreshListView();

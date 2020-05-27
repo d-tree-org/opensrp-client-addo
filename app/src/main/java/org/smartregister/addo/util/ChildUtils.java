@@ -97,93 +97,6 @@ public class ChildUtils {
 
         return null;
     }
-/**
-    public static ChildHomeVisit getLastHomeVisit(String tableName, String childId) {
-        SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, new String[]{ChildDBConstants.KEY.LAST_HOME_VISIT, ChildDBConstants.KEY.VISIT_NOT_DONE, ChildDBConstants.KEY.DATE_CREATED});
-        String query = queryBUilder.mainCondition(tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = '" + childId + "'");
-
-        ChildHomeVisit childHomeVisit = new ChildHomeVisit();
-        Cursor cursor = null;
-        try {
-            cursor = Utils.context().commonrepository(org.smartregister.chw.util.Constants.TABLE_NAME.CHILD).queryTable(query);
-            if (cursor != null && cursor.moveToFirst()) {
-                String lastVisitStr = cursor.getString(cursor.getColumnIndex(ChildDBConstants.KEY.LAST_HOME_VISIT));
-                if (!TextUtils.isEmpty(lastVisitStr)) {
-                    try {
-                        childHomeVisit.setLastHomeVisitDate(Long.parseLong(lastVisitStr));
-                    } catch (Exception e) {
-
-                    }
-                }
-                String visitNotDoneStr = cursor.getString(cursor.getColumnIndex(ChildDBConstants.KEY.VISIT_NOT_DONE));
-                if (!TextUtils.isEmpty(visitNotDoneStr)) {
-                    try {
-                        childHomeVisit.setVisitNotDoneDate(Long.parseLong(visitNotDoneStr));
-                    } catch (Exception e) {
-                        Timber.e(e.toString());
-                    }
-                }
-                String strDateCreated = cursor.getString(cursor.getColumnIndex(ChildDBConstants.KEY.DATE_CREATED));
-                if (!TextUtils.isEmpty(strDateCreated)) {
-                    try {
-                        childHomeVisit.setDateCreated(org.smartregister.family.util.Utils.dobStringToDateTime(strDateCreated).getMillis());
-                    } catch (Exception e) {
-                        Timber.e(e.toString());
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Timber.e(ex.toString());
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-
-        return childHomeVisit;
-    }
-**/
-    /**
-     * Same thread to retrive rules and also updateFamilyRelations in fts
-     *
-     * @param yearOfBirth
-     * @param lastVisitDate
-     * @param visitNotDate
-     * @return
-     */
-
-    /**
-    public static ChildVisit getChildVisitStatus(Context context, String yearOfBirth, long lastVisitDate, long visitNotDate, long dateCreated) {
-        HomeAlertRule homeAlertRule = new HomeAlertRule(context, yearOfBirth, lastVisitDate, visitNotDate, dateCreated);
-        ChwApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(homeAlertRule, Constants.RULE_FILE.HOME_VISIT);
-        return getChildVisitStatus(homeAlertRule, lastVisitDate);
-    }
-**/
-    /**
-     * Rules can be retrieved separately so that the background thread is used here
-     *
-     * @param rules
-     * @param yearOfBirth
-     * @param lastVisitDate
-     * @param visitNotDate
-     * @return
-     */
-/**    public static ChildVisit getChildVisitStatus(Context context, Rules rules, String yearOfBirth, long lastVisitDate, long visitNotDate, long dateCreated) {
-        HomeAlertRule homeAlertRule = new HomeAlertRule(context, yearOfBirth, lastVisitDate, visitNotDate, dateCreated);
-        ChwApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(homeAlertRule, rules);
-        return getChildVisitStatus(homeAlertRule, lastVisitDate);
-    }
-
-    public static ChildVisit getChildVisitStatus(HomeAlertRule homeAlertRule, long lastVisitDate) {
-        ChildVisit childVisit = new ChildVisit();
-        childVisit.setVisitStatus(homeAlertRule.buttonStatus);
-        childVisit.setNoOfMonthDue(homeAlertRule.noOfMonthDue);
-        childVisit.setLastVisitDays(homeAlertRule.noOfDayDue);
-        childVisit.setLastVisitMonthName(homeAlertRule.visitMonthName);
-        childVisit.setLastVisitTime(lastVisitDate);
-        return childVisit;
-    }
-**/
     public static String getChildListByFamilyId(String tableName, String familyId) {
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable(tableName, new String[]{DBConstants.KEY.BASE_ENTITY_ID});
@@ -354,13 +267,6 @@ public class ChildUtils {
         }
     }
 
-/**    public static String getImmunizationExpired(String dateOfBirth, String vaccineName) {
-        //String dob = org.smartregister.family.util.Utils.getValue(childClient.getColumnmaps(), DBConstants.KEY.DOB, false);
-        ImmunizationExpiredRule immunizationExpiredRule = new ImmunizationExpiredRule(dateOfBirth, vaccineName);
-        AddoApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(immunizationExpiredRule, Constants.RULE_FILE.IMMUNIZATION_EXPIRED);
-        return immunizationExpiredRule.getButtonStatus();
-    }
-**/
     /**
      * This method return the vaccine name first character as capital for selected vaccines
      * other's return as capital form like : input opv 1 output OPV 1,rota 1 as Rota 1,mena as MenA
@@ -404,13 +310,7 @@ public class ChildUtils {
         }
         return objects;
     }
-/**
-    public static String getServiceDueStatus(String dueDate) {
-        ServiceRule serviceRule = new ServiceRule(dueDate);
-        AddoApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(serviceRule, Constants.RULE_FILE.SERVICE);
-        return serviceRule.getButtonStatus();
-    }
-**/
+
     public static SpannableString dueOverdueCalculation(Context context, String status, String dueDate) {
         SpannableString spannableString;
         Date date = org.smartregister.family.util.Utils.dobStringToDate(dueDate);

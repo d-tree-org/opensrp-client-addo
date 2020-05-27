@@ -114,9 +114,6 @@ public class FamilyProfilePresenter extends BaseFamilyProfilePresenter implement
 
     @Override
     public void notifyHasPhone(boolean hasPhone) {
-        if (viewReference.get() != null) {
-            viewReference.get().updateHasPhone(hasPhone);
-        }
     }
 
     @Override

@@ -119,7 +119,6 @@ public class AddoLocationRecyclerViewProviderAdapter extends RecyclerView.Adapte
             // Here is where we start the activity with fingerprint search functionality
             // Also pass the location selected
             ((BaseRegisterActivity) activity).switchToFragment(3);
-            //startRegisterActivity(AddoHomeActivity.class);
         }
 
     }
