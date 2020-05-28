@@ -329,7 +329,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 }
                 if(!buttonAction.isEmpty()) {
                     //refer
-                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
+                    ReferralUtils.createReferralTask(this, baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
 
                     if (buttonAction.equalsIgnoreCase("refer")){
                         this.finish();

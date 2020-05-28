@@ -2,7 +2,6 @@ package org.smartregister.addo.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.fragments.JsonWizardFormFragment;
@@ -12,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.addo.R;
 import org.smartregister.addo.presenter.ReferralJsonWizardFormFragmentPresenter;
 
 import timber.log.Timber;
@@ -29,7 +27,7 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
 
     @Override
     public void customClick(Context context, String behaviour){
-        Toast.makeText(context, getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
         //save
         save();
     }
