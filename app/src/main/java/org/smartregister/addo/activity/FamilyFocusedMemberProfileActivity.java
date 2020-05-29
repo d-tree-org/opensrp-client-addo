@@ -1,6 +1,5 @@
 package org.smartregister.addo.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.dao.AncDao;
+import org.smartregister.addo.dao.FamilyDao;
 import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.presenter.FamilyFocusedMemberProfileActivityPresenter;
 import org.smartregister.addo.util.ChildDBConstants;
@@ -317,7 +318,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 JSONObject form = new JSONObject(jsonString);
 
                 // complete any referrals
-                //FamilyDao.completeTasksForEntity(baseEntityId);
+                FamilyDao.completeTasksForEntity(baseEntityId);
 
                 // Check if it is ANC, PNC or Child Danger sing screening and handle medication based on the screening results
                 String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
@@ -342,7 +343,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                                 @Override
                                 public void onOkButtonClick() {
                                     // Close referral
-
+                                    FamilyDao.archiveHFTasksForEntity(baseEntityId);
                                     // Open a new referral
                                     ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
 
