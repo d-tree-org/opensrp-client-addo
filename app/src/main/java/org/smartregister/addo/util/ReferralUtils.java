@@ -1,8 +1,5 @@
 package org.smartregister.addo.util;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.utils.FormUtils;
 
@@ -13,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.CoreLibrary;
-import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.domain.Task;
 import org.smartregister.location.helper.LocationHelper;
@@ -28,7 +24,7 @@ import timber.log.Timber;
 
 public class ReferralUtils {
 
-    public static void createReferralTask(Context context, String baseEntityId, String focus, String jsonString, String villageTown) {
+    public static void createReferralTask(String baseEntityId, String focus, String jsonString, String villageTown) {
         Task task = new Task();
         task.setIdentifier(UUID.randomUUID().toString());
 
@@ -53,12 +49,7 @@ public class ReferralUtils {
         task.setSyncStatus(BaseRepository.TYPE_Created);
         task.setRequester(allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM()));
         task.setLocation(locationHelper.getOpenMrsLocationId(villageTown));
-        if (hasReferralTask(CoreConstants.REFERRAL_PLAN_ID, locationHelper.getOpenMrsLocationId(villageTown), baseEntityId, CoreConstants.JsonAssets.REFERRAL_CODE)) {
-            AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
-            Toast.makeText(context, context.getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context, context.getResources().getString(R.string.client_already_has_referral), Toast.LENGTH_LONG).show();
-        }
+        AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
     }
 
     private static String getReferralProblems(String jsonString) {
@@ -139,8 +130,8 @@ public class ReferralUtils {
         return selectedOptionValues;
     }
 
-    private static boolean hasReferralTask(String planId, String groupId, String forEntity, String code) {
+    public static boolean hasReferralTask(String planId, String groupId, String forEntity, String code) {
 
-        return AddoApplication.getInstance().getTaskRepository().getTasksByEntityAndCode(planId, groupId, forEntity, code).isEmpty();
+        return !AddoApplication.getInstance().getTaskRepository().getTasksByEntityAndCode(planId, groupId, forEntity, code).isEmpty();
     }
 }
