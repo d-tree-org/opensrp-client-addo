@@ -85,5 +85,8 @@
     <color name="record_weight_grey_bg_st">#f4f4f4</color>
 
     <color name="contact_complete_grey_border">#CDCDCD</color>
+    <color name="gray_overlay">#33000000</color>
+    <color name="green_overlay">#6600FF00</color>
+    <color name="red_overlay">#66FF0000</color>
 
 </resources>
