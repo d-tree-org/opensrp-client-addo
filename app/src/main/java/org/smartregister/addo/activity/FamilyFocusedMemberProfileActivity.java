@@ -240,7 +240,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_commodities:
-                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), "ADDO COMMODITIES DISPENSE");
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), getResources().getString(R.string.dispense_commodities));
                 break;
 
             case R.id.tv_focused_client_dispense:
@@ -294,6 +294,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 

@@ -8,46 +8,46 @@ actions:
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('chk_fever')) {
-            selected += '\u2022 High Fever and general body weakness <br />';
+            selected += '\u2022 {{step2_danger_sign_fever}} <br />';
         }
         if (selectedItem.contains('chk_bleeding_vaginally')) {
 
-            selected += '\u2022 Severe vaginal bleeding, non-stop bleeding (using one pad every 5 minutes) <br />';
+            selected += '\u2022 {{step2_danger_sign_bleeding_vaginally}} <br />';
 
         }
         if (selectedItem.contains('chk_server_headache')) {
-            selected += '\u2022 Headache/Dizziness <br />';
+            selected += '\u2022 {{step2_danger_sign_server_headache}} <br />';
         }
         if (selectedItem.contains('chk_convulsions')) {
-            selected += '\u2022 Seizures/Convulsions <br /> ';
+            selected += '\u2022 {{step2_danger_sign_convulsions}} <br /> ';
 
         }
         if (selectedItem.contains('chk_difficulty_breathing')) {
-            selected += '\u2022 Difficulty breathing <br />';
+            selected += '\u2022 {{step2_danger_sign_difficulty_breathing}} <br />';
         }
         if (selectedItem.contains('chk_severe_leg_pain')) {
-            selected += '\u2022 Leg muscle cramps <br />';
+            selected += '\u2022 {{step2_danger_sign_severe_leg_pain}} <br />';
         }
         if (selectedItem.contains('chk_unusual_behaviour')) {
-           selected += '\u2022 Abnormal behaviour (stress, confusion) <br />';
+           selected += '\u2022 {{step2_danger_sign_unusual_behaviour}} <br />';
         }
         if (selectedItem.contains('chk_swelling_of_breast')) {
-           selected += '\u2022 Pain due to breast engorgement <br />';
+           selected += '\u2022 {{step2_danger_sign_swelling_of_breast}} <br />';
         }
         if (selectedItem.contains('chk_severe_abdominal_pain')) {
-           selected += '\u2022 Severe abdominal pain <br />';
+           selected += '\u2022 {{step2_danger_sign_severe_abdominal_pain}} <br />';
         }
         if (selectedItem.contains('chk_vaginal_discharge')) {
-           selected += '\u2022 Foul smelling vaginal discharge <br />';
+           selected += '\u2022 {{step2_danger_sign_vaginal_discharge}} <br />';
         }
         if (selectedItem.contains('chk_blurred_vision')) {
-           selected += '\u2022 Blurred vision <br />';
+           selected += '\u2022 {{step2_danger_sign_blurred_vision}} <br />';
         }
         if (selectedItem.contains('chk_loss_conscioueness')) {
-           selected += '\u2022 Loss of consciousness <br />';
+           selected += '\u2022 {{step2_danger_sign_loss_conscioueness}} <br />';
         }
         if (selectedItem.contains('chk_urination')) {
-           selected += '\u2022 Little/no urination <br />';
+           selected += '\u2022 {{step2_danger_sign_urination}} <br />';
         }
         return selected;
   }"
@@ -71,22 +71,22 @@ actions:
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('chk_mild_pain')) {
-            selected += '\u2022 Mild pain in the body <br />';
+            selected += '\u2022 {{step2_minor_illness_mild_pain}} <br />';
         }
         if (selectedItem.contains('chk_mild_fever')) {
 
-            selected += '\u2022 Mild fever <br />';
+            selected += '\u2022 {{step2_minor_illness_mild_fever}} <br />';
 
         }
         if (selectedItem.contains('chk_cough')) {
-            selected += '\u2022 Cough <br />';
+            selected += '\u2022 {{step2_minor_illness_cough}} <br />';
         }
         if (selectedItem.contains('chk_runny_nose')) {
-            selected += '\u2022 Runny nose/cold <br /> ';
+            selected += '\u2022 {{step2_minor_illness_runny_nose}} <br /> ';
 
         }
         if (selectedItem.contains('chk_sore_throat')) {
-            selected += '\u2022 Sore throat <br />';
+            selected += '\u2022 {{step2_minor_illness_sore_throat}} <br />';
         }
 
         if (selectedItem.contains('chk_other_needs')) {

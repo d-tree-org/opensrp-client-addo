@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
 
 import org.json.JSONObject;
 import org.smartregister.addo.R;
@@ -30,10 +32,10 @@ import org.smartregister.addo.listeners.FloatingMenuListener;
 import org.smartregister.addo.listeners.OnClickFloatingMenu;
 import org.smartregister.addo.presenter.FamilyOtherMemberActivityPresenter;
 import org.smartregister.addo.util.CoreConstants;
-import org.smartregister.addo.util.CoreJsonFormUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.activity.BaseFamilyOtherMemberProfileActivity;
+import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.fragment.BaseFamilyOtherMemberProfileFragment;
 import org.smartregister.family.model.BaseFamilyOtherMemberProfileActivityModel;
@@ -184,9 +186,25 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         return (FamilyOtherMemberActivityPresenter) presenter;
     }
 
-    public void startFormActivity(JSONObject jsonForm) {
+/*    public void startFormActivity(JSONObject jsonForm) {
         startActivityForResult(CoreJsonFormUtils.getJsonIntent(this, jsonForm, Utils.metadata().familyMemberFormActivity),
                 JsonFormUtils.REQUEST_CODE_GET_JSON);
+    }*/
+
+    public void startFormActivity(JSONObject jsonForm, String formTitle) {
+        Form form = new Form();
+        form.setName(formTitle);
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
+        form.setHideSaveLabel(true);
+        form.setWizard(false);
+
+        Intent intent = new Intent(this, FamilyWizardFormActivity.class);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+        intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
+        startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
     @Override
@@ -270,7 +288,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     }
 
     private void startRecordServiceProvided() {
-        startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoRecordServiceOther()));
+        startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoRecordServiceOther()), getResources().getString(R.string.non_focused_service_provided));
     }
 
 
