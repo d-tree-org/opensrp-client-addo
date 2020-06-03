@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addo_home_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="27dp">
+
+        <include
+            layout="@layout/toolbar_base_register"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <include
+            layout="@layout/addo_home_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/listview_background_rounded">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addo_villages_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+        <ProgressBar
+            android:id="@+id/client_list_progress"
+            style="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/addo_user_no_villages"
+            android:visibility="gone" />
+        <org.smartregister.addo.view.EmptystateView
+            android:id="@+id/ev_no_villages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:emptystate_image="@drawable/location_not_found"
+            app:emptystate_title="No Location(s)!"
+            app:emptystate_text="@string/addo_user_no_villages"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</LinearLayout>

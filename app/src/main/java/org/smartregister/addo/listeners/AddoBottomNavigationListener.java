@@ -2,11 +2,11 @@ package org.smartregister.addo.listeners;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import org.smartregister.addo.activity.FamilyRegisterActivity;
+import androidx.annotation.NonNull;
 
+import org.smartregister.addo.activity.AddoHomeActivity;
 import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
@@ -25,29 +25,15 @@ public class AddoBottomNavigationListener extends BottomNavigationListener {
         BaseRegisterActivity baseRegisterActivity = (BaseRegisterActivity) context;
 
         if (item.getItemId() == org.smartregister.family.R.id.action_family) {
-            if (context instanceof FamilyRegisterActivity) {
+            if (context instanceof AddoHomeActivity) {
                 baseRegisterActivity.switchToBaseFragment();
             } else {
-                Intent intent = new Intent(context, FamilyRegisterActivity.class);
+                Intent intent = new Intent(context, AddoHomeActivity.class);
                 context.startActivity(intent);
                 context.finish();
             }
-        } else if (item.getItemId() == org.smartregister.family.R.id.action_scan_qr) {
-            baseRegisterActivity.startQrCodeScanner();
-            return false;
-        } else if (item.getItemId() == org.smartregister.family.R.id.action_register) {
-
-            if (context instanceof FamilyRegisterActivity) {
-                baseRegisterActivity.startRegistration();
-            } else {
-                FamilyRegisterActivity.startFamilyRegisterForm(context);
-            }
-
-            return false;
         } else if (item.getItemId() == org.smartregister.family.R.id.action_job_aids) {
-            //view.setSelectedItemId(R.id.action_family);
-            //Intent intent = new Intent(context, JobAidsActivity.class);
-            //context.startActivity(intent);
+            // TODO Add code for job aid
             return false;
         }
 

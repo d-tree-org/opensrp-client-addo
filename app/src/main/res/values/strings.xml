@@ -77,10 +77,19 @@
     <string name="not_visiting_this_month">Not visiting this month</string>
     <string name="undo">UNDO</string>
     <string name="record_visit">Record visit</string>
+    <string name="ds_screening">Screen for Danger Sign</string>
+    <string name="addo_non_focus_profile_action_text">Select service provided</string>
     <string name="edit">EDIT</string>
     <string name="return_to_family_name">Return to %1$s Family</string>
     <string name="return_to_family_members">Return to family members</string>
     <string name="save_title">SAVE</string>
+
+    <!-- ADDO Danger Sign Screening and Medication Dispensing strings -->
+    <string name="danger_sign_title_child">Child Danger Sign Screening</string>
+    <string name="danger_sign_title_anc">ANC Danger Sign Screening</string>
+    <string name="danger_sign_title_pnc">PNC Danger Sign Screening</string>
+    <string name="dispense_medication_title">Dispense Medication</string>
+    <string name="default_dispense_message">Manage as needed</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -380,8 +389,39 @@
     <string name="scan_fp_message">Scan Fingerprint</string>
     <string name="scan_fp_message_instruction">To get your clients details, scan their fingerprint!</string>
     <string name="med_history">Medication History</string>
+    <string name="family_members">Family Members</string>
     <string name="family_no_medication_history">Family has no medication history</string>
-    <string name="addo_app_home">ADDO Home</string>
+    <string name="addo_app_home">ADDO HOME</string>
     <string name="return_to_addo_home">Return to home</string>
+    <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
+    <string name="fingerprint_identification_title">Find Clients</string>
+    <string name="none_of_above">None of the above</string>
+    <string name="no_client_found">No client identification from SimPrints Identification, scan again or cancel and use normal search.</string>
 
+    <string name="search_limits">Search Limits</string>
+    <string name="out_and_inside">Outside and Inside\nMy Catchment Area</string>
+    <string name="requires_internet_connection">(Requires Internet Connection)</string>
+    <string name="my_catchment_area">My Catchment Area Only</string>
+
+    <string name="first_name_hint">First Name</string>
+    <string name="first_name">First Name</string>
+    <string name="search_name">Enter first name or last name</string>
+    <string name="search_name_hint">Enter first name or last name</string>
+
+    <string name="search">Search</string>
+
+    <string name="matching_results">%1$s matching results found.</string>
+
+    <string name="search_results">Search Results</string>
+    <string name="full_name">%s %s %s</string>
+    <string name="addo_user_no_villages">This user has not been assigned any village</string>
+    <string name="addo_other_village">Other Village</string>
+    <string name="ask_client_village">Ask the client if they are from Kibaha, if they are, please select the location from the list below. If they are not in Kibaha, then do not use the system for this service.</string>
+    <string name="add_select_village">Select client village</string>
+    <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
+    <string name="give_commodities_client_focus_profile">Give Commodities</string>
+    <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
+    <string name="item_2_placeholder">Item 2 Placeholder</string>
+    <string name="item_1_placeholder">Item 1 Placeholder</string>
+    <string name="referral_submitted">Referral sent to health facility</string>
 </resources>

@@ -85,6 +85,11 @@ public class FamilyProfilePresenter extends BaseFamilyProfilePresenter implement
     }
 
     @Override
+    public void onRegistrationSaved(boolean isEdit) {
+
+    }
+
+    @Override
     public void saveChildRegistration(Pair<Client, Event> pair, String jsonString, boolean isEditMode, ChildRegisterContract.InteractorCallBack callBack) {
         childRegisterInteractor.saveRegistration(pair, jsonString, isEditMode, this);
     }
@@ -109,9 +114,6 @@ public class FamilyProfilePresenter extends BaseFamilyProfilePresenter implement
 
     @Override
     public void notifyHasPhone(boolean hasPhone) {
-        if (viewReference.get() != null) {
-            viewReference.get().updateHasPhone(hasPhone);
-        }
     }
 
     @Override

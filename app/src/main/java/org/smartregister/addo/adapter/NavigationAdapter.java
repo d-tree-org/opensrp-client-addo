@@ -2,13 +2,14 @@ package org.smartregister.addo.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.listeners.NavigationListener;
@@ -60,6 +61,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
         NavigationOption model = navigationOptionList.get(position);
         holder.tvName.setText(context.getResources().getText(model.getTitleID()));
         holder.tvCount.setText(String.format(Locale.getDefault(), "%d", model.getRegisterCount()));
+        holder.tvCount.setVisibility(View.INVISIBLE);
 
         holder.ivIcon.setImageResource(model.getResourceID());
         holder.ivIcon.setColorFilter(context.getResources().getColor(R.color.pink_500));

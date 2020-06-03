@@ -3,7 +3,6 @@ package org.smartregister.addo.custom_views;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.listeners.OnClickFloatingMenu;
@@ -79,6 +80,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
 
         addNewMember = findViewById(R.id.add_new_member_layout);
         addNewMember.setOnClickListener(this);
+        addNewMember.setVisibility(GONE);
 
         callLayout.setClickable(false);
         addNewMember.setClickable(false);

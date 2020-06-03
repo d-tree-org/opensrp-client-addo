@@ -2,18 +2,14 @@ package org.smartregister.addo.helper;
 
 import android.content.Context;
 
-import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
 import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.core.InferenceRulesEngine;
 import org.jeasy.rules.core.RulesEngineParameters;
 import org.jeasy.rules.mvel.MVELRuleFactory;
-import org.smartregister.addo.rule.HomeAlertRule;
-import org.smartregister.addo.rule.ICommonRule;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,83 +38,11 @@ public class RulesEngineHelper {
                 ruleMap.put(fileName, MVELRuleFactory.createRulesFrom(bufferedReader));
             }
             return ruleMap.get(fileName);
-        } catch (IOException e) {
+        } catch (Exception e) {
             return null;
         }
     }
 
-    protected void processInferentialRules(Rules rules, Facts facts) {
-
-        inferentialRulesEngine.fire(rules, facts);
-    }
-
-    protected void processDefaultRules(Rules rules, Facts facts) {
-
-        defaultRulesEngine.fire(rules, facts);
-    }
-
-    public String getButtonAlertStatus(ICommonRule alertRule, String rulesFile) {
-
-        Facts facts = new Facts();
-        facts.put(alertRule.getRuleKey(), alertRule);
-
-        Rules rules = rules(rulesFile);
-        if (rules == null) {
-            return null;
-        }
-
-        processDefaultRules(rules, facts);
-
-        return alertRule.getButtonStatus();
-    }
-
-    public String getButtonAlertStatus(HomeAlertRule alertRule, Rules rules) {
-
-        if (rules == null) {
-            return null;
-        }
-
-        Facts facts = new Facts();
-        facts.put(alertRule.getRuleKey(), alertRule);
-
-        processDefaultRules(rules, facts);
-
-        return alertRule.getButtonStatus();
-    }
-/**
-    public String getButtonAlertStatus(AncVisitAlertRule alertRule, Rules rules) {
-
-        if (rules == null) {
-            return null;
-        }
-
-        Facts facts = new Facts();
-        facts.put(alertRule.getRuleKey(), alertRule);
-
-        processDefaultRules(rules, facts);
-
-        return alertRule.getButtonStatus();
-    }
-
-    public List<Integer> getContactVisitSchedule(ContactRule contactRule, String rulesFile) {
-
-        Facts facts = new Facts();
-        facts.put(ContactRule.RULE_KEY, contactRule);
-
-        Rules rules = getRulesFromAsset(RULE_FOLDER_PATH + rulesFile);
-        if (rules == null) {
-            return null;
-        }
-
-        processInferentialRules(rules, facts);
-
-        Set<Integer> contactList = contactRule.set;
-        List<Integer> list = new ArrayList<>(contactList);
-        Collections.sort(list);
-
-        return list;
-    }
-**/
     public Rules rules(String rulesFile) {
         return getRulesFromAsset(RULE_FOLDER_PATH + rulesFile);
     }

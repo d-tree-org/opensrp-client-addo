@@ -5,11 +5,8 @@ public class Constants {
     public static String EC_CLIENT_FIELDS = "ec_client_fields.json";
 
     public static class CONFIGURATION {
-        public static final String LOGIN = "login";
         public static final String FAMILY_REGISTER = "family_register";
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
-        public static final String ANC_REGISTER = "anc_register";
-        public static final String MALARIA_REGISTER = "anc_malaria_confirmation";
 
     }
 
@@ -363,4 +360,12 @@ public class Constants {
         public static final int STORAGE_PERMISIONS = 1;
     }
 
+    public static final class DB {
+        public static final String FIRST_NAME = "firstName";
+        public static final String LAST_NAME = "lastName";
+    }
+
+    public static final class SIMPRINTS_IDENTIFICATION {
+        public static final int IDENTIFY_RESULT_CODE = 4061;
+    }
 }

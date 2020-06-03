@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/simprintid_appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/addo_primary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/simprint_identification_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/addo_primary"
+            android:contentInsetEnd="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetStart="0dp"
+            android:theme="@style/FamilyTheme.AppBarOverlay"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:fontFamily="@font/google_sans_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:paddingStart="0dp"
+                android:text="@string/return_to_addo_home"
+                android:textColor="@color/white"
+                android:textSize="@dimen/register_member_title_size" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/family_two_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/addo_primary"
+            app:theme="@style/FamilyTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:id="@+id/profile_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/addo_primary">
+
+
+                <TextView
+                    android:id="@+id/textview_name"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="0dp"
+                    android:paddingStart="0dp"
+                    android:text="Identified Fingerprints"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/register_member_name_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textview_name"
+                    android:layout_marginBottom="@dimen/register_member_nav_margin"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/textview_clientsfound"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_member_village_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/profile_dot_separator_margin"
+                        android:layout_marginRight="@dimen/profile_dot_separator_margin"
+                        android:text="\u00b7"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/textview_clientsnotfound"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="0dp"
+                        android:paddingStart="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_member_village_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/profile_dot_separator_margin"
+                        android:layout_marginRight="@dimen/profile_dot_separator_margin"
+                        android:text="\u00b7"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#E2E363"
+            app:tabIndicatorHeight="4dp"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator.sub.white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_base_profile" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

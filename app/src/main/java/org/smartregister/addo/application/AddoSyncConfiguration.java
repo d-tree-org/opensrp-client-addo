@@ -31,9 +31,7 @@ public class AddoSyncConfiguration extends SyncConfiguration {
 
         List<String> locationIds = LocationHelper.getInstance().locationsFromHierarchy(true, null);
         if (!org.smartregister.util.Utils.isEmptyCollection(locationIds)) {
-            int index = locationIds.indexOf(userLocationId);
-            List<String> subLocationIds = locationIds.subList(index, locationIds.size());
-            return StringUtils.join(subLocationIds, ",");
+            return StringUtils.join(locationIds, ",");
         }
         return "";
     }
@@ -64,8 +62,12 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         Boresha Afya uses SyncFilter.LOCATION as an encryption parameter changing that to TEAM_ID
         instead causes the app to work for our server (Afyatek aws)
         */
-        //return SyncFilter.LOCATION;
         return SyncFilter.LOCATION;
+    }
+
+    @Override
+    public boolean isSyncUsingPost() {
+        return true;
     }
 
     @Override

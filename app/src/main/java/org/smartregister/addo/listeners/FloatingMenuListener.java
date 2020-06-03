@@ -61,9 +61,6 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
 
                 case R.id.add_new_member_layout:
                     //TODO uncomment to implement adding new member
-                    //AddMemberFragment addmemberFragment = AddMemberFragment.newInstance();
-                    //addmemberFragment.setContext(context.get());
-                    //addmemberFragment.show(context.get().getFragmentManager(), AddMemberFragment.DIALOG_TAG);
                     break;
             }
         }

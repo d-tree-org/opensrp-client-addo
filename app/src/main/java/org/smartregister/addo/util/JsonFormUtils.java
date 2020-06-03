@@ -1,12 +1,14 @@
 package org.smartregister.addo.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Pair;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -28,6 +30,7 @@ import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.domain.Photo;
 import org.smartregister.domain.ProfileImage;
 import org.smartregister.domain.tag.FormTag;
@@ -72,7 +75,6 @@ import static org.smartregister.util.AssetHandler.jsonStringToJava;
 public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
     public static final String METADATA = "metadata";
     public static final String TITLE = "title";
-    public static final String ENCOUNTER_TYPE = "encounter_type";
     public static final int REQUEST_CODE_GET_JSON = 2244;
     public static final String CURRENT_OPENSRP_ID = "current_opensrp_id";
     public static final String READ_ONLY = "read_only";
@@ -339,7 +341,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
                 addRelationship(context, ss, baseClient);
                 SQLiteDatabase db = AddoApplication.getInstance().getRepository().getReadableDatabase();
                 AddoRepository pathRepository = new AddoRepository(context, AddoApplication.getInstance().getContext());
-                EventClientRepository eventClientRepository = new EventClientRepository(pathRepository);
+                EventClientRepository eventClientRepository = new EventClientRepository();
                 JSONObject clientjson = eventClientRepository.getClient(db, lookUpBaseEntityId);
                 baseClient.setAddresses(getAddressFromClientJson(clientjson));
             }
@@ -1394,6 +1396,53 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         }
 
         return UniqueId;
+    }
+
+    public static String lookForClientsBaseEntityId(String guid){
+
+        //baseEntityId
+        String UniqueId = "";
+        Client mClient = null;
+
+        String query_client = "select json from client where json LIKE '%"+guid+"%' ";
+        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
+
+        try {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                mClient = jsonStringToJava(cursor.getString(0), Client.class);
+                UniqueId = mClient.getBaseEntityId();
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        } finally {
+            cursor.close();
+        }
+
+        return UniqueId;
+    }
+
+
+    public static CommonRepository getCommonRepository(String tableName) {
+        return org.smartregister.family.util.Utils.context().commonrepository(tableName);
+    }
+
+    public static String getValueOfClientsFields(Map<String, String> map, String field){
+        return org.smartregister.family.util.Utils.getValue(map, field, false);
+    }
+
+
+    public static Intent getAncPncStartFormIntent(JSONObject jsonForm, Context context) {
+        Intent intent = new Intent(context, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+
+        Form form = new Form();
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setWizard(false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        return intent;
     }
 
 }

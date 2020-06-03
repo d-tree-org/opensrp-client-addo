@@ -48,34 +48,6 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
         verifyHasPhone();
         //initializeServiceStatus();
     }
-/**
-    private void initializeServiceStatus() {
-        FamilyInteractor.updateFamilyDueStatus(viewReference.get().getContext(), "", familyBaseEntityId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Timber.v(TAG, "initializeServiceStatus onSubscribe");
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        updateFamilyMemberServiceDue(s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e("initializeServiceStatus " + e.toString());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Timber.v("initializeServiceStatus onComplete");
-                    }
-                });
-    }
-**/
 
     public String getFamilyBaseEntityId() {
         return familyBaseEntityId;
@@ -130,19 +102,18 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
     }
 
     @Override
-    public void onRegistrationSaved(boolean isEditMode) {
-        if (isEditMode) {
-            getView().hideProgressDialog();
+    public void onRegistrationSaved(boolean b, boolean b1, FamilyEventClient familyEventClient) {
 
-            refreshProfileView();
-
-            getView().refreshList();
-        }
     }
 
     @Override
     public void verifyHasPhone() {
         ((FamilyProfileInteractor) profileInteractor).verifyHasPhone(familyBaseEntityId, this);
+    }
+
+    @Override
+    public void notifyHasPhone(boolean hasPhone) {
+
     }
 
     public FamilyOtherMemberProfileExtendedContract.View getView() {
@@ -151,21 +122,6 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
         } else {
             return null;
         }
-    }
-
-    @Override
-    public void notifyHasPhone(boolean hasPhone) {
-        if (viewReference.get() != null) {
-            viewReference.get().updateHasPhone(hasPhone);
-        }
-    }
-
-    @Override
-    public void updateFamilyMemberServiceDue(String serviceDueStatus) {
-        if (getView() != null) {
-            getView().setFamilyServiceStatus(serviceDueStatus);
-        }
-
     }
 
 }
