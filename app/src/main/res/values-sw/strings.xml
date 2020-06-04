@@ -33,7 +33,7 @@
     <string name="return_to_family_name">Rudi kwenye famia ya %1$s</string>
     <string name="addo_profile_other_screening">Chunguza dalili na kutoa dawa</string>
     <string name="give_commodities_client_focus_profile">Toa bidhaa</string>
-    <string name="focused_client_profile_dispense">Toa dawa alizoandikiwa kutoka HF AU Maabara ya Malaria</string>
+    <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari au matokeo ya kipimo cha malaria</string>
 
     <!-- Non focused client-->
     <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>

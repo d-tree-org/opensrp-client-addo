@@ -365,6 +365,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                         }
 
+                    } else {
+                        checkDSPresentProposedMedsAndDispense(form);
                     }
                 }
                 //end of check referral
