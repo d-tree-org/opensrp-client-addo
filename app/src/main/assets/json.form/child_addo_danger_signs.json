@@ -481,7 +481,7 @@
     ]
   },
   "step3": {
-    "title": "Child Condition",
+    "title": "{{step3_title}}",
     "fields": [
       {
         "key": "danger_signs_present_toaster",
