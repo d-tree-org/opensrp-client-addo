@@ -129,4 +129,9 @@ public class ReferralUtils {
 
         return selectedOptionValues;
     }
+
+    public static boolean hasReferralTask(String planId, String groupId, String forEntity, String code) {
+
+        return !AddoApplication.getInstance().getTaskRepository().getTasksByEntityAndCode(planId, groupId, forEntity, code).isEmpty();
+    }
 }

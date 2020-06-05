@@ -416,12 +416,13 @@
     <string name="full_name">%s %s %s</string>
     <string name="addo_user_no_villages">This user has not been assigned any village</string>
     <string name="addo_other_village">Other Village</string>
-    <string name="ask_client_village">Ask the client if they are from Kibaha, if they are, please select the location from the list below. If they are not in Kibaha, then do not use the system for this service.</string>
-    <string name="add_select_village">Select client village</string>
+    <string name="ask_client_village">Ask the client if they are from Kibaha. If they are, please select the location from the list below. If they are not from Kibaha, do not use the system for this service.</string>
+    <string name="add_select_village">Where does the client live?</string>
     <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
     <string name="give_commodities_client_focus_profile">Give Commodities</string>
     <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
     <string name="referral_submitted">Referral sent to health facility</string>
+    <string name="client_already_has_referral">This client already has referral to HF advice them to go there immediately ...</string>
 </resources>

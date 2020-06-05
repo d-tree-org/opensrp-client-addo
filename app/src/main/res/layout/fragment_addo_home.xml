@@ -21,7 +21,7 @@
         <include
             layout="@layout/addo_home_title_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="182dp" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
