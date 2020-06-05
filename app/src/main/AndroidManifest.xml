@@ -48,7 +48,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".activity.BaseActivity" />
         <activity
             android:name=".activity.AddoHomeActivity"
             android:label="Addo"
@@ -100,8 +99,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/captured_images_path" />
         </provider>
-
-        <activity android:name=".activity.MainActivity" />
 
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
