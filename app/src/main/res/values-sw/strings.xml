@@ -39,4 +39,8 @@
     <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>
     <string name="non_focused_service_provided">Rekodi huduma zilizotolewa</string>
 
+    <!--Dispense medications-->
+    <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>
+    <string name="do_you_want_to_give_another_referral">Mteja huyu tayari anarufaa ya kwenda kituo cha afya, je unataka kufunga rufaa hii na kufungua nyingine?</string>
+
 </resources>

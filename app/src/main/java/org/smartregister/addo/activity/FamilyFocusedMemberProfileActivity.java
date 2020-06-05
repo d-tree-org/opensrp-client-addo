@@ -490,7 +490,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private void closeOpenNewReferral(Context context, final OnDialogButtonClick onDialogButtonClick) {
         final AlertDialog alert = new AlertDialog.Builder(context).create();
-        alert.setMessage("This client already has a referral to the Health Facility, do you want to close this referral and open a new one?");
+        alert.setMessage(getString(R.string.do_you_want_to_give_another_referral));
         alert.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
