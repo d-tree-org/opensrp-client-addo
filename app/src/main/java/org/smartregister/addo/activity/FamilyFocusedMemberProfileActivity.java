@@ -491,7 +491,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private void closeOpenNewReferral(Context context, final OnDialogButtonClick onDialogButtonClick) {
         final AlertDialog alert = new AlertDialog.Builder(context).create();
         alert.setMessage(getString(R.string.do_you_want_to_give_another_referral));
-        alert.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
@@ -500,7 +500,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 alert.dismiss();
             }
         });
-        alert.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onDialogButtonClick.onCancelButtonClick();

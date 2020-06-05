@@ -42,5 +42,7 @@
     <!--Dispense medications-->
     <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>
     <string name="do_you_want_to_give_another_referral">Mteja huyu tayari anarufaa ya kwenda kituo cha afya, je unataka kufunga rufaa hii na kufungua nyingine?</string>
+    <string name="yes">Ndiyo</string>
+    <string name="no">Hapana</string>
 
 </resources>
