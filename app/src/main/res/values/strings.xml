@@ -432,4 +432,5 @@
     <string name="select_the_person_to_receive_services">Select the person to receive services</string>
     <string name="non_focused_service_provided">Record service provided</string>
     <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
+    <string name="attend_prescription_form_title">ATTEND PRESCRIPTIONS</string>
 </resources>

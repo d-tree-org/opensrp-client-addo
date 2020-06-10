@@ -244,7 +244,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_dispense:
-                Toast.makeText(this, "Please dispense the medication now.", Toast.LENGTH_SHORT).show();
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoAttendPrescriptionsFromHf()), getString(R.string.attend_prescription_form_title));
                 break;
 
             default:
