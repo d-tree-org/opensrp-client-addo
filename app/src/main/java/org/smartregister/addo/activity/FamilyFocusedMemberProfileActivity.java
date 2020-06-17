@@ -244,7 +244,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_dispense:
-                Toast.makeText(this, "Please dispense the medication now.", Toast.LENGTH_SHORT).show();
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoAttendPrescriptionsFromHf()), getString(R.string.attend_prescription_form_title));
                 break;
 
             default:
@@ -494,7 +494,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         alert.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
                 //Toast.makeText(context, context.getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
                 onDialogButtonClick.onOkButtonClick();
                 alert.dismiss();

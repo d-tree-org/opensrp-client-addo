@@ -186,11 +186,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         return (FamilyOtherMemberActivityPresenter) presenter;
     }
 
-/*    public void startFormActivity(JSONObject jsonForm) {
-        startActivityForResult(CoreJsonFormUtils.getJsonIntent(this, jsonForm, Utils.metadata().familyMemberFormActivity),
-                JsonFormUtils.REQUEST_CODE_GET_JSON);
-    }*/
-
     public void startFormActivity(JSONObject jsonForm, String formTitle) {
         Form form = new Form();
         form.setName(formTitle);

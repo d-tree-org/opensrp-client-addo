@@ -169,7 +169,6 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "buttonText": "{{step2_medicine_dispensed_button_text}}",
-        "sort": true,
         "dialogTitle": "{{step2_medicine_dispensed_dialog_title}}",
         "searchHint": "{{step2_medicine_dispensed_search_hint}}",
         "v_required": {
@@ -247,49 +246,17 @@
               "presumed-id": "er",
               "confirmed-id": "er"
             }
+          },
+          {
+            "key": "other",
+            "text": "Other",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
           }
         ],
         "type": "multi_select_list",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "other_meds",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step2_other_meds_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_other_meds_yes_text}}",
-            "extra_info": "{{step2_other_meds_yes_text_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_other_meds_no_text}}",
-            "extra_info": "{{step2_other_meds_no_text_extra_info}}"
-          }
-        ],
         "relevance": {
           "rules-engine": {
             "ex-rules": {

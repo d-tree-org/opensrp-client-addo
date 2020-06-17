@@ -154,6 +154,7 @@ public class CoreConstants {
         public static final String CHILD_ADDO_DANGER_SIGNS = "child_addo_danger_signs";
         public static final String DANGER_SIGNS_MEDICATION = "danger_signs_medication";
         public static final String ADDO_COMMODITIES = "addo_commodities";
+        public static final String ADDO_ATTEND_PRESCRIPTIONS_FROM_HF="addo_attend_prescriptions_from_lab_results";
 
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
@@ -191,6 +192,8 @@ public class CoreConstants {
         public static String getDangerSignsMedication() { return DANGER_SIGNS_MEDICATION; }
 
         public static String getAddoCommodities() { return ADDO_COMMODITIES; }
+
+        public static String getAddoAttendPrescriptionsFromHf() { return ADDO_ATTEND_PRESCRIPTIONS_FROM_HF; }
 
         public static String getChildReferralForm() {
             return CHILD_REFERRAL_FORM;

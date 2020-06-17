@@ -27,7 +27,6 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
 
     @Override
     public void customClick(Context context, String behaviour){
-        //Toast.makeText(context, getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
         //save
         save();
     }

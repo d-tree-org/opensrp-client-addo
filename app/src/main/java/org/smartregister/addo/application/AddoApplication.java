@@ -162,11 +162,6 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public void notifyAppContextChange() {
-/*        if (context != null) {
-            if (!context.allSharedPreferences().fetchLanguagePreference().isEmpty()) {
-                saveLanguage(context.allSharedPreferences().fetchLanguagePreference());
-            }
-        }*/
         FamilyLibrary.getInstance().setMetadata(getMetadata());
     }
 

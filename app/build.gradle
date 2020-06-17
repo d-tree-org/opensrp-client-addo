@@ -147,7 +147,7 @@ githubProperties.load(new FileInputStream(rootProject.file("github.properties"))
 repositories {
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/issyzac/opensrp-client-core")
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-core")
         credentials {
             username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
             password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -190,7 +190,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    implementation('org.smartregister:opensrp-client-core:1.8.30-DTREE-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-core:1.8.31-DTREE-SNAPSHOT') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
@@ -223,7 +223,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-materialedittext'
     }
 
-    implementation('org.smartregister:opensrp-client-native-form:1.7.26-DTREE-MLS-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-native-form:1.7.26-DTREE-MLS-1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
