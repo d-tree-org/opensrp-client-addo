@@ -494,7 +494,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         alert.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
                 //Toast.makeText(context, context.getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
                 onDialogButtonClick.onOkButtonClick();
                 alert.dismiss();
