@@ -2,6 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
+  "properties_file_name": "pnc_addo_danger_signs",
   "count": "3",
   "encounter_type": "PNC Danger Signs",
   "entity_id": "",
@@ -50,13 +51,13 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Woman Present",
+    "title": "{{step1_title}}",
     "next": "step2",
     "fields": [
       {
         "key": "ds_start_message",
         "type": "label",
-        "text": "Screen and Dispense Medication",
+        "text": "{{step1_start_message}}",
         "label_text_size": "18sp",
         "label_text_style": "bold"
       },
@@ -69,30 +70,30 @@
         "exclusive": [
           "chk_mother_present_yes"
         ],
-        "label": "Is the postpartum woman present?",
+        "label": "{{step1_pnc_woman_present}}",
         "options": [
           {
             "key": "chk_mother_present_yes",
-            "text": "Yes",
+            "text": "{{step1_pnc_woman_present_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "chk_mother_present_no",
-            "text": "No",
+            "text": "{{step1_pnc_woman_present_no}}",
             "text_size": "18px",
             "value": "false"
           }
         ],
         "v-required" : {
           "value" : "true",
-          "err": "Please indicate if the mother is present or not"
+          "err": "{{step1_pnc_woman_present_err}}"
         }
       }
     ]
   },
   "step2": {
-    "title": "Mother Danger Signs",
+    "title": "{{step2_title}}",
     "next": "step3",
     "fields": [
       {
@@ -101,7 +102,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Assess the postpartum woman for the following danger signs:",
+        "label": "{{step2_danger_signs_present_label}}",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [
@@ -110,98 +111,98 @@
         "options": [
           {
             "key": "chk_fever",
-            "text": "High Fever and general body weakness",
+            "text": "{{step2_danger_sign_fever}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_bleeding_vaginally",
-            "text": "Severe vaginal bleeding, non-stop bleeding (using one pad every 5 minutes)",
+            "text": "{{step2_danger_sign_bleeding_vaginally}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "150802AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_server_headache",
-            "text": "Headache/Dizziness",
+            "text": "{{step2_danger_sign_server_headache}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "139081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_convulsions",
-            "text": "Seizures/Convulsions",
+            "text": "{{step2_danger_sign_convulsions}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "164483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_difficulty_breathing",
-            "text": "Difficulty breathing",
+            "text": "{{step2_danger_sign_difficulty_breathing}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_severe_leg_pain",
-            "text": "Leg muscle cramps",
+            "text": "{{step2_danger_sign_severe_leg_pain}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "114395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_unusual_behaviour",
-            "text": "Abnormal behaviour (stress, confusion)",
+            "text": "{{step2_danger_sign_unusual_behaviour}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "152376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_swelling_of_breast",
-            "text": "Pain due to breast engorgement",
+            "text": "{{step2_danger_sign_swelling_of_breast}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "125212AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_severe_abdominal_pain",
-            "text": "Severe abdominal pain",
+            "text": "{{step2_danger_sign_severe_abdominal_pain}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "165271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_vaginal_discharge",
-            "text": "Foul smelling vaginal discharge",
+            "text": "{{step2_danger_sign_vaginal_discharge}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_blurred_vision",
-            "text": "Blurred vision",
+            "text": "{{step2_danger_sign_blurred_vision}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "147104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_loss_conscioueness",
-            "text": "Loss of consciousness",
+            "text": "{{step2_danger_sign_loss_conscioueness}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "135592AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_urination",
-            "text": "Little/no urination",
+            "text": "{{step2_danger_sign_urination}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "118982AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_none",
-            "text": "None",
+            "text": "{{step2_danger_sign_none}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -209,7 +210,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please pick at least one"
+          "err": "{{step2_danger_sign_err}}"
         },
         "relevance": {
           "step1:mother_present": {
@@ -240,7 +241,7 @@
       {
         "key": "minor_illnesses_title",
         "type": "label",
-        "text": "Minor Illnesses",
+        "text": "{{step2_minor_illnesses_title}}",
         "label_text_size": "18sp",
         "label_text_style": "bold",
         "text_color": "#000000",
@@ -262,7 +263,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Assess the postpartum woman for the following minor illnesses:",
+        "label": "{{step2_minor_illness_present_mama_label}}",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [
@@ -271,49 +272,49 @@
         "options": [
           {
             "key": "chk_mild_pain",
-            "text": "Mild pain anywhere in the body",
+            "text": "{{step2_minor_illness_mild_pain}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_mild_fever",
-            "text": "Mild fever",
+            "text": "{{step2_minor_illness_mild_fever}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_cough",
-            "text": "Cough",
+            "text": "{{step2_minor_illness_cough}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_runny_nose",
-            "text": "Runny nose/cold",
+            "text": "{{step2_minor_illness_runny_nose}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_sore_throat",
-            "text": "Sore throat",
+            "text": "{{step2_minor_illness_sore_throat}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_other_needs",
-            "text": "Other",
+            "text": "{{step2_minor_illness_other_needs}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_none",
-            "text": "None",
+            "text": "{{step2_minor_illness_none}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -321,7 +322,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please pick at least one"
+          "err": "{{step2_minor_illness_err}}"
         },
         "relevance": {
           "step2:danger_signs_present_mama": {
@@ -341,10 +342,10 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Describe the other needs",
+        "hint": "{{step2_minorillness_description}}",
         "v_required": {
           "value": "true",
-          "err": "Describe the other needs"
+          "err": "{{step2_minorillness_description_err}}"
         },
         "relevance": {
           "step2:minor_illness_present_mama": {
@@ -375,7 +376,7 @@
     ]
   },
   "step3": {
-    "title": "Mother Condition",
+    "title": "{{step3_title}}",
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -383,7 +384,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Danger sign! <br /> I have identified an urgent danger sign: <br /> {danger_signs_captured} <br /> Refer to Health Facility and dispense over the counter medicine if needed based on the symptoms.",
+        "text": "{{step3_danger_signs_toaster_text1}} {danger_signs_captured} {{step3_danger_signs_toaster_text2}}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
@@ -431,7 +432,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "button",
-        "hint": "Save and Refer to Health Facility",
+        "hint": "{{step3_save_and_refer_hint}}",
         "btn_bg_color": "#FF840952",
         "action": {
           "behaviour": "refer"
@@ -466,7 +467,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The mother has the following illness(es): <br /> {minor_illness_captured} <br /> Manage as needed by dispensing over the counter medicine or commodity",
+        "text": "{{step3_minor_illnesses_toaster_text1}} {minor_illness_captured} <br /> {{step3_minor_illnesses_toaster_text2}}",
         "text_color": "#000000",
         "toaster_type": "warning",
         "calculation": {
@@ -499,7 +500,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The mother does not have any illness please proceed as needed by dispensing over the counter medicine or commodity",
+        "text": "{{step3_no_illness_toaster}}",
         "text_color": "#101010",
         "toaster_type": "positive",
         "relevance": {
@@ -520,7 +521,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The postpartum woman must be present in order to proceed with the screening.",
+        "text": "{{step3_mama_not_present_toaster}}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "relevance": {

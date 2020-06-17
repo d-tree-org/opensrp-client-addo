@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DLDM</string>
+    <string name="menu_addo_home">Mwanzo</string>
+    <string name="menu_addo_report">Ripoti</string>
+    <string name="choose_language">Chagua lugha</string>
+    <string name="log_out_as">Log out as</string>
+
+    <!--ADDO Home Screen -->
+
+    <string name="ask_client_village">Muulize mteja kama anatoka Kibaha. Kama anatokea Kibaha tafadhali chagua kijiji anachotekea kutoka kwenye orodha hapo chini. Kama hatoki Kibaha, usitumie mfumo huu kutoa huduma hii.</string>
+    <string name="add_select_village">Mteja anaishi wapi?</string>
+    <string name="addo_other_village">Kijiji kingine</string>
+
+    <!-- Scanfinger print screen second screen after selecting the village-->
+    <string name="return_to_select_village">Rudi kuchagua kijiji</string>
+    <string name="scan_fingerprint_title">Skani alama za vidole</string>
+    <string name="scan_fingerprint_button">SKANI ALAMA ZA VIDOLE</string>
+
+    <!-- Advanced search screen-->
+    <string name="search">Tafuta</string>
+    <string name="matching_results">%1$s matokeo yanawiana.</string>
+    <string name="search_name_hint">Andika jina la kwanza/mwisho</string>
+    <string name="search_name">Andika jina la kwanza/mwisho</string>
+    <string name="search_results">Matokeo ya utafutaji</string>
+
+    <!-- Family Profile -->
+    <string name="return_to_addo_home">Rudi mwanzo</string>
+    <string name="family_members">Wanafamilia</string>
+    <string name="select_the_person_to_receive_services">Chagua mwanafamilia anayepokea huduma</string>
+
+    <!-- Focused client profile-->
+    <string name="return_to_family_name">Rudi kwenye famia ya %1$s</string>
+    <string name="addo_profile_other_screening">Chunguza dalili na kutoa dawa</string>
+    <string name="give_commodities_client_focus_profile">Toa bidhaa</string>
+    <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari au matokeo ya kipimo cha malaria</string>
+
+    <!-- Non focused client-->
+    <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>
+    <string name="non_focused_service_provided">Rekodi huduma zilizotolewa</string>
+
+    <!--Dispense medications-->
+    <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>
+    <string name="do_you_want_to_give_another_referral">Mteja huyu tayari anarufaa ya kwenda kituo cha afya, je unataka kufunga rufaa hii na kufungua nyingine?</string>
+    <string name="yes">Ndiyo</string>
+    <string name="no">Hapana</string>
+
+</resources>

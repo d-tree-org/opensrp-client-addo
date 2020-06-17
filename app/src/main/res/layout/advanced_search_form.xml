@@ -9,34 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="50dp"
         android:paddingLeft="30dp"
+        android:paddingTop="50dp"
         android:paddingRight="30dp"
         android:scrollbars="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/search_name"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/search_name_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/advanced_search_label_padding"
-                    android:paddingLeft="@dimen/advanced_search_label_padding"
-                    android:textColor="@color/client_list_grey"
-                    android:textColorHint="@color/light_grey"
-                    android:textSize="@dimen/advanced_search_text_size"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="@string/search_name"
-                    app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
-                    app:met_primaryColor="@color/addo_primary"
-                    app:met_singleLineEllipsis="true" />
-            </LinearLayout>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/search_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_name_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:paddingStart="@dimen/advanced_search_label_padding"
+                android:paddingLeft="@dimen/advanced_search_label_padding"
+                android:textColor="@color/client_list_grey"
+                android:textColorHint="@color/light_grey"
+                android:textSize="@dimen/advanced_search_text_size"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelText="@string/search_name"
+                app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
+                app:met_primaryColor="@color/addo_primary"
+                app:met_singleLineEllipsis="true" />
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

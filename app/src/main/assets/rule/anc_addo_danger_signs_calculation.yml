@@ -8,49 +8,49 @@ actions:
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('chk_fever')) {
-            selected += '\u2022 Severe fever and shivering <br />';
+            selected += '\u2022 {{step2_danger_sign_fever}} <br />';
         }
         if (selectedItem.contains('chk_bleeding_vaginally')) {
-            selected += '\u2022 Vaginal bleeding <br />';
+            selected += '\u2022 {{step2_danger_sign_vaginal_bleeding}} <br />';
         }
         if (selectedItem.contains('chk_server_headache')) {
-            selected += '\u2022 Severe headache <br />';
+            selected += '\u2022 {{step2_danger_sign_severe_headache}} <br />';
         }
         if (selectedItem.contains('chk_blurred_vision')) {
-            selected += '\u2022 Blurred vision <br />';
+            selected += '\u2022 {{step2_danger_sign_blurred_vision}} <br />';
         }
         if (selectedItem.contains('chk_convulsions')) {
-            selected += '\u2022 Convulsions/Seizures <br />';
+            selected += '\u2022 {{step2_danger_sign_convulsions}} <br />';
         }
         if (selectedItem.contains('chk_difficulty_breathing')) {
-            selected += '\u2022 Difficulty breathing <br />';
+            selected += '\u2022 {{step2_danger_sign_difficulty_breathing}} <br />';
         }
         if (selectedItem.contains('chk_severe_abdominal_pain')) {
-            selected += '\u2022 Severe abdominal pain <br />';
+            selected += '\u2022 {{step2_danger_sign_severe_abdominal_pain}} <br />';
         }
         if (selectedItem.contains('chk_loss_consciousness')) {
-            selected += '\u2022 Loss of consciousness <br />';
+            selected += '\u2022 {{step2_danger_sign_loss_consciousness}} <br />';
         }
         if (selectedItem.contains('chk_swelling')) {
-            selected += '\u2022 Swelling of the hands, face, and/or legs <br>';
+            selected += '\u2022 {{step2_danger_sign_swelling}} <br>';
         }
         if (selectedItem.contains('chk_early_labour')) {
-            selected += '\u2022 Early labour pains before 9 months <br />';
+            selected += '\u2022 {{step2_danger_sign_early_labour}} <br />';
         }
         if (selectedItem.contains('chk_vaginal_discharge')) {
-            selected += '\u2022 Foul smelling vaginal discharge <br />';
+            selected += '\u2022 {{step2_danger_sign_vaginal_discharge}} <br />';
         }
         if (selectedItem.contains('chk_unusual_movement')) {
-            selected += '\u2022 Less/no fetal movement <br />';
+            selected += '\u2022 {{step2_danger_sign_unusual_movement}} <br />';
         }
         if (selectedItem.contains('chk_water_broke')) {
-            selected += '\u2022 Water broke before 9 months <br />';
+            selected += '\u2022 {{step2_danger_sign_water_broke}} <br />';
         }
         if (selectedItem.contains('chk_vomiting')) {
-            selected += '\u2022 Vomiting <br />';
+            selected += '\u2022 {{step2_danger_sign_vomiting}} <br />';
         }
         if (selectedItem.contains('chk_anemia')) {
-            selected += '\u2022 Anemia demonstrated by paleness on the palms <br />';
+            selected += '\u2022 {{step2_danger_sign_anemia}} <br />';
         }
         return selected;
   }"
@@ -74,22 +74,22 @@ actions:
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('chk_mild_pain')) {
-            selected += '\u2022 Mild pain anywhere in the body <br />';
+            selected += '\u2022 {{step2_minor_illness_mild_pain}} <br />';
         }
         if (selectedItem.contains('chk_mild_fever')) {
 
-            selected += '\u2022 Mild fever <br />';
+            selected += '\u2022 {{step2_minor_illness_mild_fever}} <br />';
 
         }
         if (selectedItem.contains('chk_cough')) {
-            selected += '\u2022 Cough <br />';
+            selected += '\u2022 {{step2_minor_illness_cough}} <br />';
         }
         if (selectedItem.contains('chk_runny_nose')) {
-            selected += '\u2022 Runny nose/cold <br /> ';
+            selected += '\u2022 {{step2_minor_illness_runny_nose}} <br /> ';
 
         }
         if (selectedItem.contains('chk_sore_throat')) {
-            selected += '\u2022 Sore throat <br />';
+            selected += '\u2022 {{step2_minor_illness_sore_throat}} <br />';
         }
 
         if (selectedItem.contains('chk_other_needs')) {

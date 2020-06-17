@@ -2,6 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
+  "properties_file_name": "child_addo_danger_signs",
   "count": "3",
   "encounter_type": "Child Danger Signs",
   "entity_id": "",
@@ -50,13 +51,13 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Child Presence",
+    "title": "{{step1_title}}",
     "next": "step2",
     "fields": [
       {
         "key": "ds_start_message",
         "type": "label",
-        "text": "Screen and Dispense Medication",
+        "text": "{{step1_danger_signs_start_message}}",
         "label_text_size": "18sp",
         "label_text_style": "bold"
       },
@@ -69,30 +70,30 @@
         "exclusive": [
           "chk_child_present_yes"
         ],
-        "label": "Is the child present?",
+        "label": "{{step1_is_child_present_label}}",
         "options": [
           {
             "key": "chk_child_present_yes",
-            "text": "Yes",
+            "text": "{{step1_is_child_present_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "chk_child_present_no",
-            "text": "No",
+            "text": "{{step1_is_child_present_no}}",
             "text_size": "18px",
             "value": "false"
           }
         ],
         "v-required": {
           "value": "true",
-          "err": "Please indicate if the child is present or not"
+          "err": "{{step1_is_child_present_err}}"
         }
       }
     ]
   },
   "step2": {
-    "title": "Child danger signs",
+    "title": "{{step2_title}}",
     "next": "step3",
     "fields": [
       {
@@ -101,7 +102,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "159860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Asses the child for the following symptoms: <br /><br /> It is important to screen the child for <b>ALL</b> these signs because children often suffer from more than one illness.",
+        "label": "{{step2_danger_signs_present_label}}",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [
@@ -110,259 +111,259 @@
         "options": [
           {
             "key": "chk_coughing",
-            "text": "Cough",
+            "text": "{{step2_danger_sign_cough}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_difficult_breathing",
-            "text": "Difficulty breathing",
+            "text": "{{step2_danger_difficult_breathing}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_fast_breathing",
-            "text": "Fast breathing",
+            "text": "{{step2_danger_fast_breathing}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_chest_indrawing",
-            "text": "Chest in-drawing",
+            "text": "{{step2_danger_chest_indrawing}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_difficult_drinking",
-            "text": "Difficulties in suckling/drinking",
+            "text": "{{step2_danger_difficult_drinking}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_convulsions",
-            "text": "Seizures/Convulsions",
+            "text": "{{step2_danger_convulsions}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "164483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_grunting_voice",
-            "text": "Grunting voice",
+            "text": "{{step2_danger_grunting_voice}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_weak",
-            "text": "Very weak/unconscious",
+            "text": "{{step2_danger_weak}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_extreme_cold_or_hot",
-            "text": "Extreme cold or hot body temperature",
+            "text": "{{step2_danger_extreme_cold_or_hot}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_body_chills",
-            "text": "Body chills/shivering",
+            "text": "{{step2_danger_body_chills}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_severe_vomit",
-            "text": "Vomiting/Can't keep anything down",
+            "text": "{{step2_danger_severe_vomit}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_lack_of_appetite",
-            "text": "Lack of appetite",
+            "text": "{{step2_danger_lack_of_appetite}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_watery_stool_3_times_a_day",
-            "text": "Smooth/watery stool 3 times or more a day",
+            "text": "{{step2_danger_watery_stool_3_times_a_day}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_watery_stool_for_14_days_more",
-            "text": "Smooth/watery stool for 14 days or more",
+            "text": "{{step2_danger_watery_stool_for_14_days_more}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_bloody_stool",
-            "text": "Bloody stool",
+            "text": "{{step2_danger_bloody_stool}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_sunk_eyes",
-            "text": "Sunken Eyes",
+            "text": "{{step2_danger_sunk_eyes}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_excessive_crying_discomfort",
-            "text": "Excessive crying and discomfort",
+            "text": "{{step2_danger_excessive_crying_discomfort}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_feels_thirsty",
-            "text": "Feels thirsty",
+            "text": "{{step2_danger_feels_thirsty}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_oversleeping",
-            "text": "Oversleeping/difficulty waking up",
+            "text": "{{step2_danger_oversleeping}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_redness_around_umbilical",
-            "text": "Redness around/discharge from umbilical cord",
+            "text": "{{step2_danger_redness_around_umbilical}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_body_rashes",
-            "text": "Body rashes discharging pus",
+            "text": "{{step2_danger_body_rashes}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_eye_discharge",
-            "text": "Pus dis  charge from eyes",
+            "text": "{{step2_danger_eye_discharge}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "142246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_malnutrition",
-            "text": "Malnutrition",
+            "text": "{{step2_danger_malnutrition}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_not_getting_better",
-            "text": "Not getting better after treatment",
+            "text": "{{step2_danger_not_getting_better}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_blue_lips",
-            "text": "Blue lips",
+            "text": "{{step2_danger_blue_lips}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_constipation",
-            "text": "Constipation or difficult urinating",
+            "text": "{{step2_danger_constipation}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_no_movement",
-            "text": "No movement",
+            "text": "{{step2_danger_no_movement}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_jaundiced",
-            "text": "Pale or jaundiced",
+            "text": "{{step2_danger_jaundiced}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_cold_flu",
-            "text": "Runny nose/ Cold/ flu",
+            "text": "{{step2_danger_cold_flu}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_sore_throat",
-            "text": "Sore throat",
+            "text": "{{step2_danger_sore_throat}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_sneezing",
-            "text": "Sneezing",
+            "text": "{{step2_danger_sneezing}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_headache",
-            "text": "Headache",
+            "text": "{{step2_danger_headache}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_mild_diarrhea_without_blood",
-            "text": "Mild diarrhea without blood (less than 3 times in 24 hrs)",
+            "text": "{{step2_danger_mild_diarrhea_without_blood}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_minor_skin_infections",
-            "text": "Minor skin infections",
+            "text": "{{step2_danger_minor_skin_infections}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_minor_wound_cuts",
-            "text": "Minor wounds or cuts",
+            "text": "{{step2_danger_minor_wound_cuts}}",
             "value": false,
             "openmrs_entity": "",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_other",
-            "text": "Other",
+            "text": "{{step2_danger_other}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_none",
-            "text": "None",
+            "text": "{{step2_danger_none}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -370,7 +371,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please pick at least one"
+          "err": "{{step2_danger_signs_err}}"
         },
         "relevance": {
           "step1:child_present": {
@@ -390,10 +391,10 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Describe the other needs",
+        "hint": "{{step2_danger_other_description_hint}}",
         "v_required": {
           "value": "true",
-          "err": "Describe the other needs"
+          "err": "{{step2_danger_other_description_err}}"
         },
         "relevance": {
           "step2:danger_signs_present_child": {
@@ -480,7 +481,7 @@
     ]
   },
   "step3": {
-    "title": "Child Condition",
+    "title": "{{step3_title}}",
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -488,7 +489,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "<b>The child has the following {condition_urgency}:</b> <br />{danger_signs_captured} {addo_actions} <br /> {addo_medication_to_give}",
+        "text": "{{step3_danger_signs_present_toaster_text1}} {condition_urgency}:</b> <br />{danger_signs_captured} {addo_actions} <br /> {addo_medication_to_give}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {

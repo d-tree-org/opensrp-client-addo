@@ -162,8 +162,11 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public void notifyAppContextChange() {
-        Locale current = getApplicationContext().getResources().getConfiguration().locale;
-        saveLanguage(current.getLanguage());
+/*        if (context != null) {
+            if (!context.allSharedPreferences().fetchLanguagePreference().isEmpty()) {
+                saveLanguage(context.allSharedPreferences().fetchLanguagePreference());
+            }
+        }*/
         FamilyLibrary.getInstance().setMetadata(getMetadata());
     }
 

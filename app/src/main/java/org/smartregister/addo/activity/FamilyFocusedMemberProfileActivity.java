@@ -240,7 +240,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_commodities:
-                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), "ADDO COMMODITIES DISPENSE");
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), getResources().getString(R.string.dispense_commodities));
                 break;
 
             case R.id.tv_focused_client_dispense:
@@ -294,6 +294,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
@@ -364,6 +365,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                         }
 
+                    } else {
+                        checkDSPresentProposedMedsAndDispense(form);
                     }
                 }
                 //end of check referral
@@ -487,8 +490,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private void closeOpenNewReferral(Context context, final OnDialogButtonClick onDialogButtonClick) {
         final AlertDialog alert = new AlertDialog.Builder(context).create();
-        alert.setMessage("This client already has a referral to the Health Facility, do you want to close this referral and open a new one?");
-        alert.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        alert.setMessage(getString(R.string.do_you_want_to_give_another_referral));
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //AddoApplication.getInstance().getTaskRepository().addOrUpdate(task);
@@ -497,7 +500,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 alert.dismiss();
             }
         });
-        alert.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onDialogButtonClick.onCancelButtonClick();

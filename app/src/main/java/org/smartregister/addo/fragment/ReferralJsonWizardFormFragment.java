@@ -50,7 +50,7 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
     /**
      * Skips blank by relevance steps when next is clicked on the json wizard forms.
      */
-    private void skipStepsOnNextPressed() {
+    public void skipStepsOnNextPressed() {
         if (skipBlankSteps()) {
             JSONObject formStep = getStep(getArguments().getString(JsonFormConstants.STEPNAME));
             String next = formStep.optString(JsonFormConstants.NEXT, "");
@@ -66,7 +66,7 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
     /**
      * Skips blank by relevance steps when previous is clicked on the json wizard forms.
      */
-    private void skipStepOnPreviousPressed() {
+    public void skipStepOnPreviousPressed() {
         if (skipBlankSteps()) {
             JSONObject currentFormStep = getStep(getArguments().getString(JsonFormConstants.STEPNAME));
             String next = currentFormStep.optString(JsonFormConstants.NEXT, "");

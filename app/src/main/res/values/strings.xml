@@ -90,6 +90,7 @@
     <string name="danger_sign_title_pnc">PNC Danger Sign Screening</string>
     <string name="dispense_medication_title">Dispense Medication</string>
     <string name="default_dispense_message">Manage as needed</string>
+    <string name="dispense_commodities">ADDO COMMODITIES DISPENSE</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -424,5 +425,11 @@
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
     <string name="referral_submitted">Referral sent to health facility</string>
-    <string name="client_already_has_referral">This client already has referral to HF advice them to go there immediately ...</string>
+    <string name="client_already_has_referral">This client already has referral to HF advice them to go there immediately …</string>
+    <string name="return_to_select_village">Return to select village</string>
+    <string name="scan_fingerprint_title">Scan fingerprint</string>
+    <string name="scan_fingerprint_button">SCAN FINGERPRINT</string>
+    <string name="select_the_person_to_receive_services">Select the person to receive services</string>
+    <string name="non_focused_service_provided">Record service provided</string>
+    <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
 </resources>
