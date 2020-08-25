@@ -1,0 +1,67 @@
+---
+name: step2_danger_signs_captured
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('chk_suspected_pregnancy')) {
+            selected += '\u2022 {{step2_suspected_pregnancy}} <br />';
+        }
+        if (selectedItem.contains('chk_lower_abdominal_pain')) {
+            selected += '\u2022 {{step2_lower_abdominal_pain}} <br />';
+        }
+        if (selectedItem.contains('chk_vaginal_discharge')) {
+            selected += '\u2022 {{step2_chk_vaginal_discharge}} <br />';
+        }
+        if (selectedItem.contains('chk_vaginal_bleeding_between_periods')) {
+            selected += '\u2022 {{step2_vaginal_bleeding_between_periods}} <br />';
+        }
+        if (selectedItem.contains('chk_wounds_around_genitals')) {
+            selected += '\u2022 {{step2_wounds_around_genitals}} <br />';
+        }
+        if (selectedItem.contains('chk_irritation_around_genitals')) {
+            selected += '\u2022 {{step2_irritation_around_genitals}} <br />';
+        }
+        if (selectedItem.contains('chk_swelling_genital_parts')) {
+            selected += '\u2022 {{step2_swelling_genital_parts}} <br />';
+        }
+        if (selectedItem.contains('chk_other')) {
+            selected += '\u2022 ' + otherIllnesses + '<br />';
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_adolescent_condition_present, step2_adolescent_condition_present_other) "
+
+---
+name: step2_addo_actions
+description: Get the message for addo based on the conditions
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, otherIllnesses) {
+        import java.lang.*;
+        String messageToAddo = '';
+        if ((selectedItem.contains('chk_irritation_around_genitals') || selectedItem.contains('chk_lower_abdominal_pain') ||
+            selectedItem.contains('chk_vaginal_discharge') || selectedItem.contains('chk_swelling_genital_parts') ||
+            selectedItem.contains('chk_other')) && !(selectedItem.contains('chk_suspected_pregnancy') ||
+            selectedItem.contains('chk_wounds_around_genitals') || selectedItem.contains('chk_vaginal_bleeding_between_periods'))) {
+            messageToAddo = '{{step3_danger_signs_toaster_text2}}';
+        } else {
+            messageToAddo = '{{step3_danger_signs_toaster_text3}}'
+        }
+        return messageToAddo;
+  }"
+  - "calculation = getSelectedDS(step2_adolescent_condition_present, step2_adolescent_condition_present_other) "
+
+---
+name: step3_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step2_danger_signs_captured, 'addo_actions': step2_addo_actions]"
+
+  # , 'addo_actions': step2_addo_actions, 'addo_medication_to_give': step2_addo_medication_to_give, 'child_conditions':step2_child_conditions, 'condition_urgency':step2_condition_urgency]" #Remove child condition this is just for testing
