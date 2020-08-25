@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
+import org.smartregister.addo.dao.AdolescentDao;
 import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dao.FamilyDao;
 import org.smartregister.addo.dao.PNCDao;
@@ -81,6 +82,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     public static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
     public static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
     public static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
+    public static final String ADOLESCENT_SCREENING_ENCOUNTER = "Adolescent Addo Screening";
 
     @Override
     protected void onCreation() {
@@ -234,6 +236,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                     startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAncAddoDangerSigns()), getResources().getString(R.string.danger_sign_title_anc));
                 } else if (isPncClient()) {
                     startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getPncAddoDangerSigns()), getResources().getString(R.string.danger_sign_title_pnc));
+                } else if (isAdolescentClient()) {
+                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAdolescentAddoScreening()), "Adolescent Screening");
                 } else {
                     Toast.makeText(this, "You clicked a client that is not in the focused group screening", Toast.LENGTH_SHORT).show();
                 }
@@ -280,6 +284,10 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         return PNCDao.isPNCMember(baseEntityId);
     }
 
+    private boolean isAdolescentClient() {
+        return AdolescentDao.isAdolescentMember(baseEntityId);
+    }
+
     public void startFormActivity(JSONObject jsonForm, String formTitle) {
         Form form = new Form();
         form.setName(formTitle);
@@ -323,7 +331,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 // Check if it is ANC, PNC or Child Danger sing screening and handle medication based on the screening results
                 String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
-                if (encounterType.equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                if (encounterType.equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER) ||
+                        encounterType.equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ADOLESCENT_SCREENING_ENCOUNTER)) {
 
                     //check if client is being referred
                     JSONArray a = form.getJSONObject("step3").getJSONArray("fields");
@@ -393,12 +402,28 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 JSONArray step2Fields = step2.getJSONArray(JsonFormUtils.FIELDS);
                 JSONArray dangerSignsSelected;
 
-                if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+/*                if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
                     dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
                 } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
                     dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
                 } else {
                     dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
+                }*/
+                switch (form.optString(JsonFormUtils.ENCOUNTER_TYPE)) {
+                    case CHILD_DANGER_SIGN_SCREENING_ENCOUNTER:
+                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
+                        break;
+                    case ANC__DANGER_SIGN_SCREENING_ENCOUNTER:
+                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
+                        break;
+                    case PNC_DANGER_SIGN_SCREENING_ENCOUNTER:
+                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
+                        break;
+                    case ADOLESCENT_SCREENING_ENCOUNTER:
+                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "adolescent_condition_present").getJSONArray(JsonFormUtils.VALUE);
+                        break;
+                    default:
+                        return;
                 }
 
                 // When there is danger signs and the none field is not selected open the dispense medication
@@ -420,6 +445,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                     }
 
                     dispenseMedication(dangerSigns, suggestedMeds, referralStatus);
+                } else if (dangerSignsSelected.getString(0).equalsIgnoreCase("chk_none")) {
+                    dispenseMedication(null, getResources().getString(R.string.default_dispense_message), null);
                 }
             } else {
             dispenseMedication(null, null, null);
@@ -436,29 +463,23 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     private Boolean isClientPresent(@NotNull JSONObject form) {
-        Boolean clientPresent = false;
         try {
             JSONObject step1 = form.getJSONObject(JsonFormUtils.STEP1);
             JSONArray step1Fields = step1.getJSONArray(JsonFormUtils.FIELDS);
             if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                if(JsonFormUtils.getFieldJSONObject(step1Fields, "child_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_child_present_yes")) {
-                    clientPresent = true;
-                }
+                return JsonFormUtils.getFieldJSONObject(step1Fields, "child_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_child_present_yes");
             } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                if(JsonFormUtils.getFieldJSONObject(step1Fields, "pregnant_woman_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_pregnant_woman_present_yes")) {
-                    clientPresent = true;
-                }
+                return JsonFormUtils.getFieldJSONObject(step1Fields, "pregnant_woman_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_pregnant_woman_present_yes");
+            } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER)) {
+                return JsonFormUtils.getFieldJSONObject(step1Fields, "mother_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_mother_present_yes");
             } else {
-                if(JsonFormUtils.getFieldJSONObject(step1Fields, "mother_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_mother_present_yes")) {
-                    clientPresent = true;
-                }
+                return JsonFormUtils.getFieldJSONObject(step1Fields, "adolescent_present").getJSONArray(JsonFormUtils.VALUE).get(0).equals("adolescent_present_yes");
             }
 
         } catch (JSONException e) {
             Timber.e(e);
         }
-
-        return clientPresent;
+        return false;
     }
 
     private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
