@@ -30,6 +30,9 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         String userLocationId = Utils.context().allSharedPreferences().fetchUserLocalityId(providerId);
 
         List<String> locationIds = LocationHelper.getInstance().locationsFromHierarchy(true, null);
+        if (userLocationId != null) {
+            locationIds.add(userLocationId);
+        }
         if (!org.smartregister.util.Utils.isEmptyCollection(locationIds)) {
             return StringUtils.join(locationIds, ",");
         }

@@ -46,6 +46,7 @@ public class Constants {
         public static final String ANC_MEMBER_LOG = "ec_anc_log";
         public static final String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
         public static final String ANC_PREGNANCY_OUTCOME = "ec_pregnancy_outcome";
+        public static final String ADOLESCENT = "ec_adolescent";
     }
 
     public static class JSON_FORM {
