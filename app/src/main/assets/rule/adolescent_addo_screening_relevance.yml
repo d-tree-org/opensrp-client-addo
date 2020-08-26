@@ -6,6 +6,7 @@ condition: "(step2_adolescent_condition_present.contains('chk_lower_abdominal_pa
             step2_adolescent_condition_present.contains('chk_vaginal_discharge') ||
             step2_adolescent_condition_present.contains('chk_irritation_around_genitals') ||
             step2_adolescent_condition_present.contains('chk_swelling_genital_parts') ||
+            step2_adolescent_condition_present.contains('chk_family_planning') ||
             step2_adolescent_condition_present.contains('chk_other')) &&
             !(step2_adolescent_condition_present.contains('chk_suspected_pregnancy') ||
             step2_adolescent_condition_present.contains('chk_wounds_around_genitals') ||
