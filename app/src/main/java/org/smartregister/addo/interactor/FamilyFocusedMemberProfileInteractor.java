@@ -15,6 +15,7 @@ import org.smartregister.addo.dao.AdolescentDao;
 import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.chw.anc.domain.Visit;
 import org.smartregister.chw.anc.domain.VisitDetail;
@@ -195,13 +196,13 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
     protected String getEncounterType(String baseEntityId) {
         if (AncDao.isANCMember(baseEntityId)) {
-            return "ANC ADDO Visit";
+            return CoreConstants.EventType.ANC_ADDO_VISIT;
         } else if (PNCDao.isPNCMember(baseEntityId)) {
-            return "PNC ADDO Visit";
+            return CoreConstants.EventType.PNC_ADDO_VISIT;
         } else if (AdolescentDao.isAdolescentMember(baseEntityId)) {
-            return "Adolescent ADDO Visit";
+            return CoreConstants.EventType.ADOLESCENT_ADDO_VISIT;
         } else {
-            return "Child ADDO Visit";
+            return CoreConstants.EventType.CHILD_ADDO_VISIT;
         }
     }
 

@@ -166,6 +166,15 @@ public class AddoClientProcessor extends ClientProcessorForJava {
                     processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
                 }
                 break;
+            case CoreConstants.EventType.ANC_ADDO_VISIT:
+            case CoreConstants.EventType.PNC_ADDO_VISIT:
+            case CoreConstants.EventType.CHILD_ADDO_VISIT:
+            case CoreConstants.EventType.ADOLESCENT_ADDO_VISIT:
+                if (eventClient.getEvent() == null) {
+                    return;
+                }
+                processVisitEvent(eventClient);
+                processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
             default:
                 if (eventClient.getClient() != null) {
                     if (eventType.equals(CoreConstants.EventType.UPDATE_FAMILY_RELATIONS) && event.getEntityType().equalsIgnoreCase(CoreConstants.TABLE_NAME.FAMILY_MEMBER)) {

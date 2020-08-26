@@ -125,6 +125,10 @@ public class CoreConstants {
         public static final String WASH_CHECK = "WASH check";
         public static final String NUTRITION_STATUS_BABY = "Nutrition Status - Baby";
         public static final String SICK_CHILD = "Sick Child";
+        public static final String ANC_ADDO_VISIT = "ANC ADDO Visit";
+        public static final String PNC_ADDO_VISIT = "PNC ADDO Visit";
+        public static final String CHILD_ADDO_VISIT = "Child ADDO Visit";
+        public static final String ADOLESCENT_ADDO_VISIT = "Adolescent ADDO Visit";
 
     }
 
