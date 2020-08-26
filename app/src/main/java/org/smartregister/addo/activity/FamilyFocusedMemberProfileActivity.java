@@ -80,7 +80,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private FormUtils formUtils;
 
     public static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
-    public static final String ANC__DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
+    public static final String ANC_DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
     public static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
     public static final String ADOLESCENT_SCREENING_ENCOUNTER = "Adolescent Addo Screening";
 
@@ -331,7 +331,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 // Check if it is ANC, PNC or Child Danger sing screening and handle medication based on the screening results
                 String encounterType = form.optString(JsonFormUtils.ENCOUNTER_TYPE);
-                if (encounterType.equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER) ||
+                if (encounterType.equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ANC_DANGER_SIGN_SCREENING_ENCOUNTER) ||
                         encounterType.equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER) || encounterType.equalsIgnoreCase(ADOLESCENT_SCREENING_ENCOUNTER)) {
 
                     //check if client is being referred
@@ -413,7 +413,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                     case CHILD_DANGER_SIGN_SCREENING_ENCOUNTER:
                         dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
                         break;
-                    case ANC__DANGER_SIGN_SCREENING_ENCOUNTER:
+                    case ANC_DANGER_SIGN_SCREENING_ENCOUNTER:
                         dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
                         break;
                     case PNC_DANGER_SIGN_SCREENING_ENCOUNTER:
@@ -468,7 +468,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             JSONArray step1Fields = step1.getJSONArray(JsonFormUtils.FIELDS);
             if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
                 return JsonFormUtils.getFieldJSONObject(step1Fields, "child_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_child_present_yes");
-            } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
+            } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC_DANGER_SIGN_SCREENING_ENCOUNTER)) {
                 return JsonFormUtils.getFieldJSONObject(step1Fields, "pregnant_woman_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_pregnant_woman_present_yes");
             } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(PNC_DANGER_SIGN_SCREENING_ENCOUNTER)) {
                 return JsonFormUtils.getFieldJSONObject(step1Fields, "mother_present").getJSONArray(JsonFormUtils.VALUE).get(0).toString().equals("chk_mother_present_yes");
