@@ -28,6 +28,9 @@ actions:
         if (selectedItem.contains('chk_swelling_genital_parts')) {
             selected += '\u2022 {{step2_swelling_genital_parts}} <br />';
         }
+        if (selectedItem.contains('chk_family_planning')) {
+            selected += '\u2022 {{step2_family_planning}} <br />';
+        }
         if (selectedItem.contains('chk_other')) {
             selected += '\u2022 ' + otherIllnesses + '<br />';
         }
@@ -46,8 +49,9 @@ actions:
         String messageToAddo = '';
         if ((selectedItem.contains('chk_irritation_around_genitals') || selectedItem.contains('chk_lower_abdominal_pain') ||
             selectedItem.contains('chk_vaginal_discharge') || selectedItem.contains('chk_swelling_genital_parts') ||
-            selectedItem.contains('chk_other')) && !(selectedItem.contains('chk_suspected_pregnancy') ||
-            selectedItem.contains('chk_wounds_around_genitals') || selectedItem.contains('chk_vaginal_bleeding_between_periods'))) {
+            selectedItem.contains('chk_family_planning') || selectedItem.contains('chk_other')) &&
+            !(selectedItem.contains('chk_suspected_pregnancy') || selectedItem.contains('chk_wounds_around_genitals') ||
+            selectedItem.contains('chk_vaginal_bleeding_between_periods'))) {
             messageToAddo = '{{step3_danger_signs_toaster_text2}}';
         } else {
             messageToAddo = '{{step3_danger_signs_toaster_text3}}'
