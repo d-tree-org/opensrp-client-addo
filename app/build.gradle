@@ -29,8 +29,8 @@ android {
         applicationId "org.smartregister.addo"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 1
+        versionName "0.1.0"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -147,7 +147,7 @@ githubProperties.load(new FileInputStream(rootProject.file("github.properties"))
 repositories {
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/issyzac/opensrp-client-core")
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-core")
         credentials {
             username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
             password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -190,7 +190,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    implementation('org.smartregister:opensrp-client-core:1.8.30-DTREE-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-core:1.8.31-DTREE-SNAPSHOT') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
