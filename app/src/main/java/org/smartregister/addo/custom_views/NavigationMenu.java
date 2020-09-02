@@ -248,7 +248,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         final TextView tvLang = rootView.findViewById(R.id.tvLang);
 
         final String [] languages = {Constants.LANGUAGES.ENGLISH,
-        Constants.LANGUAGES.SWAHILI, Constants.LANGUAGES.FRANCAIS};
+        Constants.LANGUAGES.SWAHILI};
 
         Locale current = parentActivity.getResources().getConfiguration().locale;
         tvLang.setText(StringUtils.capitalize(current.getDisplayLanguage()));
@@ -271,10 +271,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                             case Constants.LANGUAGES
                                 .SWAHILI:
                                 LOCALE = new Locale("sw");
-                                break;
-                            case Constants.LANGUAGES
-                                .FRANCAIS:
-                                LOCALE = Locale.FRANCE;
                                 break;
                             default:
                                 LOCALE = Locale.ENGLISH;

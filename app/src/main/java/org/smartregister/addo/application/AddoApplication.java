@@ -3,6 +3,7 @@ package org.smartregister.addo.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.os.Environment;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
@@ -42,10 +43,15 @@ import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.util.Utils;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Map;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -125,6 +131,13 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public void setServerURL() {
+
+        try {
+            Yaml yaml = new Yaml();
+            Map<String, Object> envConfig = (Map<String, Object>) yaml.load(new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/environment_conf.yml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         AllSharedPreferences preferences = Utils.getAllSharedPreferences();
         preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url);
     }

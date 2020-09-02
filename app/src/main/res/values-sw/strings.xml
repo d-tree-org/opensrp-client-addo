@@ -45,5 +45,9 @@
     <string name="yes">Ndiyo</string>
     <string name="no">Hapana</string>
     <string name="attend_prescription_form_title">TOA HUDUMA YA DAWA</string>
+    <string name="switch_environment_message">Unakaribia kubadilisha mazingira ya mfumo kwenda %s. Kitendo hiki kitaondoa taarifa zote zilizohifadhiwa katika simu hii, kabla ya kuendelea mbele tafadhali hakikisha umeoanisha/sinki taarifa zako. Je ungependa kuendelea kubadilisha mazingira ya mfumo?</string>
+    <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
+    <string name="environment_name_test">mfumo jaribio</string>
+    <string name="environment_name_production">production</string>
 
 </resources>

@@ -433,4 +433,9 @@
     <string name="non_focused_service_provided">Record service provided</string>
     <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
     <string name="attend_prescription_form_title">ATTEND PRESCRIPTIONS</string>
+
+    <string name="environment_name_test">test</string>
+    <string name="environment_name_production">production</string>
+    <string name="switch_environment_title">Alert! Switching Environment</string>
+    <string name="switch_environment_message">You are about to switch to %s environment. This procedure will wipe out all of your device data, you need to make sure everything is synced before you proceed. Do you want to switch the environment?</string>
 </resources>

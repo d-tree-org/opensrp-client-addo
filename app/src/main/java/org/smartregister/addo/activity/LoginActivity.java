@@ -2,9 +2,11 @@ package org.smartregister.addo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.presenter.LoginPresenter;
+import org.smartregister.addo.view.activity.AddoSettingsActivity;
 import org.smartregister.task.SaveTeamLocationsTask;
 import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
@@ -55,5 +57,14 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         if (!mLoginPresenter.isUserLoggedOut()){
             goToHome(false);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+            startActivity(new Intent(this, AddoSettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

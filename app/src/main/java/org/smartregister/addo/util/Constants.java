@@ -369,4 +369,8 @@ public class Constants {
     public static final class SIMPRINTS_IDENTIFICATION {
         public static final int IDENTIFY_RESULT_CODE = 4061;
     }
+
+    public static final class ENVIRONMENT_CONFIG {
+        public static final String OPENSRP_ADDO_ENVIRONMENT = "opensrp_addo_environment";
+    }
 }
