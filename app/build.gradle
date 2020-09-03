@@ -13,6 +13,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
+apply plugin: 'io.fabric'
 apply plugin: 'com.github.kt3k.coveralls'
 
 jacoco {
@@ -29,7 +30,7 @@ android {
         applicationId "org.smartregister.addo"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 1
+        versionCode 3
         versionName "0.1.0"
         multiDexEnabled true
 
