@@ -1,9 +1,16 @@
 package org.smartregister.addo.application;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Environment;
+import android.preference.PreferenceManager;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
@@ -114,8 +121,6 @@ public class AddoApplication extends DrishtiApplication {
 
         CoreConstants.JSON_FORM.setLocaleAndAssetManager(getCurrentLocale(), getAssets());
 
-        setServerURL();
-
         Configuration configuration = getApplicationContext().getResources().getConfiguration();
         String language;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -128,18 +133,6 @@ public class AddoApplication extends DrishtiApplication {
             saveLanguage(Locale.FRENCH.getLanguage());
         }
 
-    }
-
-    public void setServerURL() {
-
-        try {
-            Yaml yaml = new Yaml();
-            Map<String, Object> envConfig = (Map<String, Object>) yaml.load(new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/environment_conf.yml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        AllSharedPreferences preferences = Utils.getAllSharedPreferences();
-        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url);
     }
 
     @Override

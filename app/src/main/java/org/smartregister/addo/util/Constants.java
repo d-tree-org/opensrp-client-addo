@@ -372,5 +372,6 @@ public class Constants {
 
     public static final class ENVIRONMENT_CONFIG {
         public static final String OPENSRP_ADDO_ENVIRONMENT = "opensrp_addo_environment";
+        public static final String PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH = "enable_production";
     }
 }

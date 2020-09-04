@@ -45,7 +45,8 @@ android {
         buildConfigField "boolean", 'SUPPORT_QR', 'true'
         buildConfigField "int", "DATABASE_VERSION", '1'
 
-        buildConfigField "String", 'opensrp_url', '"https://opensrp-dev.d-tree.org/opensrp/"'
+        buildConfigField "String", 'opensrp_url_staging', '"https://opensrp-dev.d-tree.org/opensrp/"'
+        buildConfigField "String", 'opensrp_url_production', '"https://afyatek.smartregister.org/opensrp/"'
         buildConfigField "String", 'opensrp_url_debug', '"https://opensrp-dev.d-tree.org/opensrp/"'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
