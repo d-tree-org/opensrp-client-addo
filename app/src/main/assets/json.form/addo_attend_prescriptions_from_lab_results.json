@@ -1,0 +1,1133 @@
+{
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "skip_blank_steps": true,
+  "properties_file_name": "addo_attend_prescriptions_from_lab_results",
+  "count": "3",
+  "encounter_type": "ADDO Visit - Attend Prescriptions from Facility or Malaria Lab Results",
+  "entity_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": ""
+  },
+  "step1": {
+    "title": "{{step1_title}}",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "select_facility_label",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "label",
+        "label_text_style": "bold",
+        "text_size": "22px",
+        "text": "{{step1_select_facility_label_text}}",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
+      },
+      {
+        "key": "select_facility",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "buttonText": "{{step1_select_facility_button_text}}",
+        "dialogTitle": "{{step1_select_facility_dialog_title}}",
+        "searchHint": "{{step1_select_facility_search_hint}}",
+        "maxSelectable": "1",
+        "maxSelectMessage": "{{step1_select_facility_maxselect_message}}",
+        "v_required": {
+          "value": true
+        },
+        "options": [
+          {
+            "key":"stand_alone_laboratory",
+            "text":"Stand-alone laboratory",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"arafa_mwendapole_dispensary",
+            "text":"Arafa Mwendapole Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"boko_mnemela_dispensary",
+            "text":"Boko Mnemela Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"dama_africa_dispensary",
+            "text":"Dama Africa Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"disunyara_dispensary",
+            "text":"Disunyara Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"dutumi_dispensary",
+            "text":"Dutumi Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"galagaza_dispensary",
+            "text":"Galagaza Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"gumba_dispensary",
+            "text":"Gumba Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"gwata_dispensary",
+            "text":"Gwata Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ics_mikocheni_charitable_dispensary",
+            "text":"ICS Mikocheni Charitable Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"jabal_hira_dispensary",
+            "text":"Jabal Hira Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"kikongo_dispensary",
+            "text":"Kikongo Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"kitomondo_dispensary",
+            "text":"Kitomondo Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"kongowe_dispensary",
+            "text":"Kongowe Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"kongowe_forest_dispensary",
+            "text":"Kongowe Forest Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"kwala_dispensary",
+            "text":"Kwala Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"lukenge_dispensary",
+            "text":"Lukenge Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"lupunga_dispensary",
+            "text":"Lupunga Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"magindu_dispensary",
+            "text":"Magindu Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mbwawa_dispensary",
+            "text":"Mbwawa Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"medewell_health_center",
+            "text":"Medewell Health Center",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mico_gumba_dispensary",
+            "text":"MICO Gumba Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"misugusugu_dispensary",
+            "text":"Misugusugu Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"miswe_dispensary",
+            "text":"Miswe Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mkoani_health_center",
+            "text":"Mkoani Health Center",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mlandizi_health_center",
+            "text":"Mlandizi Health Center",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mperamumbi_dispensary",
+            "text":"Mperamumbi Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"msua_dispensary",
+            "text":"Msua Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mtakuja_dispensary",
+            "text":"Mtakuja Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mwanabwito_dispensary",
+            "text":"Mwanabwito Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"mwendapole_dispensary",
+            "text":"Mwendapole Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ngeta_dispensary",
+            "text":"Ngeta Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ruvu_sec_dispensary",
+            "text":"Ruvu Sec Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ruvu_station_dispensary",
+            "text":"Ruvu Station Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"soga_dispensary",
+            "text":"Soga Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"st._getrude_dispensary",
+            "text":"St. Getrude Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"st._michael_health_center",
+            "text":"St. Michael Health Center",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"tumbi_regional_referral_hospital",
+            "text":"Tumbi Regional Referral Hospital",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"vikawe_dispensary",
+            "text":"Vikawe Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"vikuge_dispensary",
+            "text":"Vikuge Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"visiga_dispensary",
+            "text":"Visiga Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"visiga_seminary_dispensary",
+            "text":"Visiga Seminary Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"viziwaziwa_dispensary",
+            "text":"Viziwaziwa Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"outside_kibaha_district",
+            "text":"Outside Kibaha District",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          }
+        ],
+        "type": "multi_select_list"
+      }
+    ]
+  },
+  "step2": {
+    "title": "{{step2_title}}",
+    "next": "step3",
+    "fields": [
+      {
+        "key": "dispense_med_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "{{step2_dispense_med_label_text}}",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
+      },
+      {
+        "key": "medicine_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "buttonText": "{{step2_medicine_dispensed_button_text}}",
+        "dialogTitle": "{{step2_medicine_dispensed_dialog_title}}",
+        "searchHint": "{{step2_medicine_dispensed_search_hint}}",
+        "v_required": {
+          "value": true
+        },
+        "options": [
+          {
+            "key":"artemether_lumefantrine_tablets",
+            "text":"Artemether/Lumefantrine (ALu) tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"aminophylline_injection",
+            "text":"Aminophylline injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"amoxicillin_dispersible_tablets_capsules_oral_suspension",
+            "text":"Amoxicillin dispersible tablets, capsules /oral suspension",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"annusol_suppositories",
+            "text":"Annusol suppositories",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"bendrofluazide",
+            "text":"Bendrofluazide",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"benzyl_penicillin_powder_for_injection",
+            "text":"Benzyl Penicillin powder for injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"bisacodyl_tablets",
+            "text":"Bisacodyl tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"cetrizine_hydrochloride_syrup_tablets",
+            "text":"Cetrizine hydrochloride syrup / tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"chloramphenicol_eye_drops_ointment",
+            "text":"Chloramphenicol eye drops/ointment",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"co-trimoxazole_tablets_suspension",
+            "text":"Co-trimoxazole tablets/suspension",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"dextrose_injection",
+            "text":"Dextrose 5% injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"diclofenac_sodium_tablets",
+            "text":"Diclofenac sodium tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"doxycycline_capsules_tablets",
+            "text":"Doxycycline capsules/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ergometrine_injection",
+            "text":"Ergometrine injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"normal_saline_injection",
+            "text":"Normal Saline injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"nystatin_oral_suspension_pessaries_skin_ointment_tablets",
+            "text":"Nystatin oral suspension/ pessaries/ skin ointment/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"oxytetracycline_hydrochloride_eye_ointment",
+            "text":"Oxytetracycline hydrochloride eye ointment",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"phenoxy_methyl_penicillin_suspension_tablets",
+            "text":"Phenoxy methyl Penicillin suspension/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"phenytoin_tablets",
+            "text":"Phenytoin tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"piperazine_and_its_salts_in_oral_dosage_forms",
+            "text":"Piperazine and its salts in oral dosage forms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"procaine_penicillin_fortified",
+            "text":"Procaine Penicillin Fortified",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"promethazine_injection",
+            "text":"Promethazine injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"propranolol_tablets",
+            "text":"Propranolol tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"quinine_injection_tablets",
+            "text":"Quinine injection/ tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"silver_sulfadiazine_cream",
+            "text":"Silver sulfadiazine cream",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"water_for_injection",
+            "text":"Water for injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"paracetamol_tablets",
+            "text":"Paracetamol tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"paracetamol_suspensions",
+            "text":"Paracetamol suspensions",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ibuprofen_tablets",
+            "text":"Ibuprofen tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ibuprofen_suspensions",
+            "text":"Ibuprofen suspensions",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"oral_rehydration_salts",
+            "text":"Oral Rehydration Salts",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"cough_preparations",
+            "text":"Cough preparations",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"vitamins_suspensions_syrups",
+            "text":"Vitamins suspensions/syrups",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"zinc_sulphate_tablets",
+            "text":"Zinc Sulphate tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"combined_oral_contraceptives",
+            "text":"Combined Oral Contraceptives",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"female_condoms",
+            "text":"Female condoms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"male_condoms",
+            "text":"Male condoms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"folic_acid",
+            "text":"Folic acid",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ferrous_sulphate_tablets",
+            "text":"Ferrous Sulphate tablets ",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"other",
+            "text":"{{step2_medicine_dispensed_other}}",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          }
+        ],
+        "type": "multi_select_list"
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "30dp"
+      },
+      {
+        "key": "medication_description",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "{{step2_medication_description_hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{step2_medication_description_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "addo_attend_prescriptions_from_lab_results_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "medications_selected",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "addo_attend_prescriptions_from_lab_results_calculation.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "Dispense Confirmation",
+    "fields": [
+      {
+        "key": "no_medication_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_no_medication_dispensed_toaster_text}}",
+        "text_color": "#101010",
+        "toaster_type": "warning",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "medication_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_medication_dispensed_toaster_text}} {medications_selected}",
+        "text_color": "#101010",
+        "toaster_type": "information",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "addo_attend_prescriptions_from_lab_results_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      }
+    ]
+  }
+}

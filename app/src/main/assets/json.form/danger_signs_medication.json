@@ -2,6 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
+  "properties_file_name": "danger_signs_medication",
   "count": "3",
   "encounter_type": "ADDO Visit - Dispense Medicine",
   "entity_id": "",
@@ -50,7 +51,7 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Dispensing Options",
+    "title": "{{step1_title}}",
     "next": "step2",
     "fields": [
       {
@@ -80,7 +81,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The screening has identified that the client has the following danger signs <br /> {danger_signs_captured} <br /> {addo_medication_to_give}",
+        "text": "{{step1_danger_signs_toaster_text1}} {danger_signs_captured} <br /> {addo_medication_to_give}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
@@ -112,7 +113,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Do want to dispense medicine to this client?",
+        "label": "{{step1_dispense_options_label}}",
         "label_text_style": "bold",
         "exclusive": [
           "yes"
@@ -126,30 +127,30 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "Yes",
-            "extra_info": "NOTE: Select this option if medication is needed"
+            "text": "{{step1_dispense_options_yes}}",
+            "extra_info": "{{step1_dispense_options_yes_extra_info}}"
           },
           {
             "key": "no",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "No",
-            "extra_info": "NOTE: Select this option no medication is needed"
+            "text": "{{step1_dispense_options_no}}",
+            "extra_info": "{{step1_dispense_options_no_extra_info}}"
           }
         ]
       }
     ]
   },
   "step2": {
-    "title": "Dispense Medicines",
+    "title": "{{step2_title}}",
     "next": "step3",
     "fields": [
       {
         "key": "dispense_med_label",
         "type": "label",
         "label_text_style": "bold",
-        "text": "The medicine(s) dispensed:",
+        "text": "{{step2_dispense_med_label_text}}",
         "text_color": "#000000",
         "v_required": {
           "value": true
@@ -167,10 +168,9 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
-        "buttonText": "+ Add a medicine to dispense",
-        "sort": true,
-        "dialogTitle": "Add a medicine to dispense",
-        "searchHint": "Type Medicine Name",
+        "buttonText": "{{step2_medicine_dispensed_button_text}}",
+        "dialogTitle": "{{step2_medicine_dispensed_dialog_title}}",
+        "searchHint": "{{step2_medicine_dispensed_search_hint}}",
         "v_required": {
           "value": true
         },
@@ -246,49 +246,17 @@
               "presumed-id": "er",
               "confirmed-id": "er"
             }
+          },
+          {
+            "key": "other",
+            "text": "Other",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
           }
         ],
         "type": "multi_select_list",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "other_meds",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "Other medications?",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "Yes",
-            "extra_info": "NOTE: Select this option for other medication other than on the list"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "No",
-            "extra_info": "NOTE: Select this option if all medications are on the list"
-          }
-        ],
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -303,10 +271,10 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Record other medication:",
+        "hint": "{{step2_medication_description_hint}}",
         "v_required": {
           "value": "true",
-          "err": "Record other medications."
+          "err": "{{step2_medication_description_err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -336,7 +304,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Do you recommend that the client visits another ADDO?",
+        "label": "{{step2_linkage_recommendation_label}}",
         "label_text_style": "bold",
         "exclusive": [
           "yes"
@@ -350,16 +318,16 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "Yes",
-            "extra_info": "NOTE: Select this option if ALL medications required was given"
+            "text": "{{step2_linkage_recommendation_yes_text}}",
+            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
           },
           {
             "key": "no",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "No",
-            "extra_info": "NOTE: Select this option if some medications required was not given"
+            "text": "{{step2_linkage_recommendation_no_text}}",
+            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
           }
         ],
         "relevance": {
@@ -381,7 +349,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "No medication was not given to this client.",
+        "text": "{{step3_no_medication_dispensed_toaster_text}}",
         "text_color": "#101010",
         "toaster_type": "warning",
         "relevance": {
@@ -398,7 +366,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "You select to dispense the following medication for this client: <br /> {medications_selected}",
+        "text": "{{step3_medication_dispensed_toaster_text}} {medications_selected}",
         "text_color": "#101010",
         "toaster_type": "information",
         "relevance": {
@@ -430,7 +398,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Were you able to dispense all the medications that the client needed?",
+        "label": "{{step3_all_meds_dispensed_label}}",
         "label_text_style": "bold",
         "exclusive": [
           "yes"
@@ -444,16 +412,16 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "Yes",
-            "extra_info": "NOTE: Select this option if ALL medications required was given"
+            "text": "{{step3_all_meds_dispensed_yes_text}}",
+            "extra_info": "{{step3_all_meds_dispensed_yes_extra_info}}"
           },
           {
             "key": "no",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
-            "text": "No",
-            "extra_info": "NOTE: Select this option if some medications required was not given"
+            "text": "{{step3_all_meds_dispensed_no_text}}",
+            "extra_info": "{{step3_all_meds_dispensed_no_extra_info}}"
           }
         ],
         "relevance": {

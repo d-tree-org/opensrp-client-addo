@@ -105,7 +105,7 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
 
     public void search(String searchText) {
         Log.d("Search", "searching in presenter: "  + searchText);
-        interactor.search(searchText, this);
+        interactor.search(searchText.trim(), this); // trim to remove empty spaces
     }
 
     public void onResultsFound(List<Entity> members) {

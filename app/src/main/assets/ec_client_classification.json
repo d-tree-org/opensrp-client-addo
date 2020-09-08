@@ -128,6 +128,58 @@
             "creates_case": [
               "ec_pregnancy_outcome"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Adolescent Registration",
+            "creates_case": [
+              "ec_adolescent",
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Update Adolescent Registration",
+            "creates_case": [
+              "ec_adolescent",
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Child ADDO Visit",
+            "creates_case": [
+              "ec_child",
+              "ec_child_activity"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Adolescent ADDO Visit",
+            "creates_case": [
+              "ec_adolescent"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "ANC ADDO Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "PNC ADDO Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Adolescent Referral",
+            "creates_case": [
+              "ec_referral"
+            ]
           }
         ]
       }

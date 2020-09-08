@@ -6,9 +6,16 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
+import org.smartregister.CoreLibrary;
+import org.smartregister.addo.activity.FamilyFocusedMemberProfileActivity;
+import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
+import org.smartregister.addo.dao.AdolescentDao;
 import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dao.PNCDao;
+import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.chw.anc.domain.Visit;
 import org.smartregister.chw.anc.domain.VisitDetail;
@@ -21,9 +28,13 @@ import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
+import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.util.AppExecutors;
+import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.sync.helper.ECSyncHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +48,7 @@ import timber.log.Timber;
 public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMemberProfileContract.Interactor {
 
     private AppExecutors appExecutors;
+    private String relationalId;
 
     @VisibleForTesting
     FamilyFocusedMemberProfileInteractor(AppExecutors appExecutors) {
@@ -62,6 +74,9 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
                 final CommonPersonObjectClient pClient = new CommonPersonObjectClient(personObject.getCaseId(),
                         personObject.getDetails(), "");
                 pClient.setColumnmaps(personObject.getColumnmaps());
+
+                if (pClient != null)
+                    relationalId = Utils.getValue(pClient.getColumnmaps(), DBConstants.KEY.RELATIONAL_ID, false);
 
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
@@ -131,6 +146,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
         if (baseEvent != null) {
             baseEvent.setFormSubmissionId(JsonFormUtils.generateRandomUUIDString());
             JsonFormUtils.tagEvent(allSharedPreferences, baseEvent);
+            baseEvent.setLocationId(getClientLocationId(relationalId));
 
             String visitID = (editMode) ?
                     visitRepository().getLatestVisit(memberID, getEncounterType(memberID)).getVisitId() :
@@ -180,11 +196,13 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
     protected String getEncounterType(String baseEntityId) {
         if (AncDao.isANCMember(baseEntityId)) {
-            return "ANC ADDO Visit";
+            return CoreConstants.EventType.ANC_ADDO_VISIT;
         } else if (PNCDao.isPNCMember(baseEntityId)) {
-            return "PNC ADDO Visit";
+            return CoreConstants.EventType.PNC_ADDO_VISIT;
+        } else if (AdolescentDao.isAdolescentMember(baseEntityId)) {
+            return CoreConstants.EventType.ADOLESCENT_ADDO_VISIT;
         } else {
-            return "Child ADDO Visit";
+            return CoreConstants.EventType.CHILD_ADDO_VISIT;
         }
     }
 
@@ -193,8 +211,21 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             return Constants.TABLES.ANC_MEMBERS;
         } else if (PNCDao.isPNCMember(baseEntityId)) {
             return Constants.TABLES.PREGNANCY_OUTCOME;
+        } else if (AdolescentDao.isAdolescentMember(baseEntityId)) {
+            return org.smartregister.addo.util.Constants.TABLE_NAME.ADOLESCENT;
         } else {
             return Constants.TABLES.EC_CHILD;
         }
+    }
+
+    private String getClientLocationId(String baseEntityId) {
+        final CommonPersonObject familyObject = getCommonRepository(Utils.metadata().familyRegister.tableName).findByBaseEntityId(baseEntityId);
+        final CommonPersonObjectClient pClient = new CommonPersonObjectClient(familyObject.getCaseId(),
+                familyObject.getDetails(), "");
+        pClient.setColumnmaps(familyObject.getColumnmaps());
+
+        String villageTown = Utils.getValue(pClient.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, false);
+
+        return LocationHelper.getInstance().getOpenMrsLocationId(villageTown);
     }
 }

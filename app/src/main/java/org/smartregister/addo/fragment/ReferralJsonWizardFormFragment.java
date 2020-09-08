@@ -2,7 +2,6 @@ package org.smartregister.addo.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.fragments.JsonWizardFormFragment;
@@ -12,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.addo.R;
 import org.smartregister.addo.presenter.ReferralJsonWizardFormFragmentPresenter;
 
 import timber.log.Timber;
@@ -29,7 +27,6 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
 
     @Override
     public void customClick(Context context, String behaviour){
-        Toast.makeText(context, getResources().getString(R.string.referral_submitted), Toast.LENGTH_LONG).show();
         //save
         save();
     }
@@ -52,7 +49,7 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
     /**
      * Skips blank by relevance steps when next is clicked on the json wizard forms.
      */
-    private void skipStepsOnNextPressed() {
+    public void skipStepsOnNextPressed() {
         if (skipBlankSteps()) {
             JSONObject formStep = getStep(getArguments().getString(JsonFormConstants.STEPNAME));
             String next = formStep.optString(JsonFormConstants.NEXT, "");
@@ -68,7 +65,7 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
     /**
      * Skips blank by relevance steps when previous is clicked on the json wizard forms.
      */
-    private void skipStepOnPreviousPressed() {
+    public void skipStepOnPreviousPressed() {
         if (skipBlankSteps()) {
             JSONObject currentFormStep = getStep(getArguments().getString(JsonFormConstants.STEPNAME));
             String next = currentFormStep.optString(JsonFormConstants.NEXT, "");

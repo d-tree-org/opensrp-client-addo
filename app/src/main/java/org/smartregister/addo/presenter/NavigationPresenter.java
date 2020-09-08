@@ -5,6 +5,7 @@ import android.app.Activity;
 import org.smartregister.addo.contract.NavigationContract;
 import org.smartregister.addo.interactor.NavigationInteractor;
 import org.smartregister.addo.job.AddoTaskServiceJob;
+import org.smartregister.addo.job.AddoVisitServiceJob;
 import org.smartregister.addo.model.NavigationModel;
 import org.smartregister.addo.model.NavigationOption;
 import org.smartregister.addo.util.Constants;
@@ -80,6 +81,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
         AddoTaskServiceJob.scheduleJobImmediately(AddoTaskServiceJob.TAG);
+        AddoVisitServiceJob.scheduleJobImmediately(AddoVisitServiceJob.TAG);
     }
 
     @Override

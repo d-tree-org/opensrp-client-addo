@@ -2,6 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
+  "properties_file_name": "anc_addo_danger_signs",
   "count": "3",
   "encounter_type": "ANC Danger Signs",
   "entity_id": "",
@@ -50,7 +51,7 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Pregnant Woman Present",
+    "title": "{{step1_title}}",
     "next": "step2",
     "fields": [
       {
@@ -61,38 +62,77 @@
         "label_text_style": "bold"
       },
       {
-        "key": "pregnant_woman_present",
+        "key": "chw_link",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
         "exclusive": [
-          "chk_pregnant_woman_present_yes"
+          "chw_link_yes"
         ],
-        "label": "Is the pregnant woman present?",
+        "label": "{{step1_chw_link_label}}",
         "options": [
           {
-            "key": "chk_pregnant_woman_present_yes",
-            "text": "Yes",
+            "key": "chw_link_yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
-            "key": "chk_pregnant_woman_present_no",
-            "text": "No",
+            "key": "step1_chw_link_no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_no}}",
             "text_size": "18px",
             "value": "false"
           }
         ],
         "v-required" : {
           "value" : "true",
-          "err": "Please indicate if the pregnant woman is present or not"
+          "err": "{{step1_chw_link_err}}"
+        }
+      },
+      {
+        "key": "pregnant_woman_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "exclusive": [
+          "chk_pregnant_woman_present_yes"
+        ],
+        "label": "{{step1_pregnant_woman_present_label}}",
+        "options": [
+          {
+            "key": "chk_pregnant_woman_present_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_pregnant_woman_present_yes}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "chk_pregnant_woman_present_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_pregnant_woman_present_no}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "{{step1_pregnant_woman_present_err}}"
         }
       }
     ]
   },
   "step2": {
-    "title": "Pregnant Woman Danger Signs",
+    "title": "{{step2_title}}",
     "next": "step3",
     "fields": [
       {
@@ -101,7 +141,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Assess the pregnant woman for the following danger signs:",
+        "label": "{{step2_danger_signs_label}}",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [
@@ -110,42 +150,42 @@
         "options": [
           {
             "key": "chk_fever",
-            "text": "Severe fever and shivering",
+            "text": "{{step2_danger_sign_fever}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_bleeding_vaginally",
-            "text": "Vaginal bleeding",
+            "text": "{{step2_danger_sign_vaginal_bleeding}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "150802AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_server_headache",
-            "text": "Severe headache",
+            "text": "{{step2_danger_sign_severe_headache}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "139081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_blurred_vision",
-            "text": "Blurred vision",
+            "text": "{{step2_danger_sign_blurred_vision}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "147104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_convulsions",
-            "text": "Convulsions/Seizures",
+            "text": "{{step2_danger_sign_convulsions}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "164483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_difficulty_breathing",
-            "text": "Difficulty breathing",
+            "text": "{{step2_danger_sign_difficulty_breathing}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -159,63 +199,63 @@
           },
           {
             "key": "chk_loss_consciousness",
-            "text": "Loss of consciousness",
+            "text": "{{step2_danger_sign_loss_consciousness}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "135592AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_swelling",
-            "text": "Swelling of the hands, face, and/or legs",
+            "text": "{{step2_danger_sign_swelling}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_early_labour",
-            "text": "Early labour pains before 9 months",
+            "text": "{{step2_danger_sign_early_labour}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "151687AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_vaginal_discharge",
-            "text": "Foul smelling vaginal discharge",
+            "text": "{{step2_danger_sign_vaginal_discharge}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_unusual_movement",
-            "text": "Less/no fetal movement",
+            "text": "{{step2_danger_sign_unusual_movement}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "113377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "chk_water_broke",
-            "text": "Water broke before 9 months",
+            "text": "{{step2_danger_sign_water_broke}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_vomiting",
-            "text": "Vomiting",
+            "text": "{{step2_danger_sign_vomiting}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_anemia",
-            "text": "Anemia demonstrated by paleness on the palms or tongue, weakness or tiredness",
+            "text": "{{step2_danger_sign_anemia}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_none",
-            "text": "None",
+            "text": "{{step2_danger_sign_none}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -223,7 +263,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please pick at least one"
+          "err": "{{step2_danger_signs_err}}"
         },
         "relevance": {
           "step1:pregnant_woman_present": {
@@ -254,7 +294,7 @@
       {
         "key": "minor_illnesses_title",
         "type": "label",
-        "text": "Minor Illnesses",
+        "text": "{{step2_minor_illness_title}}",
         "label_text_size": "18sp",
         "label_text_style": "bold",
         "text_color": "#000000",
@@ -276,7 +316,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
-        "label": "Assess the pregnant woman for the following minor illnesses:",
+        "label": "{{step2_minor_illnesses_label}}",
         "text_color": "#000000",
         "exclusive": [
           "chk_none"
@@ -284,7 +324,7 @@
         "options": [
           {
             "key": "chk_mild_pain",
-            "text": "Mild pain anywhere in the body",
+            "text": "{{step2_minor_illness_mild_pain}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -292,7 +332,7 @@
           },
           {
             "key": "chk_mild_fever",
-            "text": "Mild fever",
+            "text": "{{step2_minor_illness_mild_fever}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -300,7 +340,7 @@
           },
           {
             "key": "chk_cough",
-            "text": "Cough",
+            "text": "{{step2_minor_illness_cough}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -308,7 +348,7 @@
           },
           {
             "key": "chk_runny_nose",
-            "text": "Runny nose/Cold",
+            "text": "{{step2_minor_illness_runny_nose}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -316,7 +356,7 @@
           },
           {
             "key": "chk_sore_throat",
-            "text": "Sore throat",
+            "text": "{{step2_minor_illness_sore_throat}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -324,14 +364,14 @@
           },
           {
             "key": "chk_other_needs",
-            "text": "Other",
+            "text": "{{step2_minor_illness_other_needs}}",
             "value": false,
-            "openmrs_entity": "",
+            "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_none",
-            "text": "None",
+            "text": "{{step2_minor_illness_none}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -339,7 +379,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Minor illness is required"
+          "err": "{{step2_minor_illness_err}}"
         },
         "relevance": {
           "step2:danger_signs_present": {
@@ -359,10 +399,10 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Describe the other needs",
+        "hint": "{{step2_minor_illness_description_hint}}",
         "v_required": {
           "value": "true",
-          "err": "Describe the other needs"
+          "err": "{{step2_minor_illness_description_err}}"
         },
         "relevance": {
           "step2:minor_illnesses": {
@@ -393,7 +433,7 @@
     ]
   },
   "step3": {
-    "title": "Pregnant Woman Condition",
+    "title": "{{step3_title}}",
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -401,7 +441,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Danger sign! <br /> The following urgent <b>danger sign(s)</b> have been identified: <br /> {danger_signs_captured} <br /> Refer the pregnant woman to the closest health facility. <br /> <b>Dispense</b> over the counter medicine if needed based on symptoms.",
+        "text": "{{step3_danger_signs_toaster_text1}} {danger_signs_captured} {{step3_danger_signs_toaster_text2}}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "calculation": {
@@ -451,7 +491,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "button",
-        "hint": "Save and Refer to Health Facility",
+        "hint": "{{step3_save_and_refer_hint}}",
         "btn_bg_color": "#FF840952",
         "action": {
           "behaviour": "refer"
@@ -488,7 +528,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The pregnant woman has the following illness(es): <br /> {minor_illness_captured} <br /> Manage as needed by dispensing over the counter medicine or commodity",
+        "text": "{{step3_minor_illness_toaster_text1}} {minor_illness_captured} {{step3_minor_illness_toaster_text2}}",
         "text_color": "#101010",
         "toaster_type": "warning",
         "calculation": {
@@ -521,7 +561,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The pregnant woman does not have any illness please proceed as needed by dispensing over the counter medicine or commodity",
+        "text": "{{step3_no_illness_present_toaster_text}}",
         "text_color": "#101010",
         "toaster_type": "positive",
         "relevance": {
@@ -542,7 +582,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The pregnant woman must be present in order to proceed with screening.",
+        "text": "{{step3_pregnant_woman_not_present_toaster_text}}",
         "text_color": "#000000",
         "toaster_type": "problem",
         "relevance": {

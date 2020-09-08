@@ -45,7 +45,7 @@
                     android:layout_height="35dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="19dp"
-                    android:text="Return to select village" />
+                    android:text="@string/return_to_select_village" />
 
 
             </LinearLayout>
@@ -67,7 +67,7 @@
         android:layout_marginBottom="473dp"
         android:width="187dp"
         android:height="30dp"
-        android:text="Scan fingerprint" />
+        android:text="@string/scan_fingerprint_title" />
 
 
     <LinearLayout
@@ -141,6 +141,6 @@
         android:height="20dp"
         android:background="@drawable/scanfingerprint_rectangle_bg"
         android:gravity="center"
-        android:text="SCAN FINGERPRINT" />
+        android:text="@string/scan_fingerprint_button" />
 
 </RelativeLayout>

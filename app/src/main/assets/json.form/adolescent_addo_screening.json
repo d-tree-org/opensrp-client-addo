@@ -1,0 +1,434 @@
+{
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "skip_blank_steps": true,
+  "properties_file_name": "adolescent_addo_screening",
+  "count": "3",
+  "encounter_type": "Adolescent Addo Screening",
+  "entity_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": ""
+  },
+  "step1": {
+    "title": "{{step1_title}}",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "ds_start_message",
+        "type": "label",
+        "text": "{{step1_ds_start_message}}",
+        "label_text_size": "18sp",
+        "label_text_style": "bold"
+      },
+      {
+        "key": "chw_link",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "exclusive": [
+          "chw_link_yes"
+        ],
+        "label": "{{step1_chw_link_label}}",
+        "options": [
+          {
+            "key": "chw_link_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_yes}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "step1_chw_link_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_no}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "{{step1_chw_link_err}}"
+        }
+      },
+      {
+        "key": "adolescent_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "exclusive": [
+          "adolescent_present_yes"
+        ],
+        "label": "{{step1_adolescent_present_label}}",
+        "options": [
+          {
+            "key": "adolescent_present_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_adolescent_present_yes}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "adolescent_present_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_adolescent_present_no}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "{{step1_adolescent_present_err}}"
+        }
+      }
+    ]
+  },
+  "step2": {
+    "title": "{{step2_title}}",
+    "next": "step3",
+    "fields": [
+      {
+        "key": "adolescent_condition_present",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "{{step2_adolescent_condition_present}}",
+        "label_text_style": "normal",
+        "text_color": "#C0C0C0",
+        "exclusive": [
+          "chk_none"
+        ],
+        "options": [
+          {
+            "key": "chk_suspected_pregnancy",
+            "text": "{{step2_suspected_pregnancy}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_lower_abdominal_pain",
+            "text": "{{step2_lower_abdominal_pain}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "157544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_vaginal_discharge",
+            "text": "{{step2_chk_vaginal_discharge}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "123396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_vaginal_bleeding_between_periods",
+            "text": "{{step2_vaginal_bleeding_between_periods}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "147240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_wounds_around_genitals",
+            "text": "{{step2_wounds_around_genitals}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_irritation_around_genitals",
+            "text": "{{step2_irritation_around_genitals}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "128315AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_swelling_genital_parts",
+            "text": "{{step2_swelling_genital_parts}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_family_planning",
+            "text": "{{step2_family_planning}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_other",
+            "text": "{{step2_adolescent_condition_present_other}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_none",
+            "text": "{{step2_adolescent_condition_present_none}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{step2_adolescent_condition_present_err}}"
+        },
+        "relevance": {
+          "step1:adolescent_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "adolescent_present_yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "danger_signs_captured",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "addo_actions",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "adolescent_condition_present_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "{{step2_adolescent_condition_present_other_hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{step2_adolescent_condition_present_other_err}}"
+        },
+        "relevance": {
+          "step2:adolescent_condition_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_other"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "{{step3_title}}",
+    "fields": [
+      {
+        "key": "danger_signs_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_danger_signs_toaster_text1}} {danger_signs_captured} {addo_actions}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_calculation.yml"
+            }
+          }
+        },
+        "relevance": {
+          "step2:adolescent_condition_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_suspected_pregnancy",
+                  "chk_lower_abdominal_pain",
+                  "chk_vaginal_discharge",
+                  "chk_vaginal_bleeding_between_periods",
+                  "chk_wounds_around_genitals",
+                  "chk_irritation_around_genitals",
+                  "chk_swelling_genital_parts",
+                  "chk_family_planning",
+                  "chk_other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "addo_referral_options",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "check_box",
+        "exclusive": [
+          "addo_referral_option_hf"
+        ],
+        "options": [
+          {
+            "key": "addo_referral_option_hf",
+            "text": "{{step3_addo_referral_option_hf}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "addo_referral_option_manage",
+            "text": "{{step3_addo_referral_option_manage}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "{{step3_addo_referral_options_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "save_n_refer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save_and_refer_hint}}",
+        "btn_bg_color": "#FF840952",
+        "action": {
+          "behaviour": "refer"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "no_illness_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_no_illness_present_toaster_text}}",
+        "text_color": "#101010",
+        "toaster_type": "positive",
+        "relevance": {
+          "step2:adolescent_condition_present": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "chk_none"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "adolescent_not_present_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_adolescent_not_present_toaster}}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "step1:adolescent_present": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "adolescent_present_yes"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

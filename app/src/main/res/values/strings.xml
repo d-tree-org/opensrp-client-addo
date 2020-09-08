@@ -90,6 +90,7 @@
     <string name="danger_sign_title_pnc">PNC Danger Sign Screening</string>
     <string name="dispense_medication_title">Dispense Medication</string>
     <string name="default_dispense_message">Manage as needed</string>
+    <string name="dispense_commodities">ADDO COMMODITIES DISPENSE</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -416,12 +417,25 @@
     <string name="full_name">%s %s %s</string>
     <string name="addo_user_no_villages">This user has not been assigned any village</string>
     <string name="addo_other_village">Other Village</string>
-    <string name="ask_client_village">Ask the client if they are from Kibaha, if they are, please select the location from the list below. If they are not in Kibaha, then do not use the system for this service.</string>
-    <string name="add_select_village">Select client village</string>
+    <string name="ask_client_village">Ask the client if they are from Kibaha. If they are, please select the location from the list below. If they are not from Kibaha, do not use the system for this service.</string>
+    <string name="add_select_village">Where does the client live?</string>
     <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
     <string name="give_commodities_client_focus_profile">Give Commodities</string>
     <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
     <string name="referral_submitted">Referral sent to health facility</string>
+    <string name="client_already_has_referral">This client already has referral to HF advice them to go there immediately …</string>
+    <string name="return_to_select_village">Return to select village</string>
+    <string name="scan_fingerprint_title">Scan fingerprint</string>
+    <string name="scan_fingerprint_button">SCAN FINGERPRINT</string>
+    <string name="select_the_person_to_receive_services">Select the person to receive services</string>
+    <string name="non_focused_service_provided">Record service provided</string>
+    <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
+    <string name="attend_prescription_form_title">ATTEND PRESCRIPTIONS</string>
+
+    <string name="environment_name_test">test</string>
+    <string name="environment_name_production">production</string>
+    <string name="switch_environment_title">Alert! Switching Environment</string>
+    <string name="switch_environment_message">You are about to switch to %s environment. This procedure will wipe out all of your device data, you need to make sure everything is synced before you proceed. Do you want to switch the environment?</string>
 </resources>

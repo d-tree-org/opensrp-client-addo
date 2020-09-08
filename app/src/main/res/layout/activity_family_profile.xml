@@ -172,7 +172,7 @@
                 android:layout_height="22dp"
                 android:width="245dp"
                 android:height="18dp"
-                android:text="Select the person to receive services" />
+                android:text="@string/select_the_person_to_receive_services" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

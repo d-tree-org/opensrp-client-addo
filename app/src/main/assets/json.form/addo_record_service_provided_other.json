@@ -1,4 +1,5 @@
 {
+  "properties_file_name": "addo_record_service_provided_other",
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "count": "1",
@@ -62,7 +63,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "check_box",
-        "label": "Select service provided",
+        "label": "{{service_provided}}",
         "label_text_style": "normal",
         "text_color": "#C0C0C0",
         "exclusive": [
@@ -71,28 +72,28 @@
         "options": [
           {
             "key": "chk_commodities",
-            "text": "Commodities",
+            "text": "{{commodities}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_medicine",
-            "text": "Medicine",
+            "text": "{{medicine}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_link_to_addo",
-            "text": "Link to another ADDO",
+            "text": "{{link_to_another_addo}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
             "key": "chk_referral",
-            "text": "Health Facility Referral",
+            "text": "{{health_facility_referral}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""

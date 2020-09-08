@@ -1,17 +1,15 @@
 package org.smartregister.addo.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Pair;
-
-import org.joda.time.DateTime;
-import org.smartregister.addo.application.AddoApplication;
-import org.smartregister.addo.domain.Entity;
-import android.content.ContentValues;
 
 import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
-import org.smartregister.addo.util.CoreConstants;
+import org.joda.time.DateTime;
+import org.smartregister.addo.application.AddoApplication;
+import org.smartregister.addo.domain.Entity;
 import org.smartregister.dao.AbstractDao;
 import org.smartregister.domain.Task;
 import org.smartregister.repository.BaseRepository;
@@ -24,8 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 import timber.log.Timber;
+
 import static org.smartregister.AllConstants.SYNC_STATUS;
 import static org.smartregister.addo.util.CoreConstants.BUSINESS_STATUS.LINKED;
+import static org.smartregister.addo.util.CoreConstants.BUSINESS_STATUS.REFERRED;
 import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.BUSINESS_STATUS;
 import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.FOR;
 import static org.smartregister.addo.util.CoreConstants.DB_CONSTANTS.STATUS;
@@ -158,5 +158,17 @@ public class FamilyDao extends AbstractDao {
 
         AddoApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
                 String.format("%s = ? AND %s =? AND %s =?", FOR, STATUS, BUSINESS_STATUS), new String[]{entityId, Task.TaskStatus.READY.name(), LINKED});
+    }
+
+    public static void archiveHFTasksForEntity(@NonNull String entityId) {
+        if (StringUtils.isBlank(entityId))
+            return;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(STATUS, Task.TaskStatus.ARCHIVED.name());
+        contentValues.put(SYNC_STATUS, BaseRepository.TYPE_Unsynced);
+        contentValues.put("last_modified", DateUtil.getMillis(new DateTime()));
+
+        AddoApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
+                String.format("%s = ? AND %s =? AND %s =?", FOR, STATUS, BUSINESS_STATUS), new String[]{entityId, Task.TaskStatus.READY.name(), REFERRED});
     }
 }

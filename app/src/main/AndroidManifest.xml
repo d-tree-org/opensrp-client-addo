@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -48,7 +49,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".activity.BaseActivity" />
         <activity
             android:name=".activity.AddoHomeActivity"
             android:label="Addo"
@@ -84,8 +84,18 @@
             android:launchMode="singleTask"
             android:theme="@style/FamilyTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+      
+        <activity
+            android:name="com.vijay.jsonwizard.activities.JsonFormActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AddoTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
-        <meta-data
+        <activity
+            android:name=".view.activity.AddoSettingsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+      <meta-data
             android:name="io.fabric.ApiKey"
             android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
 
@@ -99,13 +109,12 @@
                 android:resource="@xml/captured_images_path" />
         </provider>
 
-        <activity android:name=".activity.MainActivity" />
-
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ValidateIntentService" />
         <service android:name=".sync.AddoSyncTaskIntentService" />
+        <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
 
         <uses-library
