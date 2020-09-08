@@ -4,11 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -46,6 +54,8 @@ import java.util.Map;
 public class LoginActivity extends BaseLoginActivity implements BaseLoginContract.View {
 
     public static final String TAG = BaseLoginActivity.class.getCanonicalName();
+    private TextView tvNameEnv;
+    private Button btnLogin;
 
     @Override
     protected int getContentView() {
@@ -60,6 +70,8 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tvNameEnv = findViewById(R.id.at_name);
+        btnLogin = findViewById(R.id.login_login_btn);
         ActivityCompat.requestPermissions(LoginActivity.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1);
@@ -119,11 +131,13 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
                         preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_staging);
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, false).commit();
                         preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
+                        setAppNameProductionEnvironment("test");
                     } else {
 
                         preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
                         preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+                        setAppNameProductionEnvironment("production");
                     }
                 }
 
@@ -132,6 +146,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
                 preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
                 preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+                setAppNameProductionEnvironment("production");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,6 +175,33 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         return jsonObject;
     }
 
+    private void setAppNameProductionEnvironment(String nameAndEnvironment) {
+
+        if ("test".equalsIgnoreCase(nameAndEnvironment)) {
+
+            SpannableString spannableString = new SpannableString("Afya-Tek \u2022");
+            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(getActivityContext().getResources().getColor(R.color.test_env_color));
+            spannableString.setSpan(new RelativeSizeSpan(1.5f), 9, spannableString.length(), 0);
+            //BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(Color.MAGENTA);
+            spannableString.setSpan(foregroundColorSpan, 9, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //spannableString.setSpan(backgroundColorSpan, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvNameEnv.setText(spannableString);
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.test_env_color));
+
+        } else {
+
+            SpannableString spannableString = new SpannableString("Afya-Tek \u2022");
+            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(getActivityContext().getResources().getColor(R.color.login_background_color));
+            spannableString.setSpan(new RelativeSizeSpan(1.5f), 9, spannableString.length(), 0);
+            //BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(Color.GREEN);
+            spannableString.setSpan(foregroundColorSpan, 9, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //spannableString.setSpan(backgroundColorSpan, 9, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvNameEnv.setText(spannableString);
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.login_background_color));
+        }
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -172,6 +214,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
             Utils.getAllSharedPreferences().savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
             Utils.getAllSharedPreferences().savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+            setAppNameProductionEnvironment("production");
         }
     }
 }

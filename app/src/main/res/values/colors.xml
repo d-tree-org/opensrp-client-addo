@@ -88,5 +88,7 @@
     <color name="gray_overlay">#33000000</color>
     <color name="green_overlay">#6600FF00</color>
     <color name="red_overlay">#66FF0000</color>
+    <color name="test_env_color">#FC7410</color>
+    <color name="login_background_color">#0089D5</color>
 
 </resources>
