@@ -62,10 +62,45 @@
         "label_text_style": "bold"
       },
       {
+        "key": "chw_link",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "exclusive": [
+          "chw_link_yes"
+        ],
+        "label": "{{step1_chw_link_label}}",
+        "options": [
+          {
+            "key": "chw_link_yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_yes}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "step1_chw_link_no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_chw_link_no}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v-required" : {
+          "value" : "true",
+          "err": "{{step1_chw_link_err}}"
+        }
+      },
+      {
         "key": "mother_present",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
         "exclusive": [
           "chk_mother_present_yes"
@@ -74,12 +109,16 @@
         "options": [
           {
             "key": "chk_mother_present_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_pnc_woman_present_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "chk_mother_present_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_pnc_woman_present_no}}",
             "text_size": "18px",
             "value": "false"

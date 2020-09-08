@@ -64,8 +64,8 @@
       {
         "key": "chw_link",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
         "exclusive": [
           "chw_link_yes"
@@ -74,12 +74,16 @@
         "options": [
           {
             "key": "chw_link_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_chw_link_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "step1_chw_link_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_chw_link_no}}",
             "text_size": "18px",
             "value": "false"
@@ -93,8 +97,8 @@
       {
         "key": "adolescent_present",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "check_box",
         "exclusive": [
           "adolescent_present_yes"
@@ -103,12 +107,16 @@
         "options": [
           {
             "key": "adolescent_present_yes",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_adolescent_present_yes}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "adolescent_present_no",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{step1_adolescent_present_no}}",
             "text_size": "18px",
             "value": "false"
