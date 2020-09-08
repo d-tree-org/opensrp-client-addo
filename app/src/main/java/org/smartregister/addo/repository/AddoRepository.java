@@ -7,6 +7,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
 import org.smartregister.addo.application.AddoApplication;
+import org.smartregister.chw.anc.repository.VisitDetailsRepository;
 import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.repository.EventClientRepository;
@@ -45,6 +46,7 @@ public class AddoRepository extends Repository {
         TaskRepository.createTable(database);
 
         VisitRepository.createTable(database);
+        VisitDetailsRepository.createTable(database);
         onUpgrade(database, 1, 2);
 
     }

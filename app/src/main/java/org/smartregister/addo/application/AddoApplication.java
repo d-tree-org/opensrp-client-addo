@@ -237,8 +237,8 @@ public class AddoApplication extends DrishtiApplication {
 
     public static ClientProcessorForJava getClientProcessor(android.content.Context context) {
         if (clientProcessor == null) {
-            clientProcessor = AddoClientProcessor.getInstance(context);
-            //clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
+            //clientProcessor = AddoClientProcessor.getInstance(context);
+            clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
         }
         return clientProcessor;
     }
