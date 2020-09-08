@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Environment">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="enable_production"
+            android:summaryOff="OFF"
+            android:summaryOn="ON"
+            android:title="Production" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

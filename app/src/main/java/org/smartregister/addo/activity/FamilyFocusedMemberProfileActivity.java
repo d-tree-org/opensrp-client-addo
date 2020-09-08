@@ -402,13 +402,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 JSONArray step2Fields = step2.getJSONArray(JsonFormUtils.FIELDS);
                 JSONArray dangerSignsSelected;
 
-/*                if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(CHILD_DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
-                } else if (form.optString(JsonFormUtils.ENCOUNTER_TYPE).equalsIgnoreCase(ANC__DANGER_SIGN_SCREENING_ENCOUNTER)) {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
-                } else {
-                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
-                }*/
                 switch (form.optString(JsonFormUtils.ENCOUNTER_TYPE)) {
                     case CHILD_DANGER_SIGN_SCREENING_ENCOUNTER:
                         dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
