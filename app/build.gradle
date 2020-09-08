@@ -13,6 +13,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
+apply plugin: 'io.fabric'
 apply plugin: 'com.github.kt3k.coveralls'
 
 jacoco {
@@ -30,7 +31,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode 3
-        versionName "0.0.3"
+        versionName "0.1.0"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"

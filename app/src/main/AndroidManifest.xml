@@ -84,7 +84,7 @@
             android:launchMode="singleTask"
             android:theme="@style/FamilyTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
+      
         <activity
             android:name="com.vijay.jsonwizard.activities.JsonFormActivity"
             android:screenOrientation="portrait"
@@ -95,6 +95,9 @@
             android:name=".view.activity.AddoSettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+      <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
