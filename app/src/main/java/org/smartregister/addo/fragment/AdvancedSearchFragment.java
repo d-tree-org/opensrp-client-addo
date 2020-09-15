@@ -2,20 +2,17 @@ package org.smartregister.addo.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.vijay.jsonwizard.customviews.RadioButton;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.adapter.FamilyMemberAdapter;
@@ -48,8 +45,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private boolean isLocal = false;
     private boolean listMode = false;
 
-    public AdvancedSearchFragment() {
-        // Required empty public constructor
+    public AdvancedSearchFragment(boolean isLocal) {
+        this.isLocal = isLocal;
     }
 
     @Override
@@ -236,7 +233,27 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private void search() {
         showProgressView();
 
-        ((AdvancedSearchContract.Presenter) presenter).search(searchName.getText().toString());
+        Map<String, String> editMap = getSearchMap(isLocal);
+        ((AdvancedSearchContract.Presenter) presenter).search(editMap, isLocal);
+    }
+
+    protected Map<String, String> getSearchMap(boolean isLocal) {
+
+        Map<String, String> searchParams = new HashMap<>();
+
+
+        String fn = searchName.getText().toString();
+        String ln = "";//lastName.getText().toString();
+
+        if (!TextUtils.isEmpty(fn)) {
+            searchParams.put(Constants.DB.FIRST_NAME, fn);
+        }
+
+        if (!TextUtils.isEmpty(ln)) {
+            searchParams.put(Constants.DB.LAST_NAME, ln);
+        }
+
+        return searchParams;
     }
 
     @Override
@@ -244,8 +261,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //Todo implement this
     }
 
-    public void showResults(List<Entity> members) {
-        FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members);
+    public void showResults(List<Entity> members, boolean isLocal) {
+        FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members, isLocal);
         ListView listView = rootView.findViewById(R.id.family_member_list);
         listView.setAdapter(adapter);
         updateMatchingResults(members.size());
