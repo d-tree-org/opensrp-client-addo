@@ -2,6 +2,7 @@ package org.smartregister.addo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.smartregister.addo.R;
+import org.smartregister.addo.activity.FamilyFocusedMemberProfileActivity;
+import org.smartregister.addo.activity.FamilyOtherMemberProfileActivity;
+import org.smartregister.addo.dao.AdolescentDao;
+import org.smartregister.addo.dao.AncDao;
+import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.domain.Entity;
+import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
-
-    public FamilyMemberAdapter(Context context, List<Entity> members) {
+    private boolean isLocal = false;
+    public FamilyMemberAdapter(Context context, List<Entity> members, boolean isLocal) {
         super(context, 0, members);
+        this.isLocal = isLocal;
     }
 
     @Override
@@ -49,22 +61,39 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String familyId = member.getFamilyId();
-                Log.d("Family", familyId);
-                CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
-                        .findByCaseID(familyId);
-                Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
-                intent.putExtra("family_base_entity_id", patient.getCaseId());
-                intent.putExtra("family_head",
-                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
-                intent.putExtra("primary_caregiver",
-                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
-                intent.putExtra("village_town",
-                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
-                intent.putExtra("family_name",
-                        org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
-                intent.putExtra("go_to_due_page", false);
-                getContext().startActivity(intent);
+                if(isLocal) {
+                    // show family profile
+                    String familyId = member.getFamilyId();
+                    Log.d("Family", familyId);
+                    CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
+                            .findByCaseID(familyId);
+                    Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
+                    intent.putExtra("family_base_entity_id", patient.getCaseId());
+                    intent.putExtra("family_head",
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
+                    intent.putExtra("primary_caregiver",
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
+                    intent.putExtra("village_town",
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
+                    intent.putExtra("family_name",
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
+                    intent.putExtra("go_to_due_page", false);
+                    getContext().startActivity(intent);
+                } else {
+                    // show member profile
+                    HashMap<String, String> details = new HashMap<>();
+                    details.put("fist_name", member.getFirstName());
+                    details.put("last_name", member.getLastName());
+                    details.put(ChildDBConstants.KEY.ENTITY_TYPE, "ec_family_member");
+
+                    CommonPersonObjectClient commonPersonObjectClient = new CommonPersonObjectClient(member.getBaseEntityId(), new HashMap<String, String>(), fullName);
+                    commonPersonObjectClient.setColumnmaps(details);
+
+                    v.setTag(commonPersonObjectClient);
+
+                    Bundle s = new Bundle();
+                    goToProfileActivity(v, s);
+                }
             }
         });
 
@@ -79,4 +108,54 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
             return string.trim();
         }
     }
+
+    public void goToProfileActivity(View view, Bundle fragmentArguments) {
+        if (view.getTag() instanceof CommonPersonObjectClient) {
+            CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
+            String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
+            if (CoreConstants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
+                if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()) || isAdolescent(commonPersonObjectClient.entityId()))) {
+                    goToOtherMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+                } else {
+                    goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+                }
+            } else {
+                goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+            }
+        }
+    }
+
+    private void goToFocusMemberProfileActivity(CommonPersonObjectClient patient, Bundle fragmentArguments) {
+        Intent intent = new Intent(getContext(), FamilyFocusedMemberProfileActivity.class);
+        if (fragmentArguments != null) {
+            intent.putExtras(fragmentArguments);
+        }
+        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
+        intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
+        //intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
+        //intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        getContext().startActivity(intent);
+    }
+
+    public void goToOtherMemberProfileActivity(CommonPersonObjectClient patient, Bundle fragmentArguments) {
+        Intent intent = new Intent(getContext(), FamilyOtherMemberProfileActivity.class);
+        if (fragmentArguments != null) {
+            intent.putExtras(fragmentArguments);
+        }
+        intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
+        intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
+        //intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
+        //intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        getContext().startActivity(intent);
+    }
+
+    private boolean isPncMember(String entityId) {
+        return PNCDao.isPNCMember(entityId);
+    }
+
+    private boolean isAncMember(String entityId) {
+        return AncDao.isANCMember(entityId);
+    }
+
+    private boolean isAdolescent(String entityId) { return AdolescentDao.isAdolescentMember(entityId); }
 }
