@@ -129,6 +129,7 @@ public class CoreConstants {
         public static final String PNC_ADDO_VISIT = "PNC ADDO Visit";
         public static final String CHILD_ADDO_VISIT = "Child ADDO Visit";
         public static final String ADOLESCENT_ADDO_VISIT = "Adolescent ADDO Visit";
+        public static final String OTHER_MEMBER_ADDO_VISIT = "Other Member ADDO Visit";
 
     }
 
