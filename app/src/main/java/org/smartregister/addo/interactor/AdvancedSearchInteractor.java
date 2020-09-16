@@ -13,6 +13,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.smartregister.CoreLibrary;
 import org.smartregister.DristhiConfiguration;
 import org.smartregister.addo.contract.AdvancedSearchContract;
@@ -25,10 +27,13 @@ import org.smartregister.service.HTTPAgent;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.List;
 import java.lang.reflect.Type;
+
+import timber.log.Timber;
 
 public class AdvancedSearchInteractor implements AdvancedSearchContract.Interactor {
     public static final String SEARCH_URL = "/rest/search/search";
@@ -107,8 +112,20 @@ public class AdvancedSearchInteractor implements AdvancedSearchContract.Interact
         });
         Gson gson = builder.create();
 
-        List<Entity> members = gson.fromJson(response.payload(), new TypeToken<List<Entity>>() {
-        }.getType());
+        List<Entity> members = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(response.payload());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject objectInArray = jsonArray.getJSONObject(i);
+                String opensrpId = objectInArray.getJSONObject("identifiers").getString("opensrp_id");
+                if (!opensrpId.contains("family")) {
+                    Entity member = gson.fromJson(objectInArray.toString(), Entity.class);
+                    members.add(member);
+                }
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
 
         return members;
     }

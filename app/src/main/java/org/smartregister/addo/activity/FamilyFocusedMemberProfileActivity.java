@@ -113,7 +113,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void setupViews() {
         super.setupViews();
         TextView toolBarTitle = findViewById(R.id.toolbar_title_focused);
-        toolBarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        if(presenter().getFamilyName() == null) {
+            toolBarTitle.setText(getString(R.string.search_results_return));
+        } else {
+            toolBarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        }
 
         detailOneView = findViewById(R.id.textview_detail_one_focused);
         detailTwoView = findViewById(R.id.textview_detail_two_focused);

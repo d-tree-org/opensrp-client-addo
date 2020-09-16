@@ -414,6 +414,7 @@
     <string name="matching_results">%1$s matching results found.</string>
 
     <string name="search_results">Search Results</string>
+    <string name="search_results_return">Return to Search Results</string>
     <string name="full_name">%s %s %s</string>
     <string name="addo_user_no_villages">This user has not been assigned any village</string>
     <string name="addo_other_village">Other Village</string>

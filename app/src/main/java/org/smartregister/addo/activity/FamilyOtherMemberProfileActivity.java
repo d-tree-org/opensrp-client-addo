@@ -116,7 +116,11 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         textViewDangersignScreening = findViewById(R.id.textview_ds_screening);
 
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        if(presenter().getFamilyName() == null) {
+            toolbarTitle.setText(getString(R.string.search_results_return));
+        } else {
+            toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        }
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorHeight(0);
