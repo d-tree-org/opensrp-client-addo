@@ -1,5 +1,6 @@
 package org.smartregister.addo.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,14 +21,16 @@ import org.smartregister.addo.dao.PNCDao;
 import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.addo.util.PullEventClientRecordUtil;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 
-import java.util.HashMap;
 import java.util.List;
+
+import static org.smartregister.addo.util.JsonFormUtils.getCommonRepository;
 
 public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
     private boolean isLocal = false;
@@ -80,16 +83,24 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
                     intent.putExtra("go_to_due_page", false);
                     getContext().startActivity(intent);
                 } else {
+                    // check if member exists locally
+                    CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
+                    if(personObject == null) {
+                        Log.d("personObject", " personObject is null");
+
+                        // pull client record from server
+                        ProgressDialog progressDialog = new ProgressDialog(getContext());
+                        progressDialog.setCancelable(false);
+                        PullEventClientRecordUtil.pullEventClientRecord(member.getBaseEntityId(), progressDialog);
+
+                        getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
+                        return;
+                    }
                     // show member profile
-                    HashMap<String, String> details = new HashMap<>();
-                    details.put("fist_name", member.getFirstName());
-                    details.put("last_name", member.getLastName());
-                    details.put(ChildDBConstants.KEY.ENTITY_TYPE, "ec_family_member");
+                    final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
+                    client.setColumnmaps(personObject.getColumnmaps());
 
-                    CommonPersonObjectClient commonPersonObjectClient = new CommonPersonObjectClient(member.getBaseEntityId(), new HashMap<String, String>(), fullName);
-                    commonPersonObjectClient.setColumnmaps(details);
-
-                    v.setTag(commonPersonObjectClient);
+                    v.setTag(client);
 
                     Bundle s = new Bundle();
                     goToProfileActivity(v, s);
