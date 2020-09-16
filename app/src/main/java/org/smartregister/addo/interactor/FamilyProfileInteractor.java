@@ -26,6 +26,9 @@ public class FamilyProfileInteractor extends org.smartregister.family.interactor
     }
 
     public void verifyHasPhone(final String familyID, final FamilyProfileExtendedContract.PresenterCallBack profilePresenter) {
+        if(familyID == null) {
+            return;
+        }
         Runnable runnable = new Runnable() {
             @Override
             public void run() {

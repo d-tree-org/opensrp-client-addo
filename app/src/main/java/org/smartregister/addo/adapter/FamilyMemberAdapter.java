@@ -24,6 +24,7 @@ import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.PullEventClientRecordUtil;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.event.Listener;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
@@ -85,25 +86,27 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
                 } else {
                     // check if member exists locally
                     CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
+
                     if(personObject == null) {
                         Log.d("personObject", " personObject is null");
 
                         // pull client record from server
                         ProgressDialog progressDialog = new ProgressDialog(getContext());
                         progressDialog.setCancelable(false);
-                        PullEventClientRecordUtil.pullEventClientRecord(member.getBaseEntityId(), progressDialog);
+                        PullEventClientRecordUtil.pullEventClientRecord(member.getBaseEntityId(), pullEventClientRecordListener, progressDialog);
 
                         getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
-                        return;
+
+                    } else {
+                        // show member profile
+                        final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
+                        client.setColumnmaps(personObject.getColumnmaps());
+
+                        v.setTag(client);
+
+                        Bundle s = new Bundle();
+                        goToProfileActivity(v, s);
                     }
-                    // show member profile
-                    final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
-                    client.setColumnmaps(personObject.getColumnmaps());
-
-                    v.setTag(client);
-
-                    Bundle s = new Bundle();
-                    goToProfileActivity(v, s);
                 }
             }
         });
@@ -169,4 +172,27 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
     }
 
     private boolean isAdolescent(String entityId) { return AdolescentDao.isAdolescentMember(entityId); }
+
+    private final Listener<String> pullEventClientRecordListener = new Listener<String>() {
+        public void onEvent(final String baseEntityId) {
+            if (baseEntityId != null) {
+                // show profile view
+                CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(baseEntityId);
+
+                if(personObject == null) return;
+
+                final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
+                client.setColumnmaps(personObject.getColumnmaps());
+
+                View v = new View(getContext());
+                v.setTag(client);
+
+                Bundle s = new Bundle();
+                goToProfileActivity(v, s);
+
+            } else {
+                Utils.showShortToast(getContext(), "Error pulling record from server");
+            }
+        }
+    };
 }

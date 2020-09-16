@@ -12,10 +12,10 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.DristhiConfiguration;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.domain.Response;
-import org.smartregister.domain.ResponseStatus;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.Event;
 import org.smartregister.domain.db.EventClient;
+import org.smartregister.event.Listener;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.sync.intent.SyncIntentService;
 
@@ -30,10 +30,10 @@ import static org.smartregister.chw.anc.util.NCUtils.getClientProcessorForJava;
 
 public class PullEventClientRecordUtil {
 
-    public static void pullEventClientRecord(final String baseEntityId,
+    public static void pullEventClientRecord(final String baseEntityId, final Listener<String> listener,
                                          final ProgressDialog progressDialog) {
 
-        org.smartregister.util.Utils.startAsyncTask(new AsyncTask<Void, Void, JSONObject>() {
+        org.smartregister.util.Utils.startAsyncTask(new AsyncTask<Void, Void, String>() {
 
             @Override
             protected void onPreExecute() {
@@ -41,31 +41,23 @@ public class PullEventClientRecordUtil {
             }
 
             @Override
-            protected JSONObject doInBackground(Void... params) {
+            protected String doInBackground(Void... params) {
                 publishProgress();
-                Response<String> response = pull(baseEntityId);
-                if (response.isFailure()) {
-                    return null;
-                } else {
-                    try {
-                        return new JSONObject(response.payload());
-                    } catch (Exception e) {
-                        Log.e(getClass().getName(), "", e);
-                        return null;
-                    }
-                }
+                return pull(baseEntityId);
             }
 
             @Override
-            protected void onPostExecute(JSONObject result) {
+            protected void onPostExecute(String result) {
+                listener.onEvent(result);
                 progressDialog.dismiss();
             }
         }, null);
     }
 
-    private static Response<String> pull(String baseEntityId) {
+    private static String pull(String baseEntityId) {
         if (baseEntityId == null || baseEntityId.isEmpty()) {
-            return new Response<>(ResponseStatus.failure, "entityId doesn't exist");
+            Timber.d("entityId doesn't exist");
+            return null;
         }
 
         Context context = CoreLibrary.getInstance().context();
@@ -77,11 +69,13 @@ public class PullEventClientRecordUtil {
         String uri = baseUrl + SyncIntentService.SYNC_URL + paramString;
 
         Timber.d(new StringBuilder(PullEventClientRecordUtil.class.getCanonicalName()).append(" ").append(uri).toString());
-
-        Response<String> response = new Response<>(ResponseStatus.failure, "");
+        ;
         try {
-            response = context.getHttpAgent().fetch(uri);
+            Response<String> response = context.getHttpAgent().fetch(uri);
             // TO Do: validate response
+            if(response == null || response.isFailure()) {
+                return null;
+            }
 
             JSONObject jsonObject = new JSONObject(response.payload());
 
@@ -102,7 +96,7 @@ public class PullEventClientRecordUtil {
             Log.d("Pull EventClient error", e.toString());
         }
 
-        return response;
+        return baseEntityId;
     }
 
     private static String urlEncode(String value) {
