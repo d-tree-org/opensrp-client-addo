@@ -91,7 +91,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_chw_link_err}}"
         }
@@ -124,7 +124,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_pnc_woman_present_err}}"
         }
@@ -445,7 +445,7 @@
                   "chk_difficulty_breathing",
                   "chk_severe_leg_pain",
                   "chk_unusual_behaviour",
-                  "chk_swelling of breast",
+                  "chk_swelling_of_breast",
                   "chk_severe_abdominal_pain",
                   "chk_vaginal_discharge",
                   "chk_blurred_vision",
@@ -454,6 +454,44 @@
                 ]
               }
             ]
+          }
+        }
+      },
+      {
+        "key": "asterisk_symbol",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "danger_sign_not_selected",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_danger_sign_not_present_toaster}} {asterisk_symbol}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_relevance.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_calculation.yml"
+            }
           }
         }
       },
@@ -567,8 +605,8 @@
           "step1:mother_present": {
             "ex-checkbox": [
               {
-                "not": [
-                  "chk_mother_present_yes"
+                "or": [
+                  "chk_mother_present_no"
                 ]
               }
             ]
