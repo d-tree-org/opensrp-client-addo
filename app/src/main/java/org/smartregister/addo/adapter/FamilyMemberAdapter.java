@@ -66,9 +66,12 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
             @Override
             public void onClick(View v) {
                 String familyId = member.getFamilyId();
-                Log.d("Family", familyId);
-                CommonPersonObject patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
-                        .findByCaseID(familyId);
+                CommonPersonObject patient= null;
+                if (familyId != null) {
+                    Log.d("Family", familyId);
+                    patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
+                            .findByCaseID(familyId);
+                }
                 if(isLocal && patient != null) {
                     // show family profile
                     Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
