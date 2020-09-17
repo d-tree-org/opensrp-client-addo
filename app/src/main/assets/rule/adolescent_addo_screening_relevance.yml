@@ -24,3 +24,12 @@ condition: "step2_adolescent_condition_present.contains('chk_suspected_pregnancy
             step3_addo_referral_options.contains('addo_referral_option_hf')"
 actions:
   - "isRelevant = true"
+
+---
+name: step3_required_field_err_toaster
+description: Danger signs not selected
+priority: 1
+condition: "(step2_adolescent_condition_present.isEmpty() && step1_adolescent_present.contains('adolescent_present_yes')) ||
+            (step1_chw_link.isEmpty() || step1_adolescent_present.isEmpty())"
+actions:
+  - "isRelevant = true"
