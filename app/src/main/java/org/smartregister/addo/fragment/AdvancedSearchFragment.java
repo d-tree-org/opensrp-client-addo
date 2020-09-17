@@ -28,6 +28,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AdvancedSearchFragment extends BaseRegisterFragment implements AdvancedSearchContract.View {
 
@@ -272,11 +273,11 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
 
         String fn = "";
         if(isLocal) {
-            fn = searchName.getText().toString();
+            fn = Objects.requireNonNull(searchName.getText()).toString().trim();
         } else {
-            fn = firstName.getText().toString();
+            fn = firstName.getText().toString().trim();
         }
-        String ln = lastName.getText().toString();
+        String ln = lastName.getText().toString().trim();
 
         if (!TextUtils.isEmpty(fn)) {
             searchParams.put(Constants.DB.FIRST_NAME, fn);
