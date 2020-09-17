@@ -406,6 +406,8 @@
 
     <string name="first_name_hint">First Name</string>
     <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_hint">Last Name</string>
     <string name="search_name">Enter first name or last name</string>
     <string name="search_name_hint">Enter first name or last name</string>
 

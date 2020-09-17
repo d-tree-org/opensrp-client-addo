@@ -42,6 +42,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private TextView searchCriteria;
     private TextView matchingResults;
     private MaterialEditText searchName;
+    private MaterialEditText firstName;
+    private MaterialEditText lastName;
     private boolean isLocal = false;
     private boolean listMode = false;
 
@@ -56,6 +58,17 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //return inflater.inflate(R.layout.fragment_advanced_search, container, false);
 
         View view = inflater.inflate(R.layout.fragment_advanced_search, container, false);
+
+        if(!isLocal) {
+            view.findViewById(R.id.search_name_ll).setVisibility(View.GONE);
+            view.findViewById(R.id.first_name_ll).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.last_name_ll).setVisibility(View.VISIBLE);
+        } else {
+            view.findViewById(R.id.search_name_ll).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.first_name_ll).setVisibility(View.GONE);
+            view.findViewById(R.id.last_name_ll).setVisibility(View.GONE);
+        }
+
         rootView = view;//handle to the root
 
         setupViews(view);
@@ -120,6 +133,14 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         searchName = view.findViewById(R.id.search_name);
         searchName.addTextChangedListener(advancedSearchTextwatcher);
 
+        firstName = view.findViewById(R.id.first_name);
+        firstName.addTextChangedListener(advancedSearchTextwatcher);
+
+        lastName = view.findViewById(R.id.last_name);
+        lastName.addTextChangedListener(advancedSearchTextwatcher);
+
+        advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, firstName);
+        advancedFormSearchableFields.put(Constants.DB.LAST_NAME, lastName);
         advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, searchName);
     }
 
@@ -241,9 +262,13 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
 
         Map<String, String> searchParams = new HashMap<>();
 
-
-        String fn = searchName.getText().toString();
-        String ln = "";//lastName.getText().toString();
+        String fn = "";
+        if(isLocal) {
+            fn = searchName.getText().toString();
+        } else {
+            fn = firstName.getText().toString();
+        }
+        String ln = lastName.getText().toString();
 
         if (!TextUtils.isEmpty(fn)) {
             searchParams.put(Constants.DB.FIRST_NAME, fn);
