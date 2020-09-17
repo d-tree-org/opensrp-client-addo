@@ -91,7 +91,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_chw_link_err}}"
         }
@@ -124,7 +124,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_pregnant_woman_present_err}}"
         }
