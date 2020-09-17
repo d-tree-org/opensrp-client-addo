@@ -108,6 +108,14 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     public void setupViews(View view) {
         super.setupViews(view);
 
+        if (titleLabelView != null) {
+            if(isLocal) {
+                titleLabelView.setText(getString(R.string.search));
+            } else {
+                titleLabelView.setText(getString(R.string.global_search));
+            }
+        }
+
         listViewLayout = view.findViewById(R.id.advanced_search_list);
         listViewLayout.setVisibility(View.GONE);
 
@@ -330,7 +338,11 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             advancedSearchToolbarSearchButton.setVisibility(View.VISIBLE);
 
             if (titleLabelView != null) {
-                titleLabelView.setText(getString(R.string.search));
+                if(isLocal) {
+                    titleLabelView.setText(getString(R.string.search));
+                } else {
+                    titleLabelView.setText(getString(R.string.global_search));
+                }
             }
 
 

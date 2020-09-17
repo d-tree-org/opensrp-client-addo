@@ -412,6 +412,7 @@
     <string name="search_name_hint">Enter first name or last name</string>
 
     <string name="search">Search</string>
+    <string name="global_search">Global Search</string>
 
     <string name="matching_results">%1$s matching results found.</string>
 
