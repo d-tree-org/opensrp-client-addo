@@ -16,6 +16,7 @@
     <string name="return_to_select_village">Rudi kuchagua kijiji</string>
     <string name="scan_fingerprint_title">Skani alama za vidole</string>
     <string name="scan_fingerprint_button">SKANI ALAMA ZA VIDOLE</string>
+    <string name="manual_search_button">TAFUTA KWA KAWAIDA</string>
 
     <!-- Advanced search screen-->
     <string name="search">Tafuta</string>
