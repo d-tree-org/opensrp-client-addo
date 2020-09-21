@@ -163,8 +163,8 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         if (addMember != null) {
             addMember.setVisible(false);
         }
-
-        getMenuInflater().inflate(R.menu.other_member_menu, menu);
+        // Remove the the Option Menu for the ADDO application, can be activated by uncommenting this line
+        //getMenuInflater().inflate(R.menu.other_member_menu, menu);
 
         return true;
     }
