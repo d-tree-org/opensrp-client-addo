@@ -85,7 +85,8 @@ android {
             buildConfigField "int", "PULL_UNIQUE_IDS_MINUTES", '180'
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '180'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
-            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
+            buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
         }
@@ -101,9 +102,10 @@ android {
             buildConfigField "boolean", 'SUPPORT_QR', 'true'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
-            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
+            buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
-            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "d_tree_test" ')
+            buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
             testCoverageEnabled true
         }
     }
