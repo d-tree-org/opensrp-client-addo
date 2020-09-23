@@ -336,8 +336,9 @@
       {
         "key": "addo_referral_options",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "",
+        "label": "{{step3_addo_referral_options}}",
         "type": "check_box",
         "exclusive": [
           "addo_referral_option_hf"
