@@ -90,7 +90,11 @@ actions:
         }
 
         if (selectedItem.contains('chk_other_needs')) {
-            selected += '\u2022' + otherIllness + '<br />';
+            if (!otherIllness.isEmpty()) {
+                selected += '\u2022' + otherIllness + '<br />';
+            } else {
+                selected += '<br /> \u2022' + '<font color=red>{{other_danger_signs_not_described}}</font>' + '<br />';
+            }
         }
 
         return selected;
