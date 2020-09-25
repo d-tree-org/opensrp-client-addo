@@ -119,6 +119,18 @@ public class Utils extends org.smartregister.family.util.Utils {
         }
     }
 
+    public static int getMemberImageResourceIdentifier() {
+        return R.mipmap.ic_member;
+    }
+
+    public static int getAnCWomanImageResourceIdentifier() {
+        return R.drawable.anc_woman;
+    }
+
+    public static int getPnCWomanImageResourceIdentifier() {
+        return R.drawable.pnc_woman;
+    }
+
     public static float convertDpToPixel(float dp, Context context) {
         return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
