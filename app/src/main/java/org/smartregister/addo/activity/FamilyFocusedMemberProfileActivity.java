@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.vijay.jsonwizard.activities.JsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
@@ -37,6 +38,7 @@ import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.addo.util.ReferralUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.model.BaseFamilyProfileMemberModel;
 import org.smartregister.family.util.Constants;
@@ -245,11 +247,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 break;
 
             case R.id.tv_focused_client_commodities:
-                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), getResources().getString(R.string.dispense_commodities));
+                startFormActivityForSingleForms(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), getResources().getString(R.string.dispense_commodities));
                 break;
 
             case R.id.tv_focused_client_dispense:
-                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoAttendPrescriptionsFromHf()), getString(R.string.attend_prescription_form_title));
+                startFormActivityForSingleForms(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoAttendPrescriptionsFromHf()), getString(R.string.attend_prescription_form_title));
                 break;
 
             default:
@@ -305,6 +307,22 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         form.setWizard(true);
 
         Intent intent = new Intent(this, ReferralWizardFormActivity.class);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+        intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
+        startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
+    }
+
+    public void startFormActivityForSingleForms(JSONObject jsonForm, String formTitle) {
+        Form form = new Form();
+        form.setName(formTitle);
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
+        form.setHideSaveLabel(true);
+        form.setWizard(false);
+
+        Intent intent = new Intent(this, FamilyWizardFormActivity.class);
         intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);

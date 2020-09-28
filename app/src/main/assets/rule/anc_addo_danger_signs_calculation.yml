@@ -93,7 +93,11 @@ actions:
         }
 
         if (selectedItem.contains('chk_other_needs')) {
-            selected += '\u2022' + otherIllness + '<br />';
+            if (!otherIllness.isEmpty()) {
+                selected += '\u2022' + otherIllness + '<br />';
+            } else {
+                selected += '<br /> \u2022' + '<font color=red>{{other_danger_signs_not_described}}</font>' + '<br />'
+            }
         }
 
         return selected;
@@ -108,136 +112,18 @@ condition: "true"
 actions:
   - "calculation = ['minor_illness_captured': step2_minor_illness_captured]"
 
-#################################################### Swahili #########################################
 ---
-name: step1_danger_signs_captured_sw
-description: Get the danger signs that were selected
+name: step3_asterisk_symbol
+description: Display the red asterisks
 priority: 1
 condition: "true"
 actions:
-  - "def getSelectedDS(selectedItem, otherIllnesses) {
-        import java.lang.*;
-        String selected = '';
-        if (selectedItem.contains('chk_fever')) {
-            if (selected.isEmpty()) {
-                selected += 'Homa';
-            } else {
-                selected += ', Homa \n';
-            }
+  - 'calculation = "{{step3_asterisk_symbol_questions}} (<font color=red>*</font>)"'
 
-        }
-        if (selectedItem.contains('chk_bleeding_vaginally')) {
-            if (selected.isEmpty()) {
-                selected += 'Damu kutoka ukeni';
-            } else {
-                selected += ', Damu kutoka ukeni';
-            }
-        }
-        if (selectedItem.contains('chk_server_headache')) {
-            if (selected.isEmpty()) {
-                selected += 'Maumivu ya kichwa';
-            } else {
-                selected += ', Maumivu ya kichwa';
-            }
-        }
-        if (selectedItem.contains('chk_blurred_vision')) {
-            if (selected.isEmpty()) {
-                selected += 'Kutoona vizuri';
-            } else {
-                selected += ', Kutoona vizuri';
-            }
-        }
-        if (selectedItem.contains('chk_convulsions')) {
-            if (selected.isEmpty()) {
-                selected += 'Degedege / Mtukutiko wa mwili';
-            } else {
-                selected += ', Degedege / Mtukutiko wa mwili';
-            }
-        }
-        if (selectedItem.contains('chk_difficulty_breathing')) {
-            if (selected.isEmpty()) {
-                selected += 'Kushindwa kupumua';
-            } else {
-                selected += ', Kushindwa kupumua';
-            }
-        }
-        if (selectedItem.contains('chk_severe_abdominal_pain')) {
-            if (selected.isEmpty()) {
-                selected += 'Maumivu makali ya tumbo';
-            } else {
-                selected += ', Maumivu makali ya tumbo';
-            }
-        }
-        if (selectedItem.contains('chk_loss_consciousness')) {
-            if (selected.isEmpty()) {
-                selected += 'Kupoteza fahamu';
-            } else {
-                selected += ', Kupoteza fahamu';
-            }
-        }
-        if (selectedItem.contains('chk_swelling')) {
-            if (selected.isEmpty()) {
-                selected += 'Kuvimba uso na / au mikono';
-            } else {
-                selected += ', Kuvimba uso na / au mikono';
-            }
-        }
-        if (selectedItem.contains('chk_early_labour')) {
-            if (selected.isEmpty()) {
-                selected += 'Kupata uchungu mapema kabla ya miezi tisa';
-            } else {
-                selected += ', Kupata uchungu mapema kabla ya miezi tisa';
-            }
-        }
-        if (selectedItem.contains('chk_vaginal_discharge')) {
-            if (selected.isEmpty()) {
-                selected += 'Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
-            } else {
-                selected += ', Kutoka uchafu / majimaji ukeni yenye harufu mbaya';
-            }
-        }
-        if (selectedItem.contains('chk_unusual_movement')) {
-            if (selected.isEmpty()) {
-                selected += 'Kutocheza / kucheza kusiko kwa kawaida kwa mtoto aliye tumboni';
-            } else {
-                selected += ', Kutocheza / kucheza kusiko kwa kawaida kwa mtoto aliye tumboni';
-            }
-        }
-        if (selectedItem.contains('chk_water_broke')) {
-            if (selected.isEmpty()) {
-                selected += 'Maji kumwagika kabla ya miezi tisa';
-            } else {
-                selected += ', Maji kumwagika kabla ya miezi tisa';
-            }
-        }
-        if (selectedItem.contains('chk_vomiting')) {
-            if (selected.isEmpty()) {
-                selected += 'Kutapika';
-            } else {
-                selected += ', Kutapika';
-            }
-        }
-        if (selectedItem.contains('chk_anemia')) {
-            if (selected.isEmpty()) {
-                selected += 'Anemia demonstrated by paleness on the palms';
-            } else {
-                selected += ', Anemia demonstrated by paleness on the palms';
-            }
-        }
-        if (selectedItem.contains('chk_other')) {
-            if (selected.isEmpty()) {
-                selected += otherIllnesses;
-            } else {
-                selected += ', '+otherIllnesses;
-            }
-        }
-        return selected;
-  }"
-  - "calculation = getSelectedDS(step1_danger_signs_present, step1_danger_sign_description) "
 ---
-name: step1_danger_signs_present_toaster_sw
+name: step3_required_field_err_toaster
 description: Displaying the danger signs selected in the toaster message
 priority: 1
 condition: "true"
 actions:
-  - "calculation = ['danger_signs_captured_sw': step1_danger_signs_captured_sw]"
+  - "calculation = ['asterisk_symbol': step3_asterisk_symbol]"

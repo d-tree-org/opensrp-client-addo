@@ -90,7 +90,11 @@ actions:
         }
 
         if (selectedItem.contains('chk_other_needs')) {
-            selected += '\u2022' + otherIllness + '<br />';
+            if (!otherIllness.isEmpty()) {
+                selected += '\u2022' + otherIllness + '<br />';
+            } else {
+                selected += '<br /> \u2022' + '<font color=red>{{other_danger_signs_not_described}}</font>' + '<br />';
+            }
         }
 
         return selected;
@@ -222,3 +226,19 @@ priority: 1
 condition: "true"
 actions:
   - "calculation = ['danger_signs_captured_sw': step1_danger_signs_captured_sw]"
+
+---
+name: step3_asterisk_symbol
+description: Display the red asterisks
+priority: 1
+condition: "true"
+actions:
+  - 'calculation = "{{step3_asterisk_symbol_questions}} (<font color=red>*</font>)"'
+
+---
+name: step3_danger_sign_not_selected
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['asterisk_symbol': step3_asterisk_symbol]"

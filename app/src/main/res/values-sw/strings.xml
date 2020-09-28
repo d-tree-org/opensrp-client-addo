@@ -49,5 +49,6 @@
     <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
     <string name="environment_name_test">mfumo jaribio</string>
     <string name="environment_name_production">production</string>
+    <string name="dispense_commodities">DLDM BIDHAA</string>
 
 </resources>

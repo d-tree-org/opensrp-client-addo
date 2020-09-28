@@ -91,7 +91,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_chw_link_err}}"
         }
@@ -126,7 +126,7 @@
             "value": "false"
           }
         ],
-        "v-required": {
+        "v_required": {
           "value": "true",
           "err": "{{step1_is_child_present_err}}"
         }
@@ -601,6 +601,44 @@
         "spacer_height": "20dp"
       },
       {
+        "key": "asterisk_symbol",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "required_field_err_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_danger_sign_not_present_toaster}} {asterisk_symbol}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_relevance.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "save_n_refer",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -653,8 +691,8 @@
           "step1:child_present": {
             "ex-checkbox": [
               {
-                "not": [
-                  "chk_child_present_yes"
+                "or": [
+                  "chk_child_present_no"
                 ]
               }
             ]
