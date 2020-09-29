@@ -406,14 +406,18 @@
 
     <string name="first_name_hint">First Name</string>
     <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_hint">Last Name</string>
     <string name="search_name">Enter first name or last name</string>
     <string name="search_name_hint">Enter first name or last name</string>
 
     <string name="search">Search</string>
+    <string name="global_search">Global Search</string>
 
     <string name="matching_results">%1$s matching results found.</string>
 
     <string name="search_results">Search Results</string>
+    <string name="search_results_return">Return to Search Results</string>
     <string name="full_name">%s %s %s</string>
     <string name="addo_user_no_villages">This user has not been assigned any village</string>
     <string name="addo_other_village">Other Village</string>
@@ -429,6 +433,7 @@
     <string name="return_to_select_village">Return to select village</string>
     <string name="scan_fingerprint_title">Scan fingerprint</string>
     <string name="scan_fingerprint_button">SCAN FINGERPRINT</string>
+    <string name="manual_search_button">MANUAL SEARCH</string>
     <string name="select_the_person_to_receive_services">Select the person to receive services</string>
     <string name="non_focused_service_provided">Record service provided</string>
     <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>

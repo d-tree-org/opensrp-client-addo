@@ -97,7 +97,7 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
                 model.setSelectedVillage(village);
                 ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(2);
             } else {
-                ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(1);
+                ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(3);
             }
 
         });
