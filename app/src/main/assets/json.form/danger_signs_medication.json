@@ -119,7 +119,8 @@
           "yes"
         ],
         "v_required": {
-          "value": true
+          "value": "true",
+          "err": "{{step1_dispense_options_err}}"
         },
         "options": [
           {
@@ -166,13 +167,14 @@
       {
         "key": "medicine_dispensed",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "buttonText": "{{step2_medicine_dispensed_button_text}}",
         "dialogTitle": "{{step2_medicine_dispensed_dialog_title}}",
         "searchHint": "{{step2_medicine_dispensed_search_hint}}",
         "v_required": {
-          "value": true
+          "value": "true",
+          "err": "Select at least one"
         },
         "options": [
           {
@@ -268,7 +270,7 @@
       {
         "key": "medication_description",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "{{step2_medication_description_hint}}",
@@ -287,7 +289,7 @@
       {
         "key": "medications_selected",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "hidden",
         "calculation": {
@@ -310,7 +312,8 @@
           "yes"
         ],
         "v_required": {
-          "value": true
+          "value": true,
+          "err": "{{step2_linkage_recommendation_err}}"
         },
         "options": [
           {
@@ -393,6 +396,44 @@
         "spacer_height": "20dp"
       },
       {
+        "key": "asterisk_symbol",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "required_field_err_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_for_error_present_toaster}} {asterisk_symbol}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "all_meds_dispensed",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -404,7 +445,8 @@
           "yes"
         ],
         "v_required": {
-          "value": true
+          "value": true,
+          "err": "{{step3_all_meds_dispensed_err}}"
         },
         "options": [
           {

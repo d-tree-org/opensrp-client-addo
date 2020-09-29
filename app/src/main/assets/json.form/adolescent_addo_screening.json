@@ -89,7 +89,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_chw_link_err}}"
         }
@@ -122,7 +122,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step1_adolescent_present_err}}"
         }
@@ -336,8 +336,9 @@
       {
         "key": "addo_referral_options",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "",
+        "label": "{{step3_addo_referral_options}}",
         "type": "check_box",
         "exclusive": [
           "addo_referral_option_hf"
@@ -356,7 +357,7 @@
             "value": "false"
           }
         ],
-        "v-required" : {
+        "v_required" : {
           "value" : "true",
           "err": "{{step3_addo_referral_options_err}}"
         },
@@ -364,6 +365,44 @@
           "rules-engine": {
             "ex-rules": {
               "rules-file": "adolescent_addo_screening_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "asterisk_symbol",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "required_field_err_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step3_danger_sign_not_present_toaster}} {asterisk_symbol}",
+        "text_color": "#000000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_relevance.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_calculation.yml"
             }
           }
         }
@@ -421,8 +460,8 @@
           "step1:adolescent_present": {
             "ex-checkbox": [
               {
-                "not": [
-                  "adolescent_present_yes"
+                "or": [
+                  "adolescent_present_no"
                 ]
               }
             ]

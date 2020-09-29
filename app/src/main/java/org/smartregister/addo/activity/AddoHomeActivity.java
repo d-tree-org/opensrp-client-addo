@@ -67,20 +67,12 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     @Override
     protected Fragment[] getOtherFragments() {
 
-        Fragment[] fragments = new Fragment[2];
-        fragments[0] = new AdvancedSearchFragment();
+        Fragment[] fragments = new Fragment[3];
+        fragments[0] = new AdvancedSearchFragment(true);
         fragments[1] = new ScanFingerPrintFragment();
+        fragments[2] = new AdvancedSearchFragment(false);
 
         return fragments;
-    }
-
-    protected AdvancedSearchFragment getAdvancedSearchFragment() {
-
-        if (advancedSearchFragmentWR == null || advancedSearchFragmentWR.get() == null) {
-            advancedSearchFragmentWR = new WeakReference<>(new AdvancedSearchFragment());
-        }
-
-        return advancedSearchFragmentWR.get();
     }
 
     @Override

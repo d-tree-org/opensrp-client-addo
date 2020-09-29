@@ -2,6 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
+  "properties_file_name": "addo_commodities",
   "count": "1",
   "encounter_type": "ADDO Visit - Dispense Commodities",
   "entity_id": "",
@@ -50,17 +51,14 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Dispensing Options",
+    "title": "{{step1_title}}",
     "fields": [
       {
-        "key": "dispense_commodity_message",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "toaster_notes",
-        "text": "Dispense appropriate commodity as requested by the client",
-        "text_color": "#000000",
-        "toaster_type": "info"
+        "key": "commodities_client",
+        "type": "label",
+        "text": "{{step1_start_message}}",
+        "label_text_size": "16sp",
+        "label_text_style": "bold"
       },
       {
         "key": "spacer",
@@ -71,35 +69,37 @@
         "spacer_height": "20dp"
       },
       {
-        "key": "dispense_options",
+        "key": "client_commodities_dispensed",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "Did you dispense commodities?",
-        "label_text_style": "bold",
+        "openmrs_entity_id": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
         "exclusive": [
-          "yes"
+          "client_commodities_dispensed_yes"
         ],
-        "v_required": {
-          "value": true
-        },
+        "label": "{{step1_client_commodities_dispensed_label}}",
         "options": [
           {
-            "key": "yes",
-            "openmrs_entity_parent": "",
+            "key": "client_commodities_dispensed_yes",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "Yes"
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_client_commodities_dispensed_yes}}",
+            "text_size": "18px",
+            "value": "false"
           },
           {
-            "key": "no",
-            "openmrs_entity_parent": "",
+            "key": "client_commodities_dispensed_no",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "No"
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step1_client_commodities_dispensed_no}}",
+            "text_size": "18px",
+            "value": "false"
           }
-        ]
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step1_client_commodities_dispensed_err}}"
+        }
       }
     ]
   }

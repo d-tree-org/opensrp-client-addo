@@ -2,14 +2,24 @@ package org.smartregister.addo.presenter;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.contract.AdvancedSearchContract;
 import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.interactor.AdvancedSearchInteractor;
+import org.smartregister.addo.util.Constants;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.domain.Response;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract;
 import org.smartregister.family.contract.FamilyRegisterFragmentContract.Presenter;
 import org.smartregister.family.util.DBConstants;
@@ -17,7 +27,11 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -103,14 +117,15 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
         return null;
     }
 
-    public void search(String searchText) {
-        Log.d("Search", "searching in presenter: "  + searchText);
-        interactor.search(searchText.trim(), this); // trim to remove empty spaces
+    public void search(Map<String, String> searchMap, boolean isLocal) {
+        Log.d("Search", "searching in presenter: "  + searchMap.toString());
+        interactor.search(searchMap, isLocal, this);
     }
 
-    public void onResultsFound(List<Entity> members) {
+    public void onResultsFound(List<Entity> members, boolean isLocal) {
         System.out.println("Member size: " + members.size());
 
-        getView().showResults(members);
+        getView().showResults(members, isLocal);
     }
+
 }

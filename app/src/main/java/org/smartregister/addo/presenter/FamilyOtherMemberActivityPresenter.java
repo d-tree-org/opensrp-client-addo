@@ -1,8 +1,15 @@
 package org.smartregister.addo.presenter;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import org.apache.commons.lang3.tuple.Triple;
+import org.smartregister.addo.R;
+import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.addo.contract.FamilyProfileExtendedContract;
+import org.smartregister.addo.interactor.FamilyFocusedMemberProfileInteractor;
+import org.smartregister.addo.interactor.FamilyOtherMemberProfileInteractor;
 import org.smartregister.addo.interactor.FamilyProfileInteractor;
 import org.smartregister.addo.model.FamilyProfileModel;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -15,6 +22,7 @@ import org.smartregister.family.util.Utils;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -23,7 +31,7 @@ import static org.smartregister.util.Utils.getName;
 public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberProfileActivityPresenter
         implements FamilyOtherMemberProfileExtendedContract.Presenter,
         FamilyProfileContract.InteractorCallBack,
-        FamilyProfileExtendedContract.PresenterCallBack {
+        FamilyProfileExtendedContract.PresenterCallBack, FamilyOtherMemberProfileExtendedContract.InteractorCallBack {
 
     private static final String TAG = FamilyOtherMemberActivityPresenter.class.getCanonicalName();
 
@@ -33,6 +41,7 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
 
     private FamilyProfileContract.Interactor profileInteractor;
     private FamilyProfileContract.Model profileModel;
+    private FamilyOtherMemberProfileInteractor interactor;
 
     public FamilyOtherMemberActivityPresenter(FamilyOtherMemberProfileExtendedContract.View view, FamilyOtherMemberContract.Model model,
                                               String viewConfigurationIdentifier, String familyBaseEntityId, String baseEntityId,
@@ -44,6 +53,7 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
 
         this.profileInteractor = new FamilyProfileInteractor();
         this.profileModel = new FamilyProfileModel(familyName);
+        this.interactor = new FamilyOtherMemberProfileInteractor(familyBaseEntityId);
 
         verifyHasPhone();
         //initializeServiceStatus();
@@ -57,19 +67,11 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
         return familyName;
     }
 
-    public void updateFamilyMember(String jsonString) {
-
-        try {
-            getView().showProgressDialog(org.smartregister.family.R.string.saving_dialog_title);
-
-            FamilyEventClient familyEventClient = profileModel.processUpdateMemberRegistration(jsonString, familyBaseEntityId);
-            if (familyEventClient == null) {
-                return;
-            }
-            profileInteractor.saveRegistration(familyEventClient, jsonString, true, this);
-        } catch (Exception e) {
-            getView().hideProgressDialog();
-            Timber.e(e);
+    @Override
+    public void submitVisit(Map<String, String> formForSubmission) {
+        if (viewReference.get() != null) {
+            viewReference.get().showProgressDialog(R.string.submit);
+            interactor.submitVisit(false, baseEntityId, formForSubmission, this);
         }
     }
 
@@ -83,6 +85,17 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
             int age = Utils.getAgeFromDate(Utils.getValue(client.getColumnmaps(), DBConstants.KEY.DOB, true));
 
             this.getView().setProfileName(MessageFormat.format("{0}, {1}", getName(getName(firstName, middleName), lastName), age));
+        }
+    }
+
+    @Override
+    public void onSubmitted(boolean successful) {
+        if (successful) {
+            viewReference.get().hideProgressDialog();
+            Toast.makeText((Activity) this.getView(), "Submitted ...", Toast.LENGTH_SHORT).show();
+        } else {
+            viewReference.get().hideProgressDialog();
+            Toast.makeText((Activity) this.getView(), "Not submitted ...", Toast.LENGTH_SHORT).show();
         }
     }
 

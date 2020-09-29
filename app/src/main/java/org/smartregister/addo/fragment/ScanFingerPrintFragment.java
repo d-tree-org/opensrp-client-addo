@@ -26,6 +26,7 @@ import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.smartregister.addo.BuildConfig.SIMPRINT_MODULE_ID;
@@ -80,6 +81,9 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
         TextView scanFp = view.findViewById(R.id.scan_fp_txt);
         scanFp.setOnClickListener(registerActionHandler);
 
+        TextView manualSearch = view.findViewById(R.id.manual_search);
+        manualSearch.setOnClickListener(registerActionHandler);
+
     }
 
 
@@ -130,6 +134,8 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
         } else if (view.getId() == R.id.scan_fp_txt) {
             Toast.makeText(getActivity(), "We start scanning now", Toast.LENGTH_SHORT).show();
             startScannig();
+        } else if (view.getId() == R.id.manual_search) {
+            ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(1);
         }
     }
 

@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.FamilyOtherMemberProfileExtendedContract;
@@ -32,6 +33,7 @@ import org.smartregister.addo.listeners.FloatingMenuListener;
 import org.smartregister.addo.listeners.OnClickFloatingMenu;
 import org.smartregister.addo.presenter.FamilyOtherMemberActivityPresenter;
 import org.smartregister.addo.util.CoreConstants;
+import org.smartregister.addo.util.CoreJsonFormUtils;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.activity.BaseFamilyOtherMemberProfileActivity;
@@ -45,6 +47,9 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.util.FormUtils;
 import org.smartregister.view.fragment.BaseRegisterFragment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -116,7 +121,11 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         textViewDangersignScreening = findViewById(R.id.textview_ds_screening);
 
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        if(presenter().getFamilyName() == null) {
+            toolbarTitle.setText(getString(R.string.search_results_return));
+        } else {
+            toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
+        }
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorHeight(0);
@@ -205,31 +214,24 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case org.smartregister.addo.util.Constants.ProfileActivityResults.CHANGE_COMPLETED:
-                if (resultCode == Activity.RESULT_OK) {
-                    Intent intent = new Intent(FamilyOtherMemberProfileActivity.this, FamilyProfileActivity.class);
-                    intent.putExtras(getIntent().getExtras());
-                    startActivity(intent);
-                    finish();
-                }
-                break;
-            case JsonFormUtils.REQUEST_CODE_GET_JSON:
-                if (resultCode == RESULT_OK) {
-                    try {
-                        String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-                        JSONObject form = new JSONObject(jsonString);
-                        if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyMemberRegister.updateEventType)) {
-                            presenter().updateFamilyMember(jsonString);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-            default:
-                break;
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == org.smartregister.addo.util.JsonFormUtils.REQUEST_CODE_GET_JSON) {
+            try {
+                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+                JSONObject form = new JSONObject(jsonString);
+
+                Map<String, String> formSubmission = new HashMap<>();
+                formSubmission.put(form.optString(CoreJsonFormUtils.ENCOUNTER_TYPE), jsonString);
+                submitForm(formSubmission);
+
+            } catch (JSONException e) {
+                Timber.e(e);
+            }
         }
+    }
+
+    public void submitForm(Map<String, String> formForSubmission) {
+        presenter().submitVisit(formForSubmission);
     }
 
     @Override

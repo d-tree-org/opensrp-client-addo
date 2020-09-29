@@ -17,25 +17,87 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical">
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/search_name"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:id="@+id/search_name_ll"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_name_hint"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:paddingStart="@dimen/advanced_search_label_padding"
-                android:paddingLeft="@dimen/advanced_search_label_padding"
-                android:textColor="@color/client_list_grey"
-                android:textColorHint="@color/light_grey"
-                android:textSize="@dimen/advanced_search_text_size"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="@string/search_name"
-                app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
-                app:met_primaryColor="@color/addo_primary"
-                app:met_singleLineEllipsis="true" />
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/search_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_name_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/advanced_search_label_padding"
+                    android:paddingLeft="@dimen/advanced_search_label_padding"
+                    android:textColor="@color/client_list_grey"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="@dimen/advanced_search_text_size"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="@string/search_name"
+                    app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
+                    app:met_primaryColor="@color/addo_primary"
+                    app:met_singleLineEllipsis="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/first_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/first_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/advanced_search_label_padding"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="@dimen/advanced_search_text_size"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="@string/first_name"
+                    app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
+                    app:met_primaryColor="@color/addo_primary"
+                    app:met_singleLineEllipsis="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/last_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/last_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/advanced_search_label_padding"
+                    android:paddingLeft="@dimen/advanced_search_label_padding"
+                    android:textColor="@color/client_list_grey"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="@dimen/advanced_search_text_size"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="@string/last_name"
+                    app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
+                    app:met_primaryColor="@color/addo_primary"
+                    app:met_singleLineEllipsis="true" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
