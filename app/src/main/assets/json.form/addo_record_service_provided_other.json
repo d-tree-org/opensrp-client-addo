@@ -97,8 +97,19 @@
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_other",
+            "text": "{{other_service}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
           }
-        ]
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{service_provided_other_err}}"
+        }
       }
     ]
   }
