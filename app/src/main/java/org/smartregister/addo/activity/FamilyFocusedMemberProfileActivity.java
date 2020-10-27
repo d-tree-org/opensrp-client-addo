@@ -505,7 +505,12 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
         try {
-            JSONObject form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
+            JSONObject form = new JSONObject();
+            if (isAdolescentClient()) {
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAdolescent());
+            } else {
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
+            }
             JSONObject stepOne = form.getJSONObject(JsonFormUtils.STEP1);
             JSONArray fields = stepOne.getJSONArray(JsonFormUtils.FIELDS);
             updateFormField(fields, "danger_signs_captured", dangerSigns);
