@@ -218,7 +218,7 @@
             }
           },
           {
-            "key": "female_condom",
+            "key": "fcondom",
             "text": "{{step2_female_condom}}",
             "property": {
               "presumed-id": "er",
@@ -226,7 +226,7 @@
             }
           },
           {
-            "key": "male_condom",
+            "key": "mcondom",
             "text": "{{step2_male_condom}}",
             "property": {
               "presumed-id": "er",
