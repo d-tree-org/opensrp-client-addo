@@ -416,6 +416,7 @@
   },
   "step3": {
     "title": "{{step3_title}}",
+    "hide-save-button": true,
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -610,6 +611,33 @@
                 ]
               }
             ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "Next",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "pnc_addo_danger_signs_relevance.yml"
+            }
           }
         }
       }
