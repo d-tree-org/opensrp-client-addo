@@ -174,7 +174,7 @@
         "searchHint": "{{step2_medicine_dispensed_search_hint}}",
         "v_required": {
           "value": "true",
-          "err": "Select at least one"
+          "err": "{{step2_medicine_dispensed_err}}"
         },
         "options": [
           {
