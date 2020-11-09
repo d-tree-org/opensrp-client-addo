@@ -92,10 +92,10 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
     public void onSubmitted(boolean successful) {
         if (successful) {
             viewReference.get().hideProgressDialog();
-            Toast.makeText((Activity) this.getView(), "Submitted ...", Toast.LENGTH_SHORT).show();
+            Toast.makeText((Activity) this.getView(), R.string.submitted_for_onsubmit, Toast.LENGTH_SHORT).show();
         } else {
             viewReference.get().hideProgressDialog();
-            Toast.makeText((Activity) this.getView(), "Not submitted ...", Toast.LENGTH_SHORT).show();
+            Toast.makeText((Activity) this.getView(), R.string.not_submitted_for_onsubmit, Toast.LENGTH_SHORT).show();
         }
     }
 
