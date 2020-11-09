@@ -39,6 +39,8 @@
     <!-- Non focused client-->
     <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>
     <string name="non_focused_service_provided">Rekodi huduma zilizotolewa</string>
+    <string name="submitted_for_onsubmit">Imetumwa ...</string>
+    <string name="not_submitted_for_onsubmit">Haijatumwa ...</string>
 
     <!--Dispense medications-->
     <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>

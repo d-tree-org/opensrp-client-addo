@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "690110851268",
+    "firebase_url": "https://afyatek-addo.firebaseio.com",
+    "project_id": "afyatek-addo",
+    "storage_bucket": "afyatek-addo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690110851268:android:3507d828fb50619b58c191",
+        "android_client_info": {
+          "package_name": "org.smartregister.addo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690110851268-i4s0c5mjp8ri3kk87q2pridmutaujpr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjQy5qlusn4G043jBMOs00LyITU2M6I3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690110851268-i4s0c5mjp8ri3kk87q2pridmutaujpr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

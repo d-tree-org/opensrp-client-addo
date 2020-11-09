@@ -66,10 +66,10 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_linkage_recommendation
+name: step3_linkage_recommendation
 description: Linkage to another addo
 priority: 1
-condition: "(step1_referral_status != 'referred' && step1_dispense_options.contains('no'))"
+condition: "(step1_referral_status != 'referred' && (step1_dispense_options.contains('no') || step3_all_meds_dispensed.contains('no')))"
 actions:
   - "isRelevant = true"
 

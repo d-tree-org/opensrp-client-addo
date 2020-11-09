@@ -9,6 +9,7 @@ import com.vijay.jsonwizard.interactors.JsonFormInteractor;
 import com.vijay.jsonwizard.presenters.JsonWizardFormFragmentPresenter;
 import com.vijay.jsonwizard.utils.FormUtils;
 
+import org.smartregister.addo.R;
 import org.smartregister.addo.fragment.ReferralJsonWizardFormFragment;
 
 public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragmentPresenter {
@@ -66,5 +67,28 @@ public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragm
             getView().transactThis(next);
         }
         return false;
+    }
+
+    @Override
+    public void setUpToolBar() {
+        String mStepName = getView().getArguments().getString("stepName");
+        getView().setActionBarTitle(mStepDetails.optString(JsonFormConstants.STEP_TITLE));
+        getView().setToolbarTitleColor(R.color.white);
+        if (mStepDetails.has("bottom_navigation")) {
+            getView().updateVisibilityOfNextAndSave(false, false);
+            return;
+        }
+        if (!mStepName.equals(JsonFormConstants.FIRST_STEP_NAME)) {
+            getView().setUpBackButton();
+        }
+
+        if (mStepDetails.has("next")) {
+            getView().updateVisibilityOfNextAndSave(true, false);
+        } else if (mStepDetails.has("hide-save-button")) {
+            getView().updateVisibilityOfNextAndSave(false, false);
+            getView().previousAndNextButtonVisibility(true, false);
+        } else {
+            getView().updateVisibilityOfNextAndSave(false, true);
+        }
     }
 }
