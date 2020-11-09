@@ -42,6 +42,15 @@ actions:
         if (selectedItem.contains('zinc_sulphate_tablets')) {
             selected += '\u2022 Zinc Sulphate tablets <br>';
         }
+        if (selectedItem.contains('fcondom')) {
+            selected += '\u2022 {{step2_female_condom}} <br>';
+        }
+        if (selectedItem.contains('mcondom')) {
+            selected += '\u2022 {{step2_male_condom}} <br>';
+        }
+        if (selectedItem.contains('combined_oral_contraceptive')) {
+            selected += '\u2022 {{step2_combined_oral_contraceptives}} <br>';
+        }
         return selected;
   }"
   - "calculation = getSelectedDS(step2_medicine_dispensed)"
