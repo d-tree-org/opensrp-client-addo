@@ -714,7 +714,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "button",
-        "hint": "Next",
+        "hint": "{{step3_save}}",
         "btn_bg_color": "#3596c0",
         "action": {
           "behaviour": "save"
