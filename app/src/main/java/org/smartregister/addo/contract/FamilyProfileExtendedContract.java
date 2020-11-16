@@ -28,7 +28,6 @@ public interface FamilyProfileExtendedContract {
     interface View extends FamilyProfileContract.View {
         void startChildForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception;
 
-        void updateHasPhone(boolean hasPhone);
     }
 
     interface PresenterCallBack {

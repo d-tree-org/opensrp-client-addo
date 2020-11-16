@@ -22,6 +22,7 @@ import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.PullEventClientRecordUtil;
+import org.smartregister.clientandeventmodel.Gender;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.event.Listener;
@@ -58,7 +59,7 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         String fullName = String.format("%s %s %s", isNull(member.getFirstName()), isNull(member.getMiddleName()), isNull(member.getLastName()));
         tvName.setText(fullName);
 
-        tvGender.setText(member.getGender());
+        tvGender.setText(getTranslatedGender(member.getGender()));
         new ImageRenderHelper(getContext()).refreshProfileImage("8e3738ba-c510-44ba-92d2-49e3938d2415", profile,
                 Utils.getMemberProfileImageResourceIDentifier(""));
 
@@ -124,6 +125,10 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         } else {
             return string.trim();
         }
+    }
+
+    private String getTranslatedGender(String gender) {
+        return Gender.FEMALE.toString().equalsIgnoreCase(gender) ? getContext().getResources().getString(R.string.female) : getContext().getResources().getString(R.string.male);
     }
 
     public void goToProfileActivity(View view, Bundle fragmentArguments) {
