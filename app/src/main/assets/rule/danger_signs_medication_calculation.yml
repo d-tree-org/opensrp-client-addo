@@ -12,7 +12,7 @@ description: Get the danger signs that were selected
 priority: 1
 condition: "true"
 actions:
-  - "def getSelectedDS(selectedItem) {
+  - "def getSelectedDS(selectedItem, other_medicine) {
         import java.lang.*;
         String selected = '';
         if (selectedItem.contains('amoxicillin')) {
@@ -51,9 +51,12 @@ actions:
         if (selectedItem.contains('combined_oral_contraceptive')) {
             selected += '\u2022 {{step2_combined_oral_contraceptives}} <br>';
         }
+        if (selectedItem.contains('other')) {
+            selected += '\u2022 ' + other_medicine + '<br>';
+        }
         return selected;
   }"
-  - "calculation = getSelectedDS(step2_medicine_dispensed)"
+  - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
 
 ---
 name: step3_medication_dispensed_toaster
