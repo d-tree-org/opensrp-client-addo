@@ -33,6 +33,7 @@ import org.smartregister.helper.ImageRenderHelper;
 import java.util.List;
 
 import static org.smartregister.addo.util.JsonFormUtils.getCommonRepository;
+import static org.smartregister.addo.util.Utils.getTranslatedGender;
 
 public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
     private boolean isLocal = false;
@@ -125,10 +126,6 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         } else {
             return string.trim();
         }
-    }
-
-    private String getTranslatedGender(String gender) {
-        return Gender.FEMALE.toString().equalsIgnoreCase(gender) ? getContext().getResources().getString(R.string.female) : getContext().getResources().getString(R.string.male);
     }
 
     public void goToProfileActivity(View view, Bundle fragmentArguments) {
