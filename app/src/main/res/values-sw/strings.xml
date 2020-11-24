@@ -52,6 +52,13 @@
     <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
     <string name="environment_name_test">mfumo jaribio</string>
     <string name="environment_name_production">production</string>
+
+    <!-- ADDO Danger Sign Screening and Medication Dispensing strings -->
+    <string name="danger_sign_title_child">Dalili za Hatari Mtoto</string>
+    <string name="danger_sign_title_anc">Dalili za Hatari Mjamzito </string>
+    <string name="danger_sign_title_pnc">Dalili za Hatari Mama</string>
+    <string name="danger_signs_title_adolescent">Chunguza kijana Balehe</string>
+    <string name="dispense_medication_title">Toa Dawa</string>
     <string name="dispense_commodities">DLDM BIDHAA</string>
 
 </resources>

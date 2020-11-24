@@ -91,6 +91,7 @@
     <string name="dispense_medication_title">Dispense Medication</string>
     <string name="default_dispense_message">Manage as needed</string>
     <string name="dispense_commodities">ADDO COMMODITIES DISPENSE</string>
+    <string name="danger_signs_title_adolescent">Adolescent Screening</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
