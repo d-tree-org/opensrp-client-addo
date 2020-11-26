@@ -12,8 +12,6 @@ import android.preference.PreferenceManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.evernote.android.job.JobManager;
 
 import org.smartregister.AllConstants;
@@ -59,8 +57,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -92,8 +90,8 @@ public class AddoApplication extends DrishtiApplication {
         context.updateCommonFtsObject(createCommonFtsObject());
 
 
-        Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
-
+        //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);
