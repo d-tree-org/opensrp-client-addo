@@ -41,6 +41,8 @@
     <string name="non_focused_service_provided">Rekodi huduma zilizotolewa</string>
     <string name="submitted_for_onsubmit">Imetumwa ...</string>
     <string name="not_submitted_for_onsubmit">Haijatumwa ...</string>
+    <string name="family_profile_title_with_firstname">Familia ya %1$s %2$s</string>
+    <string name="family_profile_title">Familia ya %1$s</string>
 
     <!--Dispense medications-->
     <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>

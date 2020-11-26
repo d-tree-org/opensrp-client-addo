@@ -57,8 +57,6 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
     private String primaryCaregiver;
     private String familyName;
 
-    private FamilyFloatingMenu familyFloatingMenu;
-
     @Override
     protected void onCreation() {
         super.onCreation();
@@ -97,17 +95,6 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         CircleImageView profileView = findViewById(R.id.imageview_profile);
         profileView.setBorderWidth(2);
 
-        // add floating menu
-        familyFloatingMenu = new FamilyFloatingMenu(this);
-        LinearLayout.LayoutParams linearLayoutParams =
-                new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
-        familyFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
-        addContentView(familyFloatingMenu, linearLayoutParams);
-        familyFloatingMenu.setClickListener(
-                FloatingMenuListener.getInstance(this, presenter().familyBaseEntityId())
-        );
     }
 
     @Override
@@ -191,13 +178,6 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
 
     @Override
     public void startChildForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
-    }
-
-    @Override
-    public void updateHasPhone(boolean hasPhone) {
-        if (familyFloatingMenu != null) {
-            familyFloatingMenu.reDraw(hasPhone);
-        }
     }
 
     @Override

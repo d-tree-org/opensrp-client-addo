@@ -90,7 +90,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
         getView().setProfileName(MessageFormat.format("{0}, {1}", getName(getName(firstName, middleName),lastName), age));
 
         String gender = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GENDER, true);
-        getView().setProfileDetailOne(gender);
+        getView().setProfileDetailOne(org.smartregister.addo.util.Utils.getTranslatedGender(gender));
 
         getView().setProfileDetailTwo(villageTown);
 

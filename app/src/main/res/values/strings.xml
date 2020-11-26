@@ -442,6 +442,8 @@
 
     <string name="submitted_for_onsubmit">Submitted ...</string>
     <string name="not_submitted_for_onsubmit">Not submitted ...</string>
+    <string name="family_profile_title_with_firstname">%1$s %2$s Family</string>
+    <string name="family_profile_title">%1$s Family</string>
 
     <string name="environment_name_test">test</string>
     <string name="environment_name_production">production</string>
