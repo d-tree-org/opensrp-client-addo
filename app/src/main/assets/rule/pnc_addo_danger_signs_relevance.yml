@@ -7,3 +7,11 @@ condition: "(step2_danger_signs_present_mama.isEmpty() && step1_mother_present.c
             (step1_chw_link.isEmpty() || step1_mother_present.isEmpty())"
 actions:
   - "isRelevant = true"
+
+---
+name: step3_save
+description: No danger signs save normal
+priority: 1
+condition: "step2_danger_signs_present_mama.contains('chk_none') || step1_mother_present.contains('chk_mother_present_no')"
+actions:
+  - "isRelevant = true"

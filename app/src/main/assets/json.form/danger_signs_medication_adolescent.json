@@ -2,9 +2,9 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
-  "properties_file_name": "danger_signs_medication",
+  "properties_file_name": "danger_signs_medication_adolescent",
   "count": "3",
-  "encounter_type": "ADDO Visit - Dispense Medicine",
+  "encounter_type": "ADDO Visit - Dispense Medicine Adolescent",
   "entity_id": "",
   "metadata": {
     "start": {
@@ -218,6 +218,30 @@
             }
           },
           {
+            "key": "fcondom",
+            "text": "{{step2_female_condom}}",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "mcondom",
+            "text": "{{step2_male_condom}}",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "combined_oral_contraceptive",
+            "text": "{{step2_combined_oral_contraceptives}}",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
             "key": "oral_rehydration_salts",
             "text": "Oral Rehydration Salts",
             "property": {
@@ -296,6 +320,47 @@
           "rules-engine": {
             "ex-rules": {
               "rules-file": "danger_signs_medication_calculation.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "linkage_recommendation",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "{{step2_linkage_recommendation_label}}",
+        "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{step2_linkage_recommendation_err}}"
+        },
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "{{step2_linkage_recommendation_yes_text}}",
+            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "{{step2_linkage_recommendation_no_text}}",
+            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
             }
           }
         }
@@ -423,47 +488,6 @@
             "openmrs_entity_id": "",
             "text": "{{step3_all_meds_dispensed_no_text}}",
             "extra_info": "{{step3_all_meds_dispensed_no_extra_info}}"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "linkage_recommendation",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step2_linkage_recommendation_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{step2_linkage_recommendation_err}}"
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_yes_text}}",
-            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_no_text}}",
-            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
           }
         ],
         "relevance": {

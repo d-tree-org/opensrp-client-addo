@@ -91,6 +91,7 @@
     <string name="dispense_medication_title">Dispense Medication</string>
     <string name="default_dispense_message">Manage as needed</string>
     <string name="dispense_commodities">ADDO COMMODITIES DISPENSE</string>
+    <string name="danger_signs_title_adolescent">Adolescent Screening</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -438,6 +439,9 @@
     <string name="non_focused_service_provided">Record service provided</string>
     <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
     <string name="attend_prescription_form_title">ATTEND PRESCRIPTIONS</string>
+
+    <string name="submitted_for_onsubmit">Submitted ...</string>
+    <string name="not_submitted_for_onsubmit">Not submitted ...</string>
 
     <string name="environment_name_test">test</string>
     <string name="environment_name_production">production</string>

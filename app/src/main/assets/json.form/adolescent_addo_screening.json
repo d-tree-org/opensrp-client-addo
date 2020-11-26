@@ -288,6 +288,7 @@
   },
   "step3": {
     "title": "{{step3_title}}",
+    "hide-save-button": true,
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -346,12 +347,16 @@
         "options": [
           {
             "key": "addo_referral_option_hf",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
             "text": "{{step3_addo_referral_option_hf}}",
             "text_size": "18px",
             "value": "false"
           },
           {
             "key": "addo_referral_option_manage",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
             "text": "{{step3_addo_referral_option_manage}}",
             "text_size": "18px",
             "value": "false"
@@ -465,6 +470,33 @@
                 ]
               }
             ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save}}",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adolescent_addo_screening_relevance.yml"
+            }
           }
         }
       }
