@@ -30,8 +30,8 @@ android {
         applicationId "org.smartregister.addo"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 6
-        versionName "0.3.0"
+        versionCode 8
+        versionName "0.3.1"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -102,7 +102,7 @@ android {
             buildConfigField "boolean", 'SUPPORT_QR', 'true'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
-            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
@@ -255,7 +255,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
     }
 
-    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.1-RESEARCH-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.6-RESEARCH-SNAPSHOT') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-family'
