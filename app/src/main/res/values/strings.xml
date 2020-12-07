@@ -443,4 +443,40 @@
     <string name="environment_name_production">production</string>
     <string name="switch_environment_title">Alert! Switching Environment</string>
     <string name="switch_environment_message">You are about to switch to %s environment. This procedure will wipe out all of your device data, you need to make sure everything is synced before you proceed. Do you want to switch the environment?</string>
+
+    <string name="monthly_activity">Monthly Activity</string>
+
+    <!--  Monthly Activities Indicators  -->
+    <string name="current_month"> Current Month </string>
+
+    <string name="last_month"> Last Month</string>
+
+    <string name="target_not_reached">Target Not Reached</string>
+
+    <string name="target_reached">Target Reached</string>
+
+    <string name="monthly_target"> Monthly Target Reached and Remained</string>
+
+    <string name="visits_and_registrations">Visits and Registrations</string>
+
+    <string name="registrations_indicator"> Registrations </string>
+
+    <string name="visits_indicator"> Visits </string>
+
+    <string name="child_hf_referral_text">Child - HF Referral</string>
+
+    <string name="child_addo_linkage_text">Child - ADDO Linkage</string>
+
+    <string name="anc_hf_referral_text">ANC - HF Referral</string>
+
+    <string name="anc_addo_linkage_text">ANC - ADDO Linkage</string>
+
+    <string name="adolescent_hf_referral_text">Adolescent - HF Referral</string>
+
+    <string name="adolescent_addo_linkage_text">Adolescent - ADDO Linkage</string>
+
+    <string name="pnc_hf_referral_text">PNC - HF Referral</string>
+
+    <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
+
 </resources>

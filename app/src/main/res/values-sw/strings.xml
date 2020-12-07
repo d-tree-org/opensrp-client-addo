@@ -52,4 +52,39 @@
     <string name="environment_name_production">production</string>
     <string name="dispense_commodities">DLDM BIDHAA</string>
 
+    <string name="monthly_activity">Malengo ya mwezi</string>
+
+    <!--  Monthly Activities Indicators  -->
+    <string name="current_month"> Mwezi huu </string>
+
+    <string name="last_month"> Mwezi uliopita </string>
+
+    <string name="target_not_reached">Target Not Reached</string>
+
+    <string name="target_reached">Target Reached</string>
+
+    <string name="monthly_target"> Monthly Target Reached and Remained</string>
+
+    <string name="visits_and_registrations">Visits and Registrations</string>
+
+    <string name="registrations_indicator"> Masajili </string>
+
+    <string name="visits_indicator"> Matembeleo </string>
+
+    <string name="child_hf_referral_text">Mtoto - Rufaa kwenda kituoni</string>
+
+    <string name="child_addo_linkage_text">Mtoto - Ushauri kwenda DLDM</string>
+
+    <string name="anc_hf_referral_text">Mjamzito - Rufaa kwenda kituoni</string>
+
+    <string name="anc_addo_linkage_text">Mjamzito - Ushauri kwenda DLDM</string>
+
+    <string name="adolescent_hf_referral_text">Kijana balehe - Rufaa kwenda kituoni</string>
+
+    <string name="adolescent_addo_linkage_text">Kijana balehe - Ushauri kwenda DLDM</string>
+
+    <string name="pnc_hf_referral_text">Aliyejifungua - Rufaa kwenda kituoni</string>
+
+    <string name="pnc_addo_linkage_text">Aliyejifungua - Ushauri kwenda DLDM</string>
+
 </resources>
