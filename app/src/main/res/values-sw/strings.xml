@@ -24,6 +24,13 @@
     <string name="search_name_hint">Andika jina la kwanza/mwisho</string>
     <string name="search_name">Andika jina la kwanza/mwisho</string>
     <string name="search_results">Matokeo ya utafutaji</string>
+    <string name="global_search">Utafutaji wa jumla</string>
+    <string name="search_results_return">Rudi kwenye matokeo ya utafutaji</string>
+
+    <string name="first_name_hint">Jina la kwanza</string>
+    <string name="first_name">Jina la kwanza</string>
+    <string name="last_name">Jina la pili</string>
+    <string name="last_name_hint">Jina la pili</string>
 
     <!-- Family Profile -->
     <string name="return_to_addo_home">Rudi mwanzo</string>
