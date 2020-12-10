@@ -129,7 +129,7 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                 "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
-                "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-2 months') " +
+                "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months') " +
                 "and visit_type in ('ANC ADDO Visit', 'Child ADDO Visit', 'PNC ADDO Visit', 'Adolescent ADDO Visit', 'Other Member ADDO Visit' ) " +
                 "and visit_json like \"%"+anmUser+"%\" "+
                 "group by base_entity_id, date_visited" +
