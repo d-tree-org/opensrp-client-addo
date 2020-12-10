@@ -19,8 +19,9 @@ public class NavigationModelFlv implements NavigationModel.Flavor {
 
             NavigationOption opt1 = new NavigationOption(R.mipmap.ic_home, 0, R.string.menu_addo_home, Constants.DrawerMenu.ALL_FAMILIES, 0);
             NavigationOption opt2 = new NavigationOption(R.drawable.ic_report, 0, R.string.menu_addo_report, Constants.DrawerMenu.CHILD_CLIENTS, 0);
+            NavigationOption opt3 = new NavigationOption(R.mipmap.ic_chart, R.mipmap.ic_chart_active, R.string.monthly_activity, Constants.DrawerMenu.MONTHLY_ACTIVITY, 0);
 
-            navigationOptions.addAll(asList(opt1, opt2));
+            navigationOptions.addAll(asList(opt1, opt2, opt3));
         }
 
         return navigationOptions;
