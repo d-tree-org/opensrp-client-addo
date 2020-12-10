@@ -123,7 +123,8 @@
         <service android:name=".sync.AddoSyncTaskIntentService" />
         <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
-        <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService" />
+        <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService"
+            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"
