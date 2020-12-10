@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.smartregister.addo.R;
 import org.smartregister.addo.activity.AddoHomeActivity;
+import org.smartregister.addo.activity.MonthlyActivitiesRegisterActivity;
 import org.smartregister.addo.adapter.NavigationAdapter;
 import org.smartregister.addo.util.Constants;
 
@@ -41,6 +42,9 @@ public class NavigationListener implements View.OnClickListener {
                         break;
                     case Constants.DrawerMenu.CHILD_CLIENTS:
                         Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.CHILD_CLIENTS, Toast.LENGTH_SHORT).show();
+                        break;
+                    case Constants.DrawerMenu.MONTHLY_ACTIVITY:
+                        startRegisterActivity(MonthlyActivitiesRegisterActivity.class);
                         break;
                     default:
                         break;
