@@ -1,30 +1,10 @@
 indicators:
-  - key: "S_IND_004"
-    description: "Visits conducted in the current month"
+  - key: "INDICATOR_LAST_TOTAL"
+    description: "Total Last Month Visits"
     indicatorQuery: "
       select count (*)
       from ( select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited
-        from visits
-          where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')
-          and visit_type in ('ANC Home Visit', 'PNC Home Visit')
-          group by base_entity_id, date_visited )"
-
-  - key: "S_IND_003"
-    description: "Visits conducted in the last month"
-    indicatorQuery: "
-      select count (*)
-      from ( select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited
-        from visits
-          where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')
-          and visit_type in ('ANC Home Visit', 'PNC Home Visit')
-          group by base_entity_id, date_visited )"
-
-  - key: "S_IND_001"
-    description: "Registration in the last Month"
-    indicatorQuery: " select count(distinct baseEntityId) from event where eventType in ('Child Registration',
-                      'Adolescent Registration', 'Family Member Registration') and date(eventDate) < date('now', 'start of month') and date(eventDate) >= date('now', 'start of month', '-1 months') "
-
-  - key: "S_IND_002"
-    description: "Registration in the current month"
-    indicatorQuery: " select count(distinct baseEntityId) from event where eventType in ('Child Registration',
-                      'Adolescent Registration', 'Family Member Registration') and date(eventDate) >= date('now', 'start of month') "
+      from visits
+      where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')
+      and visit_type in ('Other Member ADDO Visit', 'Adolescent ADDO Visit', 'ANC ADDO Visit', 'PNC ADDO Visit', 'Child ADDO Visit' )
+      group by base_entity_id, date_visited )"
