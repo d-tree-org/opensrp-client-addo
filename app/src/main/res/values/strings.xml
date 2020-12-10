@@ -447,21 +447,19 @@
     <string name="monthly_activity">Monthly Activity</string>
 
     <!--  Monthly Activities Indicators  -->
-    <string name="current_month"> Current Month </string>
+    <string name="current_month"> Current Month Visits </string>
 
-    <string name="last_month"> Last Month</string>
+    <string name="last_month"> Last Month Visits</string>
 
-    <string name="target_not_reached">Target Not Reached</string>
+    <string name="child_encounters"> Children </string>
+    <string name="adolescent_encounters"> Adolescent </string>
+    <string name="anc_encounters"> ANC </string>
+    <string name="pnc_encounters"> PNC </string>
+    <string name="other_encounters"> OTHERS </string>
+    <string name="total_encounters"> Total Visits </string>
+    <string name="referred_encounters"> Referred Visits </string>
 
-    <string name="target_reached">Target Reached</string>
 
-    <string name="monthly_target"> Monthly Target Reached and Remained</string>
-
-    <string name="visits_and_registrations">Visits and Registrations</string>
-
-    <string name="registrations_indicator"> Registrations </string>
-
-    <string name="visits_indicator"> Visits </string>
 
     <string name="child_hf_referral_text">Child - HF Referral</string>
 
