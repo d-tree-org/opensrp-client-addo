@@ -24,6 +24,13 @@
     <string name="search_name_hint">Andika jina la kwanza/mwisho</string>
     <string name="search_name">Andika jina la kwanza/mwisho</string>
     <string name="search_results">Matokeo ya utafutaji</string>
+    <string name="global_search">Utafutaji wa jumla</string>
+    <string name="search_results_return">Rudi kwenye matokeo ya utafutaji</string>
+
+    <string name="first_name_hint">Jina la kwanza</string>
+    <string name="first_name">Jina la kwanza</string>
+    <string name="last_name">Jina la pili</string>
+    <string name="last_name_hint">Jina la pili</string>
 
     <!-- Family Profile -->
     <string name="return_to_addo_home">Rudi mwanzo</string>
@@ -39,6 +46,10 @@
     <!-- Non focused client-->
     <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>
     <string name="non_focused_service_provided">Rekodi huduma zilizotolewa</string>
+    <string name="submitted_for_onsubmit">Imetumwa ...</string>
+    <string name="not_submitted_for_onsubmit">Haijatumwa ...</string>
+    <string name="family_profile_title_with_firstname">Familia ya %1$s %2$s</string>
+    <string name="family_profile_title">Familia ya %1$s</string>
 
     <!--Dispense medications-->
     <string name="default_dispense_message">Mpatie dawa kulingana na mahitaji.</string>
@@ -50,6 +61,13 @@
     <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
     <string name="environment_name_test">mfumo jaribio</string>
     <string name="environment_name_production">production</string>
+
+    <!-- ADDO Danger Sign Screening and Medication Dispensing strings -->
+    <string name="danger_sign_title_child">Dalili za Hatari Mtoto</string>
+    <string name="danger_sign_title_anc">Dalili za Hatari Mjamzito </string>
+    <string name="danger_sign_title_pnc">Dalili za Hatari Mama</string>
+    <string name="danger_signs_title_adolescent">Chunguza kijana Balehe</string>
+    <string name="dispense_medication_title">Toa Dawa</string>
     <string name="dispense_commodities">DLDM BIDHAA</string>
 
     <string name="monthly_activity">Malengo ya mwezi</string>

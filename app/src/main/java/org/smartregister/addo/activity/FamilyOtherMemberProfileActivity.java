@@ -68,8 +68,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     protected MemberObject memberObject;
     private FormUtils formUtils;
 
-    private OnClickFloatingMenu onClickFloatingMenu;
-
 
     @Override
     protected void onCreation() {
@@ -132,17 +130,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
 
         findViewById(R.id.viewpager).setVisibility(View.GONE);
 
-        // add floating menu
-        familyFloatingMenu = new FamilyMemberFloatingMenu(this);
-        LinearLayout.LayoutParams linearLayoutParams =
-                new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
-        familyFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
-        addContentView(familyFloatingMenu, linearLayoutParams);
-
-        familyFloatingMenu.setClickListener(onClickFloatingMenu);
-
         textViewDangersignScreening.setOnClickListener(this);
 
     }
@@ -152,6 +139,10 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         return this;
     }
 
+    @Override
+    public void setProfileDetailOne(String detailOne) {
+        super.setProfileDetailOne(org.smartregister.addo.util.Utils.getTranslatedGender(detailOne));
+    }
 
     @Override
     protected ViewPager setupViewPager(ViewPager viewPager) {

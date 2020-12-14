@@ -523,6 +523,7 @@
   },
   "step3": {
     "title": "{{step3_title}}",
+    "hide-save-button": true,
     "fields": [
       {
         "key": "danger_signs_present_toaster",
@@ -644,7 +645,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "button",
-        "hint": "Save and Refer to Health Facility",
+        "hint": "{{step3_save_and_refer_button_text}}",
         "btn_bg_color": "#FF840952",
         "action": {
           "behaviour": "refer"
@@ -663,7 +664,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The child does not have any illness please proceed as needed by dispensing over the counter medicine or commodity",
+        "text": "{{step3_no_illness_present_toaster_text}}",
         "text_color": "#101010",
         "toaster_type": "positive",
         "relevance": {
@@ -684,7 +685,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "The child must be present in order to proceed with screening.",
+        "text": "{{step3_child_not_present_toaster_text}}",
         "text_color": "#CF0800",
         "toaster_type": "problem",
         "relevance": {
@@ -696,6 +697,33 @@
                 ]
               }
             ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save}}",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_addo_danger_signs_relevance.yml"
+            }
           }
         }
       }

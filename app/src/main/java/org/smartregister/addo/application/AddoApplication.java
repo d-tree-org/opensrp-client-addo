@@ -65,6 +65,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import timber.log.Timber;
 
 /**
@@ -95,10 +98,14 @@ public class AddoApplication extends DrishtiApplication {
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
 
-        //issyzac appcenter -> d247b350-e934-46e9-abae-abbb8ed47c33
-        //Dtree appcenter -> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
+        //issyzac appcenter key -> d247b350-e934-46e9-abae-abbb8ed47c33
+        //Dtree appcenter key-> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
         AppCenter.start(this, "00e04fdd-ab2d-47ee-b7a3-38986474a7f6",
                 Analytics.class, Crashes.class);
+
+        //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
+        FirebaseApp.initializeApp(getApplicationContext());
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);

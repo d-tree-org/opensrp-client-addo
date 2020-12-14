@@ -91,6 +91,7 @@
     <string name="dispense_medication_title">Dispense Medication</string>
     <string name="default_dispense_message">Manage as needed</string>
     <string name="dispense_commodities">ADDO COMMODITIES DISPENSE</string>
+    <string name="danger_signs_title_adolescent">Adolescent Screening</string>
 
     <string name="allow_calls_denied">Kindly allow calls to be made here</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -399,11 +400,6 @@
     <string name="none_of_above">None of the above</string>
     <string name="no_client_found">No client identification from SimPrints Identification, scan again or cancel and use normal search.</string>
 
-    <string name="search_limits">Search Limits</string>
-    <string name="out_and_inside">Outside and Inside\nMy Catchment Area</string>
-    <string name="requires_internet_connection">(Requires Internet Connection)</string>
-    <string name="my_catchment_area">My Catchment Area Only</string>
-
     <string name="first_name_hint">First Name</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -438,6 +434,11 @@
     <string name="non_focused_service_provided">Record service provided</string>
     <string name="do_you_want_to_give_another_referral">This client already has a referral to the Health Facility, do you want to close this referral and open a new one?</string>
     <string name="attend_prescription_form_title">ATTEND PRESCRIPTIONS</string>
+
+    <string name="submitted_for_onsubmit">Submitted ...</string>
+    <string name="not_submitted_for_onsubmit">Not submitted ...</string>
+    <string name="family_profile_title_with_firstname">%1$s %2$s Family</string>
+    <string name="family_profile_title">%1$s Family</string>
 
     <string name="environment_name_test">test</string>
     <string name="environment_name_production">production</string>

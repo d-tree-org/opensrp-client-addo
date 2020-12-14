@@ -22,6 +22,7 @@ import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.PullEventClientRecordUtil;
+import org.smartregister.clientandeventmodel.Gender;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.event.Listener;
@@ -32,6 +33,7 @@ import org.smartregister.helper.ImageRenderHelper;
 import java.util.List;
 
 import static org.smartregister.addo.util.JsonFormUtils.getCommonRepository;
+import static org.smartregister.addo.util.Utils.getTranslatedGender;
 
 public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
     private boolean isLocal = false;
@@ -58,7 +60,7 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         String fullName = String.format("%s %s %s", isNull(member.getFirstName()), isNull(member.getMiddleName()), isNull(member.getLastName()));
         tvName.setText(fullName);
 
-        tvGender.setText(member.getGender());
+        tvGender.setText(getTranslatedGender(member.getGender()));
         new ImageRenderHelper(getContext()).refreshProfileImage("8e3738ba-c510-44ba-92d2-49e3938d2415", profile,
                 Utils.getMemberProfileImageResourceIDentifier(""));
 

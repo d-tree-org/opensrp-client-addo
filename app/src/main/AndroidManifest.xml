@@ -28,9 +28,9 @@
         android:theme="@style/AddoTheme"
         tools:replace="android:theme">
 
-        <meta-data
+<!--        <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
+            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />-->
 
         <activity
             android:name=".activity.LoginActivity"
@@ -60,7 +60,7 @@
             android:label="@string/title_family_detail"
             android:parentActivityName=".activity.AddoHomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AddoTheme.NoActionBar"></activity>
+            android:theme="@style/AddoTheme.NoActionBar" />
         <activity
             android:name=".activity.FamilyOtherMemberProfileActivity"
             android:label="@string/title_family_detail"
@@ -96,15 +96,11 @@
             android:name=".view.activity.AddoSettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
+      
         <activity
             android:name=".activity.MonthlyActivitiesRegisterActivity"
             android:label="@string/monthly_activity"
             android:theme="@style/AddoTheme.NoActionBar" />
-
-      <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
