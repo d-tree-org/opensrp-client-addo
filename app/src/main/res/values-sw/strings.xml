@@ -70,4 +70,35 @@
     <string name="dispense_medication_title">Toa Dawa</string>
     <string name="dispense_commodities">DLDM BIDHAA</string>
 
+    <string name="monthly_activity">Malengo ya mwezi</string>
+
+    <!--  Monthly Activities Indicators  -->
+    <string name="current_month"> Matembeleo ya Mwezi huu </string>
+
+    <string name="last_month"> Matembeleo ya Mwezi uliopita </string>
+
+    <string name="child_encounters"> Watoto </string>
+    <string name="adolescent_encounters"> Vijana Balehe </string>
+    <string name="anc_encounters"> Wajawazito </string>
+    <string name="pnc_encounters"> Waliojifungua </string>
+    <string name="other_encounters"> Wengineo </string>
+    <string name="total_encounters"> Matembeleo Yote </string>
+    <string name="referred_encounters"> Waliopewa Rufaa </string>
+
+    <string name="child_hf_referral_text">Mtoto - Rufaa kwenda kituoni</string>
+
+    <string name="child_addo_linkage_text">Mtoto - Ushauri kwenda DLDM</string>
+
+    <string name="anc_hf_referral_text">Mjamzito - Rufaa kwenda kituoni</string>
+
+    <string name="anc_addo_linkage_text">Mjamzito - Ushauri kwenda DLDM</string>
+
+    <string name="adolescent_hf_referral_text">Kijana balehe - Rufaa kwenda kituoni</string>
+
+    <string name="adolescent_addo_linkage_text">Kijana balehe - Ushauri kwenda DLDM</string>
+
+    <string name="pnc_hf_referral_text">Aliyejifungua - Rufaa kwenda kituoni</string>
+
+    <string name="pnc_addo_linkage_text">Aliyejifungua - Ushauri kwenda DLDM</string>
+
 </resources>
