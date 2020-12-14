@@ -13,6 +13,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.evernote.android.job.JobManager;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import org.smartregister.AllConstants;
 import org.smartregister.Context;
@@ -95,10 +98,15 @@ public class AddoApplication extends DrishtiApplication {
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
 
+        //issyzac appcenter key -> d247b350-e934-46e9-abae-abbb8ed47c33
+        //Dtree appcenter key-> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
+        AppCenter.start(this, "00e04fdd-ab2d-47ee-b7a3-38986474a7f6",
+                Analytics.class, Crashes.class);
 
         //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
         FirebaseApp.initializeApp(getApplicationContext());
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
+
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);
         p2POptions.setAuthorizationService(new AddoAuthorizationService());
