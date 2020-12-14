@@ -34,6 +34,7 @@ import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.contract.FamilyCallDialogContract;
 import org.smartregister.addo.fragment.CopyToClipboardDialog;
+import org.smartregister.clientandeventmodel.Gender;
 import org.smartregister.util.PermissionUtils;
 
 import java.text.MessageFormat;
@@ -339,6 +340,10 @@ public class Utils extends org.smartregister.family.util.Utils {
 
     public static org.smartregister.Context context() {
         return CoreLibrary.getInstance().context();
+    }
+
+    public static String getTranslatedGender(String gender) {
+        return Gender.FEMALE.toString().equalsIgnoreCase(gender) ? context().getStringResource(R.string.female) : context().getStringResource(R.string.male);
     }
 
 }

@@ -20,6 +20,7 @@ public class Constants {
         public static final String PNC = "PNC";
         public static final String FAMILY_PLANNING = "Family Planning";
         public static final String MALARIA = "Malaria";
+        public static final String MONTHLY_ACTIVITY = "Monthly Activity";
     }
 
     public static final class PEER_TO_PEER {

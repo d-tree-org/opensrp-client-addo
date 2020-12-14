@@ -303,7 +303,8 @@
     ]
   },
   "step3": {
-    "title": "Dispense Confirmation",
+    "title": "{{step3_title}}",
+    "hide-save-button": true,
     "fields": [
       {
         "key": "no_medication_dispensed_toaster",
@@ -472,6 +473,26 @@
               "rules-file": "danger_signs_medication_relevance.yml"
             }
           }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save}}",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
         }
       }
     ]

@@ -96,6 +96,11 @@
             android:name=".view.activity.AddoSettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+      
+        <activity
+            android:name=".activity.MonthlyActivitiesRegisterActivity"
+            android:label="@string/monthly_activity"
+            android:theme="@style/AddoTheme.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -114,6 +119,8 @@
         <service android:name=".sync.AddoSyncTaskIntentService" />
         <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
+        <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService"
+            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -244,7 +244,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 } else if (isPncClient()) {
                     startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getPncAddoDangerSigns()), getResources().getString(R.string.danger_sign_title_pnc));
                 } else if (isAdolescentClient()) {
-                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAdolescentAddoScreening()), "Adolescent Screening");
+                    startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAdolescentAddoScreening()), getResources().getString(R.string.danger_signs_title_adolescent));
                 } else {
                     Toast.makeText(this, "You clicked a client that is not in the focused group screening", Toast.LENGTH_SHORT).show();
                 }
