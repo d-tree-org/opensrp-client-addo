@@ -65,9 +65,6 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AppCenter.start(getApplication(), "d247b350-e934-46e9-abae-abbb8ed47c33",
-                Analytics.class, Crashes.class);
-
         tvNameEnv = findViewById(R.id.at_name);
         btnLogin = findViewById(R.id.login_login_btn);
         ActivityCompat.requestPermissions(LoginActivity.this,
