@@ -31,6 +31,10 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.MappedByteBuffer;
@@ -60,6 +64,10 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AppCenter.start(getApplication(), "d247b350-e934-46e9-abae-abbb8ed47c33",
+                Analytics.class, Crashes.class);
+
         tvNameEnv = findViewById(R.id.at_name);
         btnLogin = findViewById(R.id.login_login_btn);
         ActivityCompat.requestPermissions(LoginActivity.this,
