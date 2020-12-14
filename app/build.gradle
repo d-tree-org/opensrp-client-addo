@@ -321,10 +321,13 @@ dependencies {
     testImplementation 'org.robolectric:shadows-multidex:4.0.1'
     testImplementation 'org.robolectric:shadows-support-v4:3.4-rc2'
     testImplementation 'androidx.test:core:1.0.0'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:17.2.2@aar') {
         transitive = true
     }
 
+    def appCenterSdkVersion = '4.0.0'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 
 }
 
