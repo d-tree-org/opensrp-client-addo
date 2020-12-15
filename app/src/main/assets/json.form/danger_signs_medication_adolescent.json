@@ -323,52 +323,12 @@
             }
           }
         }
-      },
-      {
-        "key": "linkage_recommendation",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step2_linkage_recommendation_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{step2_linkage_recommendation_err}}"
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_yes_text}}",
-            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_no_text}}",
-            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
       }
     ]
   },
   "step3": {
-    "title": "Dispense Confirmation",
+    "title": "{{step3_title}}",
+    "hide-save-button": true,
     "fields": [
       {
         "key": "no_medication_dispensed_toaster",
@@ -496,6 +456,67 @@
               "rules-file": "danger_signs_medication_relevance.yml"
             }
           }
+        }
+      },
+      {
+        "key": "linkage_recommendation",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "{{step2_linkage_recommendation_label}}",
+        "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{step2_linkage_recommendation_err}}"
+        },
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "{{step2_linkage_recommendation_yes_text}}",
+            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "text": "{{step2_linkage_recommendation_no_text}}",
+            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save}}",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
         }
       }
     ]

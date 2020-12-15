@@ -119,9 +119,7 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
         }).get(AddoHomeActivity.AddoHomeSharedViewModel.class);
         this.rootView = view;
         this.setupViews(view);
-
         return view;
-
     }
 
     @Override

@@ -400,11 +400,6 @@
     <string name="none_of_above">None of the above</string>
     <string name="no_client_found">No client identification from SimPrints Identification, scan again or cancel and use normal search.</string>
 
-    <string name="search_limits">Search Limits</string>
-    <string name="out_and_inside">Outside and Inside\nMy Catchment Area</string>
-    <string name="requires_internet_connection">(Requires Internet Connection)</string>
-    <string name="my_catchment_area">My Catchment Area Only</string>
-
     <string name="first_name_hint">First Name</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -442,9 +437,45 @@
 
     <string name="submitted_for_onsubmit">Submitted ...</string>
     <string name="not_submitted_for_onsubmit">Not submitted ...</string>
+    <string name="family_profile_title_with_firstname">%1$s %2$s Family</string>
+    <string name="family_profile_title">%1$s Family</string>
 
     <string name="environment_name_test">test</string>
     <string name="environment_name_production">production</string>
     <string name="switch_environment_title">Alert! Switching Environment</string>
     <string name="switch_environment_message">You are about to switch to %s environment. This procedure will wipe out all of your device data, you need to make sure everything is synced before you proceed. Do you want to switch the environment?</string>
+
+    <string name="monthly_activity">Monthly Activity</string>
+
+    <!--  Monthly Activities Indicators  -->
+    <string name="current_month"> Current Month Visits </string>
+
+    <string name="last_month"> Last Month Visits</string>
+
+    <string name="child_encounters"> Children </string>
+    <string name="adolescent_encounters"> Adolescent </string>
+    <string name="anc_encounters"> ANC </string>
+    <string name="pnc_encounters"> PNC </string>
+    <string name="other_encounters"> OTHERS </string>
+    <string name="total_encounters"> Total Visits </string>
+    <string name="referred_encounters"> Referred Visits </string>
+
+
+
+    <string name="child_hf_referral_text">Child - HF Referral</string>
+
+    <string name="child_addo_linkage_text">Child - ADDO Linkage</string>
+
+    <string name="anc_hf_referral_text">ANC - HF Referral</string>
+
+    <string name="anc_addo_linkage_text">ANC - ADDO Linkage</string>
+
+    <string name="adolescent_hf_referral_text">Adolescent - HF Referral</string>
+
+    <string name="adolescent_addo_linkage_text">Adolescent - ADDO Linkage</string>
+
+    <string name="pnc_hf_referral_text">PNC - HF Referral</string>
+
+    <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
+
 </resources>

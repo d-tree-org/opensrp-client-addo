@@ -13,6 +13,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.evernote.android.job.JobManager;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import org.smartregister.AllConstants;
 import org.smartregister.Context;
@@ -30,6 +33,8 @@ import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.chw.anc.AncLibrary;
+import org.smartregister.chw.referral.ReferralLibrary;
+import org.smartregister.chw.referral.domain.ReferralMetadata;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
@@ -40,6 +45,7 @@ import org.smartregister.family.domain.FamilyMetadata;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.TaskRepository;
@@ -55,8 +61,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import timber.log.Timber;
@@ -89,8 +98,13 @@ public class AddoApplication extends DrishtiApplication {
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
 
+        //issyzac appcenter key -> d247b350-e934-46e9-abae-abbb8ed47c33
+        //Dtree appcenter key-> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
+        AppCenter.start(this, "00e04fdd-ab2d-47ee-b7a3-38986474a7f6",
+                Analytics.class, Crashes.class);
 
         //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
+        FirebaseApp.initializeApp(getApplicationContext());
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
         //Initialize Modules
@@ -106,7 +120,13 @@ public class AddoApplication extends DrishtiApplication {
 
         FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
         SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
+        ReferralMetadata referralMetadata = new ReferralMetadata();
+        referralMetadata.setLocationIdMap(new HashMap<>());
+        ReferralLibrary.init(context, getRepository(), referralMetadata, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+
+        // Init Reporting library
+        ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 

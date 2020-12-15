@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_parent_layout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

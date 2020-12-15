@@ -45,7 +45,8 @@ condition: "step2_medicine_dispensed.contains('amoxicillin') ||
             step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
             step2_medicine_dispensed.contains('fcondom') ||
             step2_medicine_dispensed.contains('mcondom') ||
-            step2_medicine_dispensed.contains('combined_oral_contraceptive')"
+            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
+            step2_medicine_dispensed.contains('other')"
 actions:
   - "isRelevant = true"
 
@@ -61,7 +62,19 @@ actions:
 name: step3_all_meds_dispensed
 description: Dispense medication
 priority: 1
-condition: "step2_medicine_dispensed.contains('amoxicillin') || step2_medicine_dispensed.contains('paracetamol_tablets') || step2_medicine_dispensed.contains('paracetamol_suspensions') || step2_medicine_dispensed.contains('ibuprofen_tablets') || step2_medicine_dispensed.contains('ibuprofen_suspensions') || step2_medicine_dispensed.contains('oral_rehydration_salts') || step2_medicine_dispensed.contains('cough_preparations') || step2_medicine_dispensed.contains('vitamins_suspensions') || step2_medicine_dispensed.contains('zinc_sulphate_tablets')"
+condition: "step2_medicine_dispensed.contains('amoxicillin') ||
+            step2_medicine_dispensed.contains('paracetamol_tablets') ||
+            step2_medicine_dispensed.contains('paracetamol_suspensions') ||
+            step2_medicine_dispensed.contains('ibuprofen_tablets') ||
+            step2_medicine_dispensed.contains('ibuprofen_suspensions') ||
+            step2_medicine_dispensed.contains('oral_rehydration_salts') ||
+            step2_medicine_dispensed.contains('cough_preparations') ||
+            step2_medicine_dispensed.contains('vitamins_suspensions') ||
+            step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
+            step2_medicine_dispensed.contains('fcondom') ||
+            step2_medicine_dispensed.contains('mcondom') ||
+            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
+            step2_medicine_dispensed.contains('other')"
 actions:
   - "isRelevant = true"
 

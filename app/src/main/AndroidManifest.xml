@@ -60,7 +60,7 @@
             android:label="@string/title_family_detail"
             android:parentActivityName=".activity.AddoHomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AddoTheme.NoActionBar"></activity>
+            android:theme="@style/AddoTheme.NoActionBar" />
         <activity
             android:name=".activity.FamilyOtherMemberProfileActivity"
             android:label="@string/title_family_detail"
@@ -96,9 +96,11 @@
             android:name=".view.activity.AddoSettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-      <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
+      
+        <activity
+            android:name=".activity.MonthlyActivitiesRegisterActivity"
+            android:label="@string/monthly_activity"
+            android:theme="@style/AddoTheme.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -117,6 +119,8 @@
         <service android:name=".sync.AddoSyncTaskIntentService" />
         <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
+        <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService"
+            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"

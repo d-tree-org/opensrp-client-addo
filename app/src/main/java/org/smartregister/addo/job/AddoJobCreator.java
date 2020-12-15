@@ -12,6 +12,7 @@ import org.smartregister.job.P2pServiceJob;
 import org.smartregister.job.PullUniqueIdsServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
+import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.sync.intent.SyncIntentService;
 
 import timber.log.Timber;
@@ -41,6 +42,8 @@ public class AddoJobCreator implements JobCreator {
                 return new AddoTaskServiceJob();
             case AddoVisitServiceJob.TAG:
                 return new AddoVisitServiceJob();
+            case RecurringIndicatorGeneratingJob.TAG:
+                return new RecurringIndicatorGeneratingJob();
             default:
                 Timber.d( "Looks like you tried to create a job " + tag + " that is not declared in the Chw Job Creator");
                 return null;
