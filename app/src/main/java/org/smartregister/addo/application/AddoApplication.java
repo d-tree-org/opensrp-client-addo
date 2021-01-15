@@ -33,6 +33,7 @@ import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.chw.anc.AncLibrary;
+import org.smartregister.chw.pnc.PncLibrary;
 import org.smartregister.chw.referral.ReferralLibrary;
 import org.smartregister.chw.referral.domain.ReferralMetadata;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -124,7 +125,7 @@ public class AddoApplication extends DrishtiApplication {
         referralMetadata.setLocationIdMap(new HashMap<>());
         ReferralLibrary.init(context, getRepository(), referralMetadata, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
-
+        PncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         // Init Reporting library
         ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 

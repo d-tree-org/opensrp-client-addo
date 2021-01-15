@@ -83,6 +83,7 @@ android {
             buildConfigField "int", "IMAGE_UPLOAD_MINUTES", '180'
             buildConfigField "int", "PULL_UNIQUE_IDS_MINUTES", '180'
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '180'
+            buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
@@ -101,6 +102,7 @@ android {
             buildConfigField "boolean", 'SUPPORT_QR', 'true'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
+            buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
             buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
@@ -201,7 +203,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    implementation('org.smartregister:opensrp-client-core:1.8.31-DTREE-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-core:1.8.31-DTREE-2-SNAPSHOT') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
@@ -245,13 +247,24 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-simprints'
     }
 
-    implementation('org.smartregister:opensrp-chw-anc:0.1.53-DTREE-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-chw-anc:0.1.53-DTREE-1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
+    }
+
+    implementation('org.smartregister:opensrp-chw-pnc:0.0.31-DTREE-1-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-chw-anc'
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
+        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 
     implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.1-RESEARCH-SNAPSHOT') {

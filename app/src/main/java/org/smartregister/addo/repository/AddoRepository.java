@@ -7,6 +7,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
 import org.smartregister.addo.application.AddoApplication;
+import org.smartregister.addo.util.AddoRepositoryUtils;
 import org.smartregister.chw.anc.repository.VisitDetailsRepository;
 import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
@@ -64,7 +65,23 @@ public class AddoRepository extends Repository {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 
-        //ChwRepositoryFlv.onUpgrade(context, db, oldVersion, newVersion);
+        int upgradeTo = oldVersion +1;
+
+            if (upgradeTo == 2) {
+                upgradeToVersion2(context, db);
+            }
+
+
+    }
+
+    private void upgradeToVersion2(Context context, SQLiteDatabase db) {
+        try {
+
+            db.execSQL(AddoRepositoryUtils.UPGRADE_V2);
+
+        } catch (Exception e) {
+            Timber.e(e, "Upgrade to version 2");
+        }
     }
 
 
