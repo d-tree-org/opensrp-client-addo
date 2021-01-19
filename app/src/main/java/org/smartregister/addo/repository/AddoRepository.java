@@ -31,7 +31,7 @@ public class AddoRepository extends Repository {
     private Context context;
 
     public AddoRepository(Context context, org.smartregister.Context openSRPContext) {
-        super(context, AllConstants.DATABASE_NAME, 10, openSRPContext.session(), AddoApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
+        super(context, AllConstants.DATABASE_NAME, 11, openSRPContext.session(), AddoApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
         this.context = context;
     }
 
@@ -67,7 +67,7 @@ public class AddoRepository extends Repository {
 
         int upgradeTo = oldVersion +1;
 
-            if (upgradeTo == 2) {
+            if (upgradeTo == 11) {
                 upgradeToVersion2(context, db);
             }
 
