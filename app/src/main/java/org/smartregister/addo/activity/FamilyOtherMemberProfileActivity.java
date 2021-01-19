@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private CommonPersonObjectClient commonPersonObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
     private TextView textViewDangersignScreening;
+    private ImageView imageView;
     protected MemberObject memberObject;
     private FormUtils formUtils;
 
@@ -117,6 +119,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         super.setupViews();
 
         textViewDangersignScreening = findViewById(R.id.textview_ds_screening);
+        imageView = findViewById(R.id.imageview_profile);
 
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
         if(presenter().getFamilyName() == null) {
@@ -184,6 +187,11 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     @Override
     public FamilyOtherMemberActivityPresenter presenter() {
         return (FamilyOtherMemberActivityPresenter) presenter;
+    }
+
+    @Override
+    public void setProfileImage(String baseEntityId, String entityType) {
+        this.imageRenderHelper.refreshProfileImage(baseEntityId, this.imageView, Utils.getMemberProfileImageResourceIDentifier(entityType));
     }
 
     public void startFormActivity(JSONObject jsonForm, String formTitle) {
