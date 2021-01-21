@@ -84,6 +84,7 @@ android {
             buildConfigField "int", "PULL_UNIQUE_IDS_MINUTES", '180'
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '180'
             buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
+            buildConfigField "int", "ADOLESCENT_CLOSE_MINUTES", '1440'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
@@ -103,6 +104,7 @@ android {
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
             buildConfigField "int", "REPORT_INDICATOR_GENERATION_MINUTES", '15'
             buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
+            buildConfigField "int", "ADOLESCENT_CLOSE_MINUTES", '1440'
             buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')

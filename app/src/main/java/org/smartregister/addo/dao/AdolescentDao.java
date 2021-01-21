@@ -1,5 +1,6 @@
 package org.smartregister.addo.dao;
 
+import org.smartregister.addo.repository.AdolescentCloseRepository;
 import org.smartregister.dao.AbstractDao;
 import java.text.ParseException;
 
@@ -24,5 +25,8 @@ public class AdolescentDao extends AbstractDao {
         return res.get(0) > 0;
     }
 
-}
+    public static void graduateAdolescentToAdult(int cutOffAge, AdolescentCloseRepository adolescentCloseRepository) {
+        adolescentCloseRepository.graduateAdolescent(cutOffAge);
+    }
 
+}

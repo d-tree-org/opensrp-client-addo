@@ -1,6 +1,7 @@
 package org.smartregister.addo.interactor;
 
 import org.smartregister.addo.BuildConfig;
+import org.smartregister.addo.job.AddoAdolescentCloseJob;
 import org.smartregister.addo.job.AddoTaskServiceJob;
 import org.smartregister.addo.job.BasePncCloseJob;
 import org.smartregister.job.SyncServiceJob;
@@ -24,6 +25,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         AddoTaskServiceJob.scheduleJob(AddoTaskServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES), getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         BasePncCloseJob.scheduleJob(BasePncCloseJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.BASE_PNC_CLOSE_MINUTES), getFlexValue(BuildConfig.BASE_PNC_CLOSE_MINUTES));
+
+        AddoAdolescentCloseJob.scheduleJob(AddoAdolescentCloseJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.ADOLESCENT_CLOSE_MINUTES), getFlexValue(BuildConfig.ADOLESCENT_CLOSE_MINUTES));
     }
 
     @Override
@@ -32,5 +35,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
         AddoTaskServiceJob.scheduleJobImmediately(AddoTaskServiceJob.TAG);
         BasePncCloseJob.scheduleJobImmediately(BasePncCloseJob.TAG);
+        AddoAdolescentCloseJob.scheduleJobImmediately(AddoAdolescentCloseJob.TAG);
     }
 }
