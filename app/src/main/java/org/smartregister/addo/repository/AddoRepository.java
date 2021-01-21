@@ -6,6 +6,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
+import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.util.AddoRepositoryUtils;
 import org.smartregister.chw.anc.repository.VisitDetailsRepository;
@@ -31,7 +32,7 @@ public class AddoRepository extends Repository {
     private Context context;
 
     public AddoRepository(Context context, org.smartregister.Context openSRPContext) {
-        super(context, AllConstants.DATABASE_NAME, 11, openSRPContext.session(), AddoApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
+        super(context, AllConstants.DATABASE_NAME, BuildConfig.DATABASE_VERSION, openSRPContext.session(), AddoApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
         this.context = context;
     }
 
@@ -55,7 +56,7 @@ public class AddoRepository extends Repository {
 
         VisitRepository.createTable(database);
         VisitDetailsRepository.createTable(database);
-        onUpgrade(database, 1, 2);
+        onUpgrade(database, 1, BuildConfig.DATABASE_VERSION);
 
     }
 
@@ -67,14 +68,20 @@ public class AddoRepository extends Repository {
 
         int upgradeTo = oldVersion +1;
 
+        while (upgradeTo <= newVersion ) {
+            // implementation for database upgrades
+
             if (upgradeTo == 11) {
-                upgradeToVersion2(context, db);
+                upgradeToVersion11(context, db);
             }
+            upgradeTo++;
+
+        }
 
 
     }
 
-    private void upgradeToVersion2(Context context, SQLiteDatabase db) {
+    private void upgradeToVersion11(Context context, SQLiteDatabase db) {
         try {
 
             db.execSQL(AddoRepositoryUtils.UPGRADE_V2);

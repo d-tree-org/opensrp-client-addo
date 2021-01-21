@@ -43,7 +43,7 @@ android {
         buildConfigField "String[]", "ALLOWED_LOCATION_LEVELS", '{"Village"}'
         buildConfigField "String", 'DEFAULT_LOCATION', '"Village"'
         buildConfigField "boolean", 'SUPPORT_QR', 'true'
-        buildConfigField "int", "DATABASE_VERSION", '1'
+        buildConfigField "int", "DATABASE_VERSION", '11'
 
         buildConfigField "String", 'opensrp_url_staging', '"https://opensrp-dev.d-tree.org/opensrp/"'
         buildConfigField "String", 'opensrp_url_production', '"https://afyatek.smartregister.org/opensrp/"'
