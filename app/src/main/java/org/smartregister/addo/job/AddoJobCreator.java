@@ -47,6 +47,9 @@ public class AddoJobCreator implements JobCreator {
 
             case BasePncCloseJob.TAG:
                 return new BasePncCloseJob();
+
+            case AddoAdolescentCloseJob.TAG:
+                return new AddoAdolescentCloseJob();
             default:
                 Timber.d( "Looks like you tried to create a job " + tag + " that is not declared in the Chw Job Creator");
                 return null;
