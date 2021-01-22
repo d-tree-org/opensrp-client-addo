@@ -15,6 +15,8 @@ public class AddoAdolescentCloseIntent extends IntentService {
     private static final String TAG  = "AddoAdolescentCloseIntent";
     private AdolescentCloseRepository adolescentCloseRepository;
 
+    private static final int ADOLESCENT_CUTOFF_AGE = 20;
+
     public AddoAdolescentCloseIntent() { super(TAG);}
 
     @Override
@@ -28,7 +30,7 @@ public class AddoAdolescentCloseIntent extends IntentService {
 
         try {
 
-            AdolescentDao.graduateAdolescentToAdult(20, adolescentCloseRepository);
+            AdolescentDao.graduateAdolescentToAdult(ADOLESCENT_CUTOFF_AGE, adolescentCloseRepository);
 
         } catch (Exception e) {
             Timber.e(e);
