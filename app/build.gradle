@@ -1,4 +1,5 @@
 buildscript {
+
     repositories {
         google()
         jcenter()
@@ -86,7 +87,7 @@ android {
             buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
             buildConfigField "int", "ADOLESCENT_CLOSE_MINUTES", '1440'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
-            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
@@ -147,6 +148,58 @@ android {
 
 tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
+}
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-core")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+    maven {
+        name = "GitHubPackages"
+        /*  Configure path to the library hosted on GitHub Packages Registry
+         *  Replace UserID with package owner userID and REPOSITORY with the repository name
+         *  e.g. "https://maven.pkg.github.com/enefce/AndroidLibraryForGitHubPackagesDemo"*/
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-simprints")
+        credentials {
+            /** Create github.properties in root project folder file with
+             ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+             ** Or set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-family")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-native-form")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-chw-anc")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
 }
 
 dependencies {
