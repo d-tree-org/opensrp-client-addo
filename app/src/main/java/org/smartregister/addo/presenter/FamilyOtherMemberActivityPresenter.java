@@ -85,6 +85,7 @@ public class FamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberPro
             int age = Utils.getAgeFromDate(Utils.getValue(client.getColumnmaps(), DBConstants.KEY.DOB, true));
 
             this.getView().setProfileName(MessageFormat.format("{0}, {1}", getName(getName(firstName, middleName), lastName), age));
+            this.getView().setProfileImage(baseEntityId, "ec_family_member");
         }
     }
 

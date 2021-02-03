@@ -121,6 +121,8 @@
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
         <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService"
             android:exported="false" />
+        <service android:name=".intent.AddoPncCloseIntent" />
+        <service android:name=".intent.AddoAdolescentCloseIntent" />
 
         <uses-library
             android:name="org.apache.http.legacy"
