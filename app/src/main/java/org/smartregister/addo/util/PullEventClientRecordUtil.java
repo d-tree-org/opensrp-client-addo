@@ -31,9 +31,9 @@ import static org.smartregister.chw.anc.util.NCUtils.getClientProcessorForJava;
 public class PullEventClientRecordUtil {
 
     public static void pullEventClientRecord(final String baseEntityId, final Listener<String> listener,
-                                         final ProgressDialog progressDialog) {
+                                         final ProgressDialog progressDialog, String originalBaseEntityId) {
 
-        org.smartregister.util.Utils.startAsyncTask(new AsyncTask<Void, Void, String>() {
+        org.smartregister.util.Utils.startAsyncTask(new AsyncTask<Void, Void, String[]>() {
 
             @Override
             protected void onPreExecute() {
@@ -41,20 +41,25 @@ public class PullEventClientRecordUtil {
             }
 
             @Override
-            protected String doInBackground(Void... params) {
+            protected String[] doInBackground(Void... params) {
                 publishProgress();
                 return pull(baseEntityId);
             }
 
             @Override
-            protected void onPostExecute(String result) {
-                listener.onEvent(result);
-                progressDialog.dismiss();
+            protected void onPostExecute(String[] result) {
+                if(!result[1].equalsIgnoreCase("ec_family")) {
+                    // pull family record
+                    PullEventClientRecordUtil.pullEventClientRecord(result[2], listener, progressDialog, baseEntityId);
+                } else {
+                    listener.onEvent(originalBaseEntityId);
+                    progressDialog.dismiss();
+                }
             }
         }, null);
     }
 
-    private static String pull(String baseEntityId) {
+    private static String[] pull(String baseEntityId) {
         if (baseEntityId == null || baseEntityId.isEmpty()) {
             Timber.d("entityId doesn't exist");
             return null;
@@ -69,7 +74,9 @@ public class PullEventClientRecordUtil {
         String uri = baseUrl + SyncIntentService.SYNC_URL + paramString;
 
         Timber.d(new StringBuilder(PullEventClientRecordUtil.class.getCanonicalName()).append(" ").append(uri).toString());
-        ;
+
+        String entityType = "";
+        String familyId = "";
         try {
             Response<String> response = context.getHttpAgent().fetch(uri);
             // TO Do: validate response
@@ -82,6 +89,11 @@ public class PullEventClientRecordUtil {
             EventClientRepository eventClientRepository = new EventClientRepository();
             Event event = eventClientRepository.convert(jsonObject.getJSONArray("events").get(0).toString(), Event.class);
             Client client = eventClientRepository.convert(jsonObject.getJSONArray("clients").get(0).toString(), Client.class);
+
+            entityType = event.getEntityType();
+            if(!entityType.equalsIgnoreCase("ec_family")) {
+                familyId = client.getRelationships().get("family").get(0);
+            }
 
             List<EventClient> eventClientList = new ArrayList<>();
             eventClientList.add(new EventClient(event, client));
@@ -96,7 +108,7 @@ public class PullEventClientRecordUtil {
             Log.d("Pull EventClient error", e.toString());
         }
 
-        return baseEntityId;
+        return new String[]{baseEntityId, entityType, familyId};
     }
 
     private static String urlEncode(String value) {
