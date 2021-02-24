@@ -150,6 +150,25 @@ public class AddoClientProcessor extends ClientProcessorForJava {
                 processVisitEvent(eventClient);
                 processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
                 break;
+
+            case CoreConstants.EventType.REMOVE_FAMILY:
+                if (eventClient.getClient() == null) {
+                    return;
+                }
+                processRemoveFamily(eventClient.getClient().getBaseEntityId(), event.getEventDate().toDate());
+                break;
+            case CoreConstants.EventType.REMOVE_MEMBER:
+                if (eventClient.getClient() == null) {
+                    return;
+                }
+                processRemoveMember(eventClient.getClient().getBaseEntityId(), event.getEventDate().toDate());
+                break;
+            case CoreConstants.EventType.REMOVE_CHILD:
+                if (eventClient.getClient() == null) {
+                    return;
+                }
+                processRemoveChild(eventClient.getClient().getBaseEntityId(), event.getEventDate().toDate());
+                break;
             case CoreConstants.EventType.CHILD_VACCINE_CARD_RECEIVED:
                 if (eventClient.getClient() == null) {
                     return;
@@ -394,5 +413,120 @@ public class AddoClientProcessor extends ClientProcessorForJava {
             Timber.e(e);
         }
         return null;
+    }
+
+    /**
+     * Remove Family
+     *
+     * @param familyID*/
+
+    private void processRemoveFamily(String familyID, Date eventDate) {
+
+        Date myEventDate = eventDate;
+        if (myEventDate == null) {
+            myEventDate = new Date();
+        }
+
+        if (familyID == null) {
+            return;
+        }
+
+        AllCommonsRepository commonsRepository = AddoApplication.getInstance().getAllCommonsRepository(CoreConstants.TABLE_NAME.FAMILY);
+        if (commonsRepository != null) {
+
+            ContentValues values = new ContentValues();
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put("is_closed", 1);
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY, values,
+                    DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{familyID});
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.CHILD, values,
+                    DBConstants.KEY.RELATIONAL_ID + " = ?  ", new String[]{familyID});
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY_MEMBER, values,
+                    DBConstants.KEY.RELATIONAL_ID + " = ?  ", new String[]{familyID});
+
+            // clean fts table
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY), values,
+                    CommonFtsObject.idColumn + " = ?  ", new String[]{familyID});
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD), values,
+                    String.format(" %s in (select base_entity_id from %s where relational_id = ? )  ", CommonFtsObject.idColumn, CoreConstants.TABLE_NAME.CHILD), new String[]{familyID});
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER), values,
+                    String.format(" %s in (select base_entity_id from %s where relational_id = ? )  ", CommonFtsObject.idColumn, CoreConstants.TABLE_NAME.FAMILY_MEMBER), new String[]{familyID});
+
+        }
+    }
+
+    /**
+     * Remove Family Member
+     *
+     * @param baseEntityId*/
+
+    private void processRemoveMember(String baseEntityId, Date eventDate) {
+
+        Date myEventDate = eventDate;
+        if (myEventDate == null) {
+            myEventDate = new Date();
+        }
+
+        if (baseEntityId == null) {
+            return;
+        }
+
+        AllCommonsRepository commonsRepository = AddoApplication.getInstance().getAllCommonsRepository(CoreConstants.TABLE_NAME.FAMILY_MEMBER);
+        if (commonsRepository != null) {
+
+            ContentValues values = new ContentValues();
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put("is_closed", 1);
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY_MEMBER, values,
+                    DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{baseEntityId});
+
+            // clean fts table
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER), values,
+                    " object_id  = ?  ", new String[]{baseEntityId});
+
+            // Utils.context().commonrepository(CoreConstants.TABLE_NAME.FAMILY_MEMBER).populateSearchValues(baseEntityId, DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd").format(eventDate), null);
+
+        }
+    }
+
+    /**
+     * Remove a Child Client
+     *
+     * @param baseEntityId*/
+
+    public static void processRemoveChild(String baseEntityId, Date eventDate) {
+
+        Date myEventDate = eventDate;
+        if (myEventDate == null) {
+            myEventDate = new Date();
+        }
+
+        if (baseEntityId == null) {
+            return;
+        }
+
+        AllCommonsRepository commonsRepository = AddoApplication.getInstance().getAllCommonsRepository(CoreConstants.TABLE_NAME.CHILD);
+        if (commonsRepository != null) {
+
+            ContentValues values = new ContentValues();
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put("is_closed", 1);
+
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.CHILD, values,
+                    DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{baseEntityId});
+
+            // clean fts table
+            AddoApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD), values,
+                    CommonFtsObject.idColumn + "  = ?  ", new String[]{baseEntityId});
+
+            // Utils.context().commonrepository(CoreConstants.TABLE_NAME.CHILD).populateSearchValues(baseEntityId, DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd").format(eventDate), null);
+
+        }
     }
 }
