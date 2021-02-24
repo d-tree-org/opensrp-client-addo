@@ -22,7 +22,6 @@ import org.smartregister.addo.domain.Entity;
 import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.PullEventClientRecordUtil;
-import org.smartregister.clientandeventmodel.Gender;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.event.Listener;
@@ -31,6 +30,7 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.smartregister.addo.util.JsonFormUtils.getCommonRepository;
 import static org.smartregister.addo.util.Utils.getTranslatedGender;
@@ -93,24 +93,14 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
                     CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
 
                     if(personObject == null) {
-                        Log.d("personObject", " personObject is null");
-
                         // pull client record from server
                         ProgressDialog progressDialog = new ProgressDialog(getContext());
                         progressDialog.setCancelable(false);
-                        PullEventClientRecordUtil.pullEventClientRecord(member.getBaseEntityId(), pullEventClientRecordListener, progressDialog);
-
-                        getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(member.getBaseEntityId());
+                        PullEventClientRecordUtil.pullEventClientRecord(member.getBaseEntityId(), pullEventClientRecordListener, progressDialog, "");
 
                     } else {
                         // show member profile
-                        final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
-                        client.setColumnmaps(personObject.getColumnmaps());
-
-                        v.setTag(client);
-
-                        Bundle s = new Bundle();
-                        goToProfileActivity(v, s);
+                        showProfile(personObject, v);
                     }
                 }
             }
@@ -151,8 +141,8 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         }
         intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
         intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
-        //intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
-        //intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        intent.putExtra(Constants.INTENT_KEY.VILLAGE_TOWN,
+                org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), Constants.INTENT_KEY.VILLAGE_TOWN, false));
         getContext().startActivity(intent);
     }
 
@@ -163,8 +153,8 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
         }
         intent.putExtra(Constants.INTENT_KEY.BASE_ENTITY_ID, patient.getCaseId());
         intent.putExtra(org.smartregister.addo.util.Constants.INTENT_KEY.CHILD_COMMON_PERSON, patient);
-        //intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, getFamilyHead());
-        //intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, getPrimaryCaregiver());
+        intent.putExtra(Constants.INTENT_KEY.VILLAGE_TOWN,
+                org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), Constants.INTENT_KEY.VILLAGE_TOWN, false));
         getContext().startActivity(intent);
     }
 
@@ -186,18 +176,37 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
 
                 if(personObject == null) return;
 
-                final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
-                client.setColumnmaps(personObject.getColumnmaps());
-
                 View v = new View(getContext());
-                v.setTag(client);
-
-                Bundle s = new Bundle();
-                goToProfileActivity(v, s);
+                showProfile(personObject, v);
 
             } else {
                 Utils.showShortToast(getContext(), "Error pulling record from server");
             }
         }
     };
+
+    private void showProfile(CommonPersonObject personObject, View v) {
+        final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
+
+        String relationId = org.smartregister.family.util.Utils.getValue(personObject.getColumnmaps(), "relational_id", false);
+        CommonPersonObject family = getCommonRepository(Utils.metadata().familyRegister.tableName).findByBaseEntityId(relationId);
+
+        if(family == null) {
+            ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setCancelable(false);
+            PullEventClientRecordUtil.pullEventClientRecord(relationId, pullEventClientRecordListener, progressDialog, personObject.getCaseId());
+        }
+        else {
+            String village = org.smartregister.family.util.Utils.getValue(family.getColumnmaps(), Constants.INTENT_KEY.VILLAGE_TOWN, false);
+
+            Map<String, String> columnMaps = personObject.getColumnmaps();
+            columnMaps.put(Constants.INTENT_KEY.VILLAGE_TOWN, village);
+            client.setColumnmaps(columnMaps);
+
+            v.setTag(client);
+
+            Bundle s = new Bundle();
+            goToProfileActivity(v, s);
+        }
+    }
 }
