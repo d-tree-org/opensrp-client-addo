@@ -99,6 +99,7 @@
       
         <activity
             android:name=".activity.MonthlyActivitiesRegisterActivity"
+            android:screenOrientation="portrait"
             android:label="@string/monthly_activity"
             android:theme="@style/AddoTheme.NoActionBar" />
 
