@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.evernote.android.job.JobManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -81,6 +82,7 @@ public class AddoApplication extends DrishtiApplication {
     private static CommonFtsObject commonFtsObject;
     private static ClientProcessorForJava clientProcessor;
     private RulesEngineHelper rulesEngineHelper;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public static synchronized AddoApplication getInstance() {
         return (AddoApplication) mInstance;
@@ -107,6 +109,9 @@ public class AddoApplication extends DrishtiApplication {
         //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
         FirebaseApp.initializeApp(getApplicationContext());
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
+
+        //Initialize FirebaseAnalytics
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);
@@ -167,6 +172,13 @@ public class AddoApplication extends DrishtiApplication {
 
     public Context getContext(){
         return context;
+    }
+
+    public FirebaseAnalytics getFirebaseAnalytics(){
+        if (mFirebaseAnalytics == null)
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        return mFirebaseAnalytics;
     }
 
     public void saveLanguage(String language) {
