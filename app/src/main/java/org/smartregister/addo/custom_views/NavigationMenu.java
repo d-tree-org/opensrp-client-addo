@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.style.FadingCircle;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.smartregister.addo.R;
 import org.smartregister.addo.adapter.NavigationAdapter;
 import org.smartregister.addo.application.AddoApplication;
@@ -376,6 +379,15 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         if (activityWeakReference.get() != null && !activityWeakReference.get().isDestroyed()) {
             mPresenter.refreshNavigationCount(activityWeakReference.get());
         }
+
+        //Log on firebase analytics that the sync has successfully been completed
+        DateTime now = new DateTime();
+        FirebaseAnalytics analytics = AddoApplication.getInstance().getFirebaseAnalytics();
+
+        Bundle params = new Bundle();
+        params.putString("provider_id", AddoApplication.getInstance().getContext().allSharedPreferences().fetchRegisteredANM());
+        params.putString("timestamp", now.toString());
+        analytics.logEvent("sync_completed", params);
 
     }
 

@@ -380,6 +380,17 @@
             }
           },
           {
+            "key":"mpangile_dispensary",
+            "text":"Mpangile Dispensary",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
             "key":"msua_dispensary",
             "text":"Msua Dispensary",
             "openmrs_entity_parent":"",
