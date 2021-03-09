@@ -87,7 +87,7 @@ android {
             buildConfigField "int", "BASE_PNC_CLOSE_MINUTES", '1440'
             buildConfigField "int", "ADOLESCENT_CLOSE_MINUTES", '1440'
             buildConfigField "boolean", "SUPPORT_REPORT", "false"
-            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "fUBnpzDdbsCsMp0egCHB" ')
+            buildConfigField("String", "SIMPRINT_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')

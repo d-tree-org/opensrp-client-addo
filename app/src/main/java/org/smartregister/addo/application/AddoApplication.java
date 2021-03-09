@@ -125,7 +125,7 @@ public class AddoApplication extends DrishtiApplication {
         FamilyLibrary.init(context, getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
-        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PRODUCTION_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
+        SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
         ReferralMetadata referralMetadata = new ReferralMetadata();
         referralMetadata.setLocationIdMap(new HashMap<>());
         ReferralLibrary.init(context, getRepository(), referralMetadata, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
