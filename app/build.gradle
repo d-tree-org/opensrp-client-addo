@@ -30,8 +30,8 @@ android {
         applicationId "org.smartregister.addo"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 14
-        versionName "0.7.2"
+        versionCode 15
+        versionName "0.7.3"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
