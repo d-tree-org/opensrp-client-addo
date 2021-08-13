@@ -1,0 +1,7 @@
+Updated Addo monthly activities statistics page
+Fixed global search information error
+Fixed clients visibility after being removed from the CHW
+Fixed screen rotation error while viewing monthly statistics
+Log successful syncs to firebase analytics
+Fixed Simprints Project ID missmatch
+Minor bug fixes
