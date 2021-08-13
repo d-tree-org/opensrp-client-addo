@@ -1,2 +1,3 @@
-json_key_file("") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
-package_name("org.smartregister.addo") # e.g. com.krausefx.app
+# Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file("/home/issyzack/Development/git_repos/android/opensrp/devops/pc-api-6258682355167056014-464-354fac73ee3f.json")
+package_name("org.smartregister.addo")
