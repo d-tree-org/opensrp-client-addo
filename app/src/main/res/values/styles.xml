@@ -63,16 +63,16 @@
     </style>
 
     <style name="selectClientVillag">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/google_sans_medium</item>
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingMultiplier">1.19</item>
     </style>
 
     <style name="askTheClientIfTh">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/google_sans_regular</item>
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingMultiplier">1.18</item>
     </style>
 
@@ -124,6 +124,12 @@
     <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="page_location_selector">
+        <item name="android:fontFamily">@font/google_sans_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
     </style>
 
 </resources>

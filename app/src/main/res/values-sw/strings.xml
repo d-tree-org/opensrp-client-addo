@@ -100,5 +100,9 @@
     <string name="pnc_hf_referral_text">Aliyejifungua - Rufaa kwenda kituoni</string>
 
     <string name="pnc_addo_linkage_text">Aliyejifungua - Ushauri kwenda DLDM</string>
+    <string name="total_referrals">Rufaa Zote</string>
+    <string name="referrals_closed">Rufaa zilizofungwa</string>
+    <string name="total_visits">Matembeleo ya Wiki</string>
+    <string name="weekly_summary_title_text">Taarifa za wiki</string>
 
 </resources>
