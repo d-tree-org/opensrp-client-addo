@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.addo.R;
-import org.smartregister.addo.activity.AddoHomeActivity;
+import org.smartregister.addo.viewmodel.AddoHomeViewModel;
 import org.smartregister.addo.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.addo.contract.AddoHomeFragmentContract;
 import org.smartregister.addo.custom_views.NavigationMenu;
@@ -38,9 +38,12 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<String> villageLocations = new ArrayList<>();
-    private AddoHomeActivity.AddoHomeSharedViewModel model;
+    private AddoHomeViewModel model;
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
+    private TextView numReferralsWeek;
+    private TextView numClosedReferralWeek;
+    private TextView numOfVisitsAddo;
 
     @Override
     public void setupViews(View view) {
@@ -64,6 +67,23 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
                     titleView.getPaddingBottom());
             titleView.setVisibility(View.GONE);
         }
+
+        // Weekly Summary numbers
+        numReferralsWeek = view.findViewById(R.id.tot_ref_num);
+        numClosedReferralWeek = view.findViewById(R.id.ref_closure_num);
+        numOfVisitsAddo = view.findViewById(R.id.num_visits_nums);
+
+        model.getNumRefferalsWeek().observe(Objects.requireNonNull(getActivity()), s -> {
+            numReferralsWeek.setText(s);
+        });
+
+        model.getNumClosedRefferalsWeek().observe(getActivity(), s -> {
+            numClosedReferralWeek.setText(s);
+        });
+
+        model.getNumAddoVisits().observe(getActivity(), s -> {
+            numOfVisitsAddo.setText(s);
+        });
 
         tvNoVillage = view.findViewById(R.id.empty_view);
         emptystateView = view.findViewById(R.id.ev_no_villages);
@@ -114,9 +134,11 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new AddoHomeActivity.AddoHomeSharedViewModel();
+                return (T) new AddoHomeViewModel();
             }
-        }).get(AddoHomeActivity.AddoHomeSharedViewModel.class);
+        }).get(AddoHomeViewModel.class);
+        // You can use the android-components library is updated, the updates breaks RecyclerViewAdapter - Investigate
+        //model = new ViewModelProvider(requireActivity()).get(AddoHomeActivity.AddoHomeSharedViewModel.class);
         this.rootView = view;
         this.setupViews(view);
         return view;
