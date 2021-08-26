@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/primary_color"
+    android:background="@color/white"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
 
@@ -29,7 +29,7 @@
             android:gravity="center"
             android:layout_margin="5dp"
             android:text="@string/total_referrals"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:fontFamily="@font/google_sans_bold"
             android:textSize="14sp" />
 
@@ -38,7 +38,7 @@
             style="@style/askTheClientIfTh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:layout_gravity="center"
             android:fontFamily="@font/google_sans_bold"
             android:text="10" />
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_margin="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:text="@string/referrals_closed"
             android:fontFamily="@font/google_sans_bold"
             android:textSize="14sp" />
@@ -90,7 +90,7 @@
             style="@style/askTheClientIfTh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:fontFamily="@font/google_sans_bold"
             android:layout_gravity="center"
             android:text="6" />
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_margin="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:text="@string/total_visits"
             android:fontFamily="@font/google_sans_bold"
             android:textSize="14sp" />
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/primary_color"
             android:fontFamily="@font/google_sans_bold"
             android:text="34" />
 
