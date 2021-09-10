@@ -6,19 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.evernote.android.job.JobManager;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import org.smartregister.AllConstants;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.P2POptions;
@@ -54,21 +47,12 @@ import org.smartregister.repository.TaskRepository;
 import org.smartregister.simprint.SimPrintsLibrary;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
-import org.smartregister.util.Utils;
-import org.smartregister.view.activity.DrishtiApplication;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import org.smartregister.view.activity.DrishtiApplication;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import timber.log.Timber;
 
@@ -101,12 +85,12 @@ public class AddoApplication extends DrishtiApplication {
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
 
-        //issyzac appcenter key -> d247b350-e934-46e9-abae-abbb8ed47c33
-        //Dtree appcenter key-> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
-        AppCenter.start(this, "00e04fdd-ab2d-47ee-b7a3-38986474a7f6",
-                Analytics.class, Crashes.class);
+        /*
+            issyzac appcenter key -> d247b350-e934-46e9-abae-abbb8ed47c33
+            Dtree appcenter key-> 00e04fdd-ab2d-47ee-b7a3-38986474a7f6
+            AppCenter.start(this, "00e04fdd-ab2d-47ee-b7a3-38986474a7f6", Analytics.class, Crashes.class);
+        */
 
-        //Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
         FirebaseApp.initializeApp(getApplicationContext());
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
