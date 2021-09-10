@@ -37,6 +37,7 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
     private static ReportContract.Presenter presenter;
     private ViewGroup visualizationsViewGroup;
+
     private List<Map<String, IndicatorTally>> indicatorTallies;
 
     private static final String HAS_LOADED_SAMPLE_DATA = "has_loaded_sample_data";
@@ -280,6 +281,8 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
     private void createReportViews(ViewGroup mainLayout) {
 
+        createTopReportViews(mainLayout);
+
         mainLayout.addView(getTitleView(getResources().getString(R.string.current_month)));
 
         NumericDisplayModel childEnconters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.childEncounter, R.string.child_encounters, indicatorTallies);
@@ -307,6 +310,17 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel referredEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthReferredEncounters, R.string.referred_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), referredEncounters).createView());
 
+    }
+
+    private void createTopReportViews(ViewGroup topView){
+
+        topView.addView(getTitleView("Weekly Reports"));
+
+        NumericDisplayModel childEnconters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.childEncounter, R.string.child_encounters, indicatorTallies);
+        topView.addView(new NumericIndicatorView(getContext(), childEnconters).createView());
+
+        NumericDisplayModel adolescentEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.adolescentEncounter, R.string.adolescent_encounters, indicatorTallies);
+        topView.addView(new NumericIndicatorView(getContext(), adolescentEncounters).createView());
     }
 
     View getTitleView(String titleText){
