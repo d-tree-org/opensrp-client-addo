@@ -460,7 +460,10 @@
     <string name="total_encounters"> Total Visits </string>
     <string name="referred_encounters"> Referred Visits </string>
 
-
+    <string name="current_month_visits"> Number of visits conducted in the current month </string>
+    <string name="last_month_visits"> Number of visits conducted in the last month </string>
+    <string name="curr_month_percentage_attended_visits"> % of visits conducted at the ADDO for linked clients </string>
+    <string name="last_month_percentage_attended_visits"> Last month % of visits conducted at the ADDO for linked clients </string>
 
     <string name="child_hf_referral_text">Child - HF Referral</string>
 
