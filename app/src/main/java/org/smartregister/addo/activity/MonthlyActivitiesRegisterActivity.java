@@ -119,4 +119,8 @@ public class MonthlyActivitiesRegisterActivity extends BaseRegisterActivity {
         t.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

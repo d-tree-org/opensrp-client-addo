@@ -31,10 +31,6 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.MappedByteBuffer;

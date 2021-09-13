@@ -26,6 +26,7 @@ import org.smartregister.reporting.domain.ReportIndicator;
 import org.smartregister.reporting.model.NumericDisplayModel;
 import org.smartregister.reporting.view.NumericIndicatorView;
 
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
     private static ReportContract.Presenter presenter;
     private ViewGroup visualizationsViewGroup;
+
     private List<Map<String, IndicatorTally>> indicatorTallies;
 
     private static final String HAS_LOADED_SAMPLE_DATA = "has_loaded_sample_data";
@@ -80,161 +82,248 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         List<ReportIndicator> reportIndicators = new ArrayList<>();
         List<IndicatorQuery> indicatorQueries = new ArrayList<>();
 
-        String currentMonthAdolescent = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                "and visit_type in ('Adolescent ADDO Visit' ) " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+        withIndicator(ChartUtil.adolescentEncounter, reportIndicators);
+        withIndicator(ChartUtil.ancEncounter, reportIndicators);
+        withIndicator(ChartUtil.childEncounter, reportIndicators);
+        withIndicator(ChartUtil.otherEncounter, reportIndicators);
+        withIndicator(ChartUtil.pncEncounter, reportIndicators);
+        withIndicator(ChartUtil.lastMonthTotalEncounters, reportIndicators);
+        withIndicator(ChartUtil.lastMonthReferredEncounters, reportIndicators);
+        withIndicator(ChartUtil.currentMonthLinked, reportIndicators);
+        withIndicator(ChartUtil.currentMonthLinkedAttended, reportIndicators);
+        withIndicator(ChartUtil.lastMonthLinked, reportIndicators);
+        withIndicator(ChartUtil.lastMonthAttendedLinked, reportIndicators);
+        withIndicator(ChartUtil.currentMonthVisits, reportIndicators);
+        withIndicator(ChartUtil.lastMonthVisits, reportIndicators);
 
-        String currentMonthChild = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                "and visit_type in ('Child ADDO Visit' ) " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+        withIndicator(ChartUtil.currentMonthIssuedByAddo, reportIndicators);
+        withIndicator(ChartUtil.currentMonthIssuedAttendedByAddo, reportIndicators);
+        withIndicator(ChartUtil.lastMonthIssuedByAddo, reportIndicators);
+        withIndicator(ChartUtil.lastMonthIssuedAttendedByAddo, reportIndicators);
+        withIndicator(ChartUtil.currentMonthCompleted, reportIndicators);
+        withIndicator(ChartUtil.lastMonthCompleted, reportIndicators);
 
-        String currentMonthAnc = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                "and visit_type in ('ANC ADDO Visit' ) " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+        withQuery(ChartUtil.adolescentEncounter, indicatorQueries);
+        withQuery(ChartUtil.ancEncounter, indicatorQueries);
+        withQuery(ChartUtil.childEncounter, indicatorQueries);
+        withQuery(ChartUtil.otherEncounter, indicatorQueries);
+        withQuery(ChartUtil.pncEncounter, indicatorQueries);
+        withQuery(ChartUtil.lastMonthTotalEncounters, indicatorQueries);
+        withQuery(ChartUtil.lastMonthReferredEncounters, indicatorQueries);
+        withQuery(ChartUtil.currentMonthLinked, indicatorQueries);
+        withQuery(ChartUtil.currentMonthLinkedAttended, indicatorQueries);
+        withQuery(ChartUtil.lastMonthLinked, indicatorQueries);
+        withQuery(ChartUtil.lastMonthAttendedLinked, indicatorQueries);
+        withQuery(ChartUtil.currentMonthVisits, indicatorQueries);
+        withQuery(ChartUtil.lastMonthVisits, indicatorQueries);
 
-        String currentMonthPnc = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                "and visit_type in ('PNC ADDO Visit' ) " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
-
-        String currentMonthOther = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
-                "and visit_type in ('Other Member ADDO Visit') " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-         ")";
-
-        String lastMonthTotal = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
-                "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months') " +
-                "and visit_type in ('ANC ADDO Visit', 'Child ADDO Visit', 'PNC ADDO Visit', 'Adolescent ADDO Visit', 'Other Member ADDO Visit' ) " +
-                "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
-
-        String lastMonthReferred = "select count(*) from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                "from visits inner join task " +
-                "on visits.base_entity_id = task.for" +
-                "where datetime(visits.visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
-                "and datetime(visits.visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')" +
-                "and task.business_status = 'Linked' " +
-                "and visits.visit_type in ('ANC ADDO Visit', 'Child ADDO Visit', 'PNC ADDO Visit', 'Adolescent ADDO Visit', 'Other Member ADDO Visit' ) " +
-                "and visits.visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
-
-
-        ReportIndicator currentMonthAdolescentVisits = new ReportIndicator();
-        currentMonthAdolescentVisits.setKey(ChartUtil.adolescentEncounter);
-        currentMonthAdolescentVisits.setDescription("Adolescent visits conducted in the current month");
-        reportIndicators.add(currentMonthAdolescentVisits);
-
-        ReportIndicator currentMonthANCVisits = new ReportIndicator();
-        currentMonthANCVisits.setKey("IND_CURR_ANC");
-        currentMonthANCVisits.setDescription("ANC visits conducted in the current month");
-        reportIndicators.add(currentMonthANCVisits);
-
-        ReportIndicator currentMonthPNCVisits = new ReportIndicator();
-        currentMonthPNCVisits.setKey("IND_CURR_PNC");
-        currentMonthPNCVisits.setDescription("PNC visits conducted in the current month");
-        reportIndicators.add(currentMonthPNCVisits);
-
-        ReportIndicator currentMonthChildVisits = new ReportIndicator();
-        currentMonthChildVisits.setKey("IND_CURR_CHILD");
-        currentMonthChildVisits.setDescription("Children visits conducted in the current month");
-        reportIndicators.add(currentMonthChildVisits);
-
-        ReportIndicator currentMonthOtherVisits = new ReportIndicator();
-        currentMonthOtherVisits.setKey("IND_CURR_OTHER");
-        currentMonthOtherVisits.setDescription("Other client visits conducted in the current month");
-        reportIndicators.add(currentMonthOtherVisits);
-
-        ReportIndicator lastMonthTotalVisits = new ReportIndicator();
-        lastMonthTotalVisits.setKey("IND_LAST_TOTAL");
-        lastMonthTotalVisits.setDescription("Total Visits conducted in the last month");
-        reportIndicators.add(lastMonthTotalVisits);
-
-        ReportIndicator lastMonthReferredVisits = new ReportIndicator();
-        lastMonthReferredVisits.setKey("IND_LAST_REFERRED");
-        lastMonthReferredVisits.setDescription("Visits conducted in the current month that were referred");
-        reportIndicators.add(lastMonthReferredVisits);
-
-        IndicatorQuery curMonthAddo = new IndicatorQuery();
-        curMonthAddo.setIndicatorCode(ChartUtil.adolescentEncounter);
-        curMonthAddo.setDbVersion(0);
-        curMonthAddo.setId(null);
-        curMonthAddo.setQuery(currentMonthAdolescent);
-        indicatorQueries.add(curMonthAddo);
-
-        IndicatorQuery curMonthChild = new IndicatorQuery();
-        curMonthChild.setIndicatorCode(ChartUtil.childEncounter);
-        curMonthChild.setDbVersion(0);
-        curMonthChild.setId(null);
-        curMonthChild.setQuery(currentMonthChild);
-        indicatorQueries.add(curMonthChild);
-
-        IndicatorQuery curMonthANC = new IndicatorQuery();
-        curMonthANC.setIndicatorCode(ChartUtil.ancEncounter);
-        curMonthANC.setDbVersion(0);
-        curMonthANC.setId(null);
-        curMonthANC.setQuery(currentMonthAnc);
-        indicatorQueries.add(curMonthANC);
-
-        IndicatorQuery curMonthPNC = new IndicatorQuery();
-        curMonthPNC.setIndicatorCode(ChartUtil.pncEncounter);
-        curMonthPNC.setDbVersion(0);
-        curMonthPNC.setId(null);
-        curMonthPNC.setQuery(currentMonthPnc);
-        indicatorQueries.add(curMonthPNC);
-
-        IndicatorQuery curMonthOther = new IndicatorQuery();
-        curMonthOther.setIndicatorCode(ChartUtil.otherEncounter);
-        curMonthOther.setDbVersion(0);
-        curMonthOther.setId(null);
-        curMonthOther.setQuery(currentMonthOther);
-        indicatorQueries.add(curMonthOther);
-
-        IndicatorQuery lastMonthTotalIndicatorQuery = new IndicatorQuery();
-        lastMonthTotalIndicatorQuery.setIndicatorCode(ChartUtil.lastMonthTotalEncounters);
-        lastMonthTotalIndicatorQuery.setDbVersion(0);
-        lastMonthTotalIndicatorQuery.setId(null);
-        lastMonthTotalIndicatorQuery.setQuery(lastMonthTotal);
-        indicatorQueries.add(lastMonthTotalIndicatorQuery);
-
-        IndicatorQuery lastMonthReferredIndicatorQuery = new IndicatorQuery();
-        lastMonthReferredIndicatorQuery.setIndicatorCode(ChartUtil.lastMonthReferredEncounters);
-        lastMonthReferredIndicatorQuery.setDbVersion(0);
-        lastMonthReferredIndicatorQuery.setId(null);
-        lastMonthReferredIndicatorQuery.setQuery(lastMonthReferred);
-        indicatorQueries.add(lastMonthReferredIndicatorQuery);
+        withQuery(ChartUtil.currentMonthIssuedByAddo, indicatorQueries);
+        withQuery(ChartUtil.currentMonthIssuedAttendedByAddo, indicatorQueries);
+        withQuery(ChartUtil.lastMonthIssuedByAddo, indicatorQueries);
+        withQuery(ChartUtil.lastMonthIssuedAttendedByAddo, indicatorQueries);
+        withQuery(ChartUtil.currentMonthCompleted, indicatorQueries);
+        withQuery(ChartUtil.lastMonthCompleted, indicatorQueries);
 
         presenter.addIndicators(reportIndicators);
         presenter.addIndicatorQueries(indicatorQueries);
 
+    }
+
+    private void withIndicator(String indicatorCode, List<ReportIndicator> indicators){
+        ReportIndicator indicator = new ReportIndicator();
+        indicator.setKey(indicatorCode);
+        switch (indicatorCode){
+            case ChartUtil.adolescentEncounter:
+                indicator.setDescription("Adolescent visits conducted in the current month");
+                break;
+            case ChartUtil.ancEncounter:
+                indicator.setDescription("ANC visits conducted in the current month");
+                break;
+            case ChartUtil.pncEncounter:
+                indicator.setDescription("PNC visits conducted in the current month");
+                break;
+            case ChartUtil.childEncounter:
+                indicator.setDescription("Children visits conducted in the current month");
+                break;
+            case ChartUtil.otherEncounter:
+                indicator.setDescription("Other client visits conducted in the current month");
+                break;
+            case ChartUtil.lastMonthTotalEncounters:
+                indicator.setDescription("Total Visits conducted in the last month");
+                break;
+            case ChartUtil.lastMonthReferredEncounters:
+                indicator.setDescription("Visits conducted in the current month that were referred");
+                break;
+            case ChartUtil.currentMonthLinked:
+                indicator.setDescription("Clients link to ADDO this month");
+                break;
+            case ChartUtil.currentMonthLinkedAttended:
+                indicator.setDescription("Attended clients that were linked to ADDO this month");
+                break;
+            case ChartUtil.lastMonthLinked:
+                indicator.setDescription("Clients link to ADDO last month");
+                break;
+            case ChartUtil.lastMonthAttendedLinked:
+                indicator.setDescription("Attended clients that were linked to ADDO last month");
+                break;
+            case ChartUtil.currentMonthIssuedByAddo:
+                indicator.setDescription("Referrals issued by an ADDO in the current month");
+                break;
+            case ChartUtil.currentMonthIssuedAttendedByAddo:
+                indicator.setDescription("Current month ADDO Issued referrals that were attended");
+                break;
+            case ChartUtil.lastMonthIssuedByAddo:
+                indicator.setDescription("Referrals issued by and ADDO in the last month");
+                break;
+            case ChartUtil.lastMonthIssuedAttendedByAddo:
+                indicator.setDescription("last month issued referrals that were attended");
+                break;
+        }
+        indicators.add(indicator);
+    }
+
+    private void withQuery(String indicatorCode, List<IndicatorQuery> queries){
+        IndicatorQuery iQuery = new IndicatorQuery();
+        String query = "";
+        iQuery.setIndicatorCode(indicatorCode);
+        iQuery.setDbVersion(0);
+        iQuery.setId(null);
+        switch (indicatorCode){
+            case ChartUtil.adolescentEncounter:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                        "and visit_type in ('Adolescent ADDO Visit' ) " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.childEncounter:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                        "and visit_type in ('Child ADDO Visit' ) " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.ancEncounter:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                        "and visit_type in ('ANC ADDO Visit' ) " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.pncEncounter:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                        "and visit_type in ('PNC ADDO Visit' ) " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.otherEncounter:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
+                        "and visit_type in ('Other Member ADDO Visit') " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.lastMonthTotalEncounters:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits " +
+                        "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
+                        "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months') " +
+                        "and visit_type in ('ANC ADDO Visit', 'Child ADDO Visit', 'PNC ADDO Visit', 'Adolescent ADDO Visit', 'Other Member ADDO Visit' ) " +
+                        "and visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.lastMonthReferredEncounters:
+                query = "select count(*) from ( " +
+                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+                        "from visits inner join task " +
+                        "on visits.base_entity_id = task.for" +
+                        "where datetime(visits.visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
+                        "and datetime(visits.visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')" +
+                        "and task.business_status = 'Linked' " +
+                        "and visits.visit_type in ('ANC ADDO Visit', 'Child ADDO Visit', 'PNC ADDO Visit', 'Adolescent ADDO Visit', 'Other Member ADDO Visit' ) " +
+                        "and visits.visit_json like \"%"+anmUser+"%\" "+
+                        "group by base_entity_id, date_visited" +
+                        ")";
+                break;
+            case ChartUtil.currentMonthLinked:
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.currentMonthLinkedAttended:
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        "business_status = 'Attended' and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.lastMonthLinked:
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        lastMonthLimit();
+                break;
+            case ChartUtil.lastMonthAttendedLinked:
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        "business_status = 'Attended' and " +
+                        lastMonthLimit();
+                break;
+            case ChartUtil.currentMonthVisits:
+                query = "select count(*) from visits where " +
+                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit') " +
+                        "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";
+                break;
+            case ChartUtil.lastMonthVisits:
+                query = "select count(*) from visits where " +
+                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit')" +
+                        " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months) and" +
+                        " datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month')";
+                break;
+            case ChartUtil.currentMonthIssuedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.currentMonthIssuedAttendedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and status in ('IN_PROGRESS', 'COMPLETED') and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.lastMonthIssuedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and " +
+                        lastMonthLimit();
+                break;
+            case ChartUtil.lastMonthIssuedAttendedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and status in ('IN_PROGRESS', 'COMPLETED') and " +
+                        lastMonthLimit();
+                break;
+        }
+        iQuery.setQuery(query);
+        queries.add(iQuery);
+    }
+
+    private String lastMonthLimit(){
+        return "datetime(authored_on/1000, 'unixepoch') < date('now', 'start of month') and " +
+                "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month', '-1 months') ";
+    }
+
+    private String currentMonthLimit(){
+        return "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month') ";
     }
 
     @Nullable
@@ -282,6 +371,13 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
         mainLayout.addView(getTitleView(getResources().getString(R.string.current_month)));
 
+        NumericDisplayModel visitsConducted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthVisits, R.string.current_month_visits, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), visitsConducted).createView());
+
+        addPercentageLinked(mainLayout);
+
+        addPercentageCompleted(mainLayout);
+
         NumericDisplayModel childEnconters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.childEncounter, R.string.child_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), childEnconters).createView());
 
@@ -301,12 +397,74 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         mainLayout.addView(spacerView);
 
         mainLayout.addView(getTitleView(getResources().getString(R.string.last_month)));
+
+        NumericDisplayModel visitsConductedLastMonth = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthVisits, R.string.last_month_visits, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), visitsConductedLastMonth).createView());
+
+        addPercentageLinkedLastMonth(mainLayout);
+
+        addPercentageCompletedLastMonth(mainLayout);
+
         NumericDisplayModel totalEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthTotalEncounters, R.string.total_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), totalEncounters).createView());
 
         NumericDisplayModel referredEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthReferredEncounters, R.string.referred_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), referredEncounters).createView());
 
+    }
+
+    private void addPercentageLinked(ViewGroup topView){
+        NumericDisplayModel currentMonthLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthLinked, R.string.current_month, indicatorTallies);
+        NumericDisplayModel currentMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthLinkedAttended, R.string.current_month, indicatorTallies);
+        int percentage = 0;
+        if (currentMonthLinkedAttended.getCount() > 0 && currentMonthLinked.getCount() > 0 ){
+            percentage =  Math.round((currentMonthLinkedAttended.getCount()/currentMonthLinked.getCount())*100);
+        }
+
+        NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.curr_month_percentage_attended_visits, indicatorTallies);
+        percentageVisitsForLinked.setCount(percentage);
+        topView.addView(new NumericIndicatorView(getContext(), percentageVisitsForLinked).createView());
+    }
+
+    private void addPercentageLinkedLastMonth(ViewGroup topView){
+        NumericDisplayModel lastMonthLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthLinked, R.string.last_month, indicatorTallies);
+        NumericDisplayModel lastMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthAttendedLinked, R.string.last_month, indicatorTallies);
+        int percentage = 0;
+        if (lastMonthLinked.getCount() > 0 && lastMonthLinkedAttended.getCount() > 0){
+            percentage =  Math.round((lastMonthLinkedAttended.getCount()/lastMonthLinked.getCount())*100);
+        }
+
+        NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.last_month_percentage_attended_visits, indicatorTallies);
+        percentageVisitsForLinked.setCount(percentage);
+        topView.addView(new NumericIndicatorView(getContext(), percentageVisitsForLinked).createView());
+    }
+
+    private void addPercentageCompleted(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedByAddo, R.string.current_month, indicatorTallies);
+        NumericDisplayModel currentMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
+        int percentage = 0;
+        if (currentMonthIssuedCompleted.getCount() > 0 && currentMonthIssued.getCount() > 0 ){
+            float perc = currentMonthIssuedCompleted.getCount()/currentMonthIssued.getCount();
+            perc = perc * 100;
+            percentage = Math.round(perc);
+        }
+
+        NumericDisplayModel percentageIssuedCompletedCM = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompleted, R.string.curr_month_percentage_completed, indicatorTallies);
+        percentageIssuedCompletedCM.setCount(percentage);
+        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedCM).createView());
+    }
+
+    private void addPercentageCompletedLastMonth(ViewGroup mainView){
+        NumericDisplayModel lastMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedByAddo, R.string.current_month, indicatorTallies);
+        NumericDisplayModel lastMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
+        int percentage = 0;
+        if (lastMonthIssuedCompleted.getCount() > 0 && lastMonthIssued.getCount() > 0 ){
+            percentage =  Math.round((lastMonthIssuedCompleted.getCount()/lastMonthIssued.getCount())*100);
+        }
+
+        NumericDisplayModel percentageIssuedCompletedML = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompletedLastMonth, R.string.last_month_percentage_completed, indicatorTallies);
+        percentageIssuedCompletedML.setCount(percentage);
+        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedML).createView());
     }
 
     View getTitleView(String titleText){
