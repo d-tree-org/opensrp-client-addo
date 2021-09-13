@@ -91,6 +91,9 @@
     <string name="curr_month_percentage_attended_visits"> % ya matembeleo yaliyounganishwa kwa ADDO mwezi huu </string>
     <string name="last_month_percentage_attended_visits"> % ya matembeleo yaliyounganishwa kwa ADDO mwezi uliopita </string>
 
+    <string name="curr_month_percentage_completed"> % ya rufaa zilizotumwa kituo cha afya zikakamilika mwezi huu</string>
+    <string name="last_month_percentage_completed"> % ya rufaa zilizotumwa kituo cha afya zikakamilika mwezi uliopita </string>
+
     <string name="child_hf_referral_text">Mtoto - Rufaa kwenda kituoni</string>
 
     <string name="child_addo_linkage_text">Mtoto - Ushauri kwenda DLDM</string>
