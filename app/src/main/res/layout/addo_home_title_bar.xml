@@ -2,33 +2,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_bar_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="2"
+    android:layout_height="wrap_content"
+    android:layout_weight="3"
     android:background="@color/addo_primary"
-    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/week_summary_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="2dp"
+        android:fontFamily="@font/google_sans_medium"
+        android:text="@string/weekly_summary_title_text"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <include
+        android:id="@+id/rep_num"
+        layout="@layout/addo_summary_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/week_summary_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="2dp" />
+
+    <TextView
         android:id="@+id/village_select_title"
+        style="@style/selectClientVillag"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
+        android:layout_below="@+id/rep_num"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
         android:height="30dp"
+        android:ellipsize="start"
         android:gravity="center"
         android:singleLine="true"
-        android:ellipsize="start"
-        style="@style/selectClientVillag"
-        android:text="@string/add_select_village" />
+        android:text="@string/add_select_village"
+        android:visibility="visible" />
 
     <TextView
         style="@style/askTheClientIfTh"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/village_select_title"
-        android:layout_marginTop="12dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:width="328dp"
-        android:height="133dp"
-        android:gravity="center"
         android:paddingTop="3dp"
-        android:text="@string/ask_client_village" />
+        android:text="@string/ask_client_village"
+        android:visibility="visible" />
 
 </RelativeLayout>

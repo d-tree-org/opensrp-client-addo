@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.5.4'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
     }
 }
@@ -110,6 +110,7 @@ android {
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
+            ext.enableCrashlytics = false
             testCoverageEnabled true
         }
     }

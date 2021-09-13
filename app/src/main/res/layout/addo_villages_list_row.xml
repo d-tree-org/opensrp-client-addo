@@ -38,7 +38,7 @@
 
                 <org.smartregister.view.LocationPickerView
                     android:id="@+id/village_name"
-                    style="@style/me_page_location_selector"
+                    style="@style/page_location_selector"
                     android:layout_width="210dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
@@ -48,7 +48,8 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:scrollHorizontally="true"
-                    android:text="Village Name" />
+                    android:text="Village Name"
+                    android:textColor="@color/black" />
 
             </RelativeLayout>
 

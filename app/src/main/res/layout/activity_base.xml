@@ -79,7 +79,6 @@
                         android:src="@drawable/ic_fondation_botnar"
                         android:scaleType="centerCrop" />
 
-
                 </LinearLayout>
 
                 <TextView
