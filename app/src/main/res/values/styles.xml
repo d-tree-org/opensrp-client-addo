@@ -125,11 +125,25 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@android:color/holo_red_light</item>
     </style>
-
+  
     <style name="page_location_selector">
         <item name="android:fontFamily">@font/google_sans_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/text_black</item>
-    </style>
+   </style>
+  <!-- Fullscreen style override -->
+  <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
+      <item name="android:windowNoTitle">true</item>
+      <item name="colorPrimaryDark">@color/primaryDark</item>
+      <item name="colorPrimary">@color/primary</item>
+      <!-- Set this to true if you want Full Screen without status bar -->
+      <item name="android:windowFullscreen">false</item>
+      <item name="android:windowIsFloating">false</item>
+      <!-- This is important! Don't forget to set window background -->
+      <item name="android:windowBackground">@color/white</item>
+      <!-- Additionally if you want animations when dialog opening -->
+      <!--   <item name="android:windowEnterAnimation">@anim/slide_up</item>
+         <item name="android:windowExitAnimation">@anim/slide_down</item>-->
+  </style>
 
 </resources>
