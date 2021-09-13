@@ -477,5 +477,9 @@
     <string name="pnc_hf_referral_text">PNC - HF Referral</string>
 
     <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
+    <string name="referrals_closed">Referrals Closed</string>
+    <string name="total_referrals">Total Referrals</string>
+    <string name="total_visits">Total Visits By ADDO</string>
+    <string name="weekly_summary_title_text">Weekly summary</string>
 
 </resources>
