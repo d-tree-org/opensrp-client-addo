@@ -100,6 +100,8 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         withIndicator(ChartUtil.currentMonthIssuedAttendedByAddo, reportIndicators);
         withIndicator(ChartUtil.lastMonthIssuedByAddo, reportIndicators);
         withIndicator(ChartUtil.lastMonthIssuedAttendedByAddo, reportIndicators);
+        withIndicator(ChartUtil.currentMonthCompleted, reportIndicators);
+        withIndicator(ChartUtil.lastMonthCompleted, reportIndicators);
 
         withQuery(ChartUtil.adolescentEncounter, indicatorQueries);
         withQuery(ChartUtil.ancEncounter, indicatorQueries);
@@ -119,6 +121,8 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         withQuery(ChartUtil.currentMonthIssuedAttendedByAddo, indicatorQueries);
         withQuery(ChartUtil.lastMonthIssuedByAddo, indicatorQueries);
         withQuery(ChartUtil.lastMonthIssuedAttendedByAddo, indicatorQueries);
+        withQuery(ChartUtil.currentMonthCompleted, indicatorQueries);
+        withQuery(ChartUtil.lastMonthCompleted, indicatorQueries);
 
         presenter.addIndicators(reportIndicators);
         presenter.addIndicatorQueries(indicatorQueries);
@@ -162,18 +166,31 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
             case ChartUtil.lastMonthAttendedLinked:
                 indicator.setDescription("Attended clients that were linked to ADDO last month");
                 break;
+            case ChartUtil.currentMonthIssuedByAddo:
+                indicator.setDescription("Referrals issued by an ADDO in the current month");
+                break;
+            case ChartUtil.currentMonthIssuedAttendedByAddo:
+                indicator.setDescription("Current month ADDO Issued referrals that were attended");
+                break;
+            case ChartUtil.lastMonthIssuedByAddo:
+                indicator.setDescription("Referrals issued by and ADDO in the last month");
+                break;
+            case ChartUtil.lastMonthIssuedAttendedByAddo:
+                indicator.setDescription("last month issued referrals that were attended");
+                break;
         }
         indicators.add(indicator);
     }
 
     private void withQuery(String indicatorCode, List<IndicatorQuery> queries){
         IndicatorQuery iQuery = new IndicatorQuery();
+        String query = "";
         iQuery.setIndicatorCode(indicatorCode);
         iQuery.setDbVersion(0);
         iQuery.setId(null);
         switch (indicatorCode){
             case ChartUtil.adolescentEncounter:
-                String currentMonthAdolescent = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
@@ -181,10 +198,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(currentMonthAdolescent);
                 break;
             case ChartUtil.childEncounter:
-                String currentMonthChild = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
@@ -192,10 +208,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(currentMonthChild);
                 break;
             case ChartUtil.ancEncounter:
-                String currentMonthAnc = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
@@ -203,10 +218,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(currentMonthAnc);
                 break;
             case ChartUtil.pncEncounter:
-                String currentMonthPnc = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
@@ -214,10 +228,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(currentMonthPnc);
                 break;
             case ChartUtil.otherEncounter:
-                String currentMonthOther = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
@@ -225,10 +238,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(currentMonthOther);
                 break;
             case ChartUtil.lastMonthTotalEncounters:
-                String lastMonthTotal = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits " +
                         "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
@@ -237,10 +249,9 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(lastMonthTotal);
                 break;
             case ChartUtil.lastMonthReferredEncounters:
-                String lastMonthReferred = "select count(*) from ( " +
+                query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                         "from visits inner join task " +
                         "on visits.base_entity_id = task.for" +
@@ -251,46 +262,68 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                         "and visits.visit_json like \"%"+anmUser+"%\" "+
                         "group by base_entity_id, date_visited" +
                         ")";
-                iQuery.setQuery(lastMonthReferred);
                 break;
             case ChartUtil.currentMonthLinked:
-                String currentMonthLinkedClients = "select count(*) from tasks where code = 'Linked' and " +
-                        "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month')";
-                iQuery.setQuery(currentMonthLinkedClients);
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        currentMonthLimit();
                 break;
             case ChartUtil.currentMonthLinkedAttended:
-                String currentMonthLinkedAttendedClients = "select count(*) from tasks where code = 'Linked' and " +
+                query = "select count(*) from tasks where code = 'Linked' and " +
                         "business_status = 'Attended' and " +
-                        "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month')";
-                iQuery.setQuery(currentMonthLinkedAttendedClients);
+                        currentMonthLimit();
                 break;
             case ChartUtil.lastMonthLinked:
-                String lastMonthLinkedClients = "select count(*) from tasks where code = 'Linked' and " +
-                        "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month', -1 months) and" +
-                        " datetime(authored_on/1000, 'unixepoch') < date('now', 'start of month')";
-                iQuery.setQuery(lastMonthLinkedClients);
+                query = "select count(*) from tasks where code = 'Linked' and " +
+                        lastMonthLimit();
                 break;
             case ChartUtil.lastMonthAttendedLinked:
-                String lastMonthLinkedAttendedClients = "select count(*) from tasks where code = 'Linked' and " +
+                query = "select count(*) from tasks where code = 'Linked' and " +
                         "business_status = 'Attended' and " +
-                        "datetime(authored_on/1000, 'unixepoch') < date('now', 'start of month') and " +
-                        "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month', '-1 months')";
-                iQuery.setQuery(lastMonthLinkedAttendedClients);
+                        lastMonthLimit();
                 break;
             case ChartUtil.currentMonthVisits:
-                String currentMonthVisits = "select count(*) from visits where " +
+                query = "select count(*) from visits where " +
                         "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit)" +
                         " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";
-                iQuery.setQuery(currentMonthVisits);
                 break;
             case ChartUtil.lastMonthVisits:
-                String lastMonthVisits = "select count(*) from visits where " +
+                query = "select count(*) from visits where " +
                         "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit)" +
-                        " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months)";
-                iQuery.setQuery(lastMonthVisits);
+                        " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months) and" +
+                        " datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month')";
+                break;
+            case ChartUtil.currentMonthIssuedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.currentMonthIssuedAttendedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and status in ('IN_PROGRESS', 'COMPLETED') and " +
+                        currentMonthLimit();
+                break;
+            case ChartUtil.lastMonthIssuedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and " +
+                        lastMonthLimit();
+                break;
+            case ChartUtil.lastMonthIssuedAttendedByAddo:
+                query = "select count(*) from task where code = 'Referral' and " +
+                        "owner = '"+anmUser+"' and status in ('IN_PROGRESS', 'COMPLETED') and " +
+                        lastMonthLimit();
                 break;
         }
+        iQuery.setQuery(query);
         queries.add(iQuery);
+    }
+
+    private String lastMonthLimit(){
+        return "datetime(authored_on/1000, 'unixepoch') < date('now', 'start of month') and " +
+                "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month', '-1 months') ";
+    }
+
+    private String currentMonthLimit(){
+        return "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month') ";
     }
 
     @Nullable
@@ -343,6 +376,8 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
         addPercentageLinked(mainLayout);
 
+        addPercentageCompleted(mainLayout);
+
         NumericDisplayModel childEnconters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.childEncounter, R.string.child_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), childEnconters).createView());
 
@@ -368,6 +403,8 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
         addPercentageLinkedLastMonth(mainLayout);
 
+        addPercentageCompletedLastMonth(mainLayout);
+
         NumericDisplayModel totalEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthTotalEncounters, R.string.total_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), totalEncounters).createView());
 
@@ -381,7 +418,7 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel currentMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthLinkedAttended, R.string.current_month, indicatorTallies);
         int percentage = 0;
         if (currentMonthLinkedAttended.getCount() > 0 && currentMonthLinked.getCount() > 0 ){
-            percentage =  Float.floatToIntBits(currentMonthLinkedAttended.getCount()/currentMonthLinked.getCount())*100;
+            percentage =  Math.round((currentMonthLinkedAttended.getCount()/currentMonthLinked.getCount())*100);
         }
 
         NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.curr_month_percentage_attended_visits, indicatorTallies);
@@ -394,12 +431,40 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel lastMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthAttendedLinked, R.string.last_month, indicatorTallies);
         int percentage = 0;
         if (lastMonthLinked.getCount() > 0 && lastMonthLinkedAttended.getCount() > 0){
-            percentage =  Float.floatToIntBits(lastMonthLinkedAttended.getCount()/lastMonthLinked.getCount())*100;
+            percentage =  Math.round((lastMonthLinkedAttended.getCount()/lastMonthLinked.getCount())*100);
         }
 
         NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.last_month_percentage_attended_visits, indicatorTallies);
         percentageVisitsForLinked.setCount(percentage);
         topView.addView(new NumericIndicatorView(getContext(), percentageVisitsForLinked).createView());
+    }
+
+    private void addPercentageCompleted(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedByAddo, R.string.current_month, indicatorTallies);
+        NumericDisplayModel currentMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
+        int percentage = 0;
+        if (currentMonthIssuedCompleted.getCount() > 0 && currentMonthIssued.getCount() > 0 ){
+            float perc = currentMonthIssuedCompleted.getCount()/currentMonthIssued.getCount();
+            perc = perc * 100;
+            percentage = Math.round(perc);
+        }
+
+        NumericDisplayModel percentageIssuedCompletedCM = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompleted, R.string.curr_month_percentage_completed, indicatorTallies);
+        percentageIssuedCompletedCM.setCount(percentage);
+        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedCM).createView());
+    }
+
+    private void addPercentageCompletedLastMonth(ViewGroup mainView){
+        NumericDisplayModel lastMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedByAddo, R.string.current_month, indicatorTallies);
+        NumericDisplayModel lastMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
+        int percentage = 0;
+        if (lastMonthIssuedCompleted.getCount() > 0 && lastMonthIssued.getCount() > 0 ){
+            percentage =  Math.round((lastMonthIssuedCompleted.getCount()/lastMonthIssued.getCount())*100);
+        }
+
+        NumericDisplayModel percentageIssuedCompletedML = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompletedLastMonth, R.string.last_month_percentage_completed, indicatorTallies);
+        percentageIssuedCompletedML.setCount(percentage);
+        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedML).createView());
     }
 
     View getTitleView(String titleText){
