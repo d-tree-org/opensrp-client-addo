@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import org.smartregister.addo.BuildConfig;
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
@@ -21,7 +20,6 @@ import org.smartregister.addo.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
 import org.smartregister.family.presenter.BaseFamilyRegisterPresenter;
-import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
@@ -100,20 +98,5 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
             }
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////// Inner Class //////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    public static class AddoHomeSharedViewModel extends ViewModel {
-        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
 
-        public AddoHomeSharedViewModel() {}
-
-        public void setSelectedVillage(String village) {
-            selectedVillage.setValue(village);
-        }
-
-        public LiveData<String> getSelectedVillage() {
-            return selectedVillage;
-        }
-    }
 }

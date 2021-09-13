@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.5.4'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
     }
 }
@@ -14,7 +14,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 jacoco {
     toolVersion = "0.8.5"
@@ -110,6 +110,7 @@ android {
             buildConfigField("String", "SIMPRINT_PRODUCTION_PROJECT_ID", ' "8rlGBhsk6371eW2KLZm6" ')
             buildConfigField("String", "SIMPRINT_USER_ID", ' "global_user" ')
             buildConfigField("String", "SIMPRINT_MODULE_ID", ' "global_module" ')
+            ext.enableCrashlytics = false
             testCoverageEnabled true
         }
     }
@@ -222,7 +223,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-family:1.2.43-DTREE-5-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-family:1.2.43-DTREE-6-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
@@ -315,16 +316,11 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.google.guava:guava:20.0'
 
-    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
+    implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
-
-    implementation('com.google.firebase:firebase-crashlytics:') {
-        transitive = true
-    }
-
-    def appCenterSdkVersion = '4.0.0'
-    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
-    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 
     implementation 'org.apache.commons:commons-lang3:1.3.2'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -355,4 +351,3 @@ dependencies {
 coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/merged.xml"
 }
-apply plugin: 'com.google.firebase.crashlytics'

@@ -24,6 +24,19 @@
             android:layout_height="match_parent" />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/village_select_title"
+        style="@style/selectClientVillag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_color"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/google_sans_italic"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:text="Select Client's village from the list" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
