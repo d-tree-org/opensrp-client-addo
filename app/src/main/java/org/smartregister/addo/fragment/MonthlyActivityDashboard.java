@@ -283,12 +283,12 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
                 break;
             case ChartUtil.currentMonthVisits:
                 query = "select count(*) from visits where " +
-                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit)" +
-                        " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";
+                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit') " +
+                        "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";
                 break;
             case ChartUtil.lastMonthVisits:
                 query = "select count(*) from visits where " +
-                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit)" +
+                        "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit')" +
                         " and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months) and" +
                         " datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month')";
                 break;
