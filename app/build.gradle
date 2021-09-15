@@ -2,6 +2,7 @@ buildscript {
 
     repositories {
         google()
+        mavenLocal()
         jcenter()
     }
     dependencies {
@@ -239,7 +240,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-materialedittext'
     }
 
-    implementation('org.smartregister:opensrp-client-native-form:1.7.26-DTREE-MLS-5-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-native-form:1.7.27-DTREE-MLS-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
