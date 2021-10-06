@@ -29,6 +29,8 @@ public interface FamilyFocusedMemberProfileContract {
         String getString(int id_with_value);
 
         void displayProgressBar(boolean b);
+
+        void showScreeningDoneCheck(boolean show);
     }
 
     interface Presenter extends BaseProfileContract.Presenter {
@@ -41,6 +43,8 @@ public interface FamilyFocusedMemberProfileContract {
 
         void submitVisit(Map<String, String> formForSubmission);
 
+        boolean checkIfScreeningDone();
+
     }
 
     interface Interactor {
@@ -48,6 +52,8 @@ public interface FamilyFocusedMemberProfileContract {
         void onDestroy(boolean isChangingConfiguration);
 
         void refreshProfileView(String baseEntityId, InteractorCallBack callback);
+
+        void checkIfScreeningWithin24H(String baseEntityId, InteractorCallBack callBack);
 
         void submitVisit(boolean editMode, String memberID, Map<String, String> formForSubmission, InteractorCallBack callBack);
 
@@ -58,5 +64,7 @@ public interface FamilyFocusedMemberProfileContract {
         void refreshProfileTopSection(CommonPersonObjectClient client);
 
         void onSubmitted(boolean successful);
+
+        void showScreeningDone(boolean show);
     }
 }
