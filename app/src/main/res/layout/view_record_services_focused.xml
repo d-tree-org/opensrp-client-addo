@@ -7,19 +7,35 @@
     android:orientation="vertical"
     android:paddingTop="10dp">
 
-    <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_focused_client_screening"
-        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginRight="17dp"
-        android:background="@drawable/addo_btn_selector_client_profile"
-        android:gravity="center"
-        android:text="@string/addo_profile_other_screening"
-        android:textAllCaps="false"
-        android:textColor="@color/addo_primary" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_focused_client_screening"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="17dp"
+            android:background="@drawable/addo_btn_selector_client_profile"
+            android:gravity="center"
+            android:text="@string/addo_profile_other_screening"
+            android:textAllCaps="false"
+            android:textColor="@color/addo_primary" />
+
+        <ImageView
+            android:id="@+id/tick_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:src="@drawable/activityrow_visited"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/tv_focused_client_commodities"
@@ -39,12 +55,12 @@
         style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
         android:layout_marginStart="17dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="17dp"
         android:layout_marginBottom="17dp"
         android:background="@drawable/addo_btn_selector_client_profile"
         android:gravity="center"
-        android:layout_marginEnd="17dp"
         android:text="@string/focused_client_profile_dispense"
         android:textColor="@color/addo_primary" />
 
