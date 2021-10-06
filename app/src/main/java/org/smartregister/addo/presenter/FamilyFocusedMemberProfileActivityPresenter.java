@@ -1,5 +1,7 @@
 package org.smartregister.addo.presenter;
 
+import static org.smartregister.util.Utils.getName;
+
 import android.app.Activity;
 import android.widget.Toast;
 
@@ -14,17 +16,15 @@ import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.Map;
 
-import static org.smartregister.util.Utils.getName;
-
 public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocusedMemberProfileContract.Presenter, FamilyFocusedMemberProfileContract.InteractorCallBack {
 
+    protected String familyHead;
+    protected String villageTown;
     private WeakReference<FamilyFocusedMemberProfileContract.View> viewReference;
     private String baseEntityId;
     private String primaryCaregiver;
     private String familyBaseEntityId;
-    protected String familyHead;
     private String familyName;
-    protected String villageTown;
     private FamilyFocusedMemberProfileInteractor interactor;
 
     public FamilyFocusedMemberProfileActivityPresenter(FamilyFocusedMemberProfileContract.View view, FamilyProfileMemberContract.Model model,
@@ -87,7 +87,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
         String lastName = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.LAST_NAME, true);
         int age = Utils.getAgeFromDate(Utils.getValue(client.getColumnmaps(), DBConstants.KEY.DOB, true));
 
-        getView().setProfileName(MessageFormat.format("{0}, {1}", getName(getName(firstName, middleName),lastName), age));
+        getView().setProfileName(MessageFormat.format("{0}, {1}", getName(getName(firstName, middleName), lastName), age));
 
         String gender = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GENDER, true);
         getView().setProfileDetailOne(org.smartregister.addo.util.Utils.getTranslatedGender(gender));
@@ -134,4 +134,16 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
             interactor.submitVisit(false, baseEntityId, formForSubmission, this);
         }
     }
+
+    @Override
+    public boolean checkIfScreeningDone() {
+        interactor.checkIfScreeningWithin24H(baseEntityId, this);
+        return false;
+    }
+
+    @Override
+    public void showScreeningDone(boolean show) {
+        getView().showScreeningDoneCheck(show);
+    }
+
 }

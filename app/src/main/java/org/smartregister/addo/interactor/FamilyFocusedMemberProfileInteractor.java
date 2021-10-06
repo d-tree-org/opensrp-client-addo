@@ -23,6 +23,7 @@ import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.chw.anc.util.Constants;
 import org.smartregister.chw.anc.util.JsonFormUtils;
 import org.smartregister.chw.anc.util.NCUtils;
+import org.smartregister.chw.anc.util.VisitUtils;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -227,5 +228,15 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
         String villageTown = Utils.getValue(pClient.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, false);
 
         return LocationHelper.getInstance().getOpenMrsLocationId(villageTown);
+    }
+
+    @Override
+    public void checkIfScreeningWithin24H(String baseEntityId, FamilyFocusedMemberProfileContract.InteractorCallBack callBack) {
+        Visit lastVisit = visitRepository().getLatestVisit(baseEntityId, getEncounterType(baseEntityId));
+        if (lastVisit != null) {
+            if (VisitUtils.isVisitWithin24Hours(lastVisit)) {
+                callBack.showScreeningDone(true);
+            }
+        }
     }
 }

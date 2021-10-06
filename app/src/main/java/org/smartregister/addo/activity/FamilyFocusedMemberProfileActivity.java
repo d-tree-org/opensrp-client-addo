@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import com.vijay.jsonwizard.activities.JsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
@@ -58,18 +58,22 @@ import timber.log.Timber;
 
 public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity implements FamilyFocusedMemberProfileContract.View {
 
+    public static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
+    public static final String ANC_DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
+    public static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
+    public static final String ADOLESCENT_SCREENING_ENCOUNTER = "Adolescent Addo Screening";
+    protected ViewPagerAdapter adapter;
+    protected MemberObject memberObject;
     private TextView nameView;
     private TextView detailOneView;
     private TextView detailTwoView;
     private TextView detailThreeView;
     private CircleImageView imageView;
+    private ImageView screeningDoneCheckView;
     private CustomFontTextView ctvScreeningMed, ctvCommodities, ctvDispense;
     private ProgressBar progressBar;
-
     private View familyHeadView;
     private View primaryCaregiverView;
-
-    protected ViewPagerAdapter adapter;
     private String familyBaseEntityId;
     private String baseEntityId;
     private String familyHead;
@@ -78,14 +82,20 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private String familyName;
     private String PhoneNumber;
     private CommonPersonObjectClient commonPersonObject;
-    protected MemberObject memberObject;
-
     private FormUtils formUtils;
 
-    public static final String CHILD_DANGER_SIGN_SCREENING_ENCOUNTER = "Child Danger Signs";
-    public static final String ANC_DANGER_SIGN_SCREENING_ENCOUNTER = "ANC Danger Signs";
-    public static final String PNC_DANGER_SIGN_SCREENING_ENCOUNTER = "PNC Danger Signs";
-    public static final String ADOLESCENT_SCREENING_ENCOUNTER = "Adolescent Addo Screening";
+    private static void updateFormField(JSONArray formFieldArrays, String formFieldKey, String updateValue) {
+        if (updateValue != null) {
+            JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, formFieldKey);
+            if (formObject != null) {
+                try {
+                    formObject.put(org.smartregister.util.JsonFormUtils.VALUE, updateValue);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreation() {
@@ -116,7 +126,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void setupViews() {
         super.setupViews();
         TextView toolBarTitle = findViewById(R.id.toolbar_title_focused);
-        if(presenter().getFamilyName() == null) {
+        if (presenter().getFamilyName() == null) {
             toolBarTitle.setText(getString(R.string.search_results_return));
         } else {
             toolBarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
@@ -134,6 +144,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         imageView = findViewById(R.id.imageview_profile);
         imageView.setBorderWidth(2);
 
+        screeningDoneCheckView = findViewById(R.id.tick_image);
+
         ctvScreeningMed = findViewById(R.id.tv_focused_client_screening);
         ctvScreeningMed.setOnClickListener(this);
         ctvCommodities = findViewById(R.id.tv_focused_client_commodities);
@@ -141,6 +153,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         ctvDispense = findViewById(R.id.tv_focused_client_dispense);
         progressBar.setVisibility(View.GONE);
         ctvDispense.setOnClickListener(this);
+
+        checkIfScreeningDone();
     }
 
     @Override
@@ -229,6 +243,19 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void onResumption() {
         super.onResumption();
         presenter().refreshProfileView();
+    }
+
+    public void checkIfScreeningDone() {
+        presenter().checkIfScreeningDone();
+    }
+
+    @Override
+    public void showScreeningDoneCheck(boolean show) {
+        if (show) {
+            screeningDoneCheckView.setVisibility(View.VISIBLE);
+        } else {
+            screeningDoneCheckView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -397,7 +424,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                             });
                         } else {
                             //refer
-                            ReferralUtils.createReferralTask( baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
+                            ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
                             checkDSPresentProposedMedsAndDispense(form);
 
                         }
@@ -470,8 +497,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                     dispenseMedication(null, getResources().getString(R.string.default_dispense_message), null);
                 }
             } else {
-            dispenseMedication(null, null, null);
-        }
+                dispenseMedication(null, null, null);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -522,19 +549,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         }
     }
 
-    private static void updateFormField(JSONArray formFieldArrays, String formFieldKey, String updateValue) {
-        if (updateValue != null) {
-            JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, formFieldKey);
-            if (formObject != null) {
-                try {
-                    formObject.put(org.smartregister.util.JsonFormUtils.VALUE, updateValue);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private void closeOpenNewReferral(Context context, final OnDialogButtonClick onDialogButtonClick) {
         final AlertDialog alert = new AlertDialog.Builder(context).create();
         alert.setMessage(getString(R.string.do_you_want_to_give_another_referral));
@@ -567,7 +581,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         } else if (AdolescentDao.isAdolescentMember(baseEntityId)) {
             imageResourceId = org.smartregister.addo.util.Utils.getMemberImageResourceIdentifier();
         } else {
-            imageResourceId =org.smartregister.addo.util.Utils.getChildProfileImageResourceIDentifier();
+            imageResourceId = org.smartregister.addo.util.Utils.getChildProfileImageResourceIDentifier();
         }
 
 
