@@ -43,7 +43,7 @@ public interface FamilyFocusedMemberProfileContract {
 
         void submitVisit(Map<String, String> formForSubmission);
 
-        boolean checkIfScreeningDone();
+        boolean checkIfVisitTasksDone();
 
     }
 
@@ -53,7 +53,7 @@ public interface FamilyFocusedMemberProfileContract {
 
         void refreshProfileView(String baseEntityId, InteractorCallBack callback);
 
-        void checkIfScreeningWithin24H(String baseEntityId, InteractorCallBack callBack);
+        void checkIfTasksDoneWithin24H(String baseEntityId, InteractorCallBack callBack);
 
         void submitVisit(boolean editMode, String memberID, Map<String, String> formForSubmission, InteractorCallBack callBack);
 
@@ -66,5 +66,9 @@ public interface FamilyFocusedMemberProfileContract {
         void onSubmitted(boolean successful);
 
         void showScreeningDone(boolean show);
+
+        void showCommoditiesGiven(boolean show);
+
+        void showDispenseOrLabTestsDone(boolean show);
     }
 }

@@ -136,14 +136,24 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
     }
 
     @Override
-    public boolean checkIfScreeningDone() {
-        interactor.checkIfScreeningWithin24H(baseEntityId, this);
+    public boolean checkIfVisitTasksDone() {
+        interactor.checkIfTasksDoneWithin24H(baseEntityId, this);
         return false;
     }
 
     @Override
     public void showScreeningDone(boolean show) {
         getView().showScreeningDoneCheck(show);
+    }
+
+    @Override
+    public void showCommoditiesGiven(boolean show) {
+
+    }
+
+    @Override
+    public void showDispenseOrLabTestsDone(boolean show) {
+
     }
 
 }

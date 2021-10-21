@@ -154,7 +154,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         progressBar.setVisibility(View.GONE);
         ctvDispense.setOnClickListener(this);
 
-        checkIfScreeningDone();
+        checkIfVisitTaskDone();
     }
 
     @Override
@@ -245,8 +245,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         presenter().refreshProfileView();
     }
 
-    public void checkIfScreeningDone() {
-        presenter().checkIfScreeningDone();
+    public void checkIfVisitTaskDone() {
+        presenter().checkIfVisitTasksDone();
     }
 
     @Override

@@ -7,14 +7,11 @@ import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
-import org.smartregister.CoreLibrary;
-import org.smartregister.addo.activity.FamilyFocusedMemberProfileActivity;
-import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.addo.dao.AdolescentDao;
 import org.smartregister.addo.dao.AncDao;
 import org.smartregister.addo.dao.PNCDao;
-import org.smartregister.addo.util.ChildDBConstants;
+import org.smartregister.addo.dao.VisitDao;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.chw.anc.domain.Visit;
@@ -29,13 +26,12 @@ import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.util.AppExecutors;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
-import org.smartregister.sync.helper.ECSyncHelper;
+import org.smartregister.util.FormUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +46,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
     private AppExecutors appExecutors;
     private String relationalId;
+    private FormUtils formUtils;
 
     @VisibleForTesting
     FamilyFocusedMemberProfileInteractor(AppExecutors appExecutors) {
@@ -138,10 +135,10 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
         String derivedEncounterType = StringUtils.isBlank(parentEventType) ? encounterType : "";
         Event baseEvent = JsonFormUtils.processVisitJsonForm(allSharedPreferences, memberID, derivedEncounterType, jsonString, getTableName(memberID));
-
-        // only tag the first event with the date
+        String formEncounterType = getEncounterType(jsonString);
+        // only tag the first event with the date & add the actual encounter type as a detail
         if (StringUtils.isBlank(parentEventType)) {
-            prepareEvent(baseEvent);
+            prepareEvent(baseEvent, formEncounterType);
         }
 
         if (baseEvent != null) {
@@ -181,13 +178,17 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
         return visitRepository().getParentVisitEventID(visit.getBaseEntityId(), parentEventType, visit.getDate());
     }
 
-    protected void prepareEvent(Event baseEvent) {
+    protected void prepareEvent(Event baseEvent, String encounterType) {
         if (baseEvent != null) {
             // add anc date obs and last
             List<Object> list = new ArrayList<>();
             list.add(new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
             baseEvent.addObs(new Obs("concept", "text", "addo_visit_date", "",
                     list, new ArrayList<>(), null, "addo_visit_date"));
+            List<Object> encounterList = new ArrayList<>();
+            encounterList.add(encounterType);
+            baseEvent.addObs(new Obs("concept", "text", "encounter_type", "",
+                    encounterList, new ArrayList<>(), null, "encounter_type"));
         }
     }
 
@@ -205,6 +206,11 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
         } else {
             return CoreConstants.EventType.CHILD_ADDO_VISIT;
         }
+    }
+
+    protected String getEncounterType(Map<String, String> jsonMap) {
+        // Since we're handling a form at a time, get one key = Encounter Type
+        return (jsonMap.size() == 1) ? jsonMap.keySet().iterator().next() : "";
     }
 
     protected String getTableName(String baseEntityId) {
@@ -231,12 +237,64 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
     }
 
     @Override
-    public void checkIfScreeningWithin24H(String baseEntityId, FamilyFocusedMemberProfileContract.InteractorCallBack callBack) {
-        Visit lastVisit = visitRepository().getLatestVisit(baseEntityId, getEncounterType(baseEntityId));
-        if (lastVisit != null) {
-            if (VisitUtils.isVisitWithin24Hours(lastVisit)) {
-                callBack.showScreeningDone(true);
-            }
+    public void checkIfTasksDoneWithin24H(String baseEntityId, FamilyFocusedMemberProfileContract.InteractorCallBack callBack) {
+        // Check whether the 3 tasks were performed recently
+        String visitType = getEncounterType(baseEntityId);
+        boolean screeningDone = checkIfTaskDoneWithin24H(getFocusScreeningForm(visitType), baseEntityId, visitType);
+        boolean commoditiesGiven = checkIfTaskDoneWithin24H(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoCommodities()), baseEntityId, visitType);
+        boolean dispenseDone = checkIfTaskDoneWithin24H(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAddoAttendPrescriptionsFromHf()), baseEntityId, visitType);
+
+        if (screeningDone) {
+            callBack.showScreeningDone(true);
+        }
+        if (commoditiesGiven) {
+            callBack.showCommoditiesGiven(true);
+        }
+        if (dispenseDone){
+            callBack.showDispenseOrLabTestsDone(true);
         }
     }
+
+    private JSONObject getFocusScreeningForm(String visitType) {
+        JSONObject jsonObject;
+        switch (visitType) {
+            case CoreConstants.EventType.ANC_ADDO_VISIT:
+                jsonObject = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAncAddoDangerSigns());
+                break;
+            case CoreConstants.EventType.PNC_ADDO_VISIT:
+                jsonObject = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getPncAddoDangerSigns());
+                break;
+            case CoreConstants.EventType.CHILD_ADDO_VISIT:
+                jsonObject = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getChildAddoDangerSigns());
+                break;
+            case CoreConstants.EventType.ADOLESCENT_ADDO_VISIT:
+                jsonObject = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getAdolescentAddoScreening());
+                break;
+            default:
+                jsonObject = null;
+                break;
+        }
+        return jsonObject;
+    }
+
+    private boolean checkIfTaskDoneWithin24H(JSONObject jsonObject, String baseEntityId, String visitType) {
+        if (jsonObject != null) {
+            String encounter = jsonObject.optString(org.smartregister.addo.util.JsonFormUtils.ENCOUNTER_TYPE);
+            Visit latestVisit = VisitDao.getLatestVisit(baseEntityId, visitType, encounter);
+            return VisitUtils.isVisitWithin24Hours(latestVisit);
+        }
+        return false;
+    }
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(Utils.context().applicationContext());
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+        return formUtils;
+    }
+
 }
