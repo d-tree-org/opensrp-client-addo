@@ -65,24 +65,16 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
     @Override
     public void refreshProfileView(final String baseEntityId, final FamilyFocusedMemberProfileContract.InteractorCallBack callback) {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                final CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(baseEntityId);
-                final CommonPersonObjectClient pClient = new CommonPersonObjectClient(personObject.getCaseId(),
-                        personObject.getDetails(), "");
-                pClient.setColumnmaps(personObject.getColumnmaps());
+        Runnable runnable = () -> {
+            final CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(baseEntityId);
+            final CommonPersonObjectClient pClient = new CommonPersonObjectClient(personObject.getCaseId(),
+                    personObject.getDetails(), "");
+            pClient.setColumnmaps(personObject.getColumnmaps());
 
-                if (pClient != null)
-                    relationalId = Utils.getValue(pClient.getColumnmaps(), DBConstants.KEY.RELATIONAL_ID, false);
+            if (pClient != null)
+                relationalId = Utils.getValue(pClient.getColumnmaps(), DBConstants.KEY.RELATIONAL_ID, false);
 
-                appExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.refreshProfileTopSection(pClient);
-                    }
-                });
-            }
+            appExecutors.mainThread().execute(() -> callback.refreshProfileTopSection(pClient));
         };
 
         appExecutors.diskIO().execute(runnable);
@@ -105,6 +97,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
             final boolean finalResult = result;
             appExecutors.mainThread().execute(() -> callBack.onSubmitted(finalResult));
+
         };
 
         appExecutors.diskIO().execute(runnable);
@@ -250,7 +243,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
         if (commoditiesGiven) {
             callBack.showCommoditiesGiven(true);
         }
-        if (dispenseDone){
+        if (dispenseDone) {
             callBack.showDispenseOrLabTestsDone(true);
         }
     }

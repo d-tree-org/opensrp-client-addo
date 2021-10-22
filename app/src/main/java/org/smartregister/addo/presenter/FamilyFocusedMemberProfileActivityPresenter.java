@@ -119,6 +119,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
     public void onSubmitted(boolean successful) {
         if (successful) {
             viewReference.get().displayProgressBar(false);
+            checkIfVisitTasksDone(); // Update visit tasks done after processing
             Toast.makeText((Activity) this.getView(), "Submitted ...", Toast.LENGTH_SHORT).show();
         } else {
             viewReference.get().displayProgressBar(false);
@@ -148,12 +149,12 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
 
     @Override
     public void showCommoditiesGiven(boolean show) {
-
+        getView().showCommoditiesGiven(show);
     }
 
     @Override
     public void showDispenseOrLabTestsDone(boolean show) {
-
+        getView().showDispenseOrTestsDone(show);
     }
 
 }

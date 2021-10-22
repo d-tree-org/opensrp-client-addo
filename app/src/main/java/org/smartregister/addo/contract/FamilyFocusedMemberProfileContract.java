@@ -31,6 +31,10 @@ public interface FamilyFocusedMemberProfileContract {
         void displayProgressBar(boolean b);
 
         void showScreeningDoneCheck(boolean show);
+
+        void showCommoditiesGiven(boolean show);
+
+        void showDispenseOrTestsDone(boolean show);
     }
 
     interface Presenter extends BaseProfileContract.Presenter {

@@ -70,6 +70,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private TextView detailThreeView;
     private CircleImageView imageView;
     private ImageView screeningDoneCheckView;
+    private ImageView commoditiesCheckView;
+    private ImageView dispenseDoneCheckView;
     private CustomFontTextView ctvScreeningMed, ctvCommodities, ctvDispense;
     private ProgressBar progressBar;
     private View familyHeadView;
@@ -144,7 +146,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         imageView = findViewById(R.id.imageview_profile);
         imageView.setBorderWidth(2);
 
-        screeningDoneCheckView = findViewById(R.id.tick_image);
+        screeningDoneCheckView = findViewById(R.id.screening_done_check);
+        commoditiesCheckView = findViewById(R.id.commodities_given_check);
+        dispenseDoneCheckView = findViewById(R.id.dispense_or_tests_done_check);
 
         ctvScreeningMed = findViewById(R.id.tv_focused_client_screening);
         ctvScreeningMed.setOnClickListener(this);
@@ -154,7 +158,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         progressBar.setVisibility(View.GONE);
         ctvDispense.setOnClickListener(this);
 
-        checkIfVisitTaskDone();
+        checkIfVisitTasksDone();
     }
 
     @Override
@@ -243,9 +247,10 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void onResumption() {
         super.onResumption();
         presenter().refreshProfileView();
+        checkIfVisitTasksDone();
     }
 
-    public void checkIfVisitTaskDone() {
+    public void checkIfVisitTasksDone() {
         presenter().checkIfVisitTasksDone();
     }
 
@@ -255,6 +260,25 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             screeningDoneCheckView.setVisibility(View.VISIBLE);
         } else {
             screeningDoneCheckView.setVisibility(View.GONE);
+        }
+    }
+
+
+    @Override
+    public void showCommoditiesGiven(boolean show) {
+        if (show) {
+            commoditiesCheckView.setVisibility(View.VISIBLE);
+        } else {
+            commoditiesCheckView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showDispenseOrTestsDone(boolean show) {
+        if (show) {
+            dispenseDoneCheckView.setVisibility(View.VISIBLE);
+        } else {
+            dispenseDoneCheckView.setVisibility(View.GONE);
         }
     }
 
