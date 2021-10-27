@@ -7,19 +7,39 @@
     android:orientation="vertical"
     android:paddingTop="10dp">
 
-    <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_focused_client_screening"
-        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginRight="17dp"
-        android:background="@drawable/addo_btn_selector_client_profile"
-        android:gravity="center"
-        android:text="@string/addo_profile_other_screening"
-        android:textAllCaps="false"
-        android:textColor="@color/addo_primary" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_focused_client_screening"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="17dp"
+            android:background="@drawable/addo_btn_selector_client_profile"
+            android:gravity="center"
+            android:text="@string/addo_profile_other_screening"
+            android:textAllCaps="false"
+            android:textColor="@color/addo_primary" />
+
+        <ImageView
+            android:id="@+id/screening_done_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:src="@drawable/activityrow_visited"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/tv_focused_client_commodities"
@@ -34,19 +54,48 @@
         android:text="@string/give_commodities_client_focus_profile"
         android:textColor="@color/addo_primary" />
 
+        <ImageView
+            android:id="@+id/commodities_given_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:src="@drawable/activityrow_visited"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/tv_focused_client_dispense"
         style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
         android:layout_marginStart="17dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="17dp"
         android:layout_marginBottom="17dp"
         android:background="@drawable/addo_btn_selector_client_profile"
         android:gravity="center"
-        android:layout_marginEnd="17dp"
+        android:lines="3"
         android:text="@string/focused_client_profile_dispense"
         android:textColor="@color/addo_primary" />
+
+        <ImageView
+            android:id="@+id/dispense_or_tests_done_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="45dp"
+            android:gravity="center"
+            android:src="@drawable/activityrow_visited"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/view_record"
