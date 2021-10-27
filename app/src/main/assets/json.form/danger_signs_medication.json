@@ -259,6 +259,7 @@
           }
         ],
         "type": "multi_select_list",
+        "hide_search_view": true,
         "relevance": {
           "rules-engine": {
             "ex-rules": {
