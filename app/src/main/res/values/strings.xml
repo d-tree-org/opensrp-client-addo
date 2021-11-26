@@ -486,5 +486,8 @@
     <string name="total_referrals">Total Referrals</string>
     <string name="total_visits">Total Visits By ADDO</string>
     <string name="weekly_summary_title_text">Weekly summary</string>
+    <string name="no_record_found">No Record Found</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
 </resources>
