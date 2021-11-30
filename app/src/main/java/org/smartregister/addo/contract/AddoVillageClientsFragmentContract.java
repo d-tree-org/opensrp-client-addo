@@ -23,6 +23,8 @@ public interface AddoVillageClientsFragmentContract {
 
         String getMainTable();
 
+        String getCountSelect();
+
         void setSelectedVillage(String selectedVillage);
 
     }

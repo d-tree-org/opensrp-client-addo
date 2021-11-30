@@ -489,5 +489,6 @@
     <string name="no_record_found">No Record Found</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="search_bar_hint">Enter first name or last name</string>
 
 </resources>

@@ -114,5 +114,6 @@
     <string name="total_visits">Matembeleo yote uliyofanya</string>
     <string name="weekly_summary_title_text">Taarifa za wiki</string>
     <string name="no_record_found">No Record Found</string>
+    <string name="search_bar_hint">Andika jina la kwanza au la pili</string>
 
 </resources>

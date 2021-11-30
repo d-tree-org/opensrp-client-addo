@@ -37,7 +37,6 @@ public class AddoVillageClientsFragmentModel implements AddoVillageClientsFragme
     public String countSelect(String tableName, String mainCondition) {
         SmartRegisterQueryBuilder countQueryBuilder = new SmartRegisterQueryBuilder();
         countQueryBuilder.SelectInitiateMainTableCounts(tableName);
-        countQueryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " COLLATE NOCASE ");
         countQueryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
         return countQueryBuilder.mainCondition(mainCondition);
     }
@@ -46,23 +45,22 @@ public class AddoVillageClientsFragmentModel implements AddoVillageClientsFragme
     public String mainSelect(String tableName, String mainCondition) {
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable(tableName, mainColumns(tableName));
-        queryBUilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " COLLATE NOCASE ");
         queryBUilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
         return queryBUilder.mainCondition(mainCondition);
     }
 
     protected String[] mainColumns(String tableName) {
-        String[] columns = new String[]{
+        return new String[]{
                 tableName + ".relationalid",
                 tableName + ".first_name",
                 tableName + ".middle_name",
                 tableName + ".last_name",
                 tableName + "." + DBConstants.KEY.DOB,
                 tableName + "." + DBConstants.KEY.GENDER,
-                tableName + ".date_created",
+                //tableName + ".date_created",
                 tableName + "." + DBConstants.KEY.BASE_ENTITY_ID,
-                CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.VILLAGE_TOWN
+                CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.VILLAGE_TOWN,
+                CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID + " as " + "family_id"
         };
-        return columns;
     }
 }

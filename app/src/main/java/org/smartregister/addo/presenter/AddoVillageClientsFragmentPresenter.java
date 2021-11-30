@@ -56,6 +56,11 @@ public class AddoVillageClientsFragmentPresenter implements AddoVillageClientsFr
     }
 
     @Override
+    public String getCountSelect() {
+        return this.model.countSelect(getMainTable(), getMainCondition());
+    }
+
+    @Override
     public void startSync() {
 
     }
@@ -67,19 +72,15 @@ public class AddoVillageClientsFragmentPresenter implements AddoVillageClientsFr
 
     @Override
     public String getMainCondition() {
-        return " " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.DATE_REMOVED + " is null " +
-                "AND " + CoreConstants.TABLE_NAME.ADOLESCENT + "." + AddoDBConstants.IS_CLOSED + " is 0 " +
-                "AND (" + CoreConstants.TABLE_NAME.ADOLESCENT + "." + DBConstants.KEY.BASE_ENTITY_ID + " NOT IN (SELECT " +
-                CoreConstants.TABLE_NAME.ANC_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " FROM " +
-                CoreConstants.TABLE_NAME.ANC_MEMBER + " WHERE " + CoreConstants.TABLE_NAME.ANC_MEMBER + "." +
-                DBConstants.KEY.BASE_ENTITY_ID + " NOT IN (SELECT " + CoreConstants.TABLE_NAME.PNC_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
-                " FROM " + CoreConstants.TABLE_NAME.PNC_MEMBER + " WHERE " + CoreConstants.TABLE_NAME.PNC_MEMBER + "." + AddoDBConstants.IS_CLOSED +
-                " is 1))) AND ec_family.village_town = '"+selectedVillage+"' ";
+        return String.format("%s.%s is null AND %s.%s like '%%%s%%' ",
+                CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.DOD,
+                CoreConstants.TABLE_NAME.FAMILY, DBConstants.KEY.VILLAGE_TOWN, selectedVillage
+        );
     }
 
     @Override
     public String getMainTable() {
-        return CoreConstants.TABLE_NAME.ADOLESCENT;
+        return CoreConstants.TABLE_NAME.FAMILY_MEMBER;
     }
 
     @Override

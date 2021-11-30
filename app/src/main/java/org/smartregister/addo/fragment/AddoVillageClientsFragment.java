@@ -1,5 +1,13 @@
 package org.smartregister.addo.fragment;
 
+import static org.smartregister.addo.util.Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID;
+import static org.smartregister.addo.util.Constants.INTENT_KEY.FAMILY_HEAD;
+import static org.smartregister.addo.util.Constants.INTENT_KEY.FAMILY_NAME;
+import static org.smartregister.addo.util.Constants.INTENT_KEY.GO_TO_DUE_PAGE;
+import static org.smartregister.addo.util.Constants.INTENT_KEY.PRIMARY_CAREGIVER;
+import static org.smartregister.addo.util.Constants.INTENT_KEY.VILLAGE_TOWN;
+
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.AddoVillageClientsFragmentContract;
+import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoVillageClientsFragmentModel;
 import org.smartregister.addo.model.FamilyProfileActivityModel;
 import org.smartregister.addo.presenter.AddoHomeFragmentPresenter;
@@ -36,6 +45,8 @@ import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.QueryBuilder;
 import org.smartregister.addo.viewmodel.AddoHomeViewModel;
 import org.smartregister.chw.anc.util.DBConstants;
+import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -47,6 +58,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -91,6 +103,9 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
         TextView tvBacktoVillage = view.findViewById(R.id.return_to_village_txt);
         tvBacktoVillage.setOnClickListener(registerActionHandler);
 
+        TextView edSeachView = view.findViewById(R.id.edt_search);
+        edSeachView.setHint(R.string.search_bar_hint);
+
         model = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
             @NonNull
             @Override
@@ -105,7 +120,7 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
                 joinTable = "";
                 villageSelected = s;
                 presenter().setSelectedVillage(s);
-                mainCondition = getMainCondition() + " AND ec_family.village_town = '"+s+"' ";
+                mainCondition = getMainCondition();
                 presenter().initializeQueries(mainCondition);
             }
         });
@@ -150,7 +165,7 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
 
     @Override
     protected String getMainCondition() {
-        return this.presenter().getMainCondition() + " AND ec_family.village_town = '"+villageSelected+"' ";
+        return this.presenter().getMainCondition();
     }
 
     @Override
@@ -165,7 +180,34 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
 
     @Override
     protected void onViewClicked(android.view.View view) {
+        if (view != null) {
+            int id = view.getId();
+            if (id == R.id.btn_back_to_villages) {
+                ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(0);
+            } if (view.getTag() instanceof CommonPersonObjectClient && view.getId() == R.id.village_client_column) {
+                CommonPersonObjectClient selectedPatient = (CommonPersonObjectClient) view.getTag();
+                String familyID = Utils.getValue(selectedPatient, "family_id", false);
+                CommonPersonObject patient;
 
+                if (familyID != null) {
+                    patient = org.smartregister.family.util.Utils.context().commonrepository(Utils.metadata().familyRegister.tableName)
+                            .findByCaseID(familyID);
+                    Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
+                    intent.putExtra( FAMILY_BASE_ENTITY_ID, patient.getCaseId());
+                    intent.putExtra(FAMILY_HEAD,
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
+                    intent.putExtra(PRIMARY_CAREGIVER,
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
+                    intent.putExtra(VILLAGE_TOWN,
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
+                    intent.putExtra(FAMILY_NAME,
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
+                    intent.putExtra(GO_TO_DUE_PAGE, false);
+                    Objects.requireNonNull(getContext()).startActivity(intent);
+
+                }
+            }
+        }
     }
 
     @Override
@@ -207,19 +249,10 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
         String query = "";
         String customFilter = getFilterString();
         try {
-            if (isValidFilterForFts(commonRepository())) {
+            sqb.addCondition(customFilter);
+            query = sqb.orderbyCondition(Sortqueries);
+            query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
 
-                String myquery = QueryBuilder.getQuery(joinTables, mainCondition, tablename, customFilter, clientAdapter, Sortqueries);
-                List<String> ids = commonRepository().findSearchIds(myquery);
-                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
-                        Sortqueries);
-                query = sqb.Endquery(query);
-            } else {
-                sqb.addCondition(customFilter);
-                query = sqb.orderbyCondition(Sortqueries);
-                query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
-
-            }
         } catch (Exception e) {
             Timber.e(e);
         }
@@ -244,11 +277,7 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
         Cursor cursor = null;
         try {
 
-            String query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER +
-                    " on " + presenter().getMainTable() + "." + org.smartregister.chw.anc.util.DBConstants.KEY.BASE_ENTITY_ID + " = " +
-                    CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " inner join " +
-                    CoreConstants.TABLE_NAME.FAMILY + " on " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
-                    CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " where " + presenter().getMainCondition();
+            String query = presenter().getCountSelect();
 
             if (StringUtils.isNotBlank(filters))
                 query = query + getFilterString();
@@ -270,4 +299,7 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
             }
         }
     }
+
+
+
 }
