@@ -4,8 +4,6 @@ import static org.smartregister.util.Utils.getName;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jeasy.rules.api.Rules;
 import org.smartregister.addo.R;
 import org.smartregister.chw.referral.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -29,14 +25,10 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import timber.log.Timber;
 
-import static org.smartregister.addo.fragment.AddoVillageClientsFragment.CLICK_VIEW_DOSAGE_STATUS;
 import static org.smartregister.addo.fragment.AddoVillageClientsFragment.CLICK_VIEW_NORMAL;
 
 /**
@@ -48,12 +40,12 @@ public class AddoVillageClientsProvider implements RecyclerViewProvider<AddoVill
     protected static CommonPersonObjectClient client;
     private final LayoutInflater inflater;
     protected View.OnClickListener onClickListener;
-    private View.OnClickListener paginationClickListener;
-    private Context context;
-    private Set<org.smartregister.configurableviews.model.View> visibleColumns;
+    private final View.OnClickListener paginationClickListener;
+    private final Context context;
+    private final Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     public AddoVillageClientsProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener,
-                                      Set visibleColumns) {
+                                      Set<org.smartregister.configurableviews.model.View> visibleColumns) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.onClickListener = onClickListener;
         this.paginationClickListener = paginationClickListener;
@@ -159,7 +151,7 @@ public class AddoVillageClientsProvider implements RecyclerViewProvider<AddoVill
         return viewHolder instanceof AddoVillageClientsProvider.FooterViewHolder;
     }
 
-    public class RegisterViewHolder extends RecyclerView.ViewHolder {
+    public static class RegisterViewHolder extends RecyclerView.ViewHolder {
         public TextView patientName;
         public TextView textViewAddressAndGender;
         public TextView textViewHasReferral;
@@ -179,7 +171,7 @@ public class AddoVillageClientsProvider implements RecyclerViewProvider<AddoVill
         }
     }
 
-    public class FooterViewHolder extends RecyclerView.ViewHolder {
+    public static class FooterViewHolder extends RecyclerView.ViewHolder {
         public TextView pageInfoView;
         public Button nextPageView;
         public Button previousPageView;

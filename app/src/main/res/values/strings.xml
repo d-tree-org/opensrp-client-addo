@@ -490,5 +490,8 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="search_bar_hint">Enter first name or last name</string>
+    <string name="age_13y">Age: 13y</string>
+    <string name="patient_name">Patient Name</string>
+    <string name="client_avatar">Client Avatar</string>
 
 </resources>
