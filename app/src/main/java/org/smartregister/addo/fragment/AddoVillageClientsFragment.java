@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,40 +23,26 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.addo.R;
 import org.smartregister.addo.contract.AddoVillageClientsFragmentContract;
-import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoVillageClientsFragmentModel;
-import org.smartregister.addo.model.FamilyProfileActivityModel;
-import org.smartregister.addo.presenter.AddoHomeFragmentPresenter;
 import org.smartregister.addo.presenter.AddoVillageClientsFragmentPresenter;
-import org.smartregister.addo.presenter.ScanFingerPrintFragmentPresenter;
-import org.smartregister.addo.provider.AddoMemberRegisterProvider;
 import org.smartregister.addo.provider.AddoVillageClientsProvider;
-import org.smartregister.addo.provider.FamilyActivityRegisterProvider;
-import org.smartregister.addo.util.Constants;
 import org.smartregister.addo.util.CoreConstants;
-import org.smartregister.addo.util.QueryBuilder;
 import org.smartregister.addo.viewmodel.AddoHomeViewModel;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
-import org.smartregister.family.adapter.FamilyRecyclerViewCustomAdapter;
 import org.smartregister.family.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -299,7 +284,5 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
             }
         }
     }
-
-
 
 }
