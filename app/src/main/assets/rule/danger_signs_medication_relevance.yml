@@ -7,22 +7,6 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_medicine_dispensed
-description: Dispense medication
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
-name: step2_dispense_med_label
-description: Dispense medication label
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
 name: step3_no_medication_dispensed_toaster
 description: Dispense confirmation, no medication dispensed
 priority: 1

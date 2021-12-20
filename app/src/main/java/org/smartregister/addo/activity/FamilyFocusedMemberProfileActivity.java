@@ -559,8 +559,12 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             JSONObject form = new JSONObject();
             if (isAdolescentClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAdolescent());
-            } else {
+            } else if(isAncClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
+            } else if(isPncClient()) {
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
+            } else {
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignMedicationChild());
             }
             JSONObject stepOne = form.getJSONObject(JsonFormUtils.STEP1);
             JSONArray fields = stepOne.getJSONArray(JsonFormUtils.FIELDS);
