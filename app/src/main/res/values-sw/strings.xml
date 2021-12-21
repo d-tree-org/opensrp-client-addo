@@ -38,7 +38,7 @@
     <string name="select_the_person_to_receive_services">Chagua mwanafamilia anayepokea huduma</string>
 
     <!-- Focused client profile-->
-    <string name="return_to_family_name">Rudi kwenye famia ya %1$s</string>
+    <string name="return_to_family_name">Rudi kwenye familia ya %1$s</string>
     <string name="addo_profile_other_screening">Chunguza dalili na kutoa dawa</string>
     <string name="give_commodities_client_focus_profile">Toa bidhaa</string>
     <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari au matokeo ya kipimo cha malaria</string>
