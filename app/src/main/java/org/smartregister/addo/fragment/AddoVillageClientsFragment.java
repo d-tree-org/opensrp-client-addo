@@ -180,13 +180,13 @@ public class AddoVillageClientsFragment extends BaseRegisterFragment implements 
                     Intent intent = new Intent(getContext(), org.smartregister.family.util.Utils.metadata().profileActivity);
                     intent.putExtra( FAMILY_BASE_ENTITY_ID, patient.getCaseId());
                     intent.putExtra(FAMILY_HEAD,
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "family_head", false));
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.FAMILY_HEAD, false));//"family_head", false));
                     intent.putExtra(PRIMARY_CAREGIVER,
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "primary_caregiver", false));
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.PRIMARY_CAREGIVER, false));//"primary_caregiver", false));
                     intent.putExtra(VILLAGE_TOWN,
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "village_town", false));
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.VILLAGE_TOWN, false));//"village_town", false));
                     intent.putExtra(FAMILY_NAME,
-                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), "first_name", false));
+                            org.smartregister.family.util.Utils.getValue(patient.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.FIRST_NAME, false));//"first_name", false));
                     intent.putExtra(GO_TO_DUE_PAGE, false);
                     Objects.requireNonNull(getContext()).startActivity(intent);
 

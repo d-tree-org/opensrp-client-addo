@@ -115,5 +115,8 @@
     <string name="weekly_summary_title_text">Taarifa za wiki</string>
     <string name="no_record_found">No Record Found</string>
     <string name="search_bar_hint">Andika jina la kwanza au la pili</string>
+    <string name="age_13y">Miaka: 13y</string>
+    <string name="patient_name">Jina la Mteja</string>
+    <string name="client_avatar">Client Avatar</string>
 
 </resources>
