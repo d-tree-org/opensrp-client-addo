@@ -1,0 +1,86 @@
+---
+name: step1_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step1_danger_signs_captured, 'addo_medication_to_give': step1_addo_medication_to_give]"
+
+---
+name: step2_medications_selected
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, other_medicine) {
+        import java.lang.*;
+        String selected = '';
+        if (selectedItem.contains('albendazole_suspension_or_tablets')) {
+            selected += '\u2022 Albendazole Suspension/Tablets <br />';
+        }
+        if (selectedItem.contains('amoxicillin_dispersible_tablets')) {
+            selected += '\u2022 Amoxicillin dispersible tablets <br />';
+        }
+        if (selectedItem.contains('amoxicillin_oral_suspension')) {
+            selected += '\u2022 Amoxicillin oral suspension <br />';
+        }
+        if (selectedItem.contains('alu_tablets')) {
+            selected += '\u2022 Artemether / Lumefantrine (ALU) Tablets <br />';
+        }
+        if (selectedItem.contains('cough_preparations')) {
+            selected += '\u2022 Cough preparations <br />';
+        }
+        if (selectedItem.contains('ibuprofen_suspensions')) {
+            selected += '\u2022 Ibuprofen suspensions <br />';
+        }
+        if (selectedItem.contains('ibuprofen_tablets')) {
+            selected += '\u2022 Ibuprofen tablets <br />';
+        }
+        if (selectedItem.contains('mebendazole_suspension_or_tablets')) {
+            selected += '\u2022 Mebendazole Suspension/Tablets <br />';
+        }
+        if (selectedItem.contains('oral_rehydration_salts')) {
+            selected += '\u2022 Oral Rehydration Salts <br />';
+        }
+        if (selectedItem.contains('paracetamol_tablets')) {
+            selected += '\u2022 Paracetamol tablets <br />';
+        }
+        if (selectedItem.contains('paracetamol_suspensions')) {
+            selected += '\u2022 Paracetamol suspensions <br />';
+        }
+        if (selectedItem.contains('vitamins_suspensions')) {
+            selected += '\u2022 Vitamins suspensions/syrups <br />';
+        }
+        if (selectedItem.contains('zinc_sulphate_tablets')) {
+            selected += '\u2022 Zinc Sulphate tablets <br>';
+        }
+        if (selectedItem.contains('other')) {
+            selected += '\u2022 ' + other_medicine + '<br>';
+        }
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
+
+---
+name: step3_medication_dispensed_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['medications_selected': step2_medications_selected]"
+
+---
+name: step3_asterisk_symbol
+description: Display the red asterisks
+priority: 1
+condition: "true"
+actions:
+  - 'calculation = "{{step3_asterisk_symbol_questions}} (<font color=red>*</font>)"'
+
+---
+name: step3_required_field_err_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['asterisk_symbol': step3_asterisk_symbol]"

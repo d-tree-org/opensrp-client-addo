@@ -98,14 +98,6 @@
             }
           }
         }
-      },
-      {
-        "key": "spacer",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "spacer",
-        "type": "spacer",
-        "spacer_height": "10dp"
       }
     ]
   },
@@ -242,7 +234,7 @@
           },
           {
             "key": "other",
-            "text": "Other",
+            "text": "{{step2_medicines_others}}",
             "property": {
               "presumed-id": "er",
               "confirmed-id": "er"
@@ -250,7 +242,7 @@
           },
           {
             "key": "none",
-            "text": "None",
+            "text": "{{step2_medicines_none}}",
             "property": {
               "presumed-id": "er",
               "confirmed-id": "er"
@@ -258,7 +250,38 @@
           }
         ],
         "type": "multi_select_list",
-        "hide_search_view": true
+        "hide_search_view": true,
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "no_medicine_selected",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "openmrs_data_type": "text",
+        "type": "check_box",
+        "label": "",
+        "exclusive": [
+          "none"
+        ],
+        "options": [
+          {
+            "key": "no_meds",
+            "text": "Hamna dawa iliyotolewa",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ]
       },
       {
         "key": "medication_description",
@@ -270,6 +293,13 @@
         "v_required": {
           "value": "true",
           "err": "{{step2_medication_description_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_relevance.yml"
+            }
+          }
         }
       },
       {
@@ -281,7 +311,7 @@
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_calculation.yml"
+              "rules-file": "danger_signs_medication_child_calculation.yml"
             }
           }
         }
@@ -321,14 +351,14 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
+              "rules-file": "danger_signs_medication_child_relevance.yml"
             }
           }
         },
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_calculation.yml"
+              "rules-file": "danger_signs_medication_child_calculation.yml"
             }
           }
         }
@@ -375,88 +405,6 @@
           "rules-engine": {
             "ex-rules": {
               "rules-file": "danger_signs_medication_calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "all_meds_dispensed",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step3_all_meds_dispensed_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{step3_all_meds_dispensed_err}}"
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step3_all_meds_dispensed_yes_text}}",
-            "extra_info": "{{step3_all_meds_dispensed_yes_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step3_all_meds_dispensed_no_text}}",
-            "extra_info": "{{step3_all_meds_dispensed_no_extra_info}}"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "linkage_recommendation",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step2_linkage_recommendation_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{step2_linkage_recommendation_err}}"
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_yes_text}}",
-            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_no_text}}",
-            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
             }
           }
         }
