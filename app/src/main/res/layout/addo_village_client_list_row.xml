@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/register_columns"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/village_client_column"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ripple_custom"
+        android:layout_marginTop="@dimen/register_list_top_bottom_margin"
+        android:layout_marginBottom="@dimen/register_list_top_bottom_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/client_avatar_wrapper"
+            android:layout_width="70dp"
+            android:layout_height="90dp"
+            android:paddingStart="@dimen/register_list_item_padding"
+            android:paddingLeft="@dimen/register_list_item_padding"
+            android:paddingTop="@dimen/register_list_top_bottom_padding"
+            android:paddingEnd="@dimen/register_list_item_padding"
+            android:paddingRight="@dimen/register_list_item_padding"
+            android:paddingBottom="@dimen/register_list_top_bottom_padding">
+
+            <ImageView
+                android:id="@+id/client_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_member"
+                android:gravity="center"
+                android:hapticFeedbackEnabled="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:contentDescription="@string/client_avatar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/textview_village_client_name"
+                style="@style/village_client_list_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@string/patient_name"
+                android:textStyle="bold" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/text_adolescent_age"
+                style="@style/CustomFontTextViewStyle.ClientList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:text="@string/age_13y"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/register_member_village_size"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/text_view_address_gender"
+                style="@style/village_client_list_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="7dp"
+                android:text="Kitomondo . Male"/>
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/has_referral"
+                style="@style/CustomFontTextViewStyle.ClientList.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="@dimen/register_list_top_bottom_padding"
+                android:text="@string/has_referral"
+                android:visibility="gone"
+                android:textColor="@color/alert_urgent_red"
+                android:textSize="@dimen/register_list_desc_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/go_to_family_wrapper"
+        android:layout_width="60dp"
+        android:layout_height="90dp"
+        android:layout_toStartOf="@+id/village_client_column"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:paddingStart="@dimen/register_list_item_padding"
+        android:paddingLeft="@dimen/register_list_item_padding"
+        android:paddingTop="@dimen/register_list_top_bottom_padding"
+        android:paddingEnd="@dimen/register_list_item_padding"
+        android:paddingRight="@dimen/register_list_item_padding"
+        android:paddingBottom="@dimen/register_list_top_bottom_padding">
+
+        <ImageView
+            android:id="@+id/go_to_family_profile"
+            android:layout_width="@dimen/me_page_section_square_dimension"
+            android:layout_height="@dimen/me_page_section_square_dimension"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:contentDescription="@string/right_arrow"
+            android:gravity="center"
+            android:src="@drawable/baseline_keyboard_arrow_right"
+            android:tint="@color/me_page_arrow" />
+
+    </LinearLayout>
+
+</RelativeLayout>
