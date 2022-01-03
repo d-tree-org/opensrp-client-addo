@@ -13,6 +13,7 @@ import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.fragment.AddoHomeFragment;
+import org.smartregister.addo.fragment.AddoVillageClientsFragment;
 import org.smartregister.addo.fragment.AdvancedSearchFragment;
 import org.smartregister.addo.fragment.ScanFingerPrintFragment;
 import org.smartregister.addo.listeners.AddoBottomNavigationListener;
@@ -59,7 +60,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
         Fragment[] fragments = new Fragment[3];
         fragments[0] = new AdvancedSearchFragment(true);
-        fragments[1] = new ScanFingerPrintFragment();
+        fragments[1] = new AddoVillageClientsFragment();
         fragments[2] = new AdvancedSearchFragment(false);
 
         return fragments;

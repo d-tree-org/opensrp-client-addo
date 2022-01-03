@@ -33,12 +33,12 @@
     <string name="last_name_hint">Jina la pili</string>
 
     <!-- Family Profile -->
-    <string name="return_to_addo_home">Rudi mwanzo</string>
+    <string name="return_to_addo_home">Rudi kutafuta mteja</string>
     <string name="family_members">Wanafamilia</string>
     <string name="select_the_person_to_receive_services">Chagua mwanafamilia anayepokea huduma</string>
 
     <!-- Focused client profile-->
-    <string name="return_to_family_name">Rudi kwenye famia ya %1$s</string>
+    <string name="return_to_family_name">Rudi kwenye familia ya %1$s</string>
     <string name="addo_profile_other_screening">Chunguza dalili na kutoa dawa</string>
     <string name="give_commodities_client_focus_profile">Toa bidhaa</string>
     <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari au matokeo ya kipimo cha malaria</string>
@@ -113,5 +113,10 @@
     <string name="referrals_closed">Rufaa zilizofungwa za Kata</string>
     <string name="total_visits">Matembeleo yote uliyofanya</string>
     <string name="weekly_summary_title_text">Taarifa za wiki</string>
+    <string name="no_record_found">No Record Found</string>
+    <string name="search_bar_hint">Andika jina la kwanza au la pili</string>
+    <string name="age_13y">Miaka: 13y</string>
+    <string name="patient_name">Jina la Mteja</string>
+    <string name="client_avatar">Client Avatar</string>
 
 </resources>

@@ -23,6 +23,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.contract.FamilyProfileContract;
 import org.smartregister.family.domain.FamilyEventClient;
 import org.smartregister.family.presenter.BaseFamilyProfilePresenter;
+import org.smartregister.family.util.DBConstants;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.view.LocationPickerView;
 
@@ -167,6 +168,35 @@ public class FamilyProfilePresenter extends BaseFamilyProfilePresenter implement
             Timber.e(e);
         }
         return res;
+    }
+
+    @Override
+    public void refreshProfileTopSection(CommonPersonObjectClient client) {
+
+        if (client == null || client.getColumnmaps() == null) {
+            return;
+        }
+
+        String firstName = org.smartregister.family.util.Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true);
+        String famName;
+
+        if (org.smartregister.family.util.Utils.getBooleanProperty(org.smartregister.family.util.Constants.Properties.FAMILY_HEAD_FIRSTNAME_ENABLED)) {
+
+            String familyHeadFirstName = org.smartregister.family.util.Utils.getValue(client.getColumnmaps(), org.smartregister.family.util.Constants.KEY.FAMILY_HEAD_NAME, true);
+            famName = String.format(getView().getString(R.string.family_profile_title_with_firstname), familyHeadFirstName, firstName);
+
+        } else {
+
+            famName = String.format(getView().getString(R.string.family_profile_title), firstName);
+        }
+
+        getView().setProfileName(famName);
+
+        String villageTown = org.smartregister.family.util.Utils.getValue(client.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, false);
+        getView().setProfileDetailOne(villageTown);
+
+        getView().setProfileImage(client.getCaseId());
+
     }
 }
 
