@@ -239,14 +239,6 @@
               "presumed-id": "er",
               "confirmed-id": "er"
             }
-          },
-          {
-            "key": "none",
-            "text": "{{step2_medicines_none}}",
-            "property": {
-              "presumed-id": "er",
-              "confirmed-id": "er"
-            }
           }
         ],
         "type": "multi_select_list",
@@ -277,7 +269,7 @@
         "options": [
           {
             "key": "no_meds",
-            "text": "Hamna dawa iliyotolewa",
+            "text": "{{step2_medicines_none}}",
             "text_size": "18px",
             "value": "false"
           }
