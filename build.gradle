@@ -3,8 +3,8 @@
 buildscript {
     repositories {
         google()
-        jcenter()
         mavenLocal()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.4'
@@ -34,7 +34,6 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
         mavenLocal()
         mavenCentral()
         maven { url 'https://maven.google.com' }
@@ -47,7 +46,7 @@ allprojects {
             url "https://s3.amazonaws.com/repo.commonsware.com"
         }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
-        maven { url "https://dl.bintray.com/ona/rdt-capture" }
+        jcenter()
     }
 }
 
