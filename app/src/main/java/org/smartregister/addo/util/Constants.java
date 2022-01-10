@@ -345,6 +345,12 @@ public class Constants {
         public static final String GROWTH_IMMUNIZATION_TYPE = "growth_type";
         public static final String CHILD_COMMON_PERSON = "child_common_peron";
         public static final String IS_COMES_FROM_FAMILY = "is_comes_from";
+        public static final String FAMILY_BASE_ENTITY_ID = "family_base_entity_id";
+        public static final String FAMILY_HEAD = "family_head";
+        public static final String PRIMARY_CAREGIVER = "primary_caregiver";
+        public static final String VILLAGE_TOWN = "village_town";
+        public static final String FAMILY_NAME = "family_name";
+        public static final String GO_TO_DUE_PAGE = "go_to_due_page";
     }
 
     public static class ProfileActivityResults {
