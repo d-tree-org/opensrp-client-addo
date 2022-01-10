@@ -110,7 +110,9 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
 
         AddoLocationRecyclerViewProviderAdapter mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
                 , this.getActivity());
-        view.setAdapter(mAdapter);
+        if (view != null) {
+            view.setAdapter(mAdapter);
+        }
         mAdapter.setOnItemClickListener(village -> {
             // if the selected item is other village then take the user to Advanced search otherwise fp scan
             if (!village.equalsIgnoreCase(String.valueOf(R.string.addo_other_village))) {

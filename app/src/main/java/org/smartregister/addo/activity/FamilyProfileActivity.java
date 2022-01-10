@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -140,6 +141,13 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
                 // TODO Add Menu Item here
 
                 break;
+            case android.R.id.home:
+                //onBackPressed();
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                assert intent != null;
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                NavUtils.navigateUpTo(this, intent);
+                return true;
             default:
                 super.onOptionsItemSelected(item);
                 break;

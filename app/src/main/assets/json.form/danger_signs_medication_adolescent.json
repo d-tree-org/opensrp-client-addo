@@ -283,6 +283,7 @@
           }
         ],
         "type": "multi_select_list",
+        "hide_search_view": true,
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -448,47 +449,6 @@
             "openmrs_entity_id": "",
             "text": "{{step3_all_meds_dispensed_no_text}}",
             "extra_info": "{{step3_all_meds_dispensed_no_extra_info}}"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "danger_signs_medication_relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "linkage_recommendation",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "native_radio",
-        "label": "{{step2_linkage_recommendation_label}}",
-        "label_text_style": "bold",
-        "exclusive": [
-          "yes"
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{step2_linkage_recommendation_err}}"
-        },
-        "options": [
-          {
-            "key": "yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_yes_text}}",
-            "extra_info": "{{step2_linkage_recommendation_yes_extra_info}}"
-          },
-          {
-            "key": "no",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "text": "{{step2_linkage_recommendation_no_text}}",
-            "extra_info": "{{step2_linkage_recommendation_no_extra_info}}"
           }
         ],
         "relevance": {
