@@ -557,11 +557,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
         try {
             JSONObject form = new JSONObject();
-            if (isAdolescentClient()) {
+            if (isPncClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAdolescent());
             } else if(isAncClient()) {
-                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
-            } else if(isPncClient()) {
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAnc());
+            } else if(isAdolescentClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
             } else {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignMedicationChild());

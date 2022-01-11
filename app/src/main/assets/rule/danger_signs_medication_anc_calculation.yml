@@ -15,49 +15,14 @@ actions:
   - "def getSelectedDS(selectedItem, other_medicine) {
         import java.lang.*;
         String selected = '';
-        if (selectedItem.contains('albendazole_suspension_or_tablets')) {
-            selected += '\u2022 Albendazole Suspension/Tablets <br />';
-        }
-        if (selectedItem.contains('amoxicillin_dispersible_tablets')) {
-            selected += '\u2022 Amoxicillin dispersible tablets <br />';
-        }
-        if (selectedItem.contains('amoxicillin_oral_suspension')) {
-            selected += '\u2022 Amoxicillin oral suspension <br />';
-        }
-        if (selectedItem.contains('alu_tablets')) {
-            selected += '\u2022 Artemether / Lumefantrine (ALU) Tablets <br />';
-        }
-        if (selectedItem.contains('cough_preparations')) {
-            selected += '\u2022 Cough preparations <br />';
-        }
-        if (selectedItem.contains('ibuprofen_suspensions')) {
-            selected += '\u2022 Ibuprofen suspensions <br />';
-        }
-        if (selectedItem.contains('ibuprofen_tablets')) {
-            selected += '\u2022 Ibuprofen tablets <br />';
-        }
-        if (selectedItem.contains('mebendazole_suspension_or_tablets')) {
-            selected += '\u2022 Mebendazole Suspension/Tablets <br />';
-        }
-        if (selectedItem.contains('oral_rehydration_salts')) {
-            selected += '\u2022 Oral Rehydration Salts <br />';
-        }
-        if (selectedItem.contains('paracetamol_tablets')) {
-            selected += '\u2022 Paracetamol tablets <br />';
-        }
-        if (selectedItem.contains('paracetamol_suspensions')) {
-            selected += '\u2022 Paracetamol suspensions <br />';
-        }
-        if (selectedItem.contains('vitamins_suspensions')) {
-            selected += '\u2022 Vitamins suspensions/syrups <br />';
-        }
-        if (selectedItem.contains('zinc_sulphate_tablets')) {
-            selected += '\u2022 Zinc Sulphate tablets <br>';
-        }
-        if (selectedItem.contains('other')) {
-            selected += '\u2022 ' + other_medicine + '<br>';
-        }
-        return selected;
+
+        HashMap<String, String> capitalCities = new HashMap<String, String>();
+        selected = helper.getSelectedItemsFromMultiSelect(selectedItem);
+
+        return capitalCities.get('name');
+  }"
+  - "def getStringRandom() {
+        return 'Woja Moja'
   }"
   - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
 
