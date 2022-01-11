@@ -108,28 +108,26 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         try {
             File file = new File(Environment.getExternalStorageDirectory() + File.separator + "Addo", "env_switch.json");
 
-            if (file.exists()) {
+            if (file.exists() && !getSwitchConfigurationsFromFile(file).isNull("env")) {
                 // if the file is there, then  switching has taken place and the data was cleared from the device
                 // Get the environment configurations from the file and set the url based on that
 /*                        Yaml yaml = new Yaml();
                         Map<String, Object> envConfig = (Map<String, Object>) yaml.load(new FileInputStream(file));*/
                 JSONObject envConfig = getSwitchConfigurationsFromFile(file);
 
-                if (envConfig != null) {
 
-                    if (envConfig.get("env").toString().equalsIgnoreCase("test")) {
+                if (envConfig.get("env").toString().equalsIgnoreCase("test")) {
 
-                        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_staging);
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, false).commit();
-                        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
-                        setAppNameProductionEnvironment("test");
-                    } else {
+                    preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_staging);
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, false).commit();
+                    preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
+                    setAppNameProductionEnvironment("test");
+                } else {
 
-                        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
-                        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
-                        setAppNameProductionEnvironment("production");
-                    }
+                    preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
+                    preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+                    setAppNameProductionEnvironment("production");
                 }
 
             } else {
