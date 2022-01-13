@@ -594,7 +594,7 @@
           },
           {
             "key": "other",
-            "text": "Other",
+            "text": "{{step2_medicines_others}}",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
