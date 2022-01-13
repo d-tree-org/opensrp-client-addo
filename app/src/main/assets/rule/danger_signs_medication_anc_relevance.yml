@@ -18,21 +18,7 @@ actions:
 name: step3_medication_dispensed_toaster
 description: Dispense confirmation, medication dispensed
 priority: 1
-condition: "step2_medicine_dispensed.contains('anusol_suppositories') ||
-            step2_medicine_dispensed.contains('albendazole_suspension_or_tablets') ||
-            step2_medicine_dispensed.contains('alu_tablets') ||
-            step2_medicine_dispensed.contains('paracetamol_tablets') ||
-            step2_medicine_dispensed.contains('paracetamol_suspensions') ||
-            step2_medicine_dispensed.contains('ibuprofen_tablets') ||
-            step2_medicine_dispensed.contains('ibuprofen_suspensions') ||
-            step2_medicine_dispensed.contains('oral_rehydration_salts') ||
-            step2_medicine_dispensed.contains('cough_preparations') ||
-            step2_medicine_dispensed.contains('vitamins_suspensions') ||
-            step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
-            step2_medicine_dispensed.contains('mebendazole_suspension_or_tablets') ||
-            step2_medicine_dispensed.contains('mcondom') ||
-            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
-            step2_medicine_dispensed.contains('other')"
+condition: "!helper.noItemSelected(step2_medicine_dispensed)"
 actions:
   - "isRelevant = true"
 

@@ -16,13 +16,12 @@ actions:
         import java.lang.*;
         String selected = '';
 
-        HashMap<String, String> capitalCities = new HashMap<String, String>();
         selected = helper.getSelectedItemsFromMultiSelect(selectedItem);
+        if (!other_medicine.isEmpty()) {
+            selected += '\u2022 ' + other_medicine + '<br>';
+        }
 
-        return capitalCities.get('name');
-  }"
-  - "def getStringRandom() {
-        return 'Woja Moja'
+        return selected;
   }"
   - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
 
