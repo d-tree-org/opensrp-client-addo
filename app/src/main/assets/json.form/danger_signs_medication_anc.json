@@ -137,7 +137,7 @@
             }
           },
           {
-            "key": "amoxicillin_capsules_",
+            "key": "amoxicillin_capsules",
             "text": "Amoxicillin capsules ",
             "property": {
               "presumed-id": "err",
@@ -161,7 +161,7 @@
             }
           },
           {
-            "key": "artemeher+_lumefantrine_tablets_act",
+            "key": "artemeher_lumefantrine_tablets_act",
             "text": "Artemeher+ Lumefantrine tablets/ACT",
             "property": {
               "presumed-id": "err",
@@ -169,7 +169,7 @@
             }
           },
           {
-            "key": "aspirin,_paracetamol,_caffeine_tablets",
+            "key": "aspirin_paracetamol_caffeine_tablets",
             "text": "Aspirin, paracetamol, caffeine tablets",
             "property": {
               "presumed-id": "err",
@@ -209,7 +209,7 @@
             }
           },
           {
-            "key": "chloramphenicol_eye_drops__ointment",
+            "key": "chloramphenicol_eye_drops_ointment",
             "text": "Chloramphenicol eye drops/ ointment",
             "property": {
               "presumed-id": "err",
@@ -233,7 +233,7 @@
             }
           },
           {
-            "key": "co-trimoxazole_tablets",
+            "key": "cotrimoxazole_tablets",
             "text": "Co-trimoxazole tablets",
             "property": {
               "presumed-id": "err",
@@ -249,7 +249,7 @@
             }
           },
           {
-            "key": "dextrose_5%_injection",
+            "key": "dextrose_injection",
             "text": "Dextrose 5% injection",
             "property": {
               "presumed-id": "err",
@@ -257,7 +257,7 @@
             }
           },
           {
-            "key": "diclofenac_ointment___cream_or_gel",
+            "key": "diclofenac_ointment_cream_or_gel",
             "text": "Diclofenac ointment / cream or gel",
             "property": {
               "presumed-id": "err",
@@ -273,7 +273,7 @@
             }
           },
           {
-            "key": "doxycycline_capsules__tablets",
+            "key": "doxycycline_capsules_tablets",
             "text": "Doxycycline capsules /tablets",
             "property": {
               "presumed-id": "err",
@@ -297,7 +297,7 @@
             }
           },
           {
-            "key": "family_planning_pills_(familia,_flexy_p)",
+            "key": "family_planning_pills_familia_flexy",
             "text": "Family planning pills (Familia, Flexy P)",
             "property": {
               "presumed-id": "err",
@@ -306,15 +306,15 @@
           },
           {
             "key": "female_condoms",
-            "text": "Female condoms",
+            "text": "{{step2_female_condom}}",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
             }
           },
           {
-            "key": "ferrous_sulphate_tablets_",
-            "text": "Ferrous Sulphate tablets ",
+            "key": "ferrous_sulphate_tablets",
+            "text": "Ferrous Sulphate tablets",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -386,14 +386,14 @@
           },
           {
             "key": "male_condoms",
-            "text": "Male condoms",
+            "text": "{{step2_male_condom}}",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
             }
           },
           {
-            "key": "metronidazole_tablets_(flagly)",
+            "key": "metronidazole_tablets_flagly",
             "text": "Metronidazole tablets (Flagly)",
             "property": {
               "presumed-id": "err",
@@ -561,7 +561,7 @@
             }
           },
           {
-            "key": "vitamin_tablets__capsules",
+            "key": "vitamin_tablets_capsules",
             "text": "Vitamin tablets/ capsules",
             "property": {
               "presumed-id": "err",
