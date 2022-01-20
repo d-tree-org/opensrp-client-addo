@@ -479,24 +479,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
                 JSONObject step2 = form.getJSONObject(JsonFormUtils.STEP2);
                 JSONArray step2Fields = step2.getJSONArray(JsonFormUtils.FIELDS);
-                JSONArray dangerSignsSelected;
-
-                switch (form.optString(JsonFormUtils.ENCOUNTER_TYPE)) {
-                    case CHILD_DANGER_SIGN_SCREENING_ENCOUNTER:
-                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
-                        break;
-                    case ANC_DANGER_SIGN_SCREENING_ENCOUNTER:
-                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
-                        break;
-                    case PNC_DANGER_SIGN_SCREENING_ENCOUNTER:
-                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
-                        break;
-                    case ADOLESCENT_SCREENING_ENCOUNTER:
-                        dangerSignsSelected = JsonFormUtils.getFieldJSONObject(step2Fields, "adolescent_condition_present").getJSONArray(JsonFormUtils.VALUE);
-                        break;
-                    default:
-                        return;
-                }
+                JSONArray dangerSignsSelected = getDangerSignsSelected(form, step2Fields);
 
                 // When there is danger signs and the none field is not selected open the dispense medication
                 if (dangerSignsSelected.length() > 0 && !dangerSignsSelected.getString(0).equalsIgnoreCase("chk_none")) {
@@ -528,6 +511,33 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             e.printStackTrace();
         }
 
+    }
+
+    private JSONArray getDangerSignsSelected(JSONObject form, JSONArray stepFields) {
+        JSONArray dangerSignsSelected = new JSONArray();
+        try {
+
+            switch (form.optString(JsonFormUtils.ENCOUNTER_TYPE)) {
+                case CHILD_DANGER_SIGN_SCREENING_ENCOUNTER:
+                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(stepFields, "danger_signs_present_child").getJSONArray(JsonFormUtils.VALUE);
+                    break;
+                case ANC_DANGER_SIGN_SCREENING_ENCOUNTER:
+                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(stepFields, "danger_signs_present").getJSONArray(JsonFormUtils.VALUE);
+                    break;
+                case PNC_DANGER_SIGN_SCREENING_ENCOUNTER:
+                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(stepFields, "danger_signs_present_mama").getJSONArray(JsonFormUtils.VALUE);
+                    break;
+                case ADOLESCENT_SCREENING_ENCOUNTER:
+                    dangerSignsSelected = JsonFormUtils.getFieldJSONObject(stepFields, "adolescent_condition_present").getJSONArray(JsonFormUtils.VALUE);
+                    break;
+                default:
+                    return null;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return dangerSignsSelected;
     }
 
     public void submitForm(Map<String, String> formForSubmission) {
