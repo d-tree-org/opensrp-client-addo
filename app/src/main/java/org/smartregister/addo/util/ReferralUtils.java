@@ -65,7 +65,7 @@ public class ReferralUtils {
                         if (field.has(JsonFormConstants.OPTIONS_FIELD_NAME)) {
                             JSONArray options = field.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
                             String values = getCheckBoxSelectedOptions(options);
-                            if (StringUtils.isNotEmpty(values) && !values.equalsIgnoreCase("Yes")) {
+                            if (StringUtils.isNotEmpty(values) && !(values.equalsIgnoreCase("Yes") || values.equalsIgnoreCase("Ndiyo"))) {
                                 formValues.add(values);
                             }
                         }
