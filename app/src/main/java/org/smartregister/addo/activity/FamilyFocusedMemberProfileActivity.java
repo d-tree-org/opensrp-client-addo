@@ -556,7 +556,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     private void dispenseMedication(String dangerSigns, String suggestedMeds, String referralStatus) {
         try {
-            JSONObject form = new JSONObject();
+            JSONObject form;
             if (isAdolescentClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAdolescent());
             } else {

@@ -7,96 +7,57 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_medicine_dispensed
-description: Dispense medication
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
-name: step2_dispense_med_label
-description: Dispense medication label
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
-name: step3_no_medication_dispensed_toaster
+name: step2_no_medication_dispensed_toaster
 description: Dispense confirmation, no medication dispensed
 priority: 1
-condition: "step1_dispense_options.contains('no') || step2_medicine_dispensed == '[]'"
+condition: "step1_medicine_dispensed == '[]'"
 actions:
   - "isRelevant = true"
 
 ---
-name: step3_medication_dispensed_toaster
+name: step2_medication_dispensed_toaster
 description: Dispense confirmation, medication dispensed
 priority: 1
-condition: "step2_medicine_dispensed.contains('amoxicillin') ||
-            step2_medicine_dispensed.contains('paracetamol_tablets') ||
-            step2_medicine_dispensed.contains('paracetamol_suspensions') ||
-            step2_medicine_dispensed.contains('ibuprofen_tablets') ||
-            step2_medicine_dispensed.contains('ibuprofen_suspensions') ||
-            step2_medicine_dispensed.contains('oral_rehydration_salts') ||
-            step2_medicine_dispensed.contains('cough_preparations') ||
-            step2_medicine_dispensed.contains('vitamins_suspensions') ||
-            step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
-            step2_medicine_dispensed.contains('fcondom') ||
-            step2_medicine_dispensed.contains('mcondom') ||
-            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
-            step2_medicine_dispensed.contains('other')"
+condition: "step1_medicine_dispensed.contains('amoxicillin') ||
+            step1_medicine_dispensed.contains('paracetamol_tablets') ||
+            step1_medicine_dispensed.contains('paracetamol_suspensions') ||
+            step1_medicine_dispensed.contains('ibuprofen_tablets') ||
+            step1_medicine_dispensed.contains('ibuprofen_suspensions') ||
+            step1_medicine_dispensed.contains('oral_rehydration_salts') ||
+            step1_medicine_dispensed.contains('cough_preparations') ||
+            step1_medicine_dispensed.contains('vitamins_suspensions') ||
+            step1_medicine_dispensed.contains('zinc_sulphate_tablets') ||
+            step1_medicine_dispensed.contains('fcondom') ||
+            step1_medicine_dispensed.contains('mcondom') ||
+            step1_medicine_dispensed.contains('combined_oral_contraceptive') ||
+            step1_medicine_dispensed.contains('other')"
 actions:
   - "isRelevant = true"
 
 ---
-name: step2_medication_description
+name: step1_medication_description
 description: Other medication descriptions
 priority: 1
-condition: "step2_medicine_dispensed.contains('other')"
+condition: "step1_medicine_dispensed.contains('other')"
 actions:
   - "isRelevant = true"
 
 ---
-name: step3_all_meds_dispensed
+name: step2_all_meds_dispensed
 description: Dispense medication
 priority: 1
-condition: "step2_medicine_dispensed.contains('amoxicillin') ||
-            step2_medicine_dispensed.contains('paracetamol_tablets') ||
-            step2_medicine_dispensed.contains('paracetamol_suspensions') ||
-            step2_medicine_dispensed.contains('ibuprofen_tablets') ||
-            step2_medicine_dispensed.contains('ibuprofen_suspensions') ||
-            step2_medicine_dispensed.contains('oral_rehydration_salts') ||
-            step2_medicine_dispensed.contains('cough_preparations') ||
-            step2_medicine_dispensed.contains('vitamins_suspensions') ||
-            step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
-            step2_medicine_dispensed.contains('fcondom') ||
-            step2_medicine_dispensed.contains('mcondom') ||
-            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
-            step2_medicine_dispensed.contains('other')"
-actions:
-  - "isRelevant = true"
----
-name: step2_other_meds
-description: Linkage to another addo
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
-name: step2_spacer1
-description: Spacer
-priority: 1
-condition: "step1_dispense_options.contains('yes')"
-actions:
-  - "isRelevant = true"
-
----
-name: step3_required_field_err_toaster
-description: Danger signs not selected
-priority: 1
-condition: "step1_dispense_options.isEmpty() || (step2_linkage_recommendation.isEmpty() && step1_dispense_options.contains('no'))"
+condition: "step1_medicine_dispensed.contains('amoxicillin') ||
+            step1_medicine_dispensed.contains('paracetamol_tablets') ||
+            step1_medicine_dispensed.contains('paracetamol_suspensions') ||
+            step1_medicine_dispensed.contains('ibuprofen_tablets') ||
+            step1_medicine_dispensed.contains('ibuprofen_suspensions') ||
+            step1_medicine_dispensed.contains('oral_rehydration_salts') ||
+            step1_medicine_dispensed.contains('cough_preparations') ||
+            step1_medicine_dispensed.contains('vitamins_suspensions') ||
+            step1_medicine_dispensed.contains('zinc_sulphate_tablets') ||
+            step1_medicine_dispensed.contains('fcondom') ||
+            step1_medicine_dispensed.contains('mcondom') ||
+            step1_medicine_dispensed.contains('combined_oral_contraceptive') ||
+            step1_medicine_dispensed.contains('other')"
 actions:
   - "isRelevant = true"
