@@ -2,12 +2,13 @@
 
 buildscript {
     repositories {
+        jcenter()
+        mavenCentral()
         google()
         mavenLocal()
-        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath 'com.google.gms:google-services:4.3.10'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
         // NOTE: Do not place your application dependencies here; they belong
@@ -42,9 +43,6 @@ allprojects {
         maven { url "https://acra.googlecode.com/svn/repository/releases" }
         maven { url "https://repo.maven.apache.org/maven2" }
         maven { url "https://cloudant.github.io/cloudant-sync-eap/repository" }
-        maven {
-            url "https://s3.amazonaws.com/repo.commonsware.com"
-        }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
         jcenter()
     }

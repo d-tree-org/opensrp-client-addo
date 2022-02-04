@@ -1,0 +1,74 @@
+---
+name: step1_danger_signs_present_toaster
+description: Danger signs identified and medication suggestions
+priority: 1
+condition: "!(step1_danger_signs_captured.isEmpty() || step1_addo_medication_to_give.isEmpty())"
+actions:
+  - "isRelevant = true"
+
+---
+name: step3_no_medication_dispensed_toaster
+description: Dispense confirmation, no medication dispensed
+priority: 1
+condition: "step2_no_medicine_selected.contains('no_meds') || step2_medicine_dispensed == '[]'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step3_medication_dispensed_toaster
+description: Dispense confirmation, medication dispensed
+priority: 1
+condition: "!helper.noItemSelected(step2_medicine_dispensed)"
+actions:
+  - "isRelevant = true"
+
+---
+name: step2_medication_description
+description: Other medication descriptions
+priority: 1
+condition: "step2_medicine_dispensed.contains('other')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step3_all_meds_dispensed
+description: Dispense medication
+priority: 1
+condition: "step2_medicine_dispensed.contains('amoxicillin') ||
+            step2_medicine_dispensed.contains('paracetamol_tablets') ||
+            step2_medicine_dispensed.contains('paracetamol_suspensions') ||
+            step2_medicine_dispensed.contains('ibuprofen_tablets') ||
+            step2_medicine_dispensed.contains('ibuprofen_suspensions') ||
+            step2_medicine_dispensed.contains('oral_rehydration_salts') ||
+            step2_medicine_dispensed.contains('cough_preparations') ||
+            step2_medicine_dispensed.contains('vitamins_suspensions') ||
+            step2_medicine_dispensed.contains('zinc_sulphate_tablets') ||
+            step2_medicine_dispensed.contains('fcondom') ||
+            step2_medicine_dispensed.contains('mcondom') ||
+            step2_medicine_dispensed.contains('combined_oral_contraceptive') ||
+            step2_medicine_dispensed.contains('other')"
+actions:
+  - "isRelevant = true"
+---
+name: step2_other_meds
+description: Linkage to another addo
+priority: 1
+condition: "step1_dispense_options.contains('yes')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step2_spacer1
+description: Spacer
+priority: 1
+condition: "step1_dispense_options.contains('yes')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step3_required_field_err_toaster
+description: Danger signs not selected
+priority: 1
+condition: "step1_dispense_options.isEmpty() || (step2_linkage_recommendation.isEmpty() && step1_dispense_options.contains('no'))"
+actions:
+  - "isRelevant = true"
