@@ -602,7 +602,6 @@
           }
         ],
         "type": "multi_select_list",
-        "hide_search_view": true,
         "relevance": {
           "step2:no_medicine_selected": {
             "ex-checkbox": [
