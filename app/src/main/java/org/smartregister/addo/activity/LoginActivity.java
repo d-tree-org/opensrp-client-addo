@@ -108,28 +108,26 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         try {
             File file = new File(Environment.getExternalStorageDirectory() + File.separator + "Addo", "env_switch.json");
 
-            if (file.exists()) {
-                // if the file is there, then  switching has taken place and the data was cleared from the device
-                // Get the environment configurations from the file and set the url based on that
+            // if the file is there, then  switching has taken place and the data was cleared from the device
+            // Get the environment configurations from the file and set the url based on that
 /*                        Yaml yaml = new Yaml();
                         Map<String, Object> envConfig = (Map<String, Object>) yaml.load(new FileInputStream(file));*/
-                JSONObject envConfig = getSwitchConfigurationsFromFile(file);
+            JSONObject envConfig = getSwitchConfigurationsFromFile(file);
 
-                if (envConfig != null) {
+            if (!envConfig.isNull("env")) {
 
-                    if (envConfig.get("env").toString().equalsIgnoreCase("test")) {
+                if (envConfig.get("env").toString().equalsIgnoreCase("test")) {
 
-                        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_staging);
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, false).commit();
-                        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
-                        setAppNameProductionEnvironment("test");
-                    } else {
+                    preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_staging);
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, false).commit();
+                    preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
+                    setAppNameProductionEnvironment("test");
+                } else {
 
-                        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
-                        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
-                        setAppNameProductionEnvironment("production");
-                    }
+                    preferences.savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
+                    preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+                    setAppNameProductionEnvironment("production");
                 }
 
             } else {
@@ -147,20 +145,22 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
 
     private JSONObject getSwitchConfigurationsFromFile(File file) {
         JSONObject jsonObject = new JSONObject();
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            String jString = null;
+        if (file.exists()) {
             try {
-                FileChannel fc = stream.getChannel();
-                MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-                /* Instead of using default, pass in a decoder. */
-                jString = Charset.defaultCharset().decode(bb).toString();
-            } finally {
-                stream.close();
+                FileInputStream stream = new FileInputStream(file);
+                String jString = null;
+                try {
+                    FileChannel fc = stream.getChannel();
+                    MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+                    /* Instead of using default, pass in a decoder. */
+                    jString = Charset.defaultCharset().decode(bb).toString();
+                } finally {
+                    stream.close();
+                }
+                jsonObject = new JSONObject(jString);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            jsonObject = new JSONObject(jString);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return jsonObject;
