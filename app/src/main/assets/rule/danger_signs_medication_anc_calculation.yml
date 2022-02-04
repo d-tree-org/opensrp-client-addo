@@ -1,0 +1,50 @@
+---
+name: step1_danger_signs_present_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['danger_signs_captured': step1_danger_signs_captured, 'addo_medication_to_give': step1_addo_medication_to_give]"
+
+---
+name: step2_medications_selected
+description: Get the danger signs that were selected
+priority: 1
+condition: "true"
+actions:
+  - "def getSelectedDS(selectedItem, other_medicine) {
+        import java.lang.*;
+        String selected = '';
+
+        selected = helper.getSelectedItemsFromMultiSelect(selectedItem);
+        if (!other_medicine.isEmpty()) {
+            selected += '\u2022 ' + other_medicine + '<br>';
+        }
+
+        return selected;
+  }"
+  - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
+
+---
+name: step3_medication_dispensed_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['medications_selected': step2_medications_selected]"
+
+---
+name: step3_asterisk_symbol
+description: Display the red asterisks
+priority: 1
+condition: "true"
+actions:
+  - 'calculation = "{{step3_asterisk_symbol_questions}} (<font color=red>*</font>)"'
+
+---
+name: step3_required_field_err_toaster
+description: Displaying the danger signs selected in the toaster message
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['asterisk_symbol': step3_asterisk_symbol]"

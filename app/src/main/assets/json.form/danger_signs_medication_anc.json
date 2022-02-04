@@ -2,9 +2,9 @@
   "validate_on_submit": true,
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
-  "properties_file_name": "danger_signs_medication_adolescent",
+  "properties_file_name": "danger_signs_medication_child",
   "count": "3",
-  "encounter_type": "ADDO Visit - Dispense Medicine Adolescent",
+  "encounter_type": "ADDO Visit - Dispense Medicine ANC",
   "entity_id": "",
   "metadata": {
     "start": {
@@ -137,8 +137,8 @@
             }
           },
           {
-            "key": "amoxicillin__capsules",
-            "text": "Amoxicillin  capsules",
+            "key": "amoxicillin_capsules",
+            "text": "Amoxicillin capsules ",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -209,7 +209,7 @@
             }
           },
           {
-            "key": "chloramphenicol_eye_drops__ointment",
+            "key": "chloramphenicol_eye_drops_ointment",
             "text": "Chloramphenicol eye drops/ ointment",
             "property": {
               "presumed-id": "err",
@@ -233,7 +233,7 @@
             }
           },
           {
-            "key": "co_trimoxazole_tablets",
+            "key": "cotrimoxazole_tablets",
             "text": "Co-trimoxazole tablets",
             "property": {
               "presumed-id": "err",
@@ -297,7 +297,7 @@
             }
           },
           {
-            "key": "family_planning_pills_familia_flexy_p",
+            "key": "family_planning_pills_familia_flexy",
             "text": "Family planning pills (Familia, Flexy P)",
             "property": {
               "presumed-id": "err",
@@ -337,8 +337,8 @@
             }
           },
           {
-            "key": "hyoscine_butyl_bromide_tablets",
-            "text": "Hyoscine butyl bromide tablets",
+            "key": "hyoscine_butyl_bromide_tables",
+            "text": "Hyoscine butyl bromide tables",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -561,8 +561,8 @@
             }
           },
           {
-            "key": "vitamins_tablets__capsules",
-            "text": "Vitamin’s tablets/ capsules",
+            "key": "vitamin_tablets_capsules",
+            "text": "Vitamin tablets/ capsules",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -662,7 +662,7 @@
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_adolescent_calculation.yml"
+              "rules-file": "danger_signs_medication_anc_calculation.yml"
             }
           }
         }
@@ -702,14 +702,14 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_adolescent_relevance.yml"
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
             }
           }
         },
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "danger_signs_medication_adolescent_calculation.yml"
+              "rules-file": "danger_signs_medication_anc_calculation.yml"
             }
           }
         }
