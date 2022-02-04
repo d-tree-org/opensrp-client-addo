@@ -561,7 +561,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             if(isAncClient() || isPncClient()) {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAnc());
             } else if(isAdolescentClient()) {
-                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedication());
+                form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignsMedicationAdolescent());
             } else {
                 form = getFormUtils().getFormJson(CoreConstants.JSON_FORM.getDangerSignMedicationChild());
             }
