@@ -482,8 +482,8 @@
     <string name="pnc_hf_referral_text">PNC - HF Referral</string>
 
     <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
-    <string name="referrals_closed">Total Linkages Closed within a ward</string>
-    <string name="total_referrals">Total Linkages within a ward</string>
+    <string name="referrals_closed">Total Linkages Closed within the ward</string>
+    <string name="total_referrals">Total Linkages within the ward</string>
     <string name="total_visits">Total Linkages Closed at your ADDO</string>
     <string name="weekly_summary_title_text">Weekly summary</string>
     <string name="no_record_found">No Record Found</string>
