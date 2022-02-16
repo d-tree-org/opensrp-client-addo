@@ -462,10 +462,14 @@
 
     <string name="current_month_visits"> Number of visits conducted in the current month </string>
     <string name="last_month_visits"> Number of visits conducted in the last month </string>
-    <string name="curr_month_percentage_attended_visits"> % of visits conducted at the ADDO for linked clients </string>
-    <string name="last_month_percentage_attended_visits"> Last month % of visits conducted at the ADDO for linked clients </string>
-    <string name="curr_month_percentage_completed"> % of completed referrals to HF that were issued by the ADDO this month</string>
-    <string name="last_month_percentage_completed"> % of completed referrals to HF that were issued by the ADDO last month </string>
+    <string name="curr_month_attended_visits"> Number of visits conducted at the ADDO for linked clients in the current month </string>
+    <string name="last_month_attended_visits"> Number of visits conducted at the ADDO for linked clients in the last month </string>
+
+    <string name="curr_month_referrals_completed"> Number of completed referrals to HF that were issued by the ADDO this month</string>
+    <string name="last_month_referrals_completed"> Number of completed referrals to HF that were issued by the ADDO last month </string>
+
+    <string name="curr_month_referrals_issued"> Number of referrals to facility issued this month </string>
+    <string name="last_month_referrals_issued"> Number of referrals to facility issued last month </string>
 
     <string name="child_hf_referral_text">Child - HF Referral</string>
 
@@ -482,9 +486,9 @@
     <string name="pnc_hf_referral_text">PNC - HF Referral</string>
 
     <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
-    <string name="referrals_closed">Referrals Closed</string>
-    <string name="total_referrals">Total Referrals</string>
-    <string name="total_visits">Total Visits By ADDO</string>
+    <string name="referrals_closed">Total Linkages Closed within the ward</string>
+    <string name="total_referrals">Total Linkages within the ward</string>
+    <string name="total_visits">Total Linkages Closed at your ADDO</string>
     <string name="weekly_summary_title_text">Weekly summary</string>
     <string name="no_record_found">No Record Found</string>
     <string name="male">Male</string>
