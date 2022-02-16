@@ -16,24 +16,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:gravity="start"
             android:layout_marginRight="100dp"
-            android:text="This is a sample label that exposes just how terrible the view is rendered"
             android:fontFamily="@font/google_sans_regular"
-            android:textColor="@color/primary_color"
-            android:textSize="16sp"/>
+            android:gravity="start"
+            android:text="This is a sample label that exposes just how terrible the view is rendered"
+            android:textColor="@color/black_tranparent_50"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/numeric_indicator_value"
-            android:textColor="@color/primary_color"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/google_sans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:text="3000" />
+            android:fontFamily="@font/google_sans_bold"
+            android:text="3000"
+            android:textColor="@color/black_tranparent_50"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 

@@ -18,6 +18,7 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.presenter.MonthlyActivityDashboardPresenter;
+import org.smartregister.addo.repository.MonthlyReportRepository;
 import org.smartregister.addo.util.ChartUtil;
 import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.IndicatorQuery;
@@ -26,7 +27,6 @@ import org.smartregister.reporting.domain.ReportIndicator;
 import org.smartregister.reporting.model.NumericDisplayModel;
 import org.smartregister.reporting.view.NumericIndicatorView;
 
-import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +49,11 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
     private View titleView;
 
     private String anmUser;
+    private MonthlyReportRepository monthlyReportRepository;
 
-    MonthlyActivityDashboard(){}
+    MonthlyActivityDashboard(){
+        monthlyReportRepository = new MonthlyReportRepository();
+    }
 
     public static MonthlyActivityDashboard newInstance(){
         MonthlyActivityDashboard fragment = new MonthlyActivityDashboard();
@@ -190,24 +193,10 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         iQuery.setId(null);
         switch (indicatorCode){
             case ChartUtil.adolescentEncounter:
-                query = "select count(*) from ( " +
-                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                        "from visits " +
-                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                        "and visit_type in ('Adolescent ADDO Visit' ) " +
-                        "and visit_json like \"%"+anmUser+"%\" "+
-                        "group by base_entity_id, date_visited" +
-                        ")";
+                query = monthlyReportRepository.getAdolescentVisits();
                 break;
             case ChartUtil.childEncounter:
-                query = "select count(*) from ( " +
-                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                        "from visits " +
-                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                        "and visit_type in ('Child ADDO Visit' ) " +
-                        "and visit_json like \"%"+anmUser+"%\" "+
-                        "group by base_entity_id, date_visited" +
-                        ")";
+                query = monthlyReportRepository.getChildVisits();
                 break;
             case ChartUtil.ancEncounter:
                 query = "select count(*) from ( " +
@@ -374,10 +363,6 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel visitsConducted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthVisits, R.string.current_month_visits, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), visitsConducted).createView());
 
-        addPercentageLinked(mainLayout);
-
-        addPercentageCompleted(mainLayout);
-
         NumericDisplayModel childEnconters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.childEncounter, R.string.child_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), childEnconters).createView());
 
@@ -393,6 +378,11 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel otherEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.otherEncounter, R.string.other_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), otherEncounters).createView());
 
+
+        addCurrentMonthReferralsIssued(mainLayout);
+
+        addCurrentMonthReferralsIssuedCompleted(mainLayout);
+
         //Add Space between indicators
         mainLayout.addView(spacerView);
 
@@ -401,70 +391,36 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         NumericDisplayModel visitsConductedLastMonth = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthVisits, R.string.last_month_visits, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), visitsConductedLastMonth).createView());
 
-        addPercentageLinkedLastMonth(mainLayout);
-
-        addPercentageCompletedLastMonth(mainLayout);
-
+        addLastMonthReferralsIssued(mainLayout);
+        addLastMonthReferralsIssuedCompleted(mainLayout);
+        /*
         NumericDisplayModel totalEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthTotalEncounters, R.string.total_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), totalEncounters).createView());
 
         NumericDisplayModel referredEncounters = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthReferredEncounters, R.string.referred_encounters, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), referredEncounters).createView());
+        */
 
     }
 
-    private void addPercentageLinked(ViewGroup topView){
-        NumericDisplayModel currentMonthLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthLinked, R.string.current_month, indicatorTallies);
-        NumericDisplayModel currentMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthLinkedAttended, R.string.current_month, indicatorTallies);
-        int percentage = 0;
-        if (currentMonthLinkedAttended.getCount() > 0 && currentMonthLinked.getCount() > 0 ){
-            percentage =  Math.round((currentMonthLinkedAttended.getCount()/currentMonthLinked.getCount())*100);
-        }
-
-        NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.curr_month_percentage_attended_visits, indicatorTallies);
-        percentageVisitsForLinked.setCount(percentage);
-        topView.addView(new NumericIndicatorView(getContext(), percentageVisitsForLinked).createView());
+    private void addCurrentMonthReferralsIssued(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedByAddo, R.string.curr_month_referrals_issued, indicatorTallies);
+        mainView.addView(new NumericIndicatorView(getContext(), currentMonthIssued).createView());
     }
 
-    private void addPercentageLinkedLastMonth(ViewGroup topView){
-        NumericDisplayModel lastMonthLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthLinked, R.string.last_month, indicatorTallies);
-        NumericDisplayModel lastMonthLinkedAttended = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthAttendedLinked, R.string.last_month, indicatorTallies);
-        int percentage = 0;
-        if (lastMonthLinked.getCount() > 0 && lastMonthLinkedAttended.getCount() > 0){
-            percentage =  Math.round((lastMonthLinkedAttended.getCount()/lastMonthLinked.getCount())*100);
-        }
-
-        NumericDisplayModel percentageVisitsForLinked = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageAttended, R.string.last_month_percentage_attended_visits, indicatorTallies);
-        percentageVisitsForLinked.setCount(percentage);
-        topView.addView(new NumericIndicatorView(getContext(), percentageVisitsForLinked).createView());
+    private void addCurrentMonthReferralsIssuedCompleted(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedAttendedByAddo, R.string.curr_month_referrals_completed, indicatorTallies);
+        mainView.addView(new NumericIndicatorView(getContext(), currentMonthIssuedCompleted).createView());
     }
 
-    private void addPercentageCompleted(ViewGroup mainView){
-        NumericDisplayModel currentMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedByAddo, R.string.current_month, indicatorTallies);
-        NumericDisplayModel currentMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.currentMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
-        int percentage = 0;
-        if (currentMonthIssuedCompleted.getCount() > 0 && currentMonthIssued.getCount() > 0 ){
-            float perc = currentMonthIssuedCompleted.getCount()/currentMonthIssued.getCount();
-            perc = perc * 100;
-            percentage = Math.round(perc);
-        }
-
-        NumericDisplayModel percentageIssuedCompletedCM = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompleted, R.string.curr_month_percentage_completed, indicatorTallies);
-        percentageIssuedCompletedCM.setCount(percentage);
-        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedCM).createView());
+    private void addLastMonthReferralsIssued(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedByAddo, R.string.last_month_referrals_issued, indicatorTallies);
+        mainView.addView(new NumericIndicatorView(getContext(), currentMonthIssued).createView());
     }
 
-    private void addPercentageCompletedLastMonth(ViewGroup mainView){
-        NumericDisplayModel lastMonthIssued = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedByAddo, R.string.current_month, indicatorTallies);
-        NumericDisplayModel lastMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedAttendedByAddo, R.string.current_month, indicatorTallies);
-        int percentage = 0;
-        if (lastMonthIssuedCompleted.getCount() > 0 && lastMonthIssued.getCount() > 0 ){
-            percentage =  Math.round((lastMonthIssuedCompleted.getCount()/lastMonthIssued.getCount())*100);
-        }
-
-        NumericDisplayModel percentageIssuedCompletedML = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.percentageCompletedLastMonth, R.string.last_month_percentage_completed, indicatorTallies);
-        percentageIssuedCompletedML.setCount(percentage);
-        mainView.addView(new NumericIndicatorView(getContext(), percentageIssuedCompletedML).createView());
+    private void addLastMonthReferralsIssuedCompleted(ViewGroup mainView){
+        NumericDisplayModel currentMonthIssuedCompleted = getIndicatorDisplayModel(LATEST_COUNT, ChartUtil.lastMonthIssuedAttendedByAddo, R.string.last_month_referrals_completed, indicatorTallies);
+        mainView.addView(new NumericIndicatorView(getContext(), currentMonthIssuedCompleted).createView());
     }
 
     View getTitleView(String titleText){

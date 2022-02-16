@@ -31,6 +31,11 @@ public class ChartUtil {
     public static final String percentageCompleted = "IND_PERCENTAGE_COMPLETED";
     public static final String percentageCompletedLastMonth = "IND_PERCENTAGE_COMPLETED_LM";
 
+    public static final String currentMonthReferralsIssuedCompletedCount = "IND_CURR_MONTH_REFERRAL_ISSUED_COMPLETED";
+    public static final String lastMonthReferralsIssuedCompletedCount = "IND_LAST_MONTH_REFERRAL_ISSUED_COMPLETED";
+    public static final String currentMonthReferralsIssuedCount = "IND_CURR_MONTH_REFERRAL_ISSUED";
+    public static final String lastMonthReferralsIssuedCount = "IND_LAST_MONTH_REFERRAL_ISSUED";
+
     public static final String lastMonthVisits = "IND_LAST_MONTH_VISITS";
 
 }
