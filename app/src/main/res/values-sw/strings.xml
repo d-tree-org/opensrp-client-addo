@@ -85,8 +85,8 @@
     <string name="total_encounters"> Matembeleo Yote </string>
     <string name="referred_encounters"> Waliopewa Rufaa </string>
 
-    <string name="current_month_visits"> Matembeleo yaliyofanyika mwezi huu </string>
-    <string name="last_month_visits"> Matembeleo yaliyofanyika mwezi uliopita </string>
+    <string name="current_month_visits"> Wateja uliowapokea mwezi huu </string>
+    <string name="last_month_visits"> Wateja uliowapokea mwezi uliopita </string>
 
     <string name="curr_month_percentage_attended_visits"> % ya matembeleo yaliyounganishwa kwa ADDO mwezi huu </string>
     <string name="last_month_percentage_attended_visits"> % ya matembeleo yaliyounganishwa kwa ADDO mwezi uliopita </string>
