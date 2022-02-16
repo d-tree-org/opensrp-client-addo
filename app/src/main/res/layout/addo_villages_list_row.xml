@@ -17,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/locationImageView"
-                android:layout_width="@dimen/me_page_section_square_dimension"
-                android:layout_height="@dimen/me_page_section_square_dimension"
+                android:layout_width="@dimen/list_header_height"
+                android:layout_height="@dimen/list_header_height"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/me_page_initials_background_margin"
                 android:contentDescription="@string/section_icon"
@@ -35,21 +35,22 @@
                 android:layout_toEndOf="@+id/locationImageView"
                 android:orientation="horizontal">
 
-
-                <org.smartregister.view.LocationPickerView
+                <TextView
                     android:id="@+id/village_name"
-                    style="@style/page_location_selector"
+                    android:fontFamily="@font/google_sans_medium"
                     android:layout_width="210dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="80dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:text="Village Name"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
 
             </RelativeLayout>
 
