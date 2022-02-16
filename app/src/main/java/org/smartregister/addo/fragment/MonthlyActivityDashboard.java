@@ -18,6 +18,7 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.addo.R;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.presenter.MonthlyActivityDashboardPresenter;
+import org.smartregister.addo.repository.MonthlyReportRepository;
 import org.smartregister.addo.util.ChartUtil;
 import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.IndicatorQuery;
@@ -26,7 +27,6 @@ import org.smartregister.reporting.domain.ReportIndicator;
 import org.smartregister.reporting.model.NumericDisplayModel;
 import org.smartregister.reporting.view.NumericIndicatorView;
 
-import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +49,11 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
     private View titleView;
 
     private String anmUser;
+    private MonthlyReportRepository monthlyReportRepository;
 
-    MonthlyActivityDashboard(){}
+    MonthlyActivityDashboard(){
+        monthlyReportRepository = new MonthlyReportRepository();
+    }
 
     public static MonthlyActivityDashboard newInstance(){
         MonthlyActivityDashboard fragment = new MonthlyActivityDashboard();
@@ -190,24 +193,10 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         iQuery.setId(null);
         switch (indicatorCode){
             case ChartUtil.adolescentEncounter:
-                query = "select count(*) from ( " +
-                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                        "from visits " +
-                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                        "and visit_type in ('Adolescent ADDO Visit' ) " +
-                        "and visit_json like \"%"+anmUser+"%\" "+
-                        "group by base_entity_id, date_visited" +
-                        ")";
+                query = monthlyReportRepository.getAdolescentVisits();
                 break;
             case ChartUtil.childEncounter:
-                query = "select count(*) from ( " +
-                        "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
-                        "from visits " +
-                        "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                        "and visit_type in ('Child ADDO Visit' ) " +
-                        "and visit_json like \"%"+anmUser+"%\" "+
-                        "group by base_entity_id, date_visited" +
-                        ")";
+                query = monthlyReportRepository.getChildVisits();
                 break;
             case ChartUtil.ancEncounter:
                 query = "select count(*) from ( " +
