@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:divider="@color/second_grey"
         android:showDividers="middle"
+        android:paddingTop="10dp"
         android:id="@+id/summary_titles"
         android:weightSum="3">
 
