@@ -1,5 +1,7 @@
 package org.smartregister.addo.repository;
 
+import static org.smartregister.family.util.DBConstants.KEY.BASE_ENTITY_ID;
+
 import android.database.Cursor;
 
 import androidx.annotation.VisibleForTesting;
@@ -111,8 +113,10 @@ public class AddoWeeklySummaryRepository {
                     "'PNC ADDO Visit', " +
                     "'Other Member ADDO Visit', " +
                     "'Adolescent ADDO Visit') and " +
-                    "date(datetime(visit_date/1000, 'unixepoch')) > datetime('now', 'start of day','-6 days') " +
-                    "group by base_entity_id, visit_date;";
+                    "date(datetime(visit_date/1000, 'unixepoch')) > datetime('now', 'start of day','-6 days') and " +
+                    BASE_ENTITY_ID + " IN(select \"for\" from task where priority = '2' and " +
+                    "date(datetime(start/1000, 'unixepoch')) > datetime('now', 'start of day', '-6 days') and " +
+                    "status IN ('COMPLETED', 'IN_PROGRESS')) group by base_entity_id, visit_date;";
             cursor = repository.getReadableDatabase().rawQuery(query, null);
             cursor.moveToFirst();
             return Integer.toString(cursor.getCount());

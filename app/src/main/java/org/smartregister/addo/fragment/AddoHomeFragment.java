@@ -22,6 +22,7 @@ import org.smartregister.addo.custom_views.NavigationMenu;
 import org.smartregister.addo.model.AddoHomeFragmentModel;
 import org.smartregister.addo.presenter.AddoHomeFragmentPresenter;
 import org.smartregister.addo.view.EmptystateView;
+import org.smartregister.domain.FetchStatus;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -201,4 +202,23 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
 
     }
 
+    @Override
+    public void onSyncComplete(FetchStatus fetchStatus) {
+        super.onSyncComplete(fetchStatus);
+        if (fetchStatus != null) {
+            if (fetchStatus.equals(FetchStatus.fetched) || fetchStatus.equals(FetchStatus.nothingFetched)) {
+                model.getNumRefferalsWeek().observe(getViewLifecycleOwner(), s -> {
+                    numReferralsWeek.setText(s);
+                });
+
+                model.getNumClosedRefferalsWeek().observe(getViewLifecycleOwner(), s -> {
+                    numClosedReferralWeek.setText(s);
+                });
+
+                model.getNumAddoVisits().observe(getViewLifecycleOwner(), s -> {
+                    numOfVisitsAddo.setText(s);
+                });
+            }
+        }
+    }
 }
