@@ -92,7 +92,7 @@
     <string name="last_month_attended_visits"> % ya matembeleo yaliyounganishwa kwa ADDO mwezi uliopita </string>
 
     <string name="curr_month_referrals_completed"> Idadi ya rufaa ulizozituma kwenda kituo cha afya zikakamilika mwezi huu </string>
-    <string name="last_month_referrals_completed"> Idadi ya rufaa ulizozituma kwenda kituo cha afya zikakamilika mwezi huu </string>
+    <string name="last_month_referrals_completed"> Idadi ya rufaa ulizozituma kwenda kituo cha afya zikakamilika mwezi uliopita </string>
 
     <string name="curr_month_referrals_issued"> Idadi ya rufaa ulizozituma kwenda kituo cha afya mwezi huu </string>
     <string name="last_month_referrals_issued"> Idadi ya rufaa ulizozituma kwenda kituo cha afya mwezi uliopita </string>
