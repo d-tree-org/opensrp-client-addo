@@ -154,6 +154,20 @@
             "openmrs_entity_id": ""
           },
           {
+            "key": "chk_genital_pus_discharge",
+            "text": "{{step2_genital_pus_discharge}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_genital_herpes",
+            "text": "{{step2_genital_herpes}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
             "key": "chk_lower_abdominal_pain",
             "text": "{{step2_lower_abdominal_pain}}",
             "value": false,
@@ -161,11 +175,11 @@
             "openmrs_entity_id": "157544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "chk_vaginal_discharge",
-            "text": "{{step2_chk_vaginal_discharge}}",
+            "key": "chk_pain_when_urinating",
+            "text": "{{step2_pain_when_urinating}}",
             "value": false,
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "123396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": ""
           },
           {
             "key": "chk_vaginal_bleeding_between_periods",
@@ -175,15 +189,36 @@
             "openmrs_entity_id": "147240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "chk_wounds_around_genitals",
-            "text": "{{step2_wounds_around_genitals}}",
+            "key": "chk_abnormal_discharge_from_genitals",
+            "text": "{{step2_abnormal_discharge_from_genitals}}",
             "value": false,
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_feel_sick",
+            "text": "{{step2_feel_sick}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_vaginal_penis_bleeding",
+            "text": "{{step2_vaginal_penis_bleeding}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
           },
           {
             "key": "chk_irritation_around_genitals",
             "text": "{{step2_irritation_around_genitals}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "128315AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "chk_genitals_watery_discharge",
+            "text": "{{step2_genitals_watery_discharge}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "128315AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -196,8 +231,15 @@
             "openmrs_entity_id": ""
           },
           {
-            "key": "chk_family_planning",
-            "text": "{{step2_family_planning}}",
+            "key": "chk_redness_swelling_genitals",
+            "text": "{{step2_redness_swelling_genitals}}",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "chk_sore_around_genitals",
+            "text": "{{step2_sore_around_genitals}}",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
@@ -312,13 +354,19 @@
               {
                 "or": [
                   "chk_suspected_pregnancy",
+                  "chk_genital_pus_discharge",
+                  "chk_genital_herpes",
                   "chk_lower_abdominal_pain",
-                  "chk_vaginal_discharge",
+                  "chk_pain_when_urinating",
                   "chk_vaginal_bleeding_between_periods",
-                  "chk_wounds_around_genitals",
+                  "chk_abnormal_discharge_from_genitals",
+                  "chk_feel_sick",
+                  "chk_vaginal_penis_bleeding",
                   "chk_irritation_around_genitals",
+                  "chk_genitals_watery_discharge",
                   "chk_swelling_genital_parts",
-                  "chk_family_planning",
+                  "chk_redness_swelling_genitals",
+                  "chk_sore_around_genitals",
                   "chk_other"
                 ]
               }
