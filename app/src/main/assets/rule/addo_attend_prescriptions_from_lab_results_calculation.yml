@@ -4,18 +4,20 @@ description: Get the danger signs that were selected
 priority: 1
 condition: "true"
 actions:
-  - 'def getSelectedDS(selectedItem) {
+  - 'def getSelectedDS(selectedItem, other_medicine) {
         import java.util.*;
 
         String selected ="";
 
-        List listOfSelected = helper.getSelectedItemsFromMultiSelect(selectedItem);
-        for (int i=0; i < listOfSelected.size(); i++) {
-            selected +=  (i+1) + ". " +listOfSelected.get(i) + "<br />";
+        selected = helper.getSelectedItemsFromMultiSelect(selectedItem);
+
+        if (!other_medicine.isEmpty()) {
+            selected += "\u2022 " + other_medicine + "<br />";
         }
+
         return selected;
   }'
-  - "calculation = getSelectedDS(step2_medicine_dispensed)"
+  - "calculation = getSelectedDS(step2_medicine_dispensed, step2_medication_description)"
 ---
 name: step3_medication_dispensed_toaster
 description: Displaying the medication selected in the toaster message
