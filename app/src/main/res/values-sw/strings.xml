@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DLDM</string>
+    <string name="nav_registers">Rejista</string>
     <string name="menu_addo_home">Mwanzo</string>
     <string name="menu_addo_report">Ripoti</string>
     <string name="choose_language">Chagua lugha</string>
-    <string name="log_out_as">Log out as</string>
+    <string name="log_out_as">Toka kwenye mfumo kama</string>
+    <string name="nav_sync">Oanisha</string>
+    <string name="nav_last">"Mwisho: </string>
 
     <!--ADDO Home Screen -->
-
     <string name="ask_client_village">Muulize mteja kama anatoka Kibaha. Kama anatokea Kibaha tafadhali chagua kijiji anachotekea kutoka kwenye orodha hapo chini. Kama hatoki Kibaha, usitumie mfumo huu kutoa huduma hii.</string>
     <string name="add_select_village">Mteja anaishi wapi?</string>
     <string name="addo_other_village">Kijiji kingine</string>
