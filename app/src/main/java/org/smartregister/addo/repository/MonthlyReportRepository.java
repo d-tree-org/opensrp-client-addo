@@ -44,62 +44,52 @@ public class MonthlyReportRepository {
     }
 
     public String getCurrentMonthChildVisits(){
-        String query = "select * from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('Child ADDO Visit' ) " +
                 "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+                "group by base_entity_id, date_visited";
         return getQueryCount(query);
     }
 
     public String getCurrentMonthAdolescentVisit(){
-        String query = "select * from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
-                "and visit_type in ('Adolescent ADDO Visit', 'Adolescent Addo Screening') " +
+                "and visit_type in ('Adolescent ADDO Visit') " +
                 "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+                "group by base_entity_id, date_visited";
         return getQueryCount(query);
     }
 
     public String getCurrentMonthANCVisits(){
-        String query = "select * from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('ANC ADDO Visit' ) " +
                 "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+                "group by base_entity_id, date_visited";
         return getQueryCount(query);
     }
 
     public String getCurrentMonthPNCVisits(){
-        String query = "select * from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('PNC ADDO Visit' ) " +
                 "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+                "group by base_entity_id, date_visited";
         return getQueryCount(query);
     }
 
     public String getCurrentMonthOtherMemberVisits(){
-        String query = "select * from ( " +
-                "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
-                "where datetime(visit_date/1000, 'unixepoch') < date('now', 'start of month') " +
-                "and visit_type not in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'ANC Home Visit') " +
+                "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                "and visit_type in ('Other Member ADDO Visit') " +
                 "and visit_json like \"%"+anmUser+"%\" "+
-                "group by base_entity_id, date_visited" +
-                ")";
+                "group by base_entity_id, date_visited";
         return getQueryCount(query);
     }
 
