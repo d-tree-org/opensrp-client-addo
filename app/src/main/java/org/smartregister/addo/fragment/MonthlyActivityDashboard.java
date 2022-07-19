@@ -10,6 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
@@ -20,6 +24,8 @@ import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.presenter.MonthlyActivityDashboardPresenter;
 import org.smartregister.addo.repository.MonthlyReportRepository;
 import org.smartregister.addo.util.ChartUtil;
+import org.smartregister.addo.viewmodel.AddoHomeViewModel;
+import org.smartregister.addo.viewmodel.MonthlyActivitiesViewModel;
 import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.IndicatorQuery;
 import org.smartregister.reporting.domain.IndicatorTally;
@@ -34,9 +40,11 @@ import java.util.Map;
 import static org.smartregister.reporting.contract.ReportContract.IndicatorView.CountType.LATEST_COUNT;
 import static org.smartregister.reporting.util.ReportingUtil.getIndicatorDisplayModel;
 
-public class MonthlyActivityDashboard extends Fragment implements ReportContract.View, LoaderManager.LoaderCallbacks<List<Map<String, IndicatorTally>>> {
+public class MonthlyActivityDashboard extends Fragment implements ReportContract.View {
 
-    private static ReportContract.Presenter presenter;
+    private Context context;
+
+    public static ReportContract.Presenter presenter;
     private ViewGroup visualizationsViewGroup;
 
     private List<Map<String, IndicatorTally>> indicatorTallies;
@@ -51,8 +59,11 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
     private String anmUser;
     private MonthlyReportRepository monthlyReportRepository;
 
+    private MonthlyActivitiesViewModel model;
+
     MonthlyActivityDashboard(){
         monthlyReportRepository = new MonthlyReportRepository();
+        context = this.getContext();
     }
 
     public static MonthlyActivityDashboard newInstance(){
@@ -69,6 +80,7 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         anmUser = CoreLibrary.getInstance().context().allSharedPreferences().fetchRegisteredANM();
@@ -78,7 +90,11 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         addIndicators();
 
         presenter.scheduleRecurringTallyJob();
-        getLoaderManager().initLoader(0, null, this).forceLoad();
+
+        model = ViewModelProviders.of(requireActivity()).get(MonthlyActivitiesViewModel.class);
+
+        presenter.fetchIndicatorsDailytallies();
+
     }
 
     private void addIndicators(){
@@ -192,12 +208,6 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         iQuery.setDbVersion(0);
         iQuery.setId(null);
         switch (indicatorCode){
-            case ChartUtil.adolescentEncounter:
-                query = monthlyReportRepository.getAdolescentVisits();
-                break;
-            case ChartUtil.childEncounter:
-                query = monthlyReportRepository.getChildVisits();
-                break;
             case ChartUtil.ancEncounter:
                 query = "select count(*) from ( " +
                         "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
@@ -428,51 +438,6 @@ public class MonthlyActivityDashboard extends Fragment implements ReportContract
         TextView title = tv.findViewById(R.id.indicator_title);
         title.setText(titleText);
         return tv;
-    }
-
-    @NonNull
-    @Override
-    public Loader<List<Map<String, IndicatorTally>>> onCreateLoader(int id, @Nullable Bundle args) {
-        hasLoadedSampleData = Boolean.parseBoolean(AddoApplication.getInstance().getContext().allSharedPreferences().getPreference(HAS_LOADED_SAMPLE_DATA));
-        if (!activityStarted){
-            activityStarted = true;
-            return new ReportIndicatorsLoader(getContext(), false);
-        }else{
-            return new ReportIndicatorsLoader(getContext(), true);
-        }
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<List<Map<String, IndicatorTally>>> loader, List<Map<String, IndicatorTally>> data) {
-        setIndicatorTallies(data);
-        refreshUI();
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<List<Map<String, IndicatorTally>>> loader) {
-
-    }
-
-    private static class ReportIndicatorsLoader extends AsyncTaskLoader<List<Map<String, IndicatorTally>>> {
-
-        boolean loadedIndicators;
-
-        public ReportIndicatorsLoader(Context context, boolean alreadyLoaded) {
-            super(context);
-            this.loadedIndicators = alreadyLoaded;
-        }
-
-        @Nullable
-        @Override
-        public List<Map<String, IndicatorTally>> loadInBackground() {
-            List<Map<String, IndicatorTally>> empty = new ArrayList<>();
-            if (!loadedIndicators) {
-                AddoApplication.getInstance().getContext().allSharedPreferences().savePreference(HAS_LOADED_SAMPLE_DATA, "true");
-                return presenter.fetchIndicatorsDailytallies();
-            }else{
-                return empty;
-            }
-        }
     }
 
 }
