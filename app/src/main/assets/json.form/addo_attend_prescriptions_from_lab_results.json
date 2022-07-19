@@ -84,7 +84,7 @@
         "options": [
           {
             "key":"stand_alone_laboratory",
-            "text":"Stand-alone laboratory",
+            "text":"{{step1_stand_alone_laboratory}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -95,7 +95,7 @@
           },
           {
             "key":"arafa_mwendapole_dispensary",
-            "text":"Arafa Mwendapole Dispensary",
+            "text":"{{step1_arafa_mwendapole_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -106,7 +106,7 @@
           },
           {
             "key":"boko_mnemela_dispensary",
-            "text":"Boko Mnemela Dispensary",
+            "text":"{{step1_boko_mnemela_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -117,7 +117,7 @@
           },
           {
             "key":"dama_africa_dispensary",
-            "text":"Dama Africa Dispensary",
+            "text":"{{step1_dama_africa_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -128,7 +128,7 @@
           },
           {
             "key":"disunyara_dispensary",
-            "text":"Disunyara Dispensary",
+            "text":"{{step1_disunyara_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -139,7 +139,7 @@
           },
           {
             "key":"dutumi_dispensary",
-            "text":"Dutumi Dispensary",
+            "text":"{{step1_dutumi_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -150,7 +150,7 @@
           },
           {
             "key":"galagaza_dispensary",
-            "text":"Galagaza Dispensary",
+            "text":"{{step1_galagaza_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -161,7 +161,7 @@
           },
           {
             "key":"gumba_dispensary",
-            "text":"Gumba Dispensary",
+            "text":"{{step1_gumba_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -172,7 +172,7 @@
           },
           {
             "key":"gwata_dispensary",
-            "text":"Gwata Dispensary",
+            "text":"{{step1_gwata_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -183,7 +183,7 @@
           },
           {
             "key":"ics_mikocheni_charitable_dispensary",
-            "text":"ICS Mikocheni Charitable Dispensary",
+            "text":"{{step1_ics_mikocheni_charitable_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -194,7 +194,7 @@
           },
           {
             "key":"jabal_hira_dispensary",
-            "text":"Jabal Hira Dispensary",
+            "text":"{{step1_jabal_hira_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -205,7 +205,7 @@
           },
           {
             "key":"kikongo_dispensary",
-            "text":"Kikongo Dispensary",
+            "text":"{{step1_kikongo_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -216,7 +216,7 @@
           },
           {
             "key":"kitomondo_dispensary",
-            "text":"Kitomondo Dispensary",
+            "text":"{{step1_kitomondo_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -227,7 +227,7 @@
           },
           {
             "key":"kongowe_dispensary",
-            "text":"Kongowe Dispensary",
+            "text":"{{step1_kongowe_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -238,7 +238,7 @@
           },
           {
             "key":"kongowe_forest_dispensary",
-            "text":"Kongowe Forest Dispensary",
+            "text":"{{step1_kongowe_forest_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -249,7 +249,7 @@
           },
           {
             "key":"kwala_dispensary",
-            "text":"Kwala Dispensary",
+            "text":"{{step1_kwala_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -260,7 +260,7 @@
           },
           {
             "key":"lukenge_dispensary",
-            "text":"Lukenge Dispensary",
+            "text":"{{step1_lukenge_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -271,7 +271,7 @@
           },
           {
             "key":"lupunga_dispensary",
-            "text":"Lupunga Dispensary",
+            "text":"{{step1_lupunga_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -282,7 +282,7 @@
           },
           {
             "key":"magindu_dispensary",
-            "text":"Magindu Dispensary",
+            "text":"{{step1_magindu_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -293,7 +293,7 @@
           },
           {
             "key":"mbwawa_dispensary",
-            "text":"Mbwawa Dispensary",
+            "text":"{{step1_mbwawa_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -304,7 +304,7 @@
           },
           {
             "key":"medewell_health_center",
-            "text":"Medewell Health Center",
+            "text":"{{step1_medewell_health_center}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -315,7 +315,7 @@
           },
           {
             "key":"mico_gumba_dispensary",
-            "text":"MICO Gumba Dispensary",
+            "text":"{{step1_mico_gumba_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -326,7 +326,7 @@
           },
           {
             "key":"misugusugu_dispensary",
-            "text":"Misugusugu Dispensary",
+            "text":"{{step1_misugusugu_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -337,7 +337,7 @@
           },
           {
             "key":"miswe_dispensary",
-            "text":"Miswe Dispensary",
+            "text":"{{step1_miswe_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -348,7 +348,7 @@
           },
           {
             "key":"mkoani_health_center",
-            "text":"Mkoani Health Center",
+            "text":"{{step1_mkoani_health_center}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -359,7 +359,7 @@
           },
           {
             "key":"mlandizi_health_center",
-            "text":"Mlandizi Health Center",
+            "text":"{{step1_mlandizi_health_center}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -370,7 +370,7 @@
           },
           {
             "key":"mperamumbi_dispensary",
-            "text":"Mperamumbi Dispensary",
+            "text":"{{step1_mperamumbi_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -381,7 +381,7 @@
           },
           {
             "key":"mpangile_dispensary",
-            "text":"Mpangile Dispensary",
+            "text":"{{step1_mpangile_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -392,7 +392,7 @@
           },
           {
             "key":"msua_dispensary",
-            "text":"Msua Dispensary",
+            "text":"{{step1_msua_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -403,7 +403,7 @@
           },
           {
             "key":"mtakuja_dispensary",
-            "text":"Mtakuja Dispensary",
+            "text":"{{step1_mtakuja_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -414,7 +414,7 @@
           },
           {
             "key":"mwanabwito_dispensary",
-            "text":"Mwanabwito Dispensary",
+            "text":"{{step1_mwanabwito_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -425,7 +425,7 @@
           },
           {
             "key":"mwendapole_dispensary",
-            "text":"Mwendapole Dispensary",
+            "text":"{{step1_mwendapole_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -436,7 +436,7 @@
           },
           {
             "key":"ngeta_dispensary",
-            "text":"Ngeta Dispensary",
+            "text":"{{step1_ngeta_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -447,7 +447,7 @@
           },
           {
             "key":"ruvu_sec_dispensary",
-            "text":"Ruvu Sec Dispensary",
+            "text":"{{step1_ruvu_sec_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -458,7 +458,7 @@
           },
           {
             "key":"ruvu_station_dispensary",
-            "text":"Ruvu Station Dispensary",
+            "text":"{{step1_ruvu_station_dispensar}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -469,7 +469,7 @@
           },
           {
             "key":"soga_dispensary",
-            "text":"Soga Dispensary",
+            "text":"{{step1_soga_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -480,7 +480,7 @@
           },
           {
             "key":"st._getrude_dispensary",
-            "text":"St. Getrude Dispensary",
+            "text":"{{step1_getrude_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -491,7 +491,7 @@
           },
           {
             "key":"st._michael_health_center",
-            "text":"St. Michael Health Center",
+            "text":"{{step1_michael_health_center}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -502,7 +502,7 @@
           },
           {
             "key":"tumbi_regional_referral_hospital",
-            "text":"Tumbi Regional Referral Hospital",
+            "text":"{{step1_tumbi_regional_referral_hospital}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -513,7 +513,7 @@
           },
           {
             "key":"vikawe_dispensary",
-            "text":"Vikawe Dispensary",
+            "text":"{{step1_vikawe_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -524,7 +524,7 @@
           },
           {
             "key":"vikuge_dispensary",
-            "text":"Vikuge Dispensary",
+            "text":"{{step1_vikuge_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -535,7 +535,7 @@
           },
           {
             "key":"visiga_dispensary",
-            "text":"Visiga Dispensary",
+            "text":"{{step1_visiga_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -546,7 +546,7 @@
           },
           {
             "key":"visiga_seminary_dispensary",
-            "text":"Visiga Seminary Dispensary",
+            "text":"{{step1_visiga_seminary_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -557,7 +557,7 @@
           },
           {
             "key":"viziwaziwa_dispensary",
-            "text":"Viziwaziwa Dispensary",
+            "text":"{{step1_viziwaziwa_dispensary}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",
@@ -568,7 +568,7 @@
           },
           {
             "key":"outside_kibaha_district",
-            "text":"Outside Kibaha District",
+            "text":"{{step1_outside_kibaha_district}}",
             "openmrs_entity_parent":"",
             "openmrs_entity":"",
             "openmrs_entity_id":"",

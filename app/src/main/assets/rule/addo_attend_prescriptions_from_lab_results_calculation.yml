@@ -4,15 +4,15 @@ description: Get the danger signs that were selected
 priority: 1
 condition: "true"
 actions:
-  - 'def getSelectedDS(selectedItem, other_medicine) {
+  - 'def getSelectedDS(selectedItem, otherMedicine) {
         import java.util.*;
 
         String selected ="";
 
         selected = helper.getSelectedItemsFromMultiSelect(selectedItem);
 
-        if (!other_medicine.isEmpty()) {
-            selected += "\u2022 " + other_medicine + "<br />";
+        if (!otherMedicine.isEmpty()) {
+            selected += "\u2022 " + otherMedicine + "<br />"
         }
 
         return selected;
