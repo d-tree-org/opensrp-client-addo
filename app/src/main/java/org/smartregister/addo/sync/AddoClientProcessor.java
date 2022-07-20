@@ -8,14 +8,12 @@ import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.anc.util.NCUtils;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.util.CoreConstants;
-import org.smartregister.addo.util.Utils;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.Event;
 import org.smartregister.domain.db.EventClient;
-import org.smartregister.domain.db.Obs;
 import org.smartregister.domain.jsonmapping.ClientClassification;
 import org.smartregister.domain.jsonmapping.Column;
 import org.smartregister.domain.jsonmapping.Table;
@@ -82,7 +80,7 @@ public class AddoClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    private ClientClassification getClassification() {
+    public ClientClassification getClassification() {
         if (classification == null) {
             classification = assetJsonToJava("ec_client_classification.json", ClientClassification.class);
         }
@@ -189,6 +187,7 @@ public class AddoClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.PNC_ADDO_VISIT:
             case CoreConstants.EventType.CHILD_ADDO_VISIT:
             case CoreConstants.EventType.ADOLESCENT_ADDO_VISIT:
+            case CoreConstants.EventType.OTHER_MEMBER_ADDO_VISIT:
                 if (eventClient.getEvent() == null) {
                     return;
                 }
@@ -435,7 +434,7 @@ public class AddoClientProcessor extends ClientProcessorForJava {
         if (commonsRepository != null) {
 
             ContentValues values = new ContentValues();
-            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(myEventDate));
             values.put("is_closed", 1);
 
             AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY, values,
@@ -480,7 +479,7 @@ public class AddoClientProcessor extends ClientProcessorForJava {
         if (commonsRepository != null) {
 
             ContentValues values = new ContentValues();
-            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(myEventDate));
             values.put("is_closed", 1);
 
             AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY_MEMBER, values,
@@ -515,7 +514,7 @@ public class AddoClientProcessor extends ClientProcessorForJava {
         if (commonsRepository != null) {
 
             ContentValues values = new ContentValues();
-            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(myEventDate));
+            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(myEventDate));
             values.put("is_closed", 1);
 
             AddoApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.CHILD, values,

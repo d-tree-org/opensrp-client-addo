@@ -19,9 +19,9 @@
     </style>
 
     <style name="AddoTheme.Login" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@color/addo_primary</item>
         <item name="android:textSize">@dimen/login_font_size</item>
-        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlActivated">@color/addo_primary</item>
     </style>
 
     <style name="AddoTheme.NoActionBar" parent="AddoTheme">

@@ -10,26 +10,44 @@ actions:
         if (selectedItem.contains('chk_suspected_pregnancy')) {
             selected += '\u2022 {{step2_suspected_pregnancy}} <br />';
         }
+        if (selectedItem.contains('chk_genital_pus_discharge')) {
+            selected += '\u2022 {{step2_genital_pus_discharge}} <br />';
+        }
+        if (selectedItem.contains('chk_genital_herpes')) {
+            selected += '\u2022 {{step2_genital_herpes}} <br />';
+        }
         if (selectedItem.contains('chk_lower_abdominal_pain')) {
             selected += '\u2022 {{step2_lower_abdominal_pain}} <br />';
         }
-        if (selectedItem.contains('chk_vaginal_discharge')) {
-            selected += '\u2022 {{step2_chk_vaginal_discharge}} <br />';
+        if (selectedItem.contains('chk_pain_when_urinating')) {
+            selected += '\u2022 {{step2_pain_when_urinating}} <br />';
         }
         if (selectedItem.contains('chk_vaginal_bleeding_between_periods')) {
             selected += '\u2022 {{step2_vaginal_bleeding_between_periods}} <br />';
         }
-        if (selectedItem.contains('chk_wounds_around_genitals')) {
-            selected += '\u2022 {{step2_wounds_around_genitals}} <br />';
+        if (selectedItem.contains('chk_abnormal_discharge_from_genitals')) {
+            selected += '\u2022 {{step2_abnormal_discharge_from_genitals}} <br />';
+        }
+        if (selectedItem.contains('chk_feel_sick')) {
+            selected += '\u2022 {{step2_feel_sick}} <br />';
+        }
+        if (selectedItem.contains('chk_vaginal_penis_bleeding')) {
+            selected += '\u2022 {{step2_vaginal_penis_bleeding}} <br />';
         }
         if (selectedItem.contains('chk_irritation_around_genitals')) {
             selected += '\u2022 {{step2_irritation_around_genitals}} <br />';
         }
+        if (selectedItem.contains('chk_genitals_watery_discharge')) {
+            selected += '\u2022 {{step2_genitals_watery_discharge}} <br />';
+        }
         if (selectedItem.contains('chk_swelling_genital_parts')) {
             selected += '\u2022 {{step2_swelling_genital_parts}} <br />';
         }
-        if (selectedItem.contains('chk_family_planning')) {
-            selected += '\u2022 {{step2_family_planning}} <br />';
+        if (selectedItem.contains('chk_redness_swelling_genitals')) {
+            selected += '\u2022 {{step2_redness_swelling_genitals}} <br />';
+        }
+        if (selectedItem.contains('chk_sore_around_genitals')) {
+            selected += '\u2022 {{step2_sore_around_genitals}} <br />';
         }
         if (selectedItem.contains('chk_other')) {
             selected += '\u2022 ' + otherIllnesses + '<br />';

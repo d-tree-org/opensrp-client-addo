@@ -11,30 +11,20 @@ import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.repository.AddoSharedPreferences;
 import org.smartregister.addo.util.Constants;
 import org.smartregister.addo.util.FileUtils;
 import org.smartregister.simprint.OnDialogButtonClick;
 import org.smartregister.view.activity.SettingsActivity;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
 
 import timber.log.Timber;
 
@@ -60,7 +50,7 @@ public class AddoSettingsActivity extends SettingsActivity {
     }
 
 
-    public void prepareSwitchFolder(){
+    public void prepareSwitchFolder() {
         String rootFolder = "Addo";
         createFolders(rootFolder, false);
         boolean onSdCard = FileUtils.canWriteToExternalDisk();
@@ -68,7 +58,7 @@ public class AddoSettingsActivity extends SettingsActivity {
             createFolders(rootFolder, true);
     }
 
-    public void createFolders(String rootFolder, boolean onSdCard){
+    public void createFolders(String rootFolder, boolean onSdCard) {
         try {
             FileUtils.createDirectory(rootFolder, onSdCard);
         } catch (Exception e) {
@@ -96,7 +86,7 @@ public class AddoSettingsActivity extends SettingsActivity {
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
                         String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "test");
 
-                        if(newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
+                        if (newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
                             if ("test".equalsIgnoreCase(environment)) {
                                 confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
                                     @Override
@@ -147,7 +137,6 @@ public class AddoSettingsActivity extends SettingsActivity {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             AddoSharedPreferences addoSharedPreferences = new AddoSharedPreferences(sharedPreferences);
             addoSharedPreferences.updateOpensrpADDOEnvironment("production");
-            writeEnvironmentConfigurations("production");
             clearApplicationData();
             Toast.makeText(getActivity(), "I am switching to production " + addoSharedPreferences.getOpensrpADDOEnvironment(), Toast.LENGTH_SHORT).show();
         }
@@ -156,7 +145,6 @@ public class AddoSettingsActivity extends SettingsActivity {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             AddoSharedPreferences addoSharedPreferences = new AddoSharedPreferences(sharedPreferences);
             addoSharedPreferences.updateOpensrpADDOEnvironment("test");
-            writeEnvironmentConfigurations("test");
             clearApplicationData();
             Toast.makeText(getActivity(), "I am switching to test", Toast.LENGTH_SHORT).show();
         }
@@ -185,19 +173,18 @@ public class AddoSettingsActivity extends SettingsActivity {
         }
 
         public void clearApplicationData() {
+            Toast.makeText(getActivity(), "Clearing environment data wait ...", Toast.LENGTH_LONG).show();
             File appDir = new File(Environment.getDataDirectory() + File.separator + "data/org.smartregister.addo");
-            if(appDir.exists()){
+            if (appDir.exists()) {
                 String[] children = appDir.list();
-                for(String s : children){
-                    if(!s.equals("lib")){
+                assert children != null;
+                for (String s : children) {
+                    if (!s.equals("lib")) {
                         deleteDir(new File(appDir, s));
-                        Log.i("TAG", "File /data/data/APP_PACKAGE/" + s +" DELETED");
+                        Timber.i("File /data/data/APP_PACKAGE/" + s + " DELETED");
                     }
                 }
-            } else {
-                // TODO
             }
-
             getActivity().finish();
             System.exit(0);
 
@@ -206,34 +193,17 @@ public class AddoSettingsActivity extends SettingsActivity {
         public static boolean deleteDir(File dir) {
             if (dir != null && dir.isDirectory()) {
                 String[] children = dir.list();
-                for (int i = 0; i < children.length; i++) {
-                    boolean success = deleteDir(new File(dir, children[i]));
+                assert children != null;
+                for (String child : children) {
+                    boolean success = deleteDir(new File(dir, child));
                     if (!success) {
                         return false;
                     }
                 }
             }
 
+            assert dir != null;
             return dir.delete();
         }
-
-        private void writeEnvironmentConfigurations(String env) {
-
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("env", env);
-
-                File file = new File(Environment.getExternalStorageDirectory()+ File.separator + "Addo", "env_switch.json");
-
-                FileWriter fileWriter = new FileWriter(file);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                bufferedWriter.write(jsonObject.toString());
-                bufferedWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
     }
-
 }

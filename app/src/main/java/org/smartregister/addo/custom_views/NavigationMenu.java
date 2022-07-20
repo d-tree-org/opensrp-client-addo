@@ -164,6 +164,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         TextView tvLogo = rootView.findViewById(R.id.tvLogo);
         tvLogo.setText("Afyatek ADDO App");
 
+        TextView tvRegisters = rootView.findViewById(R.id.tvRegisters);
+        tvRegisters.setText(activity.getResources().getString(R.string.nav_registers));
+
         if (pbSync != null) {
 
             FadingCircle circle = new FadingCircle();
@@ -224,6 +227,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     public void registerSync(final Activity parentActivity) {
         TextView tvSync = rootView.findViewById(R.id.tvSync);
+        TextView syncTimeTitle = rootView.findViewById(R.id.syncTimeTitle);
+        tvSync.setText(parentActivity.getResources().getString(R.string.nav_sync));
+        syncTimeTitle.setText(parentActivity.getResources().getString(R.string.nav_last));
         ivSync = rootView.findViewById(R.id.ivSyncIcon);
         pbSync = rootView.findViewById(R.id.pbSync);
 
