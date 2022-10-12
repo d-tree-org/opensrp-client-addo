@@ -48,7 +48,17 @@ public class MonthlyReportRepository {
         queryString.append(anmUser);
         queryString.append("%'");
 
-        return getQueryCount(queryString.toString());
+        int totalVisits = 0;
+
+        int childCount = Integer.parseInt(getCurrentMonthChildVisits());
+        int ancCount = Integer.parseInt(getCurrentMonthANCVisits());
+        int pncCount = Integer.parseInt(getCurrentMonthPNCVisits());
+        int adolescentCount = Integer.parseInt(getCurrentMonthAdolescentVisit());
+        int otherVisitCount = Integer.parseInt(getCurrentMonthOtherMemberVisits());
+
+        totalVisits = childCount + ancCount + pncCount + adolescentCount + otherVisitCount;
+
+        return totalVisits+"";
     }
 
     public String getCurrentMonthChildVisits(){
