@@ -48,8 +48,8 @@ android {
         buildConfigField "int", "DATABASE_VERSION", '11'
 
         buildConfigField "String", 'opensrp_url_staging', '"https://opensrp-dev.d-tree.org/opensrp/"'
-        buildConfigField "String", 'opensrp_url_production', '"https://opensrp-dev.d-tree.org/opensrp/"'
-//        buildConfigField "String", 'opensrp_url_production', '"https://afyatek.smartregister.org/opensrp/"'
+        //buildConfigField "String", 'opensrp_url_production', '"https://opensrp-dev.d-tree.org/opensrp/"'
+        buildConfigField "String", 'opensrp_url_production', '"https://afyatek.smartregister.org/opensrp/"'
         buildConfigField "String", 'opensrp_url_debug', '"https://opensrp-dev.d-tree.org/opensrp/"'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
