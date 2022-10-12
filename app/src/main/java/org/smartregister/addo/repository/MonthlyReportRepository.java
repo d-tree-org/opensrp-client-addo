@@ -7,6 +7,7 @@ import androidx.annotation.VisibleForTesting;
 import org.smartregister.CoreLibrary;
 import org.smartregister.addo.application.AddoApplication;
 import org.smartregister.addo.util.ChartUtil;
+import org.smartregister.addo.util.QueryBuilder;
 import org.smartregister.family.util.AppExecutors;
 import org.smartregister.repository.Repository;
 
@@ -36,15 +37,32 @@ public class MonthlyReportRepository {
                 "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit') " +
                 "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";*/
 
-        String query = "select distinct(base_entity_id), visit_type from visits where " +
-                "datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') "+
-                "and visit_json like \"%"+anmUser+"%\"";
+        String providerIdBuilder = "providerId\": \"" +
+                anmUser;
 
-        return getQueryCount(query);
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("select base_entity_id from visits where ");
+        queryString.append("datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ");
+        queryString.append("and visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit')");
+        queryString.append("and visit_json like '%");
+        queryString.append(anmUser);
+        queryString.append("%'");
+
+        int totalVisits = 0;
+
+        int childCount = Integer.parseInt(getCurrentMonthChildVisits());
+        int ancCount = Integer.parseInt(getCurrentMonthANCVisits());
+        int pncCount = Integer.parseInt(getCurrentMonthPNCVisits());
+        int adolescentCount = Integer.parseInt(getCurrentMonthAdolescentVisit());
+        int otherVisitCount = Integer.parseInt(getCurrentMonthOtherMemberVisits());
+
+        totalVisits = childCount + ancCount + pncCount + adolescentCount + otherVisitCount;
+
+        return totalVisits+"";
     }
 
     public String getCurrentMonthChildVisits(){
-        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('Child ADDO Visit' ) " +
@@ -54,7 +72,7 @@ public class MonthlyReportRepository {
     }
 
     public String getCurrentMonthAdolescentVisit(){
-        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('Adolescent ADDO Visit') " +
@@ -64,7 +82,7 @@ public class MonthlyReportRepository {
     }
 
     public String getCurrentMonthANCVisits(){
-        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('ANC ADDO Visit' ) " +
@@ -74,7 +92,7 @@ public class MonthlyReportRepository {
     }
 
     public String getCurrentMonthPNCVisits(){
-        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('PNC ADDO Visit' ) " +
@@ -84,7 +102,7 @@ public class MonthlyReportRepository {
     }
 
     public String getCurrentMonthOtherMemberVisits(){
-        String query = "select distinct(base_entity_id), date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as date_visited, visit_json, visit_type " +
                 "from visits " +
                 "where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
                 "and visit_type in ('Other Member ADDO Visit') " +
