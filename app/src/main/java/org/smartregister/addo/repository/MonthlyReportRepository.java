@@ -32,21 +32,18 @@ public class MonthlyReportRepository {
     /////////// CURRENT MONTH INDICATORS
 
     public String getCurrentMonthVisit(){
-        //Get all visit without considering focus groups since there are visit types/client types not being tracked
-        /*String query = "select distinct(base_entity_id) from visits where " +
-                "visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit') " +
-                "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ";*/
 
-        String providerIdBuilder = "providerId\": \"" +
-                anmUser;
+        String query = "select base_entity_id, date(datetime(visit_date/1000, 'unixepoch')) as dt " +
+                "from visits "+
+                "where visit_type in ('Adolescent ADDO Visit','Child ADDO Visit', 'ANC ADDO Visit', 'PNC ADDO Visit', 'Other Member ADDO Visit') " +
+                "and datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') " +
+                "and visit_json like \"%"+anmUser+"%\" " +
+                "group by dt, base_entity_id";
 
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("select base_entity_id from visits where ");
-        queryString.append("datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month') ");
-        queryString.append("and visit_type in ('Adolescent ADDO Visit','Child ADDO Visit','ANC ADDO Visit','PNC ADDO Visit', 'Other Member ADDO Visit')");
-        queryString.append("and visit_json like '%");
-        queryString.append(anmUser);
-        queryString.append("%'");
+        return getQueryCount(query);
+    }
+
+    public String getCurrentMonthAttendedClients(){
 
         int totalVisits = 0;
 
