@@ -13,6 +13,7 @@ public class MonthlyActivitiesViewModel extends AndroidViewModel {
     MonthlyReportRepository repository = new MonthlyReportRepository();
 
     MutableLiveData<String> currentMonthVisitLiveData = new MutableLiveData<>();
+    MutableLiveData<String> currentMonthClientsLiveData = new MutableLiveData<>();
     MutableLiveData<String> currentMonthChildrenLiveData = new MutableLiveData<>();
     MutableLiveData<String> currentMonthAdolescentLiveData = new MutableLiveData<>();
     MutableLiveData<String> currentMonthANCLiveData = new MutableLiveData<>();
@@ -35,6 +36,14 @@ public class MonthlyActivitiesViewModel extends AndroidViewModel {
             currentMonthVisitLiveData.setValue(count);
         }
         return currentMonthVisitLiveData;
+    }
+
+    public LiveData<String> getCurrentMonthClientsLiveData(){
+        if (currentMonthClientsLiveData.getValue() == null){
+            String count = repository.getCurrentMonthAttendedClients();
+            currentMonthClientsLiveData.setValue(count);
+        }
+        return currentMonthClientsLiveData;
     }
 
     public LiveData<String> getCurrentMonthChildrenLiveData() {

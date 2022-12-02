@@ -461,6 +461,7 @@
     <string name="referred_encounters"> Referred Visits </string>
 
     <string name="current_month_visits"> Number of visits conducted in the current month </string>
+    <string name="current_month_clients"> Number of clients attended in the current month </string>
     <string name="last_month_visits"> Number of visits conducted in the last month </string>
     <string name="curr_month_attended_visits"> Number of visits conducted at the ADDO for linked clients in the current month </string>
     <string name="last_month_attended_visits"> Number of visits conducted at the ADDO for linked clients in the last month </string>

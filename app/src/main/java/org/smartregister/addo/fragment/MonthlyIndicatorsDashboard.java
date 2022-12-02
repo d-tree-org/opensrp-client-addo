@@ -28,6 +28,7 @@ public class MonthlyIndicatorsDashboard extends Fragment {
     TextView currentMonthOthers;
     TextView currentMonthFacilityReferrals;
     TextView currentMonthCompletedFacilityReferrals;
+        TextView currentMonthAttendedClients;
 
     TextView lastMonthVisits;
     TextView lastMonthFacilityReferrals;
@@ -63,7 +64,7 @@ public class MonthlyIndicatorsDashboard extends Fragment {
         currentMonthOthers = view.findViewById(R.id.current_month_other_count);
         currentMonthFacilityReferrals = view.findViewById(R.id.current_month_issued_referrals_count);
         currentMonthCompletedFacilityReferrals = view.findViewById(R.id.current_month_completed_referrals_count);
-
+        currentMonthAttendedClients = view.findViewById(R.id.current_month_clients);
         lastMonthVisits = view.findViewById(R.id.last_month_visits_count);
         lastMonthFacilityReferrals = view.findViewById(R.id.last_month_issued_referrals_count);
         lastMonthCompletedReferrals = view.findViewById(R.id.last_month_completed_referrals_count);
@@ -74,6 +75,13 @@ public class MonthlyIndicatorsDashboard extends Fragment {
             @Override
             public void onChanged(String s) {
                 currentMonthVisits.setText(s);
+            }
+        });
+
+        model.getCurrentMonthClientsLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                currentMonthAttendedClients.setText(s);
             }
         });
 
