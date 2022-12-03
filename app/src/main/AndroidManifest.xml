@@ -28,13 +28,10 @@
         android:preserveLegacyExternalStorage="true"
         tools:replace="android:theme">
 
-<!--        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />-->
-
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.Login"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
