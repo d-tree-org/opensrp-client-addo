@@ -28,6 +28,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MonthlyActivitiesRegisterActivity extends BaseRegisterActivity {
 
@@ -112,6 +113,11 @@ public class MonthlyActivitiesRegisterActivity extends BaseRegisterActivity {
         }
     }
 
+    @Override
+    public void startFormActivity(String formName, String entityId, Map<String, String> metaData) {
+
+    }
+
     public void loadDashboard(){
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         MonthlyActivitiesRegisterFragment fragment = new MonthlyActivitiesRegisterFragment();
@@ -122,5 +128,10 @@ public class MonthlyActivitiesRegisterActivity extends BaseRegisterActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

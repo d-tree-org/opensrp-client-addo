@@ -99,7 +99,7 @@ public class ChildUtils {
     }
     public static String getChildListByFamilyId(String tableName, String familyId) {
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, new String[]{DBConstants.KEY.BASE_ENTITY_ID});
+        queryBUilder.selectInitiateMainTable(tableName, new String[]{DBConstants.KEY.BASE_ENTITY_ID});
         return queryBUilder.mainCondition(MessageFormat.format("{0}.{1} = ''{2}''", tableName, DBConstants.KEY.RELATIONAL_ID, familyId));
     }
 
@@ -178,7 +178,7 @@ public class ChildUtils {
 
     public static String mainSelectRegisterWithoutGroupby(String tableName, String familyTableName, String familyMemberTableName, String mainCondition) {
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
-        queryBUilder.SelectInitiateMainTable(tableName, mainColumns(tableName, familyTableName, familyMemberTableName));
+        queryBUilder.selectInitiateMainTable(tableName, mainColumns(tableName, familyTableName, familyMemberTableName));
         queryBUilder.customJoin("LEFT JOIN " + familyTableName + " ON  " + tableName + "." + DBConstants.KEY.RELATIONAL_ID + " = " + familyTableName + ".id COLLATE NOCASE ");
         queryBUilder.customJoin("LEFT JOIN " + familyMemberTableName + " ON  " + familyMemberTableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + familyTableName + ".primary_caregiver COLLATE NOCASE ");
 
@@ -341,10 +341,10 @@ public class ChildUtils {
 
     public static ServiceTask createServiceTaskFromEvent(String taskType, String details, String title, String formSubmissionId) {
         ServiceTask serviceTask = new ServiceTask();
-        org.smartregister.domain.db.Event event = ChildUtils.gsonConverter.fromJson(details, new TypeToken<org.smartregister.domain.db.Event>() {
+        org.smartregister.domain.Event event = ChildUtils.gsonConverter.fromJson(details, new TypeToken<org.smartregister.domain.Event>() {
         }.getType());
-        List<org.smartregister.domain.db.Obs> observations = event.getObs();
-        for (org.smartregister.domain.db.Obs obs : observations) {
+        List<org.smartregister.domain.Obs> observations = event.getObs();
+        for (org.smartregister.domain.Obs obs : observations) {
             if (obs.getFormSubmissionField().equalsIgnoreCase(formSubmissionId)) {
                 List<Object> hu = obs.getHumanReadableValues();
                 String value = "";
@@ -362,11 +362,11 @@ public class ChildUtils {
 
     public static ServiceTask createECDTaskFromEvent(Context context, String taskType, String details, String title) {
         ServiceTask serviceTask = new ServiceTask();
-        org.smartregister.domain.db.Event event = ChildUtils.gsonConverter.fromJson(details, new TypeToken<org.smartregister.domain.db.Event>() {
+        org.smartregister.domain.Event event = ChildUtils.gsonConverter.fromJson(details, new TypeToken<org.smartregister.domain.Event>() {
         }.getType());
-        List<org.smartregister.domain.db.Obs> observations = event.getObs();
+        List<org.smartregister.domain.Obs> observations = event.getObs();
         String label = "";
-        for (org.smartregister.domain.db.Obs obs : observations) {
+        for (org.smartregister.domain.Obs obs : observations) {
             if (obs.getFormSubmissionField().equalsIgnoreCase("develop_warning_signs")) {
                 List<Object> hu = obs.getHumanReadableValues();
                 String value = "";

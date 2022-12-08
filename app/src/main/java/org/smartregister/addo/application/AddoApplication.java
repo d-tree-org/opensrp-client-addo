@@ -104,7 +104,6 @@ public class AddoApplication extends DrishtiApplication {
         CoreLibrary.init(context, new AddoSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP, p2POptions);
         CoreLibrary.getInstance().setEcClientFieldsFile(Constants.EC_CLIENT_FIELDS);
 
-
         ConfigurableViewsLibrary.init(context);
         FamilyLibrary.init(context, getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 

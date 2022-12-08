@@ -24,6 +24,7 @@ import org.smartregister.family.presenter.BaseFamilyRegisterPresenter;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
+import java.util.Map;
 
 public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
@@ -76,6 +77,11 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         }
     }
 
+    @Override
+    public void startFormActivity(String formName, String entityId, Map<String, String> metaData) {
+
+    }
+
 
     @Override
     protected void registerBottomNavigation() {
@@ -100,4 +106,8 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         }
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }

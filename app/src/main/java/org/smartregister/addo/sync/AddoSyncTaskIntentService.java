@@ -1,5 +1,7 @@
 package org.smartregister.addo.sync;
 
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.IntentService;
 import android.content.Intent;
 
@@ -10,6 +12,8 @@ import org.smartregister.domain.FetchStatus;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.util.NetworkUtils;
 import org.smartregister.util.SyncUtils;
+
+import java.io.IOException;
 
 public class AddoSyncTaskIntentService extends IntentService {
     private static final String TAG = "AddoSyncTaskIntentService";
@@ -27,7 +31,11 @@ public class AddoSyncTaskIntentService extends IntentService {
             return;
         }
         if (!syncUtils.verifyAuthorization()) {
-            syncUtils.logoutUser();
+            try {
+                syncUtils.logoutUser();
+            } catch (AuthenticatorException | OperationCanceledException | IOException e) {
+                e.printStackTrace();
+            }
             return;
 
         }

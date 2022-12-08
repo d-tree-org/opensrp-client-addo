@@ -4,8 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.addo.BuildConfig;
+import org.smartregister.addo.activity.LoginActivity;
 import org.smartregister.addo.util.Utils;
 import org.smartregister.location.helper.LocationHelper;
+import org.smartregister.view.activity.BaseLoginActivity;
 
 import java.util.List;
 
@@ -71,6 +73,31 @@ public class AddoSyncConfiguration extends SyncConfiguration {
     @Override
     public boolean isSyncUsingPost() {
         return true;
+    }
+
+    @Override
+    public List<String> getSynchronizedLocationTags() {
+        return null;
+    }
+
+    @Override
+    public String getTopAllowedLocationLevel() {
+        return "District";
+    }
+
+    @Override
+    public String getOauthClientId() {
+        return "";
+    }
+
+    @Override
+    public String getOauthClientSecret() {
+        return "";
+    }
+
+    @Override
+    public Class<? extends BaseLoginActivity> getAuthenticationActivity() {
+        return LoginActivity.class;
     }
 
     @Override

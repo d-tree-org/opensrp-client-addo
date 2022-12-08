@@ -73,7 +73,8 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     public void goToHome(boolean b) {
         //Take user to a home page
         if (b) {
-            Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
+            //TODO: Change this to Async Task
+            //Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
         goToMainActivity(b);
         finish();

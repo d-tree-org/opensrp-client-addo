@@ -22,8 +22,9 @@
         android:icon="@drawable/addo_ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/addo_ic_launcher"
         android:supportsRtl="true"
+        android:exported="true"
         android:theme="@style/AddoTheme"
         android:preserveLegacyExternalStorage="true"
         tools:replace="android:theme">
@@ -81,12 +82,14 @@
             android:name=".activity.ReferralWizardFormActivity"
             android:launchMode="singleTask"
             android:theme="@style/FamilyTheme.NoActionBar"
+            android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
       
         <activity
             android:name="com.vijay.jsonwizard.activities.JsonFormActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar"
+            android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
@@ -110,17 +113,26 @@
                 android:resource="@xml/captured_images_path" />
         </provider>
 
-        <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
-        <service android:name="org.smartregister.sync.intent.SyncIntentService" />
-        <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />
-        <service android:name="org.smartregister.sync.intent.ValidateIntentService" />
-        <service android:name=".sync.AddoSyncTaskIntentService" />
-        <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService" />
-        <service android:name="org.smartregister.service.ImageUploadSyncService" />
+        <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService"
+            android:exported="false"/>
+        <service android:name="org.smartregister.sync.intent.SyncIntentService"
+            android:exported="false"/>
+        <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService"
+            android:exported="false"/>
+        <service android:name="org.smartregister.sync.intent.ValidateIntentService"
+            android:exported="false"/>
+        <service android:name=".sync.AddoSyncTaskIntentService"
+            android:exported="false"/>
+        <service android:name="org.smartregister.chw.anc.intent.HomeVisitIntentService"
+            android:exported="false"/>
+        <service android:name="org.smartregister.service.ImageUploadSyncService"
+            android:exported="false"/>
         <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService"
             android:exported="false" />
-        <service android:name=".intent.AddoPncCloseIntent" />
-        <service android:name=".intent.AddoAdolescentCloseIntent" />
+        <service android:name=".intent.AddoPncCloseIntent"
+            android:exported="false"/>
+        <service android:name=".intent.AddoAdolescentCloseIntent"
+            android:exported="false"/>
 
         <uses-library
             android:name="org.apache.http.legacy"
