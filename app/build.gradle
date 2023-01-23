@@ -2,7 +2,10 @@ buildscript {
 
     repositories {
         google()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         mavenLocal()
+        mavenCentral()
         jcenter()
         maven { url "https://repo.maven.apache.org/maven2" }
     }
@@ -210,14 +213,6 @@ repositories {
             password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
         }
     }
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/d-tree-org/opensrp-client-chw-anc")
-        credentials {
-            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-        }
-    }
 }
 
 dependencies {
@@ -227,7 +222,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.google.guava:guava:31.0.1-jre'
 
-    implementation('org.smartregister:opensrp-client-core:6.0.0-DTREE-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-core:6.0.0-Demo21-SNAPSHOT') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
@@ -280,7 +275,7 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
 
-    implementation('org.smartregister:opensrp-chw-anc:0.1.53-DTREE-1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-chw-anc:2.0.8-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -290,7 +285,7 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
 
-    implementation('org.smartregister:opensrp-chw-pnc:0.0.31-DTREE-1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-chw-pnc:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-chw-anc'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -365,7 +360,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'com.evernote:android-job:1.2.6'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'id.zelory:compressor:1.0.4'
+    implementation 'id.zelory:compressor:2.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
