@@ -30,10 +30,10 @@ public class AddoSyncTaskIntentService extends IntentService {
             sendSyncStatusBroadcastMessage(FetchStatus.noConnection);
             return;
         }
-        if (!syncUtils.verifyAuthorization()) {
+        if (!syncUtils.v1VerifyAuthorization()) {
             try {
-                syncUtils.logoutUser();
-            } catch (AuthenticatorException | OperationCanceledException | IOException e) {
+                syncUtils.v1LogoutUser();;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return;
