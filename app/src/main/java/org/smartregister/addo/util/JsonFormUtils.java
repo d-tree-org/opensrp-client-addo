@@ -464,18 +464,22 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
     }
 
     public static void saveImage(String providerId, String entityId, String imageLocation) {
-        if (isBlank(imageLocation)) {
-            return;
+        try {
+            if (isBlank(imageLocation)) {
+                return;
+            }
+
+            File file = new File(imageLocation);
+
+            if (!file.exists()) {
+                return;
+            }
+
+            Bitmap compressedImageFile = FamilyLibrary.getInstance().getCompressor().compressToBitmap(file);
+            saveStaticImageToDisk(compressedImageFile, providerId, entityId);
+        } catch (IOException e) {
+            Timber.e(e);
         }
-
-        File file = new File(imageLocation);
-
-        if (!file.exists()) {
-            return;
-        }
-
-        Bitmap compressedImageFile = FamilyLibrary.getInstance().getCompressor().compressToBitmap(file);
-        saveStaticImageToDisk(compressedImageFile, providerId, entityId);
 
     }
 
