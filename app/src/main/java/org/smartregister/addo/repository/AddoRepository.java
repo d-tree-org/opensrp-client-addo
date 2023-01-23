@@ -94,7 +94,7 @@ public class AddoRepository extends Repository {
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
-        String pass = AddoApplication.getInstance().getPassword().toString();
+        String pass = AddoApplication.getInstance().v1GetPassword();
         if (!pass.isEmpty()) {
             return getReadableDatabase(pass);
         } else {
@@ -104,7 +104,7 @@ public class AddoRepository extends Repository {
 
     @Override
     public SQLiteDatabase getWritableDatabase() {
-        String pass = AddoApplication.getInstance().getPassword().toString();
+        String pass = AddoApplication.getInstance().v1GetPassword();
         if (!pass.isEmpty()) {
             return getWritableDatabase(pass);
         } else {
