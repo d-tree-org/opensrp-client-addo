@@ -37,6 +37,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.Login"
+            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -124,6 +125,20 @@
             android:exported="false" />
         <service android:name=".intent.AddoPncCloseIntent" />
         <service android:name=".intent.AddoAdolescentCloseIntent" />
+
+        <receiver android:name="org.smartregister.view.receiver.ConnectivityChangeReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="org.smartregister.view.receiver.TimeChangedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
 
         <uses-library
             android:name="org.apache.http.legacy"
