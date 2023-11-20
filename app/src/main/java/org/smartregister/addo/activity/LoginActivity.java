@@ -156,16 +156,18 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Arrays.asList(permissions).contains(Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setServerURL();
-            }
+        if (requestCode == 1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Arrays.asList(permissions).contains(Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    setServerURL();
+                }
 
-        } else {
-            Utils.getAllSharedPreferences().savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
-            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
-            Utils.getAllSharedPreferences().savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
-            setAppNameProductionEnvironment("production");
+            } else {
+                Utils.getAllSharedPreferences().savePreference(AllConstants.DRISHTI_BASE_URL, BuildConfig.opensrp_url_production);
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).commit();
+                Utils.getAllSharedPreferences().savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_ADDO_ENVIRONMENT, "production");
+                setAppNameProductionEnvironment("production");
+            }
         }
     }
 
