@@ -124,5 +124,8 @@
     <string name="age_13y">Miaka: 13y</string>
     <string name="patient_name">Jina la Mteja</string>
     <string name="client_avatar">Client Avatar</string>
+    <string name="location_service_disabled_title">Dira ya Satelaiti (GPS) Imezimwa</string>
+    <string name="location_service_disabled_message">Tafadhali washa dira ya satelaiti (gps) na uendelee.</string>
+    <string name="enable">Washa</string>
 
 </resources>
