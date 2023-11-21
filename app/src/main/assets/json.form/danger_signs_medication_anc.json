@@ -329,6 +329,38 @@
             }
           },
           {
+            "key": "ferrous_and_folic_acid",
+            "text": "Ferrous + Folic tablet eq. 60 mg Fe + 400 mcg Folic acid",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "sp_tablet_500_mg_25_mg",
+            "text": "SP tablet, 500 mg + 25 mg",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "mosquito_net",
+            "text": "Mosquito Net",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "delivery_kit",
+            "text": "Delivery kit",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
             "key": "hydrocortisone_ointment_cream",
             "text": "Hydrocortisone ointment/cream",
             "property": {
