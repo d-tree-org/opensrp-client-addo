@@ -162,7 +162,7 @@
           },
           {
             "key": "artemeher_lumefantrine_tablets_act",
-            "text": "Artemeher+ Lumefantrine tablets/ACT",
+            "text": "ALU(Artemether 20mg/Lumefantrine 120 mg)",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -243,6 +243,22 @@
           {
             "key": "cough_preparations",
             "text": "Cough preparations",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "combined_oral_contraceptive_ethinylestradiol_levonorgestrel",
+            "text": "Combined Oral Contraceptives",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "depot_injection",
+            "text": "Depot Injection",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
