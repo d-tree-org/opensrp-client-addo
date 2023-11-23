@@ -723,6 +723,630 @@
         "spacer_height": "20dp"
       },
       {
+        "key": "all_meds_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "all_meds_dispensed",
+        "type": "check_box",
+        "exclusive": [
+          "yes"
+        ],
+        "label": "{{step3_all_meds_dispensed_label}}",
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_yes_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_no_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step3_all_meds_dispensed_err}}"
+        },
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "med_not_dispensed_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "{{step3_med_not_dispensed_label_text}}",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
+        "relevance": {
+          "step3:all_meds_dispensed": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "no"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "not_dispensed_meds",
+        "buttonText": "{{step3_not_dispensed_meds_button_text}}",
+        "dialogTitle": "{{step3_not_dispensed_meds_dialog_title}}",
+        "searchHint": "{{step3_not_dispensed_meds_search_hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{step3_not_dispensed_meds_err}}"
+        },
+        "options": [
+          {
+            "key": "aminophylline_injection",
+            "text": "Aminophylline injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "amoxicillin_capsules",
+            "text": "Amoxicillin capsules ",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "antacids_mixtures",
+            "text": "Antacids mixtures",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "anusol_suppositories",
+            "text": "Anusol suppositories",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "artemeher_lumefantrine_tablets_act",
+            "text": "Artemeher+ Lumefantrine tablets/ACT",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "aspirin_paracetamol_caffeine_tablets",
+            "text": "Aspirin, paracetamol, caffeine tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "bendroflumethiazide_tablets",
+            "text": "Bendroflumethiazide tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "benzyl_penicillin_powder_for_injection",
+            "text": "Benzyl penicillin powder for injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "bisacodyl_tablets",
+            "text": "Bisacodyl tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "cetirizine_hydrochloride_syrup_tablets",
+            "text": "Cetirizine hydrochloride syrup/tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "chloramphenicol_eye_drops_ointment",
+            "text": "Chloramphenicol eye drops/ ointment",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "clotrimazole_vaginal_cream",
+            "text": "Clotrimazole vaginal cream",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "clotrimazole_vaginal_pessaries",
+            "text": "Clotrimazole vaginal pessaries",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "cotrimoxazole_tablets",
+            "text": "Co-trimoxazole tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "cough_preparations",
+            "text": "Cough preparations",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "dextrose_injection",
+            "text": "Dextrose 5% injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "diclofenac_ointment_cream_or_gel",
+            "text": "Diclofenac ointment / cream or gel",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "diclofenac_sodium_tablets",
+            "text": "Diclofenac Sodium tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "doxycycline_capsules_tablets",
+            "text": "Doxycycline capsules /tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "ergometrine_injection",
+            "text": "Ergometrine injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "erythromycin_tablets",
+            "text": "Erythromycin tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "family_planning_pills_familia_flexy",
+            "text": "Family planning pills (Familia, Flexy P)",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "female_condoms",
+            "text": "{{step2_female_condom}}",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "ferrous_sulphate_tablets",
+            "text": "Ferrous Sulphate tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "folic_acid",
+            "text": "Folic acid",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "hydrocortisone_ointment_cream",
+            "text": "Hydrocortisone ointment/cream",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "hyoscine_butyl_bromide_tables",
+            "text": "Hyoscine butyl bromide tables",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "ibuprofen_suspensions",
+            "text": "Ibuprofen suspensions",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "ibuprofen_tablets",
+            "text": "Ibuprofen tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "indomethacin_capsules",
+            "text": "Indomethacin capsules",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "lignocaine_injection",
+            "text": "Lignocaine injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "magnesium_trisilicate",
+            "text": "Magnesium trisilicate",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "male_condoms",
+            "text": "{{step2_male_condom}}",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "metronidazole_tablets_flagly",
+            "text": "Metronidazole tablets (Flagly)",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "nitrofurantoin_tablets",
+            "text": "Nitrofurantoin tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "normal_saline_injection",
+            "text": "Normal Saline injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "nystatin_oral_suspension",
+            "text": "Nystatin Oral suspension",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "nystatin_skin_ointment",
+            "text": "Nystatin skin ointment",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "nystatin_tablets",
+            "text": "Nystatin tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "nystatin_vaginal_pessaries",
+            "text": "Nystatin vaginal pessaries",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "oral_hydration_salts",
+            "text": "Oral hydration salts",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "oxytetracycline_hydrochloride_eye_ointment",
+            "text": "Oxytetracycline hydrochloride eye ointment",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "paracetamol_tablets",
+            "text": "Paracetamol tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "paracetamol_suspensions",
+            "text": "Paracetamol suspensions",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "phenoxy_methyl_penicillin_tablets",
+            "text": "Phenoxy methyl penicillin tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "phenytoin_tablets",
+            "text": "Phenytoin tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "piperazine_and_its_salts_in_oral_dosage_forms",
+            "text": "Piperazine and its salts in oral dosage forms",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "procaine_penicillin_fortified",
+            "text": "Procaine penicillin fortified",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "promethazine_injection",
+            "text": "Promethazine injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "promethazine_tablets",
+            "text": "Promethazine tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "propranolol_tablets",
+            "text": "Propranolol tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "quinine_injection",
+            "text": "Quinine injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "quinine_tablets",
+            "text": "Quinine tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "silver_sulfadiazine_cream",
+            "text": "Silver sulfadiazine cream",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "vitamin_tablets_capsules",
+            "text": "Vitamin tablets/ capsules",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "water_for_injection",
+            "text": "Water for injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "whitfield_ointment",
+            "text": "Whitfield ointment",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "zinc_sulphate_tablets",
+            "text": "Zinc Sulphate tablets",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "other",
+            "text": "{{step2_medicines_others}}",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          }
+        ],
+        "type": "multi_select_list",
+        "relevance": {
+          "step3:all_meds_dispensed": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "no"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "reason_not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason_not_dispensed_meds",
+        "type": "check_box",
+        "exclusive": [
+          "not_in_stock"
+        ],
+        "label": "{{step3_reason_not_dispensed_meds_label}}",
+        "options": [
+          {
+            "key": "not_in_stock ",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_in_stock",
+            "text": "{{step3_reason_not_dispensed_meds_not_in_stock_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "client_could_not_afford ",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "client_could_not_afford",
+            "text": "{{step3_reason_not_dispensed_meds_client_could_not_afford_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step3_reason_not_dispensed_meds_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "asterisk_symbol",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
