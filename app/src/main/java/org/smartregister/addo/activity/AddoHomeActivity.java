@@ -59,9 +59,9 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     protected Fragment[] getOtherFragments() {
 
         Fragment[] fragments = new Fragment[3];
-        fragments[0] = new AdvancedSearchFragment(true);
+        fragments[0] = AdvancedSearchFragment.newInstance(true);
         fragments[1] = new AddoVillageClientsFragment();
-        fragments[2] = new AdvancedSearchFragment(false);
+        fragments[2] = AdvancedSearchFragment.newInstance(false);
 
         return fragments;
     }
