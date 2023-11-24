@@ -137,8 +137,8 @@
             }
           },
           {
-            "key": "amoxicillin__capsules",
-            "text": "Amoxicillin  capsules",
+            "key": "amoxicillin_capsules",
+            "text": "Amoxicillin capsules",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
