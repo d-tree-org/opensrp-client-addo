@@ -1049,7 +1049,38 @@
             }
           }
         ],
-        "type": "multi_select_list"
+        "type": "multi_select_list",
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "no_medicine_selected",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "openmrs_data_type": "text",
+        "type": "check_box",
+        "label": "",
+        "exclusive": [
+          "none"
+        ],
+        "options": [
+          {
+            "key": "no_meds",
+            "text": "{{step2_medicines_none}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ]
       },
       {
         "key": "spacer",
@@ -1129,6 +1160,13 @@
               "rules-file": "addo_attend_prescriptions_from_lab_results_calculation.yml"
             }
           }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_adolescent_relevance.yml"
+            }
+          }
         }
       },
       {
@@ -1138,6 +1176,598 @@
         "openmrs_entity_id": "spacer",
         "type": "spacer",
         "spacer_height": "20dp"
+      },
+      {
+        "key": "all_meds_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "all_meds_dispensed",
+        "type": "check_box",
+        "exclusive": [
+          "yes"
+        ],
+        "label": "{{step3_all_meds_dispensed_label}}",
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_yes_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_no_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step3_all_meds_dispensed_err}}"
+        },
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "med_not_dispensed_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "{{step3_med_not_dispensed_label_text}}",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
+        "relevance": {
+          "step3:all_meds_dispensed": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "no"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "not_dispensed_meds",
+        "buttonText": "{{step3_not_dispensed_meds_button_text}}",
+        "dialogTitle": "{{step3_not_dispensed_meds_dialog_title}}",
+        "searchHint": "{{step3_not_dispensed_meds_search_hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{step3_not_dispensed_meds_err}}"
+        },
+        "options": [
+          {
+            "key":"artemether_lumefantrine_tablets",
+            "text":"Artemether/Lumefantrine (ALu) tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"aminophylline_injection",
+            "text":"Aminophylline injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"amoxicillin_dispersible_tablets_capsules_oral_suspension",
+            "text":"Amoxicillin dispersible tablets, capsules /oral suspension",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"annusol_suppositories",
+            "text":"Annusol suppositories",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"bendrofluazide",
+            "text":"Bendrofluazide",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"benzyl_penicillin_powder_for_injection",
+            "text":"Benzyl Penicillin powder for injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"bisacodyl_tablets",
+            "text":"Bisacodyl tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"cetrizine_hydrochloride_syrup_tablets",
+            "text":"Cetrizine hydrochloride syrup / tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"chloramphenicol_eye_drops_ointment",
+            "text":"Chloramphenicol eye drops/ointment",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"co-trimoxazole_tablets_suspension",
+            "text":"Co-trimoxazole tablets/suspension",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"dextrose_injection",
+            "text":"Dextrose 5% injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"diclofenac_sodium_tablets",
+            "text":"Diclofenac sodium tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"doxycycline_capsules_tablets",
+            "text":"Doxycycline capsules/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ergometrine_injection",
+            "text":"Ergometrine injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"normal_saline_injection",
+            "text":"Normal Saline injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"nystatin_oral_suspension_pessaries_skin_ointment_tablets",
+            "text":"Nystatin oral suspension/ pessaries/ skin ointment/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"oxytetracycline_hydrochloride_eye_ointment",
+            "text":"Oxytetracycline hydrochloride eye ointment",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"phenoxy_methyl_penicillin_suspension_tablets",
+            "text":"Phenoxy methyl Penicillin suspension/tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"phenytoin_tablets",
+            "text":"Phenytoin tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"piperazine_and_its_salts_in_oral_dosage_forms",
+            "text":"Piperazine and its salts in oral dosage forms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"procaine_penicillin_fortified",
+            "text":"Procaine Penicillin Fortified",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"promethazine_injection",
+            "text":"Promethazine injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"propranolol_tablets",
+            "text":"Propranolol tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"quinine_injection_tablets",
+            "text":"Quinine injection/ tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"silver_sulfadiazine_cream",
+            "text":"Silver sulfadiazine cream",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"water_for_injection",
+            "text":"Water for injection",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"paracetamol_tablets",
+            "text":"Paracetamol tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"paracetamol_suspensions",
+            "text":"Paracetamol suspensions",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ibuprofen_tablets",
+            "text":"Ibuprofen tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ibuprofen_suspensions",
+            "text":"Ibuprofen suspensions",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"oral_rehydration_salts",
+            "text":"Oral Rehydration Salts",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"cough_preparations",
+            "text":"Cough preparations",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"vitamins_suspensions_syrups",
+            "text":"Vitamins suspensions/syrups",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"zinc_sulphate_tablets",
+            "text":"Zinc Sulphate tablets",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"combined_oral_contraceptives",
+            "text":"Combined Oral Contraceptives",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"female_condoms",
+            "text":"Female condoms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"male_condoms",
+            "text":"Male condoms",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"folic_acid",
+            "text":"Folic acid",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"ferrous_sulphate_tablets",
+            "text":"Ferrous Sulphate tablets ",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          },
+          {
+            "key":"other",
+            "text":"{{step2_medicine_dispensed_other}}",
+            "openmrs_entity_parent":"",
+            "openmrs_entity":"",
+            "openmrs_entity_id":"",
+            "property": {
+              "property1": "err",
+              "property2": "err"
+            }
+          }
+        ],
+        "type": "multi_select_list",
+        "relevance": {
+          "step3:all_meds_dispensed": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "no"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "reason_not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason_not_dispensed_meds",
+        "type": "check_box",
+        "exclusive": [
+          "not_in_stock"
+        ],
+        "label": "{{step3_reason_not_dispensed_meds_label}}",
+        "options": [
+          {
+            "key": "not_in_stock ",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_in_stock",
+            "text": "{{step3_reason_not_dispensed_meds_not_in_stock_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "client_could_not_afford ",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "client_could_not_afford",
+            "text": "{{step3_reason_not_dispensed_meds_client_could_not_afford_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step3_reason_not_dispensed_meds_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
       }
     ]
   }
