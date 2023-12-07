@@ -162,7 +162,7 @@
           },
           {
             "key": "artemeher_lumefantrine_tablets_act",
-            "text": "Artemeher+ Lumefantrine tablets/ACT",
+            "text": "Artemether + Lumefantrine tablets/ACT",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -241,6 +241,14 @@
             }
           },
           {
+            "key": "combined_oral_contraceptives",
+            "text": "Combined Oral Contraceptives - ethinylestradiol + levonorgestrel tablet, 30 micrograms + 150 micrograms",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
             "key": "cough_preparations",
             "text": "Cough preparations",
             "property": {
@@ -251,6 +259,14 @@
           {
             "key": "dextrose_injection",
             "text": "Dextrose 5% injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "depot_injection",
+            "text": "Depot Injection",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"

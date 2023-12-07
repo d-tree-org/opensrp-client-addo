@@ -162,7 +162,7 @@
           },
           {
             "key": "artemeher_lumefantrine_tablets_act",
-            "text": "Artemeher+ Lumefantrine tablets/ACT",
+            "text": "ALU(Artemether 20mg/Lumefantrine 120 mg)",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
@@ -249,6 +249,22 @@
             }
           },
           {
+            "key": "combined_oral_contraceptive_ethinylestradiol_levonorgestrel",
+            "text": "Combined Oral Contraceptives",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "depot_injection",
+            "text": "Depot Injection",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
             "key": "dextrose_injection",
             "text": "Dextrose 5% injection",
             "property": {
@@ -323,6 +339,38 @@
           {
             "key": "folic_acid",
             "text": "Folic acid",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "ferrous_and_folic_acid",
+            "text": "Ferrous + Folic tablet eq. 60 mg Fe + 400 mcg Folic acid",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "sp_tablet_500_mg_25_mg",
+            "text": "SP tablet, 500 mg + 25 mg",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "mosquito_net",
+            "text": "Mosquito Net",
+            "property": {
+              "presumed-id": "err",
+              "confirmed-id": "err"
+            }
+          },
+          {
+            "key": "delivery_kit",
+            "text": "Delivery kit",
             "property": {
               "presumed-id": "err",
               "confirmed-id": "err"
