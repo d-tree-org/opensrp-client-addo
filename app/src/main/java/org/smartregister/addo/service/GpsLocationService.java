@@ -73,7 +73,8 @@ public class GpsLocationService extends Service {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 15, locationListener);
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 15, locationListener);
+        // Remove this for now, to get more accurate location we use GPS.
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 15, locationListener);
 
     }
 
