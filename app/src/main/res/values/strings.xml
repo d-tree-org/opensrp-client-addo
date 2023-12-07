@@ -498,5 +498,8 @@
     <string name="age_13y">Age: 13y</string>
     <string name="patient_name">Patient Name</string>
     <string name="client_avatar">Client Avatar</string>
+    <string name="location_service_disabled_title">Location Disabled</string>
+    <string name="location_service_disabled_message">Please enable location to continue.</string>
+    <string name="enable">Enable</string>
 
 </resources>
