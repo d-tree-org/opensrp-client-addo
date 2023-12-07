@@ -48,8 +48,17 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private boolean isLocal = false;
     private boolean listMode = false;
 
-    public AdvancedSearchFragment(boolean isLocal) {
-        this.isLocal = isLocal;
+    public static AdvancedSearchFragment newInstance(boolean isLocal) {
+        Bundle args = new Bundle();
+        args.putBoolean("isLocal", isLocal);
+        AdvancedSearchFragment f = new AdvancedSearchFragment();
+        f.setArguments(args);
+        return f;
+    }
+
+    public AdvancedSearchFragment() {
+        // Required empty public constructor
+
     }
 
     @Override
@@ -59,6 +68,9 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //return inflater.inflate(R.layout.fragment_advanced_search, container, false);
 
         View view = inflater.inflate(R.layout.fragment_advanced_search, container, false);
+
+        assert getArguments() != null;
+        isLocal = getArguments().getBoolean("isLocal", false);
 
         if(!isLocal) {
             view.findViewById(R.id.search_name_ll).setVisibility(View.GONE);
