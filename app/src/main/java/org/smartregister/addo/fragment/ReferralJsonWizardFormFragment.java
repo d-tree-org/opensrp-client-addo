@@ -69,6 +69,12 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
         }
     }
 
+    /**
+     * Modifies the fields in the form to include the selected meds
+     *
+     * @param stepFields  {@link JSONArray}
+     * @param selectedMeds {@link List<KeyValue<String,String>>}
+     */
     private void modifyFields(JSONArray stepFields, List<KeyValue<String, String>> selectedMeds) throws JSONException {
         JSONArray medsNotInStockAffordableFields = CoreJsonFormUtils.medsNotInStockAffordableFields("danger_signs_medication_child", getContext());
         JSONArray modifiedFields = FnList
@@ -176,7 +182,6 @@ public class ReferralJsonWizardFormFragment extends JsonWizardFormFragment {
     private void removeAddedFields(JSONObject currentFormStep) {
 
         JSONArray fields = currentFormStep.optJSONArray(JsonFormConstants.FIELDS);
-        int index = -1;
         for (int i = 0; i < fields.length(); i++) {
             JSONObject field = fields.optJSONObject(i);
             if (field != null && field.has(JsonFormConstants.KEY) &&
