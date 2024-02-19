@@ -34,7 +34,7 @@ actions:
   - "calculation = ['medications_selected': step2_medications_selected]"
 
 ---
-name: step3_asterisk_symbol
+name: step4_asterisk_symbol
 description: Display the red asterisks
 priority: 1
 condition: "true"
@@ -42,7 +42,7 @@ actions:
   - 'calculation = "{{step3_asterisk_symbol_questions}} (<font color=red>*</font>)"'
 
 ---
-name: step3_required_field_err_toaster
+name: step4_required_field_err_toaster
 description: Displaying the danger signs selected in the toaster message
 priority: 1
 condition: "true"
