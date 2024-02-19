@@ -9,8 +9,14 @@ import com.vijay.jsonwizard.interactors.JsonFormInteractor;
 import com.vijay.jsonwizard.presenters.JsonWizardFormFragmentPresenter;
 import com.vijay.jsonwizard.utils.FormUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.addo.R;
 import org.smartregister.addo.fragment.ReferralJsonWizardFormFragment;
+import org.smartregister.addo.util.FnList;
+
+import timber.log.Timber;
 
 public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragmentPresenter {
     private FormUtils formUtils = new FormUtils();
@@ -62,11 +68,65 @@ public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragm
 
     protected boolean moveToNextWizardStep() {
         if (!"".equals(mStepDetails.optString(JsonFormConstants.NEXT))) {
-            ReferralJsonWizardFormFragment next = ReferralJsonWizardFormFragment.getFormFragment(mStepDetails.optString(JsonFormConstants.NEXT));
-            getView().hideKeyBoard();
-            getView().transactThis(next);
+            // Check if it is a medicine dispensing form and if the medicines have been dispensed
+            JSONObject currentFormState = getCurrentFormState();
+            if (isDispensingForm(currentFormState)) {
+                String medicinesSelected = getSelectedMedsString(currentFormState);
+                navigateToNextFormFragment(mStepDetails.optString(JsonFormConstants.NEXT), medicinesSelected);
+            } else {
+                navigateToNextFormFragment(mStepDetails
+                        .optString(JsonFormConstants.NEXT), null);
+            }
         }
         return false;
+    }
+
+    private void navigateToNextFormFragment(String step, String meds) {
+        ReferralJsonWizardFormFragment next = ReferralJsonWizardFormFragment.getFormFragment(step, meds);
+        getView().hideKeyBoard();
+        getView().transactThis(next);
+    }
+
+    private JSONObject getCurrentFormState() {
+        JSONObject currentFormState = null;
+        try {
+            currentFormState = new JSONObject(getView().getCurrentJsonState());
+        } catch (JSONException jsonException) {
+            Timber.e(jsonException);
+        }
+        return currentFormState;
+    }
+
+    private boolean isDispensingForm(JSONObject currentFormState) {
+        boolean isDispensingForm = false;
+        String encounterType;
+        if (currentFormState != null) {
+            encounterType = currentFormState.optString(JsonFormConstants.ENCOUNTER_TYPE);
+            if (encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine Child") ||
+                    encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine ANC") ||
+                    encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine Adolescent") ||
+                    encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine")) {
+                isDispensingForm = true;
+            }
+        }
+
+        return isDispensingForm;
+    }
+
+    // Here we should only return the string, all the way to the fragment, and this stuff should happen at the fragment
+    private String getSelectedMedsString(JSONObject currentFormState) {
+        try {
+            JSONObject medicineStep = currentFormState.getJSONObject("step3");
+            JSONArray medicineStepFields = medicineStep.getJSONArray(JsonFormConstants.FIELDS);
+
+            return FnList.generate(medicineStepFields::getJSONObject)
+                    .filter(field -> field.getString(JsonFormConstants.KEY).equals("not_dispensed_meds"))
+                    .reduce(null, (o, t) -> t.getString(JsonFormConstants.VALUE).equalsIgnoreCase("[]") ? null : t.getString(JsonFormConstants.VALUE));
+
+        } catch (JSONException e) {
+            Timber.e(e);
+            return null;
+        }
     }
 
     @Override
