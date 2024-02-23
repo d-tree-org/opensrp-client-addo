@@ -105,7 +105,8 @@ public class ReferralJsonWizardFormFragmentPresenter extends JsonWizardFormFragm
             if (encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine Child") ||
                     encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine ANC") ||
                     encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine Adolescent") ||
-                    encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine")) {
+                    encounterType.equalsIgnoreCase("ADDO Visit - Dispense Medicine") ||
+                    encounterType.equalsIgnoreCase("ADDO Visit - Attend Prescriptions from Facility or Malaria Lab Results")) {
                 isDispensingForm = true;
             }
         }
