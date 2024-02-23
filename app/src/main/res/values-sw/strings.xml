@@ -43,7 +43,7 @@
     <string name="return_to_family_name">Rudi kwenye familia ya %1$s</string>
     <string name="addo_profile_other_screening">Fanya Uchunguzi wa dalili na kutoa dawa</string>
     <string name="give_commodities_client_focus_profile">Toa bidhaa</string>
-    <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari au matokeo ya kipimo cha malaria</string>
+    <string name="focused_client_profile_dispense">Toa huduma kulingana na cheti cha daktari</string>
 
     <!-- Non focused client-->
     <string name="addo_non_focus_profile_action_text">Chagua huduma zilizotolewa</string>
@@ -127,5 +127,6 @@
     <string name="location_service_disabled_title">Dira ya Satelaiti (GPS) Imezimwa</string>
     <string name="location_service_disabled_message">Tafadhali washa dira ya satelaiti (gps) na uendelee.</string>
     <string name="enable">Washa</string>
+    <string name="finish">Umemaliza</string>
 
 </resources>
