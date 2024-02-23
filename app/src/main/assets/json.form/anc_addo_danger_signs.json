@@ -57,7 +57,7 @@
       {
         "key": "ds_start_message",
         "type": "label",
-        "text": "Screen and Dispense Medication",
+        "text": "{{step1_ds_start_message_label_text}}",
         "label_text_size": "18sp",
         "label_text_style": "bold"
       },
