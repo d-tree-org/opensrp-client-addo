@@ -1342,7 +1342,7 @@
     ]
   },
   "step4": {
-    "title": "{{step3_title}}",
+    "title": "{{step4_title}}",
     "hide-save-button": true,
     "fields": [
       {
@@ -1372,7 +1372,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "spacer",
         "type": "spacer",
-        "spacer_height": "20dp"
+        "spacer_height": "10dp"
       },
       {
         "key": "reason_not_dispensed_meds",
