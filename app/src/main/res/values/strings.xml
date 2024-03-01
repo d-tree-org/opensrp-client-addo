@@ -421,7 +421,7 @@
     <string name="add_select_village">Where does the client live?</string>
     <string name="addo_profile_other_screening">Screening and Medications dispensing</string>
     <string name="give_commodities_client_focus_profile">Give Commodities</string>
-    <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
+    <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF</string>
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
     <string name="referral_submitted">Referral sent to health facility</string>
@@ -498,5 +498,9 @@
     <string name="age_13y">Age: 13y</string>
     <string name="patient_name">Patient Name</string>
     <string name="client_avatar">Client Avatar</string>
+    <string name="location_service_disabled_title">Location Disabled</string>
+    <string name="location_service_disabled_message">Please enable location to continue.</string>
+    <string name="enable">Enable</string>
+    <string name="finish">FINISH</string>
 
 </resources>

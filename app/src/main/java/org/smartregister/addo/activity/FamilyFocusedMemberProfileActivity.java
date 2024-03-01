@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -36,6 +40,7 @@ import org.smartregister.addo.util.ChildDBConstants;
 import org.smartregister.addo.util.CoreConstants;
 import org.smartregister.addo.util.JsonFormUtils;
 import org.smartregister.addo.util.ReferralUtils;
+import org.smartregister.addo.viewmodel.AddoGpsLocationViewModel;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.activity.FamilyWizardFormActivity;
@@ -86,6 +91,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private CommonPersonObjectClient commonPersonObject;
     private FormUtils formUtils;
 
+    private AddoGpsLocationViewModel addoGpsLocationViewModel;
+    private Location addoLocation;
+
     private static void updateFormField(JSONArray formFieldArrays, String formFieldKey, String updateValue) {
         if (updateValue != null) {
             JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, formFieldKey);
@@ -123,6 +131,26 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         setupViews();
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addoGpsLocationViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(AddoGpsLocationViewModel.class);
+        addoGpsLocationViewModel.getLocationLiveData().observe(this, new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                if (location != null) {
+                    updateGpsLocation(location);
+                }
+                // We could put a toast message here if we want to emphasize location stuff
+            }
+        });
+    }
+
+    private void updateGpsLocation(Location location) {
+        addoLocation = location;
+    }
+
 
     @Override
     protected void setupViews() {
@@ -357,7 +385,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         form.setActionBarBackground(R.color.family_actionbar);
         form.setNavigationBackground(R.color.family_navigation);
         form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
-        form.setSaveLabel("FINISH");
+        form.setSaveLabel(getString(R.string.finish));
         form.setHideSaveLabel(true);
         form.setWizard(true);
 
@@ -403,6 +431,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON) {
             try {
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+                // Add Gps Location Detail to the Json form
+                if (addoLocation != null) {
+                    jsonString = updateWithCurrentGpsLocation(jsonString);
+                }
+
                 JSONObject form = new JSONObject(jsonString);
 
                 // complete any referrals
@@ -428,13 +461,14 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                     if (!buttonAction.isEmpty()) {
                         // Check if the client has referral already or not
                         if (ReferralUtils.hasReferralTask(CoreConstants.REFERRAL_PLAN_ID, LocationHelper.getInstance().getOpenMrsLocationId(villageTown), baseEntityId, CoreConstants.JsonAssets.REFERRAL_CODE)) {
+                            String finalJsonString = jsonString;
                             closeOpenNewReferral(this, new OnDialogButtonClick() {
                                 @Override
                                 public void onOkButtonClick() {
                                     // Close referral
                                     FamilyDao.archiveHFTasksForEntity(baseEntityId);
                                     // Open a new referral
-                                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString, villageTown);
+                                    ReferralUtils.createReferralTask(baseEntityId, form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), finalJsonString, villageTown);
 
                                     // Dispense
                                     checkDSPresentProposedMedsAndDispense(form);
@@ -466,6 +500,32 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private String updateWithCurrentGpsLocation(String jsonString) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONObject stepOne = jsonObject.getJSONObject(JsonFormUtils.STEP1);
+            JSONArray jsonArray = stepOne.getJSONArray(JsonFormUtils.FIELDS);
+
+            JSONObject formGpsLocationObject = new JSONObject();
+            formGpsLocationObject.put(JsonFormConstants.KEY, "gps");
+            formGpsLocationObject.put(JsonFormConstants.OPENMRS_ENTITY_PARENT, "");
+            formGpsLocationObject.put(JsonFormConstants.OPENMRS_ENTITY, "concept");
+            formGpsLocationObject.put(JsonFormConstants.OPENMRS_ENTITY_ID, "163277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            formGpsLocationObject.put("openmrs_data_type", "text");
+            formGpsLocationObject.put(JsonFormConstants.TYPE, "gps");
+            formGpsLocationObject.put(JsonFormConstants.VALUE, addoLocation.getLatitude() + " " + addoLocation.getLongitude());
+
+            jsonArray.put(formGpsLocationObject);
+
+            return jsonObject.toString();
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+            return jsonString;
         }
     }
 
@@ -620,8 +680,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         } else {
             imageResourceId = org.smartregister.addo.util.Utils.getChildProfileImageResourceIDentifier();
         }
-
-
         return imageResourceId;
 
     }

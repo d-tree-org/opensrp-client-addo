@@ -66,7 +66,31 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step3_required_field_err_toaster
+name: step3_not_dispensed_meds_label
+description: Medicines not dispensed label
+priority: 1
+condition: "step2_no_medicine_selected.contains('no_meds') || step3_all_meds_dispensed.contains('no')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step3_not_dispensed_meds
+description: Multiselect list for medicines not dispensed
+priority: 1
+condition: "step2_no_medicine_selected.contains('no_meds') || step3_all_meds_dispensed.contains('no')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step4_reason_not_dispensed_meds
+description: Reason for not dispensing meds
+priority: 1
+condition: "step2_no_medicine_selected.contains('no_meds') || step3_all_meds_dispensed.contains('no')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step4_required_field_err_toaster
 description: Danger signs not selected
 priority: 1
 condition: "step1_dispense_options.isEmpty() || (step2_linkage_recommendation.isEmpty() && step1_dispense_options.contains('no'))"

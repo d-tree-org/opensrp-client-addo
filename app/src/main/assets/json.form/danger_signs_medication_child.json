@@ -3,7 +3,7 @@
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
   "properties_file_name": "danger_signs_medication_child",
-  "count": "3",
+  "count": "4",
   "encounter_type": "ADDO Visit - Dispense Medicine Child",
   "entity_id": "",
   "metadata": {
@@ -311,7 +311,7 @@
   },
   "step3": {
     "title": "{{step3_title}}",
-    "hide-save-button": true,
+    "next": "step4",
     "fields": [
       {
         "key": "no_medication_dispensed_toaster",
@@ -355,12 +355,295 @@
         }
       },
       {
+        "key": "all_meds_dispensed",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "all_meds_dispensed",
+        "type": "check_box",
+        "exclusive": [
+          "yes"
+        ],
+        "label": "{{step3_all_meds_dispensed_label}}",
+        "options": [
+          {
+            "key": "yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_yes_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "no",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "text": "{{step3_all_meds_dispensed_no_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "Select one"
+        },
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "10dp",
+        "relevance": {
+          "step2:no_medicine_selected": {
+            "ex-checkbox": [
+              {
+                "not": [
+                  "no_meds"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "not_dispensed_meds_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "{{step3_med_not_dispensed_label_text}}",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "not_dispensed_meds",
+        "buttonText": "{{step3_not_dispensed_meds_button_text}}",
+        "dialogTitle": "{{step3_not_dispensed_meds_dialog_title}}",
+        "searchHint": "{{step3_not_dispensed_meds_search_hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{step3_not_dispensed_meds_err}}"
+        },
+        "options": [
+          {
+            "key": "albendazole_suspension_or_tablets",
+            "text": "Albendazole Suspension/Tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "amoxicillin_dispersible_tablets",
+            "text": "Amoxicillin dispersible tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "amoxicillin_oral_suspension",
+            "text": "Amoxicillin oral suspension",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "alu_tablets",
+            "text": "Artemether / Lumefantrine (ALU) Tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "cough_preparations",
+            "text": "Cough preparations",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "ibuprofen_suspensions",
+            "text": "Ibuprofen suspensions",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "ibuprofen_tablets",
+            "text": "Ibuprofen tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "mebendazole_suspension_or_tablets",
+            "text": "Mebendazole Suspension/Tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "oral_rehydration_salts",
+            "text": "Oral Rehydration Salts (ORS)",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "paracetamol_tablets",
+            "text": "Paracetamol tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "paracetamol_suspensions",
+            "text": "Paracetamol suspensions",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "vitamins_suspensions",
+            "text": "Vitamins suspensions/syrups",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "zinc_sulphate_tablets",
+            "text": "Zinc Sulphate tablets",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          },
+          {
+            "key": "other",
+            "text": "{{step2_medicines_others}}",
+            "property": {
+              "presumed-id": "er",
+              "confirmed-id": "er"
+            }
+          }
+        ],
+        "type": "multi_select_list",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step4": {
+    "title": "{{step3_title}}",
+    "hide-save-button": true,
+    "fields": [
+      {
+        "key": "all_medications_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step4_all_medications_dispensed_toaster}}",
+        "text_color": "#101010",
+        "toaster_type": "information",
+        "relevance": {
+          "step3:all_meds_dispensed": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "spacer",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "spacer",
         "type": "spacer",
         "spacer_height": "20dp"
+      },
+      {
+        "key": "reason_not_dispensed_meds",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason_not_dispensed_meds",
+        "type": "check_box",
+        "label": "{{step3_reason_not_dispensed_meds_label}}",
+        "options": [
+          {
+            "key": "not_in_stock",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_in_stock",
+            "text": "{{step3_reason_not_dispensed_meds_not_in_stock_text}}",
+            "text_size": "18px",
+            "value": "false"
+          },
+          {
+            "key": "client_could_not_afford",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "client_could_not_afford",
+            "text": "{{step3_reason_not_dispensed_meds_client_could_not_afford_text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "v_required" : {
+          "value" : "true",
+          "err": "{{step3_reason_not_dispensed_meds_err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
       },
       {
         "key": "asterisk_symbol",
