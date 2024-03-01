@@ -15,7 +15,7 @@ public class ReferralWizardFormActivity extends FamilyWizardFormActivity {
 
     @Override
     public void initializeFormFragment() {
-        ReferralJsonWizardFormFragment jsonWizardFormFragment = ReferralJsonWizardFormFragment.getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
+        ReferralJsonWizardFormFragment jsonWizardFormFragment = ReferralJsonWizardFormFragment.getFormFragment(JsonFormConstants.FIRST_STEP_NAME, null);
 
         getSupportFragmentManager().beginTransaction()
                 .add(com.vijay.jsonwizard.R.id.container, jsonWizardFormFragment).commit();

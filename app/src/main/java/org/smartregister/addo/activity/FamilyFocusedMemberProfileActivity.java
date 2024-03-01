@@ -385,7 +385,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         form.setActionBarBackground(R.color.family_actionbar);
         form.setNavigationBackground(R.color.family_navigation);
         form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
-        form.setSaveLabel("FINISH");
+        form.setSaveLabel(getString(R.string.finish));
         form.setHideSaveLabel(true);
         form.setWizard(true);
 

@@ -3,7 +3,7 @@
   "show_errors_on_submit": true,
   "skip_blank_steps": true,
   "properties_file_name": "addo_attend_prescriptions_from_lab_results",
-  "count": "3",
+  "count": "4",
   "encounter_type": "ADDO Visit - Attend Prescriptions from Facility or Malaria Lab Results",
   "entity_id": "",
   "metadata": {
@@ -1126,7 +1126,8 @@
     ]
   },
   "step3": {
-    "title": "Dispense Confirmation",
+    "title": "{{step3_title}}",
+    "next": "step4",
     "fields": [
       {
         "key": "no_medication_dispensed_toaster",
@@ -1175,7 +1176,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "spacer",
         "type": "spacer",
-        "spacer_height": "20dp"
+        "spacer_height": "10dp"
       },
       {
         "key": "all_meds_dispensed",
@@ -1241,14 +1242,10 @@
           "value": true
         },
         "relevance": {
-          "step3:all_meds_dispensed": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "no"
-                ]
-              }
-            ]
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
           }
         }
       },
@@ -1708,11 +1705,42 @@
         ],
         "type": "multi_select_list",
         "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "danger_signs_medication_anc_relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      }
+    ]
+  },
+  "step4": {
+    "title": "{{step4_title}}",
+    "hide-save-button": true,
+    "fields": [
+      {
+        "key": "all_medications_dispensed_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{{step4_all_medications_dispensed_toaster}}",
+        "text_color": "#101010",
+        "toaster_type": "information",
+        "relevance": {
           "step3:all_meds_dispensed": {
             "ex-checkbox": [
               {
                 "or": [
-                  "no"
+                  "yes"
                 ]
               }
             ]
@@ -1725,7 +1753,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "spacer",
         "type": "spacer",
-        "spacer_height": "20dp"
+        "spacer_height": "10dp"
       },
       {
         "key": "reason_not_dispensed_meds",
@@ -1739,7 +1767,7 @@
         "label": "{{step3_reason_not_dispensed_meds_label}}",
         "options": [
           {
-            "key": "not_in_stock ",
+            "key": "not_in_stock",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "not_in_stock",
@@ -1748,7 +1776,7 @@
             "value": "false"
           },
           {
-            "key": "client_could_not_afford ",
+            "key": "client_could_not_afford",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "client_could_not_afford",
@@ -1767,6 +1795,26 @@
               "rules-file": "danger_signs_medication_anc_relevance.yml"
             }
           }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
+      },
+      {
+        "key": "save",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "button",
+        "hint": "{{step3_save}}",
+        "btn_bg_color": "#3596c0",
+        "action": {
+          "behaviour": "save"
         }
       }
     ]

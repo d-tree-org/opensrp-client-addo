@@ -9,6 +9,7 @@ import android.util.Pair;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
+import com.vijay.jsonwizard.utils.NativeFormLangUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
@@ -79,6 +80,25 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
     public static final String CURRENT_OPENSRP_ID = "current_opensrp_id";
     public static final String READ_ONLY = "read_only";
     private static HashMap<String, String> actionMap = null;
+
+    private static final String MEDS_NOT_INSTOCK_AFFORDABLE_FIELDS = "[{\"key\":\"meds_not_in_stock\"," +
+            "\"openmrs_entity_parent\":\"\",\"openmrs_entity\":\"concept\"," +
+            "\"openmrs_entity_id\":\"meds_not_in_stock\"," +
+            "\"type\":\"check_box\",\"exclusive\":[\"yes\"],\"label\":\"{{step4_meds_not_in_stock}}" +
+            "\",\"options\":[{\"key\":\"select_medication_not_affordable\",\"openmrs_entity_parent\":" +
+            "\"\",\"openmrs_entity\":\"concept\",\"openmrs_entity_id\":\"\",\"text\":\"" +
+            "{{step3_all_meds_dispensed_yes_text}}\",\"text_size\":\"18px\",\"value\":\"false\"}]," +
+            "\"v_required\":{\"value\":\"true\",\"err\":\"Select one\"},\"relevance\":" +
+            "{\"step4:reason_not_dispensed_meds\":{\"ex-checkbox\":[{\"or\":[\"not_in_stock\"]}]}}}," +
+            "{\"key\":\"meds_not_affordable\",\"openmrs_entity_parent\":\"\",\"openmrs_entity\":" +
+            "\"concept\",\"openmrs_entity_id\":\"meds_not_affordable\",\"type\":\"check_box\"," +
+            "\"exclusive\":[\"yes\"],\"label\":\"{{step4_meds_not_affordable}}\",\"options\":" +
+            "[{\"key\":\"select_medication_not_affordable\",\"openmrs_entity_parent\":\"\",\"openmrs_entity\":" +
+            "\"concept\",\"openmrs_entity_id\":\"\",\"text\":\"{{step3_all_meds_dispensed_yes_text}}\"," +
+            "\"text_size\":\"18px\",\"value\":\"false\"}],\"v_required\":{\"value\":\"true\",\"err\":" +
+            "\"Select one\"},\"relevance\":{\"step4:reason_not_dispensed_meds\":{\"ex-checkbox\":" +
+            "[{\"or\":[\"client_could_not_afford\"]}]}}}]";
+
 
     public static Intent getJsonIntent(Context context, JSONObject jsonForm, Class activityClass) {
         Intent intent = new Intent(context, activityClass);
@@ -966,5 +986,17 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
     public static JSONObject getAutoPopulatedJsonEditMemberFormString(String title, String formName, Context context, CommonPersonObjectClient client, String eventType, String familyName, boolean isPrimaryCaregiver) {
         return new ATJsonFormUtils(AddoApplication.getInstance()).getAutoJsonEditMemberFormString(title, formName, context, client, eventType, familyName, isPrimaryCaregiver);
+    }
+
+    public static JSONArray medsNotInStockAffordableFields(String propertiesFileName, Context context) {
+
+        String translatedFields = NativeFormLangUtils.getTranslatedValue(MEDS_NOT_INSTOCK_AFFORDABLE_FIELDS, propertiesFileName, context);
+
+        try {
+            return new JSONArray(translatedFields);
+        } catch (JSONException e) {
+            Timber.e(e);
+            return null;
+        }
     }
 }
