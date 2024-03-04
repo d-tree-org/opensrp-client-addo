@@ -40,7 +40,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.Login"
-            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
